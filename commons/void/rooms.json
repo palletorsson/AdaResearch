@@ -54170,6 +54170,78 @@
             "pressed": "open",
             "editor_label": "Room to tell apart | 24 posts in two fields; a rail presses the warm twelve together and spreads the grey; a stand counts present, room round it, hidden from where you stand"
           }
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            3.2,
+            0.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+            "stands_at": [
+              3.2,
+              0.9
+            ],
+            "editor_label": "The hall's argument on cardboard | nine plates, stickers and red threads from the table of words to the two fields of posts"
+          }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NW",
+          "position": [
+            -10.0,
+            -6.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_critbias",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_critbias)"
+          }
+        },
+        {
+          "id": "word-present",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            -17,
+            0
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "PRESENT",
+            "tall": 1.2,
+            "fit_width": 6.0,
+            "editor_label": "PRESENT in standing red letters | what a census counts; on the west wing, facing APART across the floor"
+          }
+        },
+        {
+          "id": "word-apart",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17,
+            0
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "APART",
+            "tall": 1.4,
+            "fit_width": 5.0,
+            "editor_label": "APART in standing red letters | what the room is for; on the east wing"
+          }
         }
       ],
       "props": [],
