@@ -49986,6 +49986,78 @@
             "step": "short",
             "editor_label": "One line, three errors | a floor of candidate lines: where you stand is a plank among five posts; three arrows at the feet, one step downhill for three rules of error"
           }
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            6.6,
+            7.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "ML_Gradient_Landscape",
+            "stands_at": [
+              6.6,
+              7.9
+            ],
+            "editor_label": "The hall's argument on cardboard | nine plates, stickers and red threads from the three sheets round the field where a place is a line; the last plate stands behind the arrival"
+          }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NW",
+          "position": [
+            -10.0,
+            -6.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_mlgradient",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_mlgradient)"
+          }
+        },
+        {
+          "id": "word-score",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            -17,
+            0
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "SCORE",
+            "tall": 1.4,
+            "fit_width": 6.0,
+            "editor_label": "SCORE in standing red letters | what a rule of error gives a line; on the west wing"
+          }
+        },
+        {
+          "id": "word-follow",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            12.6,
+            6.0
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "FOLLOW",
+            "tall": 1.2,
+            "fit_width": 5.0,
+            "editor_label": "FOLLOW in standing red letters | the second decision: how far to go along it; south of shaft B, facing the arrival"
+          }
         }
       ],
       "props": [],
