@@ -54867,6 +54867,78 @@
             "sharing": "own",
             "editor_label": "Four stations, one walk | a field with a line; four corner stations each see part of a walk and each mean something else by DANGEROUS; ONE DEFINITION, ONE RECORD"
           }
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            9.6,
+            7.6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "SpeculativeComputation_Situated_Computation",
+            "stands_at": [
+              9.6,
+              7.6
+            ],
+            "editor_label": "The hall's argument on cardboard | nine plates, stickers and red threads from the four panels along the south band to the four stations on the east wing"
+          }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NW",
+          "position": [
+            -10.0,
+            -6.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_specsit",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_specsit)"
+          }
+        },
+        {
+          "id": "word-saw",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            -17,
+            3.4
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "SAW",
+            "tall": 1.4,
+            "fit_width": 3.6,
+            "editor_label": "SAW in standing red letters | what each station saw; on the west wing, beside MEANS"
+          }
+        },
+        {
+          "id": "word-means",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            -17,
+            -3.2
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "MEANS",
+            "tall": 1.4,
+            "fit_width": 5.0,
+            "editor_label": "MEANS in standing red letters | what each station means; on the west wing, beside SAW"
+          }
         }
       ],
       "props": [],
