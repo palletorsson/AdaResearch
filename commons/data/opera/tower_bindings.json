@@ -1,10 +1,13 @@
 {
-  "note": "Which things in the tower prompt which sung thought of Model B's inner voice (commons/void/inner_opera.gd). By map name, then by row id or prop id on that floor; the value is an object_id of a phrase in the score. `renderer` is model_b (audio/generators/ModelBVoice.gd, learned from the Rust engine) or robot (the kit's RobotVoiceGenerator.gd); `voice` holds that renderer's settings where they differ from its own defaults; `volume_db` is the voice's level in the head. First study, 2026-11-16: the roof only.",
+  "note": "Which things in the tower prompt which sung thought of Model B's inner voice (commons/void/inner_opera.gd). By map name, then by row id or prop id on that floor; the value is an object_id of a phrase in the score. `renderer` is airway (audio/generators/AirwayVoice.gd: the physical voice, the one that was approved; slow to make, so its phrases travel with the game in audio/voice_cache/, written by the bench's KEEP), model_b (audio/generators/ModelBVoice.gd, a quick formant voice) or robot (the kit's RobotVoiceGenerator.gd); `voice` holds that renderer's settings; `volume_db` is the voice's level in the head. First study, 2026-11-16: the roof only.",
   "score": "res://audio/voice_scores/tower_roof_20261116.json",
   "gaze_distance": 14,
   "volume_db": -2,
-  "renderer": "model_b",
-  "voice": {},
+  "renderer": "airway",
+  "voice": {
+    "gain": 1.0,
+    "transpose": 0.0
+  },
   "maps": {
     "Point_Zero": {
       "arrival-crate": "crate",

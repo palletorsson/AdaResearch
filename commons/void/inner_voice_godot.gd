@@ -169,19 +169,32 @@ func _on_player_finished() -> void:
 
 func _key(object_id: String) -> String:
 	var phrase: Dictionary = phrases[object_id]
-	return "%s_%s_%s" % [score_id, object_id, (VERSION + renderer_name + JSON.stringify(phrase.voice_plan) + JSON.stringify(options)).sha1_text().substr(0, 16)]
+	# by the thing and by what is sung how, not by the score file: the bench and the tower then share one render
+	return "%s_%s" % [object_id, (VERSION + renderer_name + JSON.stringify(phrase.voice_plan) + JSON.stringify(options)).sha1_text().substr(0, 16)]
 
 
 func _want_rendered(object_id: String) -> void:
 	if streams.has(object_id) or _line.has(object_id) or _task_for == object_id: return
 	var shipped := SHIPPED + _key(object_id) + ".wav"
 	if ResourceLoader.exists(shipped):
+		# in an export (and wherever the editor has imported it) the wav is a resource
 		var made: Resource = load(shipped)
 		if made is AudioStream:
 			streams[object_id] = made
 			costs[object_id] = {"seconds": 0.0, "cached": true, "shipped": true, "length_s": (made as AudioStream).get_length()}
 			rendered.emit(object_id, 0.0, true)
 			return
+	elif FileAccess.file_exists(shipped):
+		# not imported (a run straight from the project folder): the file's own samples, 16-bit mono
+		var file_bytes := FileAccess.get_file_as_bytes(shipped)
+		var at := 12
+		while at + 8 <= file_bytes.size():
+			var size := file_bytes.decode_u32(at + 4)
+			if file_bytes.slice(at, at + 4).get_string_from_ascii() == "data":
+				_keep(object_id, file_bytes.slice(at + 8, mini(at + 8 + size, file_bytes.size())), 0.0, true)
+				costs[object_id]["shipped"] = true
+				return
+			at += 8 + size + (size & 1)
 	for folder in [CACHE]:
 		var kept := str(folder) + _key(object_id) + ".s16"
 		if not FileAccess.file_exists(kept): continue

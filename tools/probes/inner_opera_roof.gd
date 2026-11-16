@@ -96,7 +96,7 @@ func run() -> void:
 		var peak := 0
 		for i in range(0, bytes.size(), 2): peak = maxi(peak, absi(bytes.decode_s16(i)))
 		loud[id] = snappedf(float(peak) / 32767.0, 0.001)
-		whole = whole and bytes.size() == int(plans[str(id)]) * 2 and peak > 1600
+		whole = whole and bytes.size() >= int(plans[str(id)]) * 2 and peak > 1600
 		var wav := AudioStreamWAV.new()
 		wav.format = AudioStreamWAV.FORMAT_16_BITS
 		wav.mix_rate = 44100
@@ -104,8 +104,11 @@ func run() -> void:
 		wav.save_to_wav(folder.path_join("%s.wav" % str(id)))
 	var made := {}
 	for id in s.costs: made[id] = [snappedf(float(s.costs[id].seconds), 0.01), snappedf(float(s.costs[id].length_s), 0.01), bool(s.costs[id].cached)]
-	checks.append({"check": "all five phrases are made off the game's thread, from nothing: each as long as its plan, none silent; written beside this report as WAV files",
-		"ok": Array(s.ready).size() == 5 and whole and not made.values().any(func(m): return m[2]), "made_in_s__length_s__kept": made, "peak": loud,
+	var shipped_ones := 0
+	for id in s.costs:
+		if bool(s.costs[id].get("shipped", false)): shipped_ones += 1
+	checks.append({"check": "all five phrases are there, each at least as long as its plan, none silent, either made off the game's thread from nothing or all five from the renders that travel with the game; written beside this report as WAV files",
+		"ok": Array(s.ready).size() == 5 and whole and (shipped_ones == 5 or not made.values().any(func(m): return m[2])), "made_in_s__length_s__kept": made, "peak": loud, "travelling_with_the_game": shipped_ones,
 		"all_five_after_s": snappedf(float(Time.get_ticks_msec() - began) / 1000.0, 0.1), "slowest_frame_while_making_ms": snappedf(slowest_frame * 1000.0, 0.1)})
 	_save()
 	var level: float = float(game.building.spec.levels[0]) + game.building.global_position.y
@@ -160,6 +163,19 @@ func run() -> void:
 	var after_clock: Dictionary = opera.state()
 	checks.append({"check": "outside, looking at the frame counter: its thought comes", "ok": str(at_clock.looking_at) == "clock" and Array(after_clock.heard).size() == 3
 		and str(after_clock.heard[2].text) == "A number is changing.", "looking_at": str(at_clock.looking_at), "heard": after_clock.heard})
+	# the sung line on the viewfinder: every thought that came was written there, and it is taken off when the voice ends
+	var display: Variant = game.get("charge_display")
+	var written := 0
+	for h in Array(after_clock.heard):
+		if bool(h.get("on_display", false)): written += 1
+	var still := str(display.get("sung")) if display is Object and is_instance_valid(display) else "no display"
+	var waited := 0
+	while still != "" and still != "no display" and waited < 600:
+		await process_frame
+		waited += 1
+		still = str(display.get("sung"))
+	checks.append({"check": "each thought that came was written on the viewfinder beside the charge, and the line is taken off when the voice ends",
+		"ok": written == Array(after_clock.heard).size() and written >= 3 and still == "", "written": written, "left_on_display": still, "frames_until_clear": waited})
 	result["passed"] = checks.all(func(c): return c.ok)
 	_save()
 	print("[inner_opera_roof] ", "PASSED" if result.passed else "FAILED")

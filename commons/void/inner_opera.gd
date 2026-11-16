@@ -185,17 +185,28 @@ func _physics_process(delta: float) -> void:
 		print("[opera] '%s' is chosen and still being made" % chosen)
 
 
+# The line being sung is written on the viewfinder (the game's charge display), and taken off when it ends.
+func _show(text: String) -> bool:
+	var display: Variant = get_parent().get("charge_display") if get_parent() != null else null
+	if display is Object and is_instance_valid(display) and (display as Object).has_method("set_sung"):
+		(display as Object).call("set_sung", text)
+		return true
+	return false
+
+
 func _on_started(object_id: String, text: String) -> void:
-	heard.append({"object": object_id, "text": text, "sung": true})
+	heard.append({"object": object_id, "text": text, "sung": true, "on_display": _show(text)})
 	print("[opera] SINGS for '%s': %s" % [object_id, text])
 
 
 func _on_finished(object_id: String) -> void:
+	_show("")
 	attention.call("mark_silent")
 	print("[opera] finished: %s" % object_id)
 
 
 func _on_failed(object_id: String, message: String) -> void:
+	_show("")
 	attention.call("mark_silent")
 	heard.append({"object": object_id, "text": "", "sung": false, "failed": message})
 	print("[opera] NOT SUNG for '%s': %s" % [object_id, message])
