@@ -43,6 +43,8 @@ var _line: Array[String] = []
 var _task := -1
 var _task_for := ""
 var _task_began := 0
+var _generation := 0                      # raised by retune(): a render begun under older settings is not kept
+var _task_generation := 0
 var _lock := Mutex.new()
 var _landed := PackedByteArray()
 var _wanted := ""
@@ -72,6 +74,22 @@ func load_score(path: String, renderer_options: Dictionary = {}) -> String:
 		if not wrong.is_empty(): return "%s: %s" % [str(phrase.object_id), wrong]
 		phrases[str(phrase.object_id)] = phrase
 		order.append(str(phrase.object_id))
+	for id in order: _want_rendered(id)
+	return ""
+
+
+## Other settings for the renderer (formant_ratio 0.8-1.3, transpose in semitones, gain): everything is made again.
+## "" when they can be used, otherwise why not; then nothing changes.
+func retune(renderer_options: Dictionary) -> String:
+	for id in order:
+		var wrong: String = Robot.validate_plan(phrases[id].voice_plan, renderer_options)
+		if not wrong.is_empty(): return wrong
+	stop()
+	options = renderer_options.duplicate()
+	_generation += 1
+	streams.clear()
+	costs.clear()
+	_line.clear()
 	for id in order: _want_rendered(id)
 	return ""
 
@@ -190,7 +208,9 @@ func _process(delta: float) -> void:
 		_landed = PackedByteArray()
 		_lock.unlock()
 		var seconds: float = float(Time.get_ticks_msec() - _task_began) / 1000.0
-		if bytes.is_empty():
+		if _task_generation != _generation:
+			_want_rendered(id)               # made under settings that have since changed: not kept, made again
+		elif bytes.is_empty():
 			if _wanted == id: _wanted = ""
 			failed.emit(id, "the renderer returned nothing")
 		else:
@@ -204,6 +224,7 @@ func _process(delta: float) -> void:
 	if _task < 0 and not _line.is_empty():
 		_task_for = _line.pop_front()
 		_task_began = Time.get_ticks_msec()
+		_task_generation = _generation
 		var plan: Dictionary = (phrases[_task_for].voice_plan as Dictionary).duplicate(true)
 		_task = WorkerThreadPool.add_task(_render.bind(plan, options.duplicate()), false, "Model B's inner voice")
 
