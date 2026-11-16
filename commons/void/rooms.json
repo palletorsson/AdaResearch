@@ -54389,6 +54389,78 @@
             "neck": "sixty",
             "editor_label": "The seat you take | a long table with a head and a ring of six at full size; tapes at eye height between seats that face each other; stand on a seat; NECK and ANGLE THE CHAIRS"
           }
+        },
+        {
+          "id": "argument",
+          "artifact": "argument_floor",
+          "station": "SW",
+          "position": [
+            -3.6,
+            0.4
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "hall": "CriticalAlgorithms_Applied_Ethics",
+            "stands_at": [
+              -3.6,
+              0.4
+            ],
+            "editor_label": "The hall's argument on cardboard | nine plates, stickers and red threads from the pedestal with the miniature rooms to the two plans at full size"
+          }
+        },
+        {
+          "id": "argument-stickers",
+          "artifact": "sticker_board",
+          "station": "NW",
+          "position": [
+            -10.0,
+            -6.9
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "board": "arg_critethics",
+            "editor_label": "The hall's stickers, threaded | a hanging board: what the hall text says near the cork, what the pass made of it in front, red thread between (the same board at /stickers?board=arg_critethics)"
+          }
+        },
+        {
+          "id": "word-spaced",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            -17,
+            0
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "SPACED",
+            "tall": 1.2,
+            "fit_width": 5.5,
+            "editor_label": "SPACED in standing red letters | what the loop guarantees; on the west wing, facing HEARD across the floor"
+          }
+        },
+        {
+          "id": "word-heard",
+          "artifact": "standing_word",
+          "station": "NE",
+          "position": [
+            17,
+            0
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "text": "HEARD",
+            "tall": 1.4,
+            "fit_width": 5.0,
+            "editor_label": "HEARD in standing red letters | what would need another kind of evidence; on the east wing"
+          }
         }
       ],
       "props": [],
