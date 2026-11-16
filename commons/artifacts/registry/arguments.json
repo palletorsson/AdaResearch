@@ -1247,6 +1247,50 @@
           "arithmetic": "The field, the stations, the arcs and the example trace are the same at every value. What changes is lettering on four panels (1.9 x 1.56 m each, of which the changing lines cover perhaps a fifth) and two plate tiles. Between one_record and both: one verdict word changes (SW from NOT DANGEROUS to DANGEROUS: about 0.15 m2 and a colour), three 'means' lines change, one tile turns yellow (0.25 m2 seen at a slant), one tally line. On a subject of some 80 m2 of frame: about 0.6 m2: under 1 %, and less at the hottest twentieth. Own against one_definition flips three verdict words: a little more."
         }
       }
+    },
+    "marks_and_walls": {
+      "lookup_name": "marks_and_walls",
+      "map_ready": true,
+      "name": "Marks And Walls",
+      "class_name": "",
+      "scene": "res://commons/artifacts/marks_and_walls/marks_and_walls.tscn",
+      "description": "A playground for the collective knowledge hall: a shared record a body can check. A field of five by four cells with walls that cannot be seen on 8 of its 31 inner edges, and on the floor the marks of six earlier sources, each saying 'a wall here' and each keeping who made it and how: felt (a body was stopped) or only told. Some repeat one another, three are wrong, three walls nobody marked. The visitor's body is the test: stopped at a wall, a mark is added or checked; walking through a marked edge strikes its marks, which stay on the floor with who said it and how it was found wrong. SIGN EVERYTHING adds the visitor's told mark to every marked edge. A stand counts marks, sources, felt and told, the edges this body has tested, and how many edges the marks are wrong about. Axis record: found, signed, checked.",
+      "category": "annotation",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "sequence": "postfoundationscrisis",
+      "interaction": "walk",
+      "size_group": "room",
+      "tags": [
+        "commons",
+        "provenance",
+        "validation",
+        "contribution",
+        "correction",
+        "playground",
+        "visual-argument",
+        "collective-knowledge"
+      ],
+      "qfep_connection": "A count of contributions is not a measure of what is known; a shared record becomes knowledge where a contribution keeps how it was made and can be checked, corrected and kept as corrected by another body.",
+      "dev_themes": [
+        "commons",
+        "provenance",
+        "models"
+      ],
+      "dna": {
+        "axes": {
+          "record": [
+            "found",
+            "signed",
+            "checked"
+          ]
+        },
+        "predicted_degeneracy": {
+          "pair": "record: found ~ checked",
+          "percent": 0.5,
+          "arithmetic": "The field, its lines and the stand are the same at every value; the walls are never drawn. What differs is chalk on the floor: found has 11 marks, checked has 14 of which 3 carry a red stroke. Three yellow strokes of 0.9 x 0.06 m and three red strokes are added (about 0.25 m2 with their tags), and four lines of figures change on the stand. Seen at a slant on a subject of some 60 m2 of frame: under 0.5 %. Signed against found adds seven broken yellow strokes: about the same."
+        }
+      }
     }
   }
 }

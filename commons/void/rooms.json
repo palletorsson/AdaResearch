@@ -54976,8 +54976,8 @@
           "id": "f1_peer_production_tool_6_5",
           "artifact": "peer_production_tool",
           "position": [
-            -1,
-            6
+            0,
+            4.5
           ],
           "station": "SW",
           "height": 0,
@@ -55015,6 +55015,22 @@
           "facing": 0,
           "scale": 1,
           "config": {}
+        },
+        {
+          "id": "marks-and-walls",
+          "artifact": "marks_and_walls",
+          "station": "NW",
+          "position": [
+            0.0,
+            -0.8
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "record": "found",
+            "editor_label": "Marks and walls | a field of 5 x 4 cells with walls that cannot be seen; six sources' chalk marks, felt or told, some wrong; the visitor's body checks, adds and strikes"
+          }
         }
       ],
       "props": [],
