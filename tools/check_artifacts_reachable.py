@@ -367,6 +367,27 @@ def beside_dirty(rows, dirty):
     return rows
 
 
+def wanted_by_dirty(rows, dirty, read):
+    """Mark each row that a dirty tracked file ANYWHERE res://-references:
+    wanted_by_dirty=[paths].
+
+    The sixth shape of the landable over-promise. On 2026-11-17 gate M read
+    'landable 1' = commons/rd_grammar/gray_scott_step.gd, untracked, 25h idle,
+    nothing beside it dirty. But the working-tree edit to the TRACKED
+    commons/graph_grammar/operations/rd_displace_op.gd -- another folder --
+    preloads it: the two are one uncommitted refactor (forum 261117-pqktu).
+    beside_dirty looks only in the row's own folder. Pure (`read` injected),
+    so the selftest feeds it; marks, never drops."""
+    texts = {rel: read(rel) or "" for rel in dirty}
+    for r in rows:
+        needle = re.compile(re.escape("res://" + r["path"]) + r"(?![\w./-])")
+        users = sorted(rel for rel, text in texts.items()
+                       if rel != r["path"] and needle.search(text))
+        if users:
+            r["wanted_by_dirty"] = users
+    return rows
+
+
 def unborn(rows, in_head):
     """Mark each row whose folder holds NO file in HEAD: unborn=True.
 
@@ -578,6 +599,20 @@ def selftest():
                   rows[0].get("needs_unlanded") == ["m2/capture.gd"]
                   and "needs_unlanded" not in rows[1] and len(rows) == 2))
 
+    # 13. The dependent in another folder (2026-11-17). q/step.gd is untracked
+    #     and nothing beside it is dirty, but tracked p/op.gd carries an
+    #     uncommitted hunk that preloads it: marked. q/stepper.gd shares the
+    #     prefix and is not referenced: unmarked. A clean file's reference
+    #     (not in `dirty`) marks nothing.
+    srcs = {"p/op.gd": 'const S := preload("res://q/step.gd")',
+            "c/clean.gd": 'const T := preload("res://q/stepper.gd")'}
+    rows = [{"token": "t", "registry": "r", "path": p}
+            for p in ("q/step.gd", "q/stepper.gd")]
+    wanted_by_dirty(rows, {"p/op.gd"}, lambda rel: srcs.get(rel, ""))
+    cases.append(("marks a row an uncommitted edit elsewhere loads",
+                  rows[0].get("wanted_by_dirty") == ["p/op.gd"]
+                  and "wanted_by_dirty" not in rows[1] and len(rows) == 2))
+
     bad =[name for name, ok in cases if not ok]
     for name, ok in cases:
         print("  %-52s %s" % (name, "ok" if ok else "FAIL"))
@@ -625,24 +660,28 @@ def main():
         for r in rows:
             if r["path"] in claimed:
                 r["claimed_by"] = claimed[r["path"]]
-    beside_dirty(split["stranded"], dirty_tracked() if paths else set())
+    dirty = dirty_tracked() if paths else set()
+    beside_dirty(split["stranded"], dirty)
+    wanted_by_dirty(split["stranded"], dirty, read_file)
     unborn(split["stranded"], in_head)
     needs_unlanded(split["stranded"], in_head, read_file)
     unclaimed = [r for r in split["stranded"] if "claimed_by" not in r]
     landed_beside = [r for r in unclaimed if "beside_dirty" not in r]
     born = [r for r in landed_beside if "unborn" not in r]
-    free = [r for r in born if "needs_unlanded" not in r]
+    whole = [r for r in born if "needs_unlanded" not in r]
+    free = [r for r in whole if "wanted_by_dirty" not in r]
     floor = ("%d gitignored on purpose (a rule decides them, not a commit), "
              "%d touched within %dh (somebody's open buffer), %d stranded "
              "(%d of them claimed in the forum, %d more beside an uncommitted "
              "tracked file, %d more in a folder no commit has touched -- a "
-             "system being born, %d more loading a file no commit has). "
+             "system being born, %d more loading a file no commit has, "
+             "%d more wanted by an uncommitted edit in another folder). "
              "Landable by an agent today: %d."
              % (len(split["ignored"]), len(split["live"]), int(HOLD_HOURS),
                 len(split["stranded"]), len(split["stranded"]) - len(unclaimed),
                 len(unclaimed) - len(landed_beside),
-                len(landed_beside) - len(born), len(born) - len(free),
-                len(free)))
+                len(landed_beside) - len(born), len(born) - len(whole),
+                len(whole) - len(free), len(free)))
 
     report = {
         "registries_in_head": sum(1 for p in in_head
@@ -659,7 +698,8 @@ def main():
         "claimed_in_the_forum": len(claimed),
         "beside_uncommitted_tracked": len(unclaimed) - len(landed_beside),
         "unborn_folder": len(landed_beside) - len(born),
-        "needs_unlanded": len(born) - len(free),
+        "needs_unlanded": len(born) - len(whole),
+        "wanted_by_dirty": len(whole) - len(free),
         "landable_today": len(free),
         "floor_reading": floor,
         "split": split,
@@ -685,7 +725,9 @@ def main():
                     ("   beside uncommitted " + ", ".join(u["beside_dirty"][:3])
                      + (" +%d" % (len(u["beside_dirty"]) - 3)
                         if len(u["beside_dirty"]) > 3 else ""))
-                    if u.get("beside_dirty") else ""))
+                    if u.get("beside_dirty") else "")
+                    + (("   wanted by uncommitted " + ", ".join(u["wanted_by_dirty"][:3]))
+                       if u.get("wanted_by_dirty") else ""))
         print("  reading: %s" % floor)
         print("absent from every tree (gate B's)        : %d" % report["absent_from_every_tree"])
         for a in absent:
