@@ -1,7 +1,7 @@
 extends Node3D
 ## A basket of mushrooms on a pillar, to be eaten. Each kind carries one of the camera study's pixel operations
-## (commons/artifacts/camera_glitch_study): eaten, the operation is in the visitor's own eyes for about half a
-## minute (mushroom_trip.gd) - the errors the camera's record was read with, now in the reading of the room itself.
+## (commons/artifacts/camera_glitch_study): eaten, the operation is in the visitor's own eyes for ten seconds and
+## fades over five more (mushroom_trip.gd) - the errors the camera's record was read with, now in the reading of the room itself.
 ## Six kinds, two of each. An eaten mushroom grows back in its place after REGROW seconds.
 
 const Mushroom := preload("res://commons/artifacts/mushroom_basket/mushroom.gd")

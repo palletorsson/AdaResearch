@@ -133,11 +133,15 @@ func run() -> void:
 		waited += 1.0
 	var after := await _picture("after.png")
 	var back := _differ(plain1, after)
-	checks.append({"check": "the effect goes again: some half minute after the last one the eyes show the room as before, the effect off",
-		"ok": int(trip.call("state").mode) == -1 and not bool(trip.call("state").effect_enabled) and back < 0.01, "gone_after_s": waited, "difference_from_before": snappedf(back, 0.0001)})
+	checks.append({"check": "the effect goes again: it fades from 10 s after the last one and is off by 15 s, the eyes showing the room as before",
+		"ok": int(trip.call("state").mode) == -1 and not bool(trip.call("state").effect_enabled) and back < 0.01 and waited <= 13.0, "gone_after_s": waited, "difference_from_before": snappedf(back, 0.0001)})
 	_save()
-	await _wait(1.0)
-	checks.append({"check": "the eaten mushrooms have grown back in their places", "ok": (basket.get("grown") as Dictionary).size() == 12, "grown": (basket.get("grown") as Dictionary).size()})
+	var regrow_wait := 0.0
+	while regrow_wait < 25.0 and (basket.get("grown") as Dictionary).size() < 12:
+		await _wait(1.0)
+		regrow_wait += 1.0
+	checks.append({"check": "the eaten mushrooms grow back in their places (20 s after each is eaten)", "ok": (basket.get("grown") as Dictionary).size() == 12,
+		"grown": (basket.get("grown") as Dictionary).size(), "waited_more_s": regrow_wait})
 	result["passed"] = checks.all(func(c): return c.ok)
 	_save()
 	print("[mushroom_basket_eat] ", "PASSED" if result.passed else "FAILED")

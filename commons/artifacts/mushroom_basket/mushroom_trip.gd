@@ -1,14 +1,15 @@
 extends Node
 ## The time a mushroom keeps in the eyes: put on the visitor's camera by the first one eaten, it holds the sight
-## effect (mushroom_sight.gd) and its curve. Rises over RISE seconds, holds HOLD, fades over FADE. Another mushroom
+## effect (mushroom_sight.gd) and its curve. Rises over RISE seconds, holds HOLD, fades over FADE: the fade begins
+## 10 s after eating (Palle, 17 Nov 2026: 'we should also fade the effect after 10 sec') and is gone at 15 s. Another mushroom
 ## eaten meanwhile changes the operation to its own and starts the curve again from where the amount is; two in a
 ## row are stronger (up to 1). Nothing else of the visitor is changed. In a headset the amount is kept lower
 ## (HEADSET_SCALE): the whole view moving with the head is harder on a body than a screen is.
 
 const Sight := preload("res://commons/artifacts/mushroom_basket/mushroom_sight.gd")
 const RISE := 3.0
-const HOLD := 16.0
-const FADE := 9.0
+const HOLD := 7.0
+const FADE := 5.0
 const HEADSET_SCALE := 0.6
 const TITLES := ["CHOP THE BANDS", "CHANNELS LOSE REGISTRATION", "EXCHANGE THE BLOCKS", "REPEAT A SCANLINE", "FEWER COLOUR VALUES", "TEAR ONE BAND"]
 
