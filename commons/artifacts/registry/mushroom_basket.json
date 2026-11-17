@@ -1,0 +1,28 @@
+{
+  "artifacts": {
+    "mushroom_basket": {
+      "lookup_name": "mushroom_basket",
+      "name": "Mushrooms to eat",
+      "scene": "res://commons/artifacts/mushroom_basket/mushroom_basket.tscn",
+      "description": "A basket of mushrooms on a pillar. Each of six kinds carries one of the camera glitch study's pixel operations; eaten (held to the mouth, or the trigger / left click while held), it puts that operation into the visitor's own eyes for about half a minute. Eaten mushrooms grow back.",
+      "category": "shaders",
+      "map_ready": true,
+      "include_in_map_data": true,
+      "auto_ground": false,
+      "footprint": [
+        0.5,
+        1.3,
+        0.5
+      ],
+      "size_group": "small",
+      "parameters": {
+        "footprint": [
+          0.5,
+          1.3,
+          0.5
+        ]
+      },
+      "qfep_connection": "The camera study shows the errors a record can be read with; here the same errors are in the visitor's own reading of the room. Perception is an operation, and it can be changed by what is taken in."
+    }
+  }
+}
