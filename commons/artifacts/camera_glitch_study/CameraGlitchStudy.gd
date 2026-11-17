@@ -7,7 +7,11 @@ const Surface = preload("res://commons/artifacts/camera_glitch_study/camera_surf
 const Channels = preload("res://commons/artifacts/camera_glitch_study/colour_plane.gdshader")
 const CameraHandle = preload("res://commons/artifacts/spine_studies/witness_camera.gd")
 const Console = preload("res://commons/artifacts/camera_glitch_study/glitch_console.gd")
-const SCREEN_LAYER := 1<<19
+# The study's own parts are on a layer its source camera does not see (so it never films itself). Not layer 20
+# (1<<19): the Void's visitor wears Model B's head on layer 20 and its eyes skip that layer (commons/void/care_body.gd),
+# so on 20 the whole study was invisible to the visitor while every probe camera, which sees all layers, showed it
+# (Palle, 17 Nov 2026: "it missing when I start floor 104"). Layer 15 is used by nothing else.
+const SCREEN_LAYER := 1<<14
 var forms=Forms.new()
 var mode:=0
 var pixel_mode:=false

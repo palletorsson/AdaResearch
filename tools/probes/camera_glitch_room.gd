@@ -30,7 +30,7 @@ func landing_checks() -> void:
 	camera.global_position=work.to_global(Vector3(0,1.65,4.3));camera.look_at(work.to_global(Vector3(0,2.0,0)));camera.current=true
 	await create_timer(1.0).timeout
 	check("source shares the museum world",work.viewport.world_3d==hall.get_world_3d())
-	check("source excludes display and HUD layers",work.source_camera.cull_mask & (1<<19)==0 and work.source_camera.cull_mask & (1<<18)==0)
+	check("source excludes display and HUD layers",work.source_camera.cull_mask & work.SCREEN_LAYER==0 and work.source_camera.cull_mask & (1<<18)==0)
 	check("one bounded source viewport",work.viewport.size==Vector2i(640,360) and work.find_children("*","SubViewport",true,false).size()==1)
 	await work.snapshot()
 	var image:Image=work.held_texture.get_image();var original:=image.get_data().hex_encode().sha256_text()
