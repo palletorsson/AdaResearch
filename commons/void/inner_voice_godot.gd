@@ -24,11 +24,10 @@ signal finished(object_id: String)
 signal failed(object_id: String, message: String)
 signal rendered(object_id: String, seconds: float, from_cache: bool)
 
-## Three renderers, all GDScript: `airway` (audio/generators/AirwayVoice.gd: the physical voice, lungs and folds and a
-## moving mouth; it is the voice that was approved, and slow to make), `model_b` (audio/generators/ModelBVoice.gd: a
-## formant voice tuned against the recordings of the approved voice, quick) and `robot` (the kit's
-## RobotVoiceGenerator.gd).
+## Godot renderers: the physical Airway, Model B's formant voice, the kit's Robot
+## and the desktop pilot that uses formants measured from the Airway model.
 const RENDERERS := {"airway": preload("res://audio/generators/AirwayVoice.gd"), "model_b": preload("res://audio/generators/ModelBVoice.gd"),
+	"phoneme": preload("res://audio/generators/PhonemeVoice.gd"),
 	"robot": preload("res://audio/generators/RobotVoiceGenerator.gd")}
 const VERSION := "gd-3"
 const RATE := 44100
@@ -59,6 +58,7 @@ var _landed := PackedByteArray()
 var _wanted := ""
 var _wanted_since := 0.0
 var _sounding := ""
+var _playback_offset := 0
 
 
 func _ready() -> void:
@@ -113,12 +113,42 @@ func has_object(object_id: String) -> bool:
 	return phrases.has(object_id)
 
 
+## The desktop sound library prepares only the examples the listener requests.
+## Existing entries are immutable here; retune() handles changed renderer settings.
+func prepare_phrase(phrase: Dictionary) -> String:
+	var id := str(phrase.get("object_id", ""))
+	if id.is_empty() or not phrase.get("voice_plan") is Dictionary:
+		return "A phrase needs an object_id and a voice_plan"
+	var wrong: String = RENDERERS[renderer_name].validate_plan(phrase.voice_plan, options)
+	if not wrong.is_empty():
+		return wrong
+	if phrases.has(id):
+		if phrases[id] != phrase:
+			return "A different phrase already uses " + id
+	else:
+		phrases[id] = phrase.duplicate(true)
+		order.append(id)
+	_want_rendered(id)
+	# An explicitly requested audition takes priority over earlier queued sounds.
+	if _line.has(id):
+		_line.erase(id)
+		_line.push_front(id)
+	return ""
+
+
 func text_of(object_id: String) -> String:
 	return str(phrases.get(object_id, {}).get("text", ""))
 
 
 func is_sounding() -> bool:
 	return not _sounding.is_empty()
+
+
+func playback_frame() -> int:
+	if _sounding.is_empty():
+		return -1
+	var time := _player.get_playback_position() + AudioServer.get_time_since_last_mix() - AudioServer.get_output_latency()
+	return _playback_offset + clampi(roundi(time * RATE), 0, roundi(_player.stream.get_length() * RATE))
 
 
 func is_ready(object_id: String) -> bool:
@@ -141,6 +171,31 @@ func sing(object_id: String) -> bool:
 	return false
 
 
+## Listen to one scored phoneme from an already-rendered phrase in the desktop bench.
+func sing_frames(object_id: String, first: int, last: int) -> bool:
+	var source: Variant = streams.get(object_id)
+	if is_sounding() or not source is AudioStreamWAV:
+		return false
+	if source.format != AudioStreamWAV.FORMAT_16_BITS or source.stereo or source.mix_rate != RATE:
+		return false
+	if first < 0 or last <= first or last * 2 > source.data.size():
+		return false
+	var samples: PackedByteArray = source.data.slice(first * 2, last * 2)
+	# A one-millisecond edge removes clicks caused by cutting inside a voiced cycle.
+	var edge := mini(44, (last - first) / 2)
+	for frame in edge:
+		var gain := float(frame) / edge
+		var tail := last - first - 1 - frame
+		samples.encode_s16(frame * 2, roundi(samples.decode_s16(frame * 2) * gain))
+		samples.encode_s16(tail * 2, roundi(samples.decode_s16(tail * 2) * gain))
+	var segment := AudioStreamWAV.new()
+	segment.format = AudioStreamWAV.FORMAT_16_BITS
+	segment.mix_rate = RATE
+	segment.data = samples
+	_sound(object_id, segment, first)
+	return true
+
+
 func stop() -> void:
 	_wanted = ""
 	if _sounding.is_empty(): return
@@ -150,10 +205,11 @@ func stop() -> void:
 	finished.emit(was)
 
 
-func _sound(object_id: String) -> void:
+func _sound(object_id: String, segment: AudioStreamWAV = null, offset := 0) -> void:
 	_wanted = ""
 	_sounding = object_id
-	_player.stream = streams[object_id]
+	_playback_offset = offset
+	_player.stream = streams[object_id] if segment == null else segment
 	_player.volume_db = volume_db
 	_player.play()
 	started.emit(object_id, text_of(object_id))
@@ -169,8 +225,15 @@ func _on_player_finished() -> void:
 
 func _key(object_id: String) -> String:
 	var phrase: Dictionary = phrases[object_id]
+	var version := VERSION
+	if renderer_name == "phoneme" and bool(options.get("individual_tuning", true)):
+		version += "-individual-1"
+	if renderer_name == "phoneme" and float(options.get("recorded_consonants", 0.0)) > 0.0:
+		version += "-lj-consonants-1"
+	if float(options.get("vocoder_mix", 0.0)) > 0.0 or float(options.get("clarity", 0.0)) > 0.0:
+		version += "-vocoder-2"
 	# by the thing and by what is sung how, not by the score file: the bench and the tower then share one render
-	return "%s_%s" % [object_id, (VERSION + renderer_name + JSON.stringify(phrase.voice_plan) + JSON.stringify(options)).sha1_text().substr(0, 16)]
+	return "%s_%s" % [object_id, (version + renderer_name + JSON.stringify(phrase.voice_plan) + JSON.stringify(options)).sha1_text().substr(0, 16)]
 
 
 func _want_rendered(object_id: String) -> void:

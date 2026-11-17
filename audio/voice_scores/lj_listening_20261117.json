@@ -1,0 +1,941 @@
+{
+  "id": "lj_listening_20261117",
+  "title": "LJ hybrid listening contrasts",
+  "note": "Authored diagnostic syllables, not English sentences. /a/ is the sustained vowel; compare A and B with identical timing and notes.",
+  "phrases": [
+    {
+      "object_id": "test_stops",
+      "object_label": "Stops: lips, tongue and back of mouth",
+      "text": "pa · ba · ta · da · ka · ga",
+      "voice_plan": {
+        "frames": 169344,
+        "phones": [
+          {
+            "kind": "consonant",
+            "phoneme": "p",
+            "start": 0,
+            "end": 6174,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 6174,
+            "end": 22050,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "b",
+            "start": 28224,
+            "end": 34398,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 34398,
+            "end": 50274,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "t",
+            "start": 56448,
+            "end": 62622,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 62622,
+            "end": 78498,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "d",
+            "start": 84672,
+            "end": 90846,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 90846,
+            "end": 106722,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "k",
+            "start": 112896,
+            "end": 119070,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 119070,
+            "end": 134946,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "g",
+            "start": 141120,
+            "end": 147294,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 147294,
+            "end": 163170,
+            "midi": 60
+          }
+        ],
+        "syllables": [
+          {
+            "start": 0,
+            "end": 22050,
+            "vowel": 6174,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 28224,
+            "end": 50274,
+            "vowel": 34398,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 56448,
+            "end": 78498,
+            "vowel": 62622,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 84672,
+            "end": 106722,
+            "vowel": 90846,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 112896,
+            "end": 134946,
+            "vowel": 119070,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 141120,
+            "end": 163170,
+            "vowel": 147294,
+            "midi": 60,
+            "gain": 0.9
+          }
+        ],
+        "word_groups": [
+          {
+            "start": 0,
+            "end": 22050
+          },
+          {
+            "start": 28224,
+            "end": 50274
+          },
+          {
+            "start": 56448,
+            "end": 78498
+          },
+          {
+            "start": 84672,
+            "end": 106722
+          },
+          {
+            "start": 112896,
+            "end": 134946
+          },
+          {
+            "start": 141120,
+            "end": 163170
+          }
+        ]
+      }
+    },
+    {
+      "object_id": "test_fricatives",
+      "object_label": "Hiss and voicing pairs",
+      "text": "fa · va · tha · dha · sa · za",
+      "voice_plan": {
+        "frames": 169344,
+        "phones": [
+          {
+            "kind": "consonant",
+            "phoneme": "f",
+            "start": 0,
+            "end": 6174,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 6174,
+            "end": 22050,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "v",
+            "start": 28224,
+            "end": 34398,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 34398,
+            "end": 50274,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "th",
+            "start": 56448,
+            "end": 62622,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 62622,
+            "end": 78498,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "dh",
+            "start": 84672,
+            "end": 90846,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 90846,
+            "end": 106722,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "s",
+            "start": 112896,
+            "end": 119070,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 119070,
+            "end": 134946,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "z",
+            "start": 141120,
+            "end": 147294,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 147294,
+            "end": 163170,
+            "midi": 60
+          }
+        ],
+        "syllables": [
+          {
+            "start": 0,
+            "end": 22050,
+            "vowel": 6174,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 28224,
+            "end": 50274,
+            "vowel": 34398,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 56448,
+            "end": 78498,
+            "vowel": 62622,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 84672,
+            "end": 106722,
+            "vowel": 90846,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 112896,
+            "end": 134946,
+            "vowel": 119070,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 141120,
+            "end": 163170,
+            "vowel": 147294,
+            "midi": 60,
+            "gain": 0.9
+          }
+        ],
+        "word_groups": [
+          {
+            "start": 0,
+            "end": 22050
+          },
+          {
+            "start": 28224,
+            "end": 50274
+          },
+          {
+            "start": 56448,
+            "end": 78498
+          },
+          {
+            "start": 84672,
+            "end": 106722
+          },
+          {
+            "start": 112896,
+            "end": 134946
+          },
+          {
+            "start": 141120,
+            "end": 163170
+          }
+        ]
+      }
+    },
+    {
+      "object_id": "test_sh_ch",
+      "object_label": "Sh, zh, ch, j and breathy h",
+      "text": "sha · zha · cha · ja · ha",
+      "voice_plan": {
+        "frames": 141120,
+        "phones": [
+          {
+            "kind": "consonant",
+            "phoneme": "sh",
+            "start": 0,
+            "end": 6174,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 6174,
+            "end": 22050,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "zh",
+            "start": 28224,
+            "end": 34398,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 34398,
+            "end": 50274,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "ch",
+            "start": 56448,
+            "end": 62622,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 62622,
+            "end": 78498,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "j",
+            "start": 84672,
+            "end": 90846,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 90846,
+            "end": 106722,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "h",
+            "start": 112896,
+            "end": 119070,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 119070,
+            "end": 134946,
+            "midi": 60
+          }
+        ],
+        "syllables": [
+          {
+            "start": 0,
+            "end": 22050,
+            "vowel": 6174,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 28224,
+            "end": 50274,
+            "vowel": 34398,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 56448,
+            "end": 78498,
+            "vowel": 62622,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 84672,
+            "end": 106722,
+            "vowel": 90846,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 112896,
+            "end": 134946,
+            "vowel": 119070,
+            "midi": 60,
+            "gain": 0.9
+          }
+        ],
+        "word_groups": [
+          {
+            "start": 0,
+            "end": 22050
+          },
+          {
+            "start": 28224,
+            "end": 50274
+          },
+          {
+            "start": 56448,
+            "end": 78498
+          },
+          {
+            "start": 84672,
+            "end": 106722
+          },
+          {
+            "start": 112896,
+            "end": 134946
+          }
+        ]
+      }
+    },
+    {
+      "object_id": "test_vowel_joins",
+      "object_label": "Same consonant, different following vowel",
+      "text": "si · sa · su · shi · sha · shu",
+      "voice_plan": {
+        "frames": 169344,
+        "phones": [
+          {
+            "kind": "consonant",
+            "phoneme": "s",
+            "start": 0,
+            "end": 6174,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "i",
+            "start": 6174,
+            "end": 22050,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "s",
+            "start": 28224,
+            "end": 34398,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 34398,
+            "end": 50274,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "s",
+            "start": 56448,
+            "end": 62622,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "u",
+            "start": 62622,
+            "end": 78498,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "sh",
+            "start": 84672,
+            "end": 90846,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "i",
+            "start": 90846,
+            "end": 106722,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "sh",
+            "start": 112896,
+            "end": 119070,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 119070,
+            "end": 134946,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "sh",
+            "start": 141120,
+            "end": 147294,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "u",
+            "start": 147294,
+            "end": 163170,
+            "midi": 60
+          }
+        ],
+        "syllables": [
+          {
+            "start": 0,
+            "end": 22050,
+            "vowel": 6174,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 28224,
+            "end": 50274,
+            "vowel": 34398,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 56448,
+            "end": 78498,
+            "vowel": 62622,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 84672,
+            "end": 106722,
+            "vowel": 90846,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 112896,
+            "end": 134946,
+            "vowel": 119070,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 141120,
+            "end": 163170,
+            "vowel": 147294,
+            "midi": 60,
+            "gain": 0.9
+          }
+        ],
+        "word_groups": [
+          {
+            "start": 0,
+            "end": 22050
+          },
+          {
+            "start": 28224,
+            "end": 50274
+          },
+          {
+            "start": 56448,
+            "end": 78498
+          },
+          {
+            "start": 84672,
+            "end": 106722
+          },
+          {
+            "start": 112896,
+            "end": 134946
+          },
+          {
+            "start": 141120,
+            "end": 163170
+          }
+        ]
+      }
+    },
+    {
+      "object_id": "test_resonants",
+      "object_label": "These resonants stay synthesized in A and B",
+      "text": "ma · na · nga · la · ra · wa · ya",
+      "voice_plan": {
+        "frames": 197568,
+        "phones": [
+          {
+            "kind": "consonant",
+            "phoneme": "m",
+            "start": 0,
+            "end": 6174,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 6174,
+            "end": 22050,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "n",
+            "start": 28224,
+            "end": 34398,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 34398,
+            "end": 50274,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "ng",
+            "start": 56448,
+            "end": 62622,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 62622,
+            "end": 78498,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "l",
+            "start": 84672,
+            "end": 90846,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 90846,
+            "end": 106722,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "r",
+            "start": 112896,
+            "end": 119070,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 119070,
+            "end": 134946,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "w",
+            "start": 141120,
+            "end": 147294,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 147294,
+            "end": 163170,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "y",
+            "start": 169344,
+            "end": 175518,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 175518,
+            "end": 191394,
+            "midi": 60
+          }
+        ],
+        "syllables": [
+          {
+            "start": 0,
+            "end": 22050,
+            "vowel": 6174,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 28224,
+            "end": 50274,
+            "vowel": 34398,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 56448,
+            "end": 78498,
+            "vowel": 62622,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 84672,
+            "end": 106722,
+            "vowel": 90846,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 112896,
+            "end": 134946,
+            "vowel": 119070,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 141120,
+            "end": 163170,
+            "vowel": 147294,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 169344,
+            "end": 191394,
+            "vowel": 175518,
+            "midi": 60,
+            "gain": 0.9
+          }
+        ],
+        "word_groups": [
+          {
+            "start": 0,
+            "end": 22050
+          },
+          {
+            "start": 28224,
+            "end": 50274
+          },
+          {
+            "start": 56448,
+            "end": 78498
+          },
+          {
+            "start": 84672,
+            "end": 106722
+          },
+          {
+            "start": 112896,
+            "end": 134946
+          },
+          {
+            "start": 141120,
+            "end": 163170
+          },
+          {
+            "start": 169344,
+            "end": 191394
+          }
+        ]
+      }
+    },
+    {
+      "object_id": "test_pitch_steps",
+      "object_label": "One consonant, four singing pitches",
+      "text": "pa · pa · pa · pa",
+      "voice_plan": {
+        "frames": 112896,
+        "phones": [
+          {
+            "kind": "consonant",
+            "phoneme": "p",
+            "start": 0,
+            "end": 6174,
+            "midi": 48
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 6174,
+            "end": 22050,
+            "midi": 48
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "p",
+            "start": 28224,
+            "end": 34398,
+            "midi": 55
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 34398,
+            "end": 50274,
+            "midi": 55
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "p",
+            "start": 56448,
+            "end": 62622,
+            "midi": 60
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 62622,
+            "end": 78498,
+            "midi": 60
+          },
+          {
+            "kind": "consonant",
+            "phoneme": "p",
+            "start": 84672,
+            "end": 90846,
+            "midi": 67
+          },
+          {
+            "kind": "vowel",
+            "phoneme": "a",
+            "start": 90846,
+            "end": 106722,
+            "midi": 67
+          }
+        ],
+        "syllables": [
+          {
+            "start": 0,
+            "end": 22050,
+            "vowel": 6174,
+            "midi": 48,
+            "gain": 0.9
+          },
+          {
+            "start": 28224,
+            "end": 50274,
+            "vowel": 34398,
+            "midi": 55,
+            "gain": 0.9
+          },
+          {
+            "start": 56448,
+            "end": 78498,
+            "vowel": 62622,
+            "midi": 60,
+            "gain": 0.9
+          },
+          {
+            "start": 84672,
+            "end": 106722,
+            "vowel": 90846,
+            "midi": 67,
+            "gain": 0.9
+          }
+        ],
+        "word_groups": [
+          {
+            "start": 0,
+            "end": 22050
+          },
+          {
+            "start": 28224,
+            "end": 50274
+          },
+          {
+            "start": 56448,
+            "end": 78498
+          },
+          {
+            "start": 84672,
+            "end": 106722
+          }
+        ]
+      }
+    }
+  ]
+}

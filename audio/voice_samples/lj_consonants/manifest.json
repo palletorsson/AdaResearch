@@ -1,0 +1,434 @@
+{
+  "version": "lj-consonants-1",
+  "sample_rate": 44100,
+  "source": "LJ Speech / Linda Johnson / Keith Ito",
+  "source_url": "https://keithito.com/LJ-Speech-Dataset/",
+  "rights": "Public domain in the USA, per the upstream dataset; recordings from LibriVox.",
+  "mirror_revision": "7367bcc33648be329bbef057cc97d0b83cadee11",
+  "alignment": "PocketSphinx 5.1.1, en-US, two-pass forced alignment, 10 ms frames; provisional boundaries",
+  "processing": "4th-order highpass removes low recorded voicing; 44.1 kHz; 3 ms fades; peak .8. Runtime matches synthetic consonant RMS.",
+  "synthetic_only": [
+    "m",
+    "n",
+    "ng",
+    "l",
+    "r",
+    "w",
+    "y"
+  ],
+  "samples": {
+    "p": {
+      "file": "p.wav",
+      "kind": "stop",
+      "burst_frame": 3409,
+      "frames": 5380,
+      "source": {
+        "phone": "P",
+        "word": "purpose",
+        "start": 1.36,
+        "end": 1.49,
+        "clip": "LJ001-0009",
+        "extract_start": 1.362,
+        "extract_end": 1.484,
+        "highpass_hz": 500,
+        "score": 0.23003609827565602,
+        "rms": 0.010036098275656134,
+        "previous_phone": "ER",
+        "next_phone": "ER"
+      },
+      "sha256": "a6628f186d90bcc21be67a6bf432986cb32ecd0f3758805d3f9dc0474e3ac4eb"
+    },
+    "b": {
+      "file": "b.wav",
+      "kind": "stop",
+      "burst_frame": 1318,
+      "frames": 5380,
+      "source": {
+        "phone": "B",
+        "word": "books",
+        "start": 0.95,
+        "end": 1.08,
+        "clip": "LJ001-0004",
+        "extract_start": 0.952,
+        "extract_end": 1.074,
+        "highpass_hz": 1000,
+        "score": 0.22709008844739237,
+        "rms": 0.007090088447392258,
+        "previous_phone": "K",
+        "next_phone": "UH"
+      },
+      "sha256": "efff036cb2ee2aa3856f65995f23e0e862e76c4df6bb1e2f030b2d8615177566"
+    },
+    "t": {
+      "file": "t.wav",
+      "kind": "stop",
+      "burst_frame": 240,
+      "frames": 8468,
+      "source": {
+        "phone": "T",
+        "word": "that",
+        "start": 2.96,
+        "end": 3.16,
+        "clip": "LJ001-0006",
+        "extract_start": 2.9619999999999997,
+        "extract_end": 3.1540000000000004,
+        "highpass_hz": 500,
+        "score": 0.2491437953281279,
+        "rms": 0.019143795328127867,
+        "previous_phone": "AE",
+        "next_phone": "AE"
+      },
+      "sha256": "0b564c22c6958624abe491870f0e53038c85aca382b1709d1b6f835de1813439"
+    },
+    "d": {
+      "file": "d.wav",
+      "kind": "stop",
+      "burst_frame": 1860,
+      "frames": 5380,
+      "source": {
+        "phone": "D",
+        "word": "represented",
+        "start": 8.4,
+        "end": 8.53,
+        "clip": "LJ001-0001",
+        "extract_start": 8.402000000000001,
+        "extract_end": 8.524,
+        "highpass_hz": 1000,
+        "score": 0.22930965362388508,
+        "rms": 0.009309653623886083,
+        "previous_phone": "IH",
+        "next_phone": "IH"
+      },
+      "sha256": "b83a009d071b9f10500047d639a6ccb54261be3f94dec1bac790f7462c9db613"
+    },
+    "k": {
+      "file": "k.wav",
+      "kind": "stop",
+      "burst_frame": 4130,
+      "frames": 5820,
+      "source": {
+        "phone": "K",
+        "word": "course",
+        "start": 1.07,
+        "end": 1.21,
+        "clip": "LJ001-0014",
+        "extract_start": 1.072,
+        "extract_end": 1.204,
+        "highpass_hz": 500,
+        "score": 0.2459027706238374,
+        "rms": 0.01590277062383749,
+        "previous_phone": "V",
+        "next_phone": "AO"
+      },
+      "sha256": "98a7ee43055db80996c34907e74eb67e914f48bac8436fa4d9fc2fc1f985fadf"
+    },
+    "g": {
+      "file": "g.wav",
+      "kind": "stop",
+      "burst_frame": 5157,
+      "frames": 6262,
+      "source": {
+        "phone": "G",
+        "word": "together",
+        "start": 6.07,
+        "end": 6.22,
+        "clip": "LJ001-0180",
+        "extract_start": 6.072,
+        "extract_end": 6.2139999999999995,
+        "highpass_hz": 1000,
+        "score": 0.2386633850867498,
+        "rms": 0.008663385086749806,
+        "previous_phone": "AH",
+        "next_phone": "EH"
+      },
+      "sha256": "1a5be47fbd17a1e91ae28987a0bb7424e78ce438ad77b3a11a9d2e60dd44f830"
+    },
+    "f": {
+      "file": "f.wav",
+      "kind": "fricative",
+      "burst_frame": 1046,
+      "frames": 5558,
+      "source": {
+        "phone": "F",
+        "word": "form",
+        "start": 5.86,
+        "end": 6.0,
+        "clip": "LJ001-0014",
+        "extract_start": 5.868,
+        "extract_end": 5.994,
+        "highpass_hz": 500,
+        "score": 0.24035288573653696,
+        "rms": 0.010352885736537294,
+        "previous_phone": "L",
+        "next_phone": "AO"
+      },
+      "sha256": "b1ab34f28a239cc71a832dd6a92f712605362362722c1fececb92163438fa17c"
+    },
+    "v": {
+      "file": "v.wav",
+      "kind": "fricative",
+      "burst_frame": 179,
+      "frames": 1588,
+      "source": {
+        "phone": "V",
+        "word": "whatever",
+        "start": 9.16,
+        "end": 9.21,
+        "clip": "LJ001-0014",
+        "extract_start": 9.168,
+        "extract_end": 9.204,
+        "highpass_hz": 1000,
+        "score": 0.17615981677152065,
+        "rms": 0.036159816771519956,
+        "previous_phone": "EH",
+        "next_phone": "ER"
+      },
+      "sha256": "1cf85b649cdd0231d8daccde855baeab61b0c53ce2e0e6da5ce4e5ca2e8c5d9e"
+    },
+    "th": {
+      "file": "th.wav",
+      "kind": "fricative",
+      "burst_frame": 711,
+      "frames": 2470,
+      "source": {
+        "phone": "TH",
+        "word": "gothic",
+        "start": 5.46,
+        "end": 5.53,
+        "clip": "LJ001-0026",
+        "extract_start": 5.468,
+        "extract_end": 5.524,
+        "highpass_hz": 500,
+        "score": 0.17369865011803326,
+        "rms": 0.013698650118032972,
+        "previous_phone": "AA",
+        "next_phone": "IH"
+      },
+      "sha256": "6963b4b0c6a1c0af0a86d29520e5fb35d3cd755d0055f7b299d7655da4f8873f"
+    },
+    "dh": {
+      "file": "dh.wav",
+      "kind": "fricative",
+      "burst_frame": 3233,
+      "frames": 3352,
+      "source": {
+        "phone": "DH",
+        "word": "that",
+        "start": 5.12,
+        "end": 5.21,
+        "clip": "LJ001-0014",
+        "extract_start": 5.128,
+        "extract_end": 5.204,
+        "highpass_hz": 1000,
+        "score": 0.18212857470661056,
+        "rms": 0.0021285747066107133,
+        "previous_phone": "R",
+        "next_phone": "AE"
+      },
+      "sha256": "9fe1d166d5d08e2b28f01d54412734b55c44cac8508e2844a99b71dcf37fe518"
+    },
+    "s": {
+      "file": "s.wav",
+      "kind": "fricative",
+      "burst_frame": 2721,
+      "frames": 6880,
+      "source": {
+        "phone": "S",
+        "word": "sense",
+        "start": 1.47,
+        "end": 1.64,
+        "clip": "LJ001-0001",
+        "extract_start": 1.478,
+        "extract_end": 1.634,
+        "highpass_hz": 500,
+        "score": 0.27,
+        "rms": 0.08659366408934648,
+        "previous_phone": "IY",
+        "next_phone": "EH"
+      },
+      "sha256": "40af392f8ff42fb3663b97378da5a38ded52596fe72ca3e779a371651476e32d"
+    },
+    "z": {
+      "file": "z.wav",
+      "kind": "fricative",
+      "burst_frame": 1900,
+      "frames": 5558,
+      "source": {
+        "phone": "Z",
+        "word": "is",
+        "start": 0.66,
+        "end": 0.8,
+        "clip": "LJ001-0048",
+        "extract_start": 0.668,
+        "extract_end": 0.794,
+        "highpass_hz": 1000,
+        "score": 0.2522374545680668,
+        "rms": 0.022237454568066785,
+        "previous_phone": "IH",
+        "next_phone": "AE"
+      },
+      "sha256": "65ee387710e769161fc5f594f1f1df56260cd5f8f378a9eddaa56b50d637ee31"
+    },
+    "sh": {
+      "file": "sh.wav",
+      "kind": "fricative",
+      "burst_frame": 4026,
+      "frames": 5116,
+      "source": {
+        "phone": "SH",
+        "word": "should",
+        "start": 6.27,
+        "end": 6.4,
+        "clip": "LJ001-0014",
+        "extract_start": 6.278,
+        "extract_end": 6.394,
+        "highpass_hz": 500,
+        "score": 0.2596293161921142,
+        "rms": 0.03962931619211343,
+        "previous_phone": "M",
+        "next_phone": "UH"
+      },
+      "sha256": "37ec0875b6d65792b91c8adf70ed68b27464d43178367cd4eb6a5f284b1651d0"
+    },
+    "zh": {
+      "file": "zh.wav",
+      "kind": "fricative",
+      "burst_frame": 4050,
+      "frames": 5116,
+      "source": {
+        "phone": "ZH",
+        "word": "pleasure",
+        "start": 2.81,
+        "end": 2.94,
+        "clip": "LJ001-0180",
+        "extract_start": 2.818,
+        "extract_end": 2.934,
+        "highpass_hz": 1000,
+        "score": 0.24336503216789526,
+        "rms": 0.023365032167895372,
+        "previous_phone": "EH",
+        "next_phone": "ER"
+      },
+      "sha256": "33c2dd276bc4272ac3b0f9ffaf6bde85bc933990cf779cbe8c0e10fbe17b5e19"
+    },
+    "h": {
+      "file": "h.wav",
+      "kind": "fricative",
+      "burst_frame": 216,
+      "frames": 3352,
+      "source": {
+        "phone": "HH",
+        "word": "whole",
+        "start": 0.27,
+        "end": 0.36,
+        "clip": "LJ001-0026",
+        "extract_start": 0.278,
+        "extract_end": 0.354,
+        "highpass_hz": 350,
+        "score": 0.1940278448480399,
+        "rms": 0.014027844848039917,
+        "previous_phone": "AH",
+        "next_phone": "OW"
+      },
+      "sha256": "35bb6b1b01a0cca0411bedd982ca16d1ecb9461290f27f80a89cb8ca0362fa5d"
+    },
+    "ch": {
+      "file": "ch.wav",
+      "kind": "affricate",
+      "burst_frame": 1310,
+      "frames": 2030,
+      "source": {
+        "phone": "CH",
+        "word": "picture",
+        "start": 3.94,
+        "end": 4.0,
+        "clip": "LJ001-0010",
+        "extract_start": 3.948,
+        "extract_end": 3.994,
+        "highpass_hz": 500,
+        "score": 0.18145239122940493,
+        "rms": 0.03145239122940487,
+        "previous_phone": "K",
+        "next_phone": "ER"
+      },
+      "sha256": "fcc897b664ae9eda5edf56348956a60c47bec6e3c3ea0c62ab62ae0ade521f11"
+    },
+    "j": {
+      "file": "j.wav",
+      "kind": "affricate",
+      "burst_frame": 2362,
+      "frames": 3794,
+      "source": {
+        "phone": "JH",
+        "word": "ages(2)",
+        "start": 2.66,
+        "end": 2.76,
+        "clip": "LJ001-0014",
+        "extract_start": 2.668,
+        "extract_end": 2.754,
+        "highpass_hz": 1000,
+        "score": 0.21272278433989672,
+        "rms": 0.022722784339897065,
+        "previous_phone": "EY",
+        "next_phone": "IH"
+      },
+      "sha256": "48c3bef49f1489efdee27544282ada6362147667024b6fd3586d7feb2331814f"
+    }
+  },
+  "sources": {
+    "LJ001-0001": {
+      "transcript": "Printing, in the only sense with which we are at present concerned, differs from most if not from all the arts and crafts represented in the Exhibition",
+      "normalized": "printing in the only sense with which we are at present concerned differs from most if not from all the arts and crafts represented in the exhibition",
+      "url": "https://huggingface.co/datasets/flexthink/ljspeech/resolve/7367bcc33648be329bbef057cc97d0b83cadee11/wavs/LJ001-0001.wav",
+      "sha256": "4d2bd83ff0f7fe33491b03193abdf623f1b4cc2d8103972b33638d3607d86dc5"
+    },
+    "LJ001-0004": {
+      "transcript": "produced the block books, which were the immediate predecessors of the true printed book,",
+      "normalized": "produced the block books which were the immediate predecessors of the true printed book",
+      "url": "https://huggingface.co/datasets/flexthink/ljspeech/resolve/7367bcc33648be329bbef057cc97d0b83cadee11/wavs/LJ001-0004.wav",
+      "sha256": "3c9cce186f26b6690b1d96a6a640c3f1bdb10e1f206738344190fa264955a7af"
+    },
+    "LJ001-0006": {
+      "transcript": "And it is worth mention in passing that, as an example of fine typography,",
+      "normalized": "and it is worth mention in passing that as an example of fine typography",
+      "url": "https://huggingface.co/datasets/flexthink/ljspeech/resolve/7367bcc33648be329bbef057cc97d0b83cadee11/wavs/LJ001-0006.wav",
+      "sha256": "4b866eebe1e7cb6ded4bcb27caa0638b8ade67a6a8a2f7132952b716dc7006db"
+    },
+    "LJ001-0009": {
+      "transcript": "Printing, then, for our purpose, may be considered as the art of making books by means of movable types.",
+      "normalized": "printing then for our purpose may be considered as the art of making books by means of movable types",
+      "url": "https://huggingface.co/datasets/flexthink/ljspeech/resolve/7367bcc33648be329bbef057cc97d0b83cadee11/wavs/LJ001-0009.wav",
+      "sha256": "d003373f9c769b17995cfff2a99818e720a56f3376678b27fc6c9c27539c3f75"
+    },
+    "LJ001-0010": {
+      "transcript": "Now, as all books not primarily intended as picture-books consist principally of types composed to form letterpress,",
+      "normalized": "now as all books not primarily intended as picture books consist principally of types composed to form letterpress",
+      "url": "https://huggingface.co/datasets/flexthink/ljspeech/resolve/7367bcc33648be329bbef057cc97d0b83cadee11/wavs/LJ001-0010.wav",
+      "sha256": "c60d0565bda9ac6076da930bab34d29ea7d1dd8961446b948f73e0a90ccd62de"
+    },
+    "LJ001-0014": {
+      "transcript": "And it was a matter of course that in the Middle Ages, when the craftsmen took care that beautiful form should always be a part of their productions whatever they were,",
+      "normalized": "and it was a matter of course that in the middle ages when the craftsmen took care that beautiful form should always be a part of their productions whatever they were",
+      "url": "https://huggingface.co/datasets/flexthink/ljspeech/resolve/7367bcc33648be329bbef057cc97d0b83cadee11/wavs/LJ001-0014.wav",
+      "sha256": "daf5ce9ee3b8b7a38ad7c6ad3ca1d89f88dd216be5f366129f44648f60dd8a9d"
+    },
+    "LJ001-0180": {
+      "transcript": "the proportions of the page still give pleasure by the sense of richness that the cuts and letter together convey.",
+      "normalized": "the proportions of the page still give pleasure by the sense of richness that the cuts and letter together convey",
+      "url": "https://huggingface.co/datasets/flexthink/ljspeech/resolve/7367bcc33648be329bbef057cc97d0b83cadee11/wavs/LJ001-0180.wav",
+      "sha256": "cd26fb4fc72988a030e819d7605f403a8f74a3663450ce13be0be3b8ae7e83bc"
+    },
+    "LJ001-0026": {
+      "transcript": "On the whole the type of this book may be considered the ne-plus-ultra of Gothic type,",
+      "normalized": "on the whole the type of this book may be considered the ne plus ultra of gothic type",
+      "url": "https://huggingface.co/datasets/flexthink/ljspeech/resolve/7367bcc33648be329bbef057cc97d0b83cadee11/wavs/LJ001-0026.wav",
+      "sha256": "86d8757eaa944031d6ea35bd8b59592e700e3150f59312da9bb7a15f592fc284"
+    },
+    "LJ001-0048": {
+      "transcript": "his letter is admirably clear and regular, but at least as beautiful as any other Roman type.",
+      "normalized": "his letter is admirably clear and regular but at least as beautiful as any other roman type",
+      "url": "https://huggingface.co/datasets/flexthink/ljspeech/resolve/7367bcc33648be329bbef057cc97d0b83cadee11/wavs/LJ001-0048.wav",
+      "sha256": "42452973f9f6b82c3a25013c73e0e38a6149a6361f6a5bf72cd68581d002cb7c"
+    }
+  }
+}

@@ -3,7 +3,7 @@ extends SceneTree
 ## or listened to. Nothing is played.
 ##
 ##   godot --headless --audio-driver Dummy --path . --script res://tools/probes/render_voice.gd --
-##       --score=res://audio/voice_scores/chimera_inner_opera_20261116.json --renderer=robot|model_b|airway [--only=<object_id>]
+##       --score=res://audio/voice_scores/chimera_inner_opera_20261116.json --renderer=robot|model_b|airway|phoneme [--only=<object_id>]
 ##       --out=<dir> [--options={"formant_ratio":1.12}]
 ##
 ## <dir>/<object_id>.wav (16-bit mono 44.1 kHz) and <dir>/render.json: per phrase the seconds it took, its length,
@@ -21,7 +21,13 @@ func _initialize() -> void:
 		if arg.begins_with("--only="): only = arg.trim_prefix("--only=")
 		if arg.begins_with("--options="): options = JSON.parse_string(arg.trim_prefix("--options="))
 	DirAccess.make_dir_recursive_absolute(out)
-	var renderer: GDScript = load({"robot": "res://audio/generators/RobotVoiceGenerator.gd", "airway": "res://audio/generators/AirwayVoice.gd"}.get(which, "res://audio/generators/ModelBVoice.gd"))
+	var renderers := {"robot": "res://audio/generators/RobotVoiceGenerator.gd", "airway": "res://audio/generators/AirwayVoice.gd",
+		"model_b": "res://audio/generators/ModelBVoice.gd", "phoneme": "res://audio/generators/PhonemeVoice.gd"}
+	if not renderers.has(which):
+		push_error("Unknown renderer " + which)
+		quit(1)
+		return
+	var renderer: GDScript = load(renderers[which])
 	var parsed: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(score))
 	var report := {"renderer": which, "options": options, "phrases": {}}
 	for phrase in parsed.phrases:

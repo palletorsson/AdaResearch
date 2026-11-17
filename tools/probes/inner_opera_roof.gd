@@ -73,6 +73,7 @@ func run() -> void:
 	for i in 1500:
 		if game.building.content.exhibits.has("0/care-units-crate") and game.has_meta("inner_opera"): break
 		await physics_frame
+
 	var opera: Variant = game.get_meta("inner_opera", null)
 	if opera == null:
 		checks.append({"check": "the game holds the inner opera", "ok": false})

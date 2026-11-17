@@ -1,12 +1,21 @@
 {
-  "note": "Which things in the tower prompt which sung thought of Model B's inner voice (commons/void/inner_opera.gd). By map name, then by row id or prop id on that floor; the value is an object_id of a phrase in the score. `renderer` is airway (audio/generators/AirwayVoice.gd: the physical voice, the one that was approved; slow to make, so its phrases travel with the game in audio/voice_cache/, written by the bench's KEEP), model_b (audio/generators/ModelBVoice.gd, a quick formant voice) or robot (the kit's RobotVoiceGenerator.gd); `voice` holds that renderer's settings; `volume_db` is the voice's level in the head. First study, 2026-11-16: the roof only.",
-  "score": "res://audio/voice_scores/tower_roof_20261116.json",
+  "note": "Primitives and Transformation, floors 0–21. Voice comparison 3 and minimalist pop retained. Named child selectors preserve editable assemblies. Source and unmatched-study ledger: chapter_lines.json.",
+  "score": "res://audio/voice_scores/tower_chapters_20261117.json",
   "gaze_distance": 14,
   "volume_db": -2,
-  "renderer": "airway",
+  "renderer": "phoneme",
   "voice": {
+    "air": 0.25,
+    "clarity": 0.55,
+    "flow_sharpness": 0.45,
+    "formant_ratio": 1.0,
     "gain": 1.0,
-    "transpose": 0.0
+    "individual_tuning": true,
+    "recorded_consonants": 1.0,
+    "speed": 0.5,
+    "transpose": 0.0,
+    "vibrato_depth_cents": 6.0,
+    "vocoder_mix": 0.0
   },
   "maps": {
     "Point_Zero": {
@@ -15,6 +24,237 @@
       "clock": "clock",
       "roof-letters": "letters",
       "here": "here"
+    },
+    "Point_One": {
+      "absence/Artifact": "chapter_01_point_absent",
+      "surface/Artifact": "chapter_01_point_visible",
+      "solid/Artifact": "chapter_01_point_solid",
+      "point-light-switch/Prefab": "chapter_01_point_sun_switch",
+      "future/Artifact": "chapter_01_point_pedestal"
+    },
+    "Point_Coordinates": {
+      "museum-point_coordinates-10-6/Artifact": "chapter_02_drag_point_target",
+      "held/Artifact": "chapter_02_point_held",
+      "world/Artifact": "chapter_02_coordinate_readout",
+      "local/Artifact": "chapter_02_coordinate_readout"
+    },
+    "Point_Lines": {
+      "setting_out/Artifact/PairingPoints": "chapter_03_pairing_point_field",
+      "point-room/Artifact": "chapter_03_line_black_box",
+      "directions/Artifact/PoliceBarricade": "chapter_03_do_not_cross_barrier",
+      "directions/Artifact/PoliceBarricade_2": "chapter_03_do_not_cross_barrier",
+      "museum-point_lines-20-18/Artifact": "chapter_03_do_not_cross_barrier",
+      "museum-point_lines-22-8/Artifact": "chapter_03_do_not_cross_barrier",
+      "museum-point_lines-22-12/Artifact": "chapter_03_do_not_cross_barrier",
+      "museum-point_lines-24-14/Artifact": "chapter_03_do_not_cross_barrier",
+      "museum-point_lines-24-18/Artifact": "chapter_03_do_not_cross_barrier",
+      "museum-point_lines-26-8/Artifact": "chapter_03_do_not_cross_barrier",
+      "museum-point_lines-26-12/Artifact": "chapter_03_do_not_cross_barrier",
+      "directions-copy-1/Artifact/PoliceBarricade": "chapter_03_do_not_cross_barrier",
+      "consequences/Artifact/DangerX": "chapter_03_anamorphic_cross",
+      "museum-point_lines-31-12/Artifact": "chapter_03_anamorphic_cross",
+      "museum-point_lines-33-12/Artifact": "chapter_03_anamorphic_cross",
+      "consequences/Artifact/RecoveryPlus": "chapter_03_health_cross",
+      "museum-point_lines-32-12/Artifact": "chapter_03_health_cross",
+      "museum-point_lines-34-12/Artifact": "chapter_03_health_cross",
+      "directions/Artifact/RedLine": "chapter_03_walk_this_line_marking",
+      "museum-point_lines-37-2/Artifact": "chapter_03_player_trace",
+      "candidate-timber_plank_1m/Artifact": "chapter_03_line_relations_gallery",
+      "candidate-timber_plank_4m/Artifact": "chapter_03_line_relations_gallery",
+      "museum-point_lines-42-3/Artifact": "chapter_03_modulor_man_demo"
+    },
+    "Point_Trace": {
+      "surface/Artifact/GlassWall": "chapter_04_glass_paint_wall",
+      "record/Artifact/Bead10mm": "chapter_04_draw_dot",
+      "record/Artifact/Bead40mm": "chapter_04_draw_dot",
+      "record/Artifact/Bead80mm": "chapter_04_draw_dot",
+      "release/Artifact/BallRamp": "chapter_04_trace_ball_ramp"
+    },
+    "Point_Triangle_Context": {
+      "arrival/Artifact/ThreeEdges": "chapter_05_triangle_line_puzzle",
+      "arrival/Artifact/PointsEdgesFace": "chapter_05_triangle_construction_plate",
+      "drawing/Artifact/Drawing": "chapter_05_draw_triangle_faces",
+      "installation-0552d253b7ac45fc8403f0027a03da70/Artifact/Member_museum_10/Original/Artifact": "chapter_05_draw_triangle_faces",
+      "drawing/Artifact/LiveTwin": "chapter_05_triangle_live_twin",
+      "installation-0552d253b7ac45fc8403f0027a03da70/Artifact/Member_museum_11/Original/Artifact": "chapter_05_triangle_live_twin",
+      "surfaces/Artifact/FacingTriangle": "chapter_05_pink_triangle",
+      "surfaces/Artifact/FourEdges": "chapter_05_quad_line_puzzle",
+      "surfaces/Artifact/SharedDiagonal": "chapter_05_quad",
+      "surfaces/Artifact/FoldedStrip": "chapter_05_folded_strip",
+      "triangle-edge-assembly/Artifact": "chapter_05_triangle_assembly_table"
+    },
+    "Primitives_Polythedra": {
+      "closure/Artifact/AlignTetrahedron": "chapter_06_align_tetrahedron",
+      "closure/Artifact/AlignWedge": "chapter_06_align_wedge",
+      "closure/Artifact/CornerTetrahedron": "chapter_06_corner_tetrahedron",
+      "boundaries/Artifact/OpenTrihedron": "chapter_06_grab_trihedron",
+      "boundaries/Artifact/EditablePyramid": "chapter_06_pyramid_edit",
+      "support/Artifact/WedgePlatform": "chapter_06_wedge_palace",
+      "support/Artifact/WedgeColumn": "chapter_06_wedge_column",
+      "museum-primitives_polythedra-36-7/Artifact": "chapter_06_concrete_barrier",
+      "museum-primitives_polythedra-36-8/Artifact": "chapter_06_concrete_barrier",
+      "museum-primitives_polythedra-36-9/Artifact": "chapter_06_concrete_barrier",
+      "museum-primitives_polythedra-36-10/Artifact": "chapter_06_concrete_barrier",
+      "museum-primitives_polythedra-36-11/Artifact": "chapter_06_concrete_barrier",
+      "museum-primitives_polythedra-37-6/Artifact": "chapter_06_concrete_barrier",
+      "museum-primitives_polythedra-37-12/Artifact": "chapter_06_concrete_barrier",
+      "museum-primitives_polythedra-38-6/Artifact": "chapter_06_concrete_barrier",
+      "museum-primitives_polythedra-38-12/Artifact": "chapter_06_concrete_barrier",
+      "museum-primitives_polythedra-39-6/Artifact": "chapter_06_concrete_barrier",
+      "museum-primitives_polythedra-39-12/Artifact": "chapter_06_concrete_barrier",
+      "museum-primitives_polythedra-40-6/Artifact": "chapter_06_concrete_barrier",
+      "museum-primitives_polythedra-40-12/Artifact": "chapter_06_concrete_barrier",
+      "museum-primitives_polythedra-41-7/Artifact": "chapter_06_concrete_barrier",
+      "museum-primitives_polythedra-41-8/Artifact": "chapter_06_concrete_barrier",
+      "museum-primitives_polythedra-41-9/Artifact": "chapter_06_concrete_barrier",
+      "museum-primitives_polythedra-41-10/Artifact": "chapter_06_concrete_barrier",
+      "museum-primitives_polythedra-41-11/Artifact": "chapter_06_concrete_barrier",
+      "museum-primitives_polythedra-31-22/Artifact": "chapter_06_rock_spawner",
+      "museum-primitives_polythedra-35-22/Artifact": "chapter_06_rock_scanner"
+    },
+    "Point_Animatedcube": {
+      "hall/Artifact/PairedCubeDiagonals": "chapter_07_paired_cube_diagonals",
+      "cube-grid-vertices-nw/Artifact": "chapter_07_paired_cube_diagonals",
+      "cube-grid-vertices-ne/Artifact": "chapter_07_paired_cube_diagonals",
+      "cube-grid-vertices-sw/Artifact": "chapter_07_paired_cube_diagonals",
+      "cube-grid-vertices-se/Artifact": "chapter_07_paired_cube_diagonals",
+      "museum-point_animatedcube-3-3/Artifact": "chapter_07_cube_lines",
+      "hall/Artifact/CubeConnections": "chapter_07_cube_diagonal_plate",
+      "hall/Artifact/FoldingCubeNet": "chapter_07_polyhedron_nets_cube",
+      "museum-point_animatedcube-25-20/Artifact/FeederNet": "chapter_07_polyhedron_nets_cube",
+      "hall/Artifact/BoxLibrary": "chapter_07_prefab_box_library",
+      "museum-point_animatedcube-25-20/Artifact": "chapter_07_cube_sorting_line",
+      "museum-point_animatedcube-31-24/Artifact": "chapter_07_glove_box",
+      "museum-point_animatedcube-15-3/Artifact": "chapter_07_first_shadow",
+      "museum-point_animatedcube-15-23/Artifact": "chapter_07_first_phosphor"
+    },
+    "Primitives_Ignorance": {
+      "museum-primitives_ignorance-2-6/Artifact/Specimen": "chapter_08_sphere",
+      "hall/Artifact/Tetrahedron/Solid": "chapter_08_geometry_courtyard",
+      "hall/Artifact/Cube/Solid": "chapter_08_geometry_courtyard",
+      "hall/Artifact/Octahedron/Solid": "chapter_08_geometry_courtyard",
+      "hall/Artifact/Dodecahedron/Solid": "chapter_08_geometry_courtyard",
+      "hall/Artifact/Icosahedron/Solid": "chapter_08_geometry_courtyard",
+      "museum-primitives_ignorance-18-13": "chapter_08_sphere_high",
+      "museum-primitives_ignorance-18-16": "chapter_08_sphere_high",
+      "museum-primitives_ignorance-21-13": "chapter_08_sphere_mid",
+      "museum-primitives_ignorance-21-16": "chapter_08_sphere_mid",
+      "museum-primitives_ignorance-24-13": "chapter_08_sphere_low",
+      "museum-primitives_ignorance-24-16": "chapter_08_sphere_low",
+      "hall/Artifact/SphereResolutionAtlas": "chapter_08_sphere_resolution_atlas",
+      "hall/Artifact/BudgetOfSmoothness": "chapter_08_budget_of_smoothness",
+      "museum-primitives_ignorance-22-9/Artifact": "chapter_08_capsule_reliquary",
+      "museum-primitives_ignorance-36-21/Artifact": "chapter_08_truncatedtetrahedron",
+      "museum-primitives_ignorance-39-23/Artifact/Specimen": "chapter_08_roughrock",
+      "museum-primitives_ignorance-39-25/Artifact/Specimen": "chapter_08_righttriangle",
+      "museum-primitives_ignorance-33-25/Artifact": "chapter_08_hole_with_cones",
+      "museum-primitives_ignorance-35-9/Artifact": "chapter_08_form_in_hand"
+    },
+    "Primitives_Columns": {
+      "hall/Artifact/Sides_04": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Sides_06": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Sides_08": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Sides_12": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Sides_16": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Grove_04_06": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Grove_06_06": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Grove_08_06": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Grove_12_06": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Grove_16_06": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Grove_04_08": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Grove_06_08": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Grove_08_08": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Grove_12_08": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Grove_16_08": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Grove_04_12": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Grove_06_12": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Grove_08_12": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Grove_12_12": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Grove_16_12": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Grove_04_16": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Grove_06_16": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Grove_08_16": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Grove_12_16": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/Grove_16_16": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/InteriorColumn_13": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/InteriorColumn_14": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/InteriorColumn_15": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/InteriorColumn_16": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/InteriorColumn_17": "chapter_09_resolution_colonnade_museum",
+      "hall/Artifact/InteriorColumn_18": "chapter_09_resolution_colonnade_museum"
+    },
+    "Primitives_Profiles": {
+      "hall/Artifact/Profile_1_O": "chapter_10_glyph_profile_gallery",
+      "hall/Artifact/Profile_2_O": "chapter_10_glyph_profile_gallery",
+      "hall/Artifact/Profile_3_B": "chapter_10_glyph_profile_gallery",
+      "hall/Artifact/Profile_4_C": "chapter_10_glyph_profile_gallery",
+      "hall/Artifact/Profile_5_I": "chapter_10_glyph_profile_gallery",
+      "hall/Artifact/Profile_6_Colon": "chapter_10_glyph_profile_gallery"
+    },
+    "Primitives_Portals": {
+      "museum-primitives_portals-2-1/Artifact": "chapter_11_capsule",
+      "sky-walk/Artifact/RefinementPassage": "chapter_11_combine_portals",
+      "hall/Artifact/AchillesAndTortoise": "chapter_11_achilles_tortoise"
+    },
+    "Primitives_Melencolia": {
+      "museum-primitives_melencolia-3-3/Artifact": "chapter_12_pyramid",
+      "museum-primitives_melencolia-3-7/Artifact": "chapter_12_pyramid",
+      "museum-primitives_melencolia-7-3/Artifact": "chapter_12_pyramid",
+      "museum-primitives_melencolia-7-7/Artifact": "chapter_12_pyramid",
+      "museum-primitives_melencolia-5-5/Artifact": "chapter_12_pyramidlong",
+      "museum-primitives_melencolia-4-5/Artifact": "chapter_12_cube_scene",
+      "museum-primitives_melencolia-5-4/Artifact": "chapter_12_cube_scene",
+      "museum-primitives_melencolia-5-6/Artifact": "chapter_12_cube_scene",
+      "museum-primitives_melencolia-6-5/Artifact": "chapter_12_cube_scene",
+      "museum-primitives_melencolia-3-9/Artifact": "chapter_12_snap_pyramid_puzzle",
+      "hall/Artifact/MelencoliaEngraving": "chapter_12_durer_scene",
+      "museum-primitives_melencolia-26-3/Artifact": "chapter_12_frame_counter_display"
+    },
+    "Trans_Pre": {
+      "still/Artifact": "chapter_13_pick_up_cube",
+      "rise/Artifact": "chapter_13_pick_up_cube",
+      "turn/Artifact": "chapter_13_pick_up_cube",
+      "swell/Artifact": "chapter_13_pick_up_cube",
+      "translation-marker/Artifact": "chapter_13_pick_up_cube",
+      "rotation-marker/Artifact": "chapter_13_pick_up_cube",
+      "scale-marker/Artifact": "chapter_13_pick_up_cube"
+    },
+    "Trans_Introduction": {
+      "transform-scaffold-banks/Artifact/source_tc": "chapter_14_tc",
+      "transform-scaffold-banks/Artifact/source_sc": "chapter_14_sc",
+      "transform-scaffold-banks/Artifact/source_rc": "chapter_14_rc",
+      "transform-scaffold-banks/Artifact/source_landing": "chapter_14_adjustable_landing",
+      "museum-trans_introduction-18-3/Artifact": "chapter_14_adjustable_landing"
+    },
+    "Trans_Translation": {
+      "movable-pivot/Artifact/TransportLift/TransportCube": "chapter_15_tc",
+      "museum-trans_translation-52-3/Artifact": "chapter_15_translation_cube_demo",
+      "museum-trans_translation-52-7/Artifact": "chapter_15_translation_cube_demo"
+    },
+    "Trans_Rotation": {
+      "axis-x/Artifact": "chapter_16_rotation_wall_crossings",
+      "axis-z/Artifact": "chapter_16_rotation_wall_crossings"
+    },
+    "Trans_Carousel": {
+      "carousel-opposed/Artifact": "chapter_16_carousel_cake"
+    },
+    "Trans_Scale": {
+      "drink-me/Artifact/Room": "chapter_18_scale_me",
+      "drink-me/Artifact/DrinkMeBottle": "chapter_18_scale_me"
+    },
+    "Trans_Body": {
+      "f1_approach_wall_5_6/Artifact": "chapter_19_approach_wall",
+      "f1_carve_grid_5_12/Artifact": "chapter_19_carve_grid",
+      "f1_approach_scale_5_18/Artifact": "chapter_19_approach_scale"
+    },
+    "Trans_Pit": {
+      "f2_pusher_block_7_3/Artifact": "chapter_20_pusher_block",
+      "f2_transformation_airlock_7_29/Artifact": "chapter_20_transformation_airlock"
+    },
+    "Trans_Playground": {
+      "kit-playground-maker/Artifact": "chapter_21_construction_robot",
+      "floor21-fork/Artifact": "chapter_21_floor21_fork"
     }
-  }
+  },
+  "accompaniment": "res://commons/data/opera/minimal_pop_score.json"
 }

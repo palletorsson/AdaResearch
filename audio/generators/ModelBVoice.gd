@@ -32,15 +32,18 @@ extends RefCounted
 ## transpose (semitones), gain, seed; tension, breathiness, brightness, roughness 0-1; pressure (cmH2O);
 ## vibrato_depth_cents, vibrato_rate, drift_cents, glide_s.
 const Robot := preload("res://audio/generators/RobotVoiceGenerator.gd")
+const SingingVocoder := preload("res://audio/generators/SingingVocoder.gd")
 const SR := 44100
 const BLOCK := 32
 const DEFAULTS := {"formant_ratio": 1.12, "transpose": 0.0, "gain": 1.0, "seed": 7241,
 	"tension": 0.28, "breathiness": 0.18, "brightness": 0.12, "roughness": 0.01, "pressure": 7.0,
 	"vibrato_depth_cents": 12.0, "vibrato_rate": 5.3, "drift_cents": 2.0, "glide_s": 0.03,
-	"flow_skew": 0.17, "flow_sharpness": 0.45, "air": 0.62, "vibrato_reach": 1.4, "f2_lift": 0.3, "upper_damping": 2.0}
+	"flow_skew": 0.17, "flow_sharpness": 0.45, "air": 0.62, "vibrato_reach": 1.4, "f2_lift": 0.3, "upper_damping": 2.0,
+	"vocoder_mix": 0.0, "clarity": 0.0}
 const RANGES := {"tension": [0.0, 1.0], "breathiness": [0.0, 1.0], "brightness": [0.0, 1.0], "roughness": [0.0, 1.0], "pressure": [0.0, 20.0],
 	"vibrato_depth_cents": [0.0, 100.0], "vibrato_rate": [0.0, 12.0], "drift_cents": [0.0, 50.0], "glide_s": [0.001, 0.3],
-	"flow_skew": [0.0, 0.3], "flow_sharpness": [0.0, 1.0], "air": [0.0, 1.0], "vibrato_reach": [0.5, 3.0], "f2_lift": [0.0, 0.8], "upper_damping": [0.5, 4.0]}
+	"flow_skew": [0.0, 0.3], "flow_sharpness": [0.0, 1.0], "air": [0.0, 1.0], "vibrato_reach": [0.5, 3.0], "f2_lift": [0.0, 0.8], "upper_damping": [0.5, 4.0],
+	"vocoder_mix": [0.0, 1.0], "clarity": [0.0, 1.0]}
 const PEAK := 0.5                         # every phrase leaves the renderer at this peak, times `gain`
 
 
@@ -74,20 +77,23 @@ static func folds(o: Dictionary) -> Dictionary:
 		"leak": (0.008 + 0.03 * float(o.breathiness)) / (0.16 * (0.45 + 0.75 * effort)), "effort": effort}
 
 
-static func render_phrase(plan: Dictionary, options: Dictionary = {}) -> PackedFloat32Array:
+## Optional phonetics overrides only the desktop phoneme pilot's articulation.
+## The default Model B path and its existing sounds remain unchanged.
+static func render_phrase(plan: Dictionary, options: Dictionary = {}, vowel_tracts: Dictionary = {}, phonetics: GDScript = null, recorded: RefCounted = null) -> PackedFloat32Array:
 	var wrong := validate_plan(plan, options)
 	if not wrong.is_empty():
 		push_error(wrong)
 		return PackedFloat32Array()
 	var o: Dictionary = DEFAULTS.duplicate()
 	o.merge(options, true)
-	var c: Dictionary = Robot.build_controls(plan, {"formant_ratio": float(o.formant_ratio), "transpose": float(o.transpose)})
+	var c: Dictionary = Robot.build_controls(plan, {"formant_ratio": float(o.formant_ratio), "transpose": float(o.transpose)}, vowel_tracts)
 	if c.has("error"):
 		push_error(c.error)
 		return PackedFloat32Array()
 	var n := int(plan.frames)
 	var syllables: Array = plan.syllables
 	var phones: Array = plan.phones
+	var clarity := float(o.clarity)
 	var f: Dictionary = folds(o)
 	var oq: float = f.open_quotient
 	# The engine computes the FLOW through the folds from their opening (Bernoulli, and the inertia of the air above
@@ -97,26 +103,51 @@ static func render_phrase(plan: Dictionary, options: Dictionary = {}) -> PackedF
 	var sharp: float = clampf(float(f.sharpness) + float(o.flow_sharpness), 0.0, 1.0)
 	var rng := posmod(int(o.seed), 2147483646) + 1
 
-	# --- consonant noise, as the robot makes it ---
+	# --- consonant noise: the original robot or the individual desktop recipes ---
 	var noise := PackedFloat64Array()
 	noise.resize(n)
 	var robot_rng: Array = [rng]
-	for p in phones:
+	for phone_index in phones.size():
+		var p: Dictionary = phones[phone_index]
 		if p.kind == "consonant":
 			var hz := 440.0 * pow(2.0, (float(p.midi) + float(o.transpose) - 69.0) / 12.0)
-			var part: PackedFloat64Array = Robot._consonant(p.phoneme, int(p.end) - int(p.start), hz, robot_rng)
+			var part: PackedFloat64Array
+			if phonetics != null:
+				var next_tract: Array = vowel_tracts.get("a", Robot.targets("vowel", "a"))
+				if phone_index + 1 < phones.size() and phones[phone_index + 1].kind == "vowel":
+					next_tract = vowel_tracts.get(phones[phone_index + 1].phoneme, next_tract)
+				part = phonetics.consonant(p.phoneme, int(p.end) - int(p.start), hz, robot_rng, next_tract)
+			else:
+				part = Robot._consonant(p.phoneme, int(p.end) - int(p.start), hz, robot_rng)
+			if recorded != null:
+				part = recorded.blend(str(p.phoneme), part)
 			var at := int(p.start)
 			for i in part.size(): noise[at + i] += part[i]
 
 	# --- how much the folds sound, phone by phone; a gap between two voiced sounds stays voiced ---
 	var voiced := PackedFloat32Array()
 	voiced.resize(n)
+	var phone_gain := PackedFloat32Array()
+	var notch_hz := PackedFloat32Array()
+	if phonetics != null:
+		phone_gain.resize(n)
+		phone_gain.fill(1.0)
+		notch_hz.resize(n)
+	var consonant_frames := PackedByteArray()
+	if clarity > 0.0:
+		consonant_frames.resize(n)
 	for k in phones.size():
 		var p: Dictionary = phones[k]
-		var level: float = Robot._voice_level(p)
-		for i in range(int(p.start), int(p.end)): voiced[i] = level
+		var level: float = Robot._voice_level(p) if phonetics == null else phonetics.voicing(p, 1.0)
+		for i in range(int(p.start), int(p.end)):
+			voiced[i] = level if phonetics == null else phonetics.voicing(p, float(i - int(p.start)) / maxi(1, int(p.end) - int(p.start)))
+			if phonetics != null:
+				phone_gain[i] = phonetics.gain_for(p)
+				notch_hz[i] = phonetics.notch_for(p)
+			if clarity > 0.0 and p.kind == "consonant":
+				consonant_frames[i] = 1
 		if k + 1 < phones.size() and int(phones[k + 1].start) > int(p.end):
-			var across: float = minf(level, Robot._voice_level(phones[k + 1]))
+			var across: float = minf(level, Robot._voice_level(phones[k + 1]) if phonetics == null else phonetics.voicing(phones[k + 1], 0.0))
 			for i in range(int(p.end), int(phones[k + 1].start)): voiced[i] = across
 
 	# --- the breath: one pressure a phrase, a target a syllable ---
@@ -173,6 +204,14 @@ static func render_phrase(plan: Dictionary, options: Dictionary = {}) -> PackedF
 	var voice_step: float = 1.0 - exp(-1.0 / (0.006 * SR))
 	var breathiness: float = float(o.breathiness)
 	var air: float = float(o.air)
+	var consonant_gain := 0.42 * (1.0 + clarity * 1.8)
+	var breath_gain := air * (1.0 - clarity * 0.35)
+	var presence := 0.0
+	var presence_step := 1.0 - exp(-TAU * 1400.0 / SR)
+	var articulation := 0.0
+	var articulation_step := 1.0 - exp(-1.0 / (SR * 0.003))
+	var mix := float(o.vocoder_mix)
+	var vocoder: SingingVocoder = SingingVocoder.new(SR) if mix > 0.0 else null
 	var f2_lift: float = float(o.f2_lift)
 	var upper_damping: float = float(o.upper_damping)
 	var leak: float = f.leak
@@ -191,8 +230,17 @@ static func render_phrase(plan: Dictionary, options: Dictionary = {}) -> PackedF
 	var shimmer: float = f.shimmer
 	var s_open: float = skew
 	var s_close: float = 1.0 - skew
+	var phone_level := 1.0
+	var notch_mix := 0.0
+	var notch_state := [0.0, 0.0]
+	var notch_coefficients: Array = [1.0, 0.0, 0.0, 0.0, 0.0]
+	var last_notch := 0.0
 	for i in n:
 		if i % BLOCK == 0:
+			if phonetics != null and notch_hz[i] > 0.0 and notch_hz[i] != last_notch:
+				notch_coefficients = phonetics.notch_coeff(notch_hz[i])
+				last_notch = notch_hz[i]
+				notch_state = [0.0, 0.0]
 			semitone += glide * (float(note[i]) - semitone)
 			rng = (rng * 48271) % 2147483647
 			drift += drift_step * ((float(rng) / 2147483647.0 * 2.0 - 1.0) * 26.0 - drift)
@@ -255,8 +303,22 @@ static func render_phrase(plan: Dictionary, options: Dictionary = {}) -> PackedF
 			y2[k] = y1[k]
 			y1[k] = y
 			x = y
-		# the breath is also heard as it is, not only through the throat: turbulence is made all along the tract
-		x += noise[i] * 0.42 * breath + aspiration * air * voice_now * breath
+		if phonetics != null:
+			phone_level += voice_step * (float(phone_gain[i]) - phone_level)
+			notch_mix += voice_step * ((0.72 if notch_hz[i] > 0.0 else 0.0) - notch_mix)
+			x = lerpf(x, Robot._filter(x, notch_coefficients, notch_state), notch_mix)
+		if vocoder != null:
+			x = lerpf(x, vocoder.step(x, phase, step / period_scale), mix)
+		# Lift the articulation band and mix the stops and fricatives directly.
+		presence += presence_step * (x - presence)
+		x += clarity * 0.45 * (x - presence)
+		x += noise[i] * consonant_gain * breath + aspiration * breath_gain * voice_now * breath
+		if clarity > 0.0:
+			# A short fade keeps consonant emphasis from clicking at phone boundaries.
+			articulation += articulation_step * (float(consonant_frames[i]) - articulation)
+			x *= 1.0 + clarity * lerpf(-0.16, 0.50, articulation)
+		if phonetics != null:
+			x *= phone_level
 		# nothing below the voice
 		var y_out: float = x - dc_x + 0.995 * dc_y
 		dc_x = x

@@ -1,11 +1,13 @@
 extends Node
-## THE OPENING (Palle, 2026-11-16): the game begins in black, inside the delivery.
+## THE OPENING: a brief rooftop anomaly, then the delivery crate lands in black.
+## 2026-11-17: the former accidental outside frame is now an authored encounter.
+## Wait under the veil for a ready roof, show the black service back for two
+## seconds, close the veil and return to the existing crate landing sequence.
 ##
-## Before this, the roof could be seen for a moment before the visitor stood in the arrival crate: the world was
-## drawn from whichever camera was current while the scene was still being handed over, and the visitor was put in
-## the crate a moment later. Now a black veil hangs in front of the ACTIVE camera from the first frame, whichever
-## camera that is, and is lifted only when it is KNOWN that the visitor is inside: the active camera and the body
-## are both measured inside the crate, the game says it is ready, and that has held for a third of a second.
+## Initially the roof appeared from whichever camera happened to be current during scene handover.
+## A veil now covers that loading period. Once scene_visible has run, a fixed roof marker
+## supplies the intentional outside view. The veil closes before relocation into the crate.
+## Its final lift still requires both camera and body inside, steady for a third of a second.
 ##
 ## Then, still in black, the crate lands: a rumble that rises, the blow, boards that rattle and settle. The veil
 ## lifts while the rattle dies away, and what is seen first is the inside of the crate.
@@ -30,6 +32,8 @@ const DRESS_WAIT := 4.0                   # after this the roof's rows are no lo
 const FADER := "opening"                # this node's own layer on the XR rig's fade
 const SOUND_SECONDS := 3.0
 const RATE := 22050
+const EXTERIOR_SECONDS := 2.0
+const EXTERIOR_CLOSE_SECONDS := .3
 const OPERA := "res://commons/void/inner_opera.gd"
 const HUD_CONFIG := "res://commons/void/hud_config.gd"
 
@@ -37,7 +41,7 @@ var game: Node3D
 var veil: MeshInstance3D
 var paint: StandardMaterial3D
 var sheet: ColorRect
-var stage := "waiting"                    # waiting -> landed -> lifting -> (freed)
+var stage := "waiting" # waiting -> exterior -> exterior_closing -> waiting -> landed -> lifting
 var crate: Node3D
 var waited := 0.0
 var steady := 0
@@ -46,6 +50,11 @@ var lifted := 0.0
 var sound: AudioStreamPlayer
 var forced := false
 var told := -1
+var exterior_seen := false
+var exterior_active := false
+var exterior_elapsed := 0.0
+var movement_was_enabled := true
+var glimpse_hud: Array[Dictionary] = []
 var report := {"seen_outside_while_black": false, "inside_when_landed": false, "crate_closed_when_landed": false, "gave_up": false, "scripted": false, "waited_s": 0.0, "sound_played": false}
 
 
@@ -180,6 +189,16 @@ func _physics_process(_delta: float) -> void:
 func _process(delta: float) -> void:
 	if veil == null: return
 	_hang()
+	if game.returning or game.recovering:
+		_done();return
+	if exterior_active and is_instance_valid(game.status): game.status.hide()
+	if exterior_active:
+		for entry in glimpse_hud:
+			if is_instance_valid(entry.node): entry.node.hide()
+	# _ready adds this before the chosen start floor is applied. Direct starts
+	# on other floors must never inherit the roof's veil or relocation.
+	if game.ready_for_play and game.checkpoint != 0:
+		_done();return
 	match stage:
 		"waiting":
 			waited += delta
@@ -192,7 +211,9 @@ func _process(delta: float) -> void:
 				report.scripted = true
 				_done()
 				return
-			if steady >= STEADY_FRAMES:
+			if not exterior_seen and game.ready_for_play and _dressed() and _begin_exterior():
+				return
+			if steady >= STEADY_FRAMES and (exterior_seen or waited>DRESS_WAIT):
 				report.inside_when_landed = true
 				report.crate_closed_when_landed = not bool(crate.get("broken"))
 				report.waited_s = waited
@@ -205,6 +226,17 @@ func _process(delta: float) -> void:
 				report.waited_s = waited
 				stage = "lifting"
 				print("[opening] GAVE UP after %.1f s: the visitor was not found inside the crate; lifting without the sound" % waited)
+		"exterior":
+			exterior_elapsed+=delta
+			if exterior_elapsed>=EXTERIOR_SECONDS:
+				stage="exterior_closing";exterior_elapsed=0.0
+		"exterior_closing":
+			exterior_elapsed+=delta
+			var alpha := clampf(exterior_elapsed/EXTERIOR_CLOSE_SECONDS,0,1)
+			paint.albedo_color.a=alpha;sheet.color.a=alpha;_shade(alpha)
+			if alpha>=1.0:
+				_finish_exterior()
+				steady=0;stage="waiting"
 		"landed":
 			since_landed += delta
 			if since_landed >= IMPACT_AT + HOLD_AFTER_IMPACT: stage = "lifting"
@@ -219,6 +251,7 @@ func _process(delta: float) -> void:
 
 
 func _done() -> void:
+	if exterior_active: _finish_exterior()
 	_shade(0.0)
 	print("[opening] lifted: %s" % str(report))
 	game.set_meta("opening_report", report.duplicate())
@@ -234,7 +267,47 @@ func _done() -> void:
 
 
 func _exit_tree() -> void:
+	_restore_glimpse_hud()
+	if exterior_active and is_instance_valid(game) and is_instance_valid(game.body):
+		game.body.enabled=movement_was_enabled and not game.returning and not game.recovering
 	XRToolsFade.set_fade(FADER, Color(0, 0, 0, 0))
+
+
+func _begin_exterior() -> bool:
+	if not game.get_meta("opening_scene_visible",false): return false
+	var mount: Node3D=game.building.content.exhibits.get("0/roof-anomaly")
+	if mount==null or get_viewport().get_camera_3d()!=game.camera: return false
+	var view: Marker3D=mount.get_node_or_null("Artifact/ArrivalView")
+	if view==null: return false
+	exterior_seen=true;exterior_active=true;exterior_elapsed=0.0
+	movement_was_enabled=game.body.enabled
+	game.place_player(view.global_position,view.global_rotation.y)
+	game.body.enabled=false
+	for hud in [game.charge_display,game.desktop_help]:
+		if is_instance_valid(hud):
+			glimpse_hud.append({"node":hud,"visible":hud.visible})
+			hud.hide()
+	if is_instance_valid(game.status): game.status.hide()
+	stage="exterior"
+	paint.albedo_color.a=0.0;sheet.color.a=0.0;_shade(0.0)
+	report["exterior_shown"]=true
+	report["exterior_seconds"]=EXTERIOR_SECONDS
+	print("[opening] rooftop transition/anomaly view")
+	return true
+
+
+func _finish_exterior() -> void:
+	exterior_active=false
+	_restore_glimpse_hud()
+	if not game.returning and not game.recovering: game.place_player_at_spawn(0)
+	game.body.enabled=movement_was_enabled and not game.returning and not game.recovering
+	if is_instance_valid(game.status): game.status.visible=game.notice_time>0.0
+
+
+func _restore_glimpse_hud() -> void:
+	for entry in glimpse_hud:
+		if is_instance_valid(entry.node): entry.node.visible=entry.visible
+	glimpse_hud.clear()
 
 
 ## How black it is: 1 black, 0 lifted. For a test.

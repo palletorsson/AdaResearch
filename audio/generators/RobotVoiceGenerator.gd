@@ -31,9 +31,9 @@ const LOCUS := {
 	"s": [400,1700], "sh": [400,1700], "f": [400,1500], "v": [400,1500],
 	"th": [400,1400], "dh": [400,1400], "z": [400,1700], "t": [400,1700],
 	"d": [400,1700], "k": [400,1500], "g": [400,1500], "p": [400,1100],
-	"b": [400,1100], "ch": [400,1700], "j": [400,1700],
+	"b": [400,1100], "ch": [400,1700], "j": [400,1700], "zh": [400,1700],
 }
-const FRICATIVE := {"s":7000.0, "z":4000.0, "sh":3000.0, "f":5000.0,
+const FRICATIVE := {"s":7000.0, "z":4000.0, "sh":3000.0, "zh":3000.0, "f":5000.0,
 	"v":2500.0, "th":6000.0, "dh":6000.0, "h":3500.0}
 const STOPS := {"p":[600.0,1.4], "b":[300.0,1.2], "t":[5500.0,1.0],
 	"d":[4000.0,0.8], "k":[2500.0,1.1], "g":[1800.0,0.9]}
@@ -51,6 +51,9 @@ static func _integer(x: Variant) -> bool:
 static func validate_plan(plan: Dictionary, options: Dictionary = {}) -> String:
 	if not _integer(plan.get("frames")) or plan.frames < 2 or plan.frames > SR * 60:
 		return "frames must be an integer between 2 and 60 seconds at 44100 Hz"
+	var timing_scale: Variant = plan.get("timing_scale", 1.0)
+	if not _number(timing_scale) or float(timing_scale) < 1.0 or float(timing_scale) > 4.0:
+		return "timing_scale must be between 1 and 4"
 	for key in ["phones", "syllables", "word_groups"]:
 		if not plan.get(key) is Array or plan[key].is_empty():
 			return key + " must be a nonempty array"
@@ -148,7 +151,7 @@ static func _voice_level(p: Dictionary) -> float:
 		return 0.0
 	if p.phoneme in ["b","d","g","j"]:
 		return 0.12
-	if p.phoneme in ["v","z","dh"]:
+	if p.phoneme in ["v","z","dh","zh"]:
 		return 0.45
 	return 1.0 if p.kind == "vowel" or p.phoneme in ["r","l","w","y"] else 0.5
 
@@ -173,21 +176,44 @@ static func _interpolate(x: Array, y: Array, frame: int) -> float:
 	return lerpf(y[i], y[i+1], float(frame - x[i]) / float(x[i+1] - x[i]))
 
 
-static func build_controls(plan: Dictionary, options: Dictionary = {}) -> Dictionary:
+static func build_tract(plan: Dictionary, ratio: float, vowel_tracts: Dictionary = {}, glide_pairs: Array = GLIDES) -> Dictionary:
+	var tract_x: Array = []
+	var tract_y: Array = []
+	var transition_frames := roundi(0.012 * SR * float(plan.get("timing_scale", 1.0)))
+	for p in plan.phones:
+		var target := targets(p.kind, p.phoneme)
+		if p.kind == "vowel":
+			target = vowel_tracts.get(p.phoneme, target)
+		else:
+			target = vowel_tracts.get("consonant:" + str(p.phoneme), target)
+		tract_x.append(int(p.start))
+		tract_x.append(maxi(p.start, p.end - mini(transition_frames, (int(p.end) - int(p.start)) / 3)))
+		tract_y.append_array([target, target])
+	var glides: Array = []
+	for i in range(plan.phones.size() - 1):
+		var left: Dictionary = plan.phones[i]
+		var right: Dictionary = plan.phones[i + 1]
+		if left.kind != "vowel" or right.kind != "vowel" or absf(left.end - right.start) > 1:
+			continue
+		if [left.phoneme, right.phoneme] not in glide_pairs:
+			continue
+		if not _inside_word(left.start, right.end, plan.word_groups):
+			return {"error": "A vowel glide cannot cross a written-word boundary"}
+		glides.append({"start": left.start, "end": tract_x[2 * i + 3], "index": 2 * i})
+	return {"tract_x": tract_x, "tract_y": tract_y, "glides": glides, "formant_ratio": ratio}
+
+
+static func build_controls(plan: Dictionary, options: Dictionary = {}, vowel_tracts: Dictionary = {}) -> Dictionary:
 	var error := validate_plan(plan, options)
 	if not error.is_empty():
 		return {"error": error}
+	var controls := build_tract(plan, float(options.get("formant_ratio", 1.0)), vowel_tracts, options.get("glide_pairs", GLIDES))
+	if controls.has("error"):
+		return controls
 	var n := int(plan.frames)
-	var tract_x: Array = []
-	var tract_y: Array = []
 	var voice := PackedFloat64Array()
 	voice.resize(n)
 	for p in plan.phones:
-		tract_x.append(int(p.start))
-		tract_x.append(maxi(p.start, p.end - mini(roundi(0.012 * SR), (int(p.end) - int(p.start)) / 3)))
-		var target := targets(p.kind, p.phoneme)
-		tract_y.append(target)
-		tract_y.append(target)
 		for frame in range(p.start, p.end):
 			voice[frame] = _voice_level(p)
 	# Smooth each step edge with the same finite Gaussian as Python, without
@@ -243,41 +269,34 @@ static func build_controls(plan: Dictionary, options: Dictionary = {}) -> Dictio
 	for frame in range(n):
 		midi[frame] += options.get("transpose", 0.0)
 		envelope[frame] *= _interpolate(amp_x, amp_y, frame)
-	var glides: Array = []
-	for i in range(plan.phones.size()-1):
-		var left: Dictionary = plan.phones[i]
-		var right: Dictionary = plan.phones[i+1]
-		if left.kind != "vowel" or right.kind != "vowel" or absf(left.end-right.start) > 1:
-			continue
-		if [left.phoneme,right.phoneme] not in options.get("glide_pairs", GLIDES):
-			continue
-		if not _inside_word(left.start, right.end, plan.word_groups):
-			return {"error": "A vowel glide cannot cross a written-word boundary"}
-		glides.append({"start": left.start, "end": right.end-mini(roundi(0.012*SR), (int(right.end)-int(right.start))/3),
-			"from": targets("vowel", left.phoneme), "to": targets("vowel", right.phoneme)})
-	return {"tract_x":tract_x, "tract_y":tract_y, "glides":glides,
-		"midi":midi, "voicing":smooth, "amplitude":envelope,
-		"formant_ratio": options.get("formant_ratio", 1.0)}
+	controls.merge({"midi": midi, "voicing": smooth, "amplitude": envelope})
+	return controls
+
+
+static func tract_blend(c: Dictionary, frame: int) -> Array:
+	var from := _segment(c.tract_x, frame)
+	var to := from
+	var blend := 0.0
+	if from + 1 < c.tract_x.size() and frame > c.tract_x[0]:
+		to = from + 1
+		blend = float(frame - c.tract_x[from]) / float(c.tract_x[to] - c.tract_x[from])
+	for g in c.glides:
+		if g.start <= frame and frame < g.end:
+			from = g.index
+			to = from + 2
+			var phase := float(frame-g.start) / maxi(1, int(g.end-g.start)-1)
+			blend = 0.5 - 0.5 * cos(PI * clampf((phase-0.30)/0.58, 0, 1))
+	return [from, to, blend]
 
 
 static func tract_at(c: Dictionary, frame: int) -> Array:
-	var index := _segment(c.tract_x, frame)
-	var a: Array = c.tract_y[index]
-	var b: Array = a
-	var blend := 0.0
-	if index + 1 < c.tract_x.size() and frame > c.tract_x[0]:
-		b = c.tract_y[index+1]
-		blend = float(frame-c.tract_x[index]) / float(c.tract_x[index+1]-c.tract_x[index])
-	for g in c.glides:
-		if g.start <= frame and frame < g.end:
-			a = g.from
-			b = g.to
-			var phase := float(frame-g.start) / maxi(1, int(g.end-g.start)-1)
-			blend = 0.5 - 0.5 * cos(PI * clampf((phase-0.30)/0.58, 0, 1))
+	var span := tract_blend(c, frame)
+	var a: Array = c.tract_y[span[0]]
+	var b: Array = c.tract_y[span[1]]
 	var result: Array = [[],[],[]]
 	for row in range(3):
 		for k in range(5):
-			result[row].append(lerpf(a[row][k], b[row][k], blend) * (float(c.formant_ratio) if row < 2 else 1.0))
+			result[row].append(lerpf(a[row][k], b[row][k], span[2]) * (float(c.formant_ratio) if row < 2 else 1.0))
 	return result
 
 
@@ -310,8 +329,8 @@ static func _fricative(symbol: String, frames: int, hz: float, rng: Array) -> Pa
 	var out := PackedFloat64Array()
 	out.resize(frames)
 	var center: float = FRICATIVE[symbol]
-	var sib := symbol in ["s","z","sh"]
-	var voiced := symbol in ["z","v"]
+	var sib := symbol in ["s","z","sh","zh"]
+	var voiced := symbol in ["z","v","zh"]
 	var q := (2.4 if sib else 1.5) if voiced else (1.8 if sib else 0.8)
 	var bp := _coeff(center, q)
 	var hp := _coeff(center * 0.55, sqrt(0.5), "hp")

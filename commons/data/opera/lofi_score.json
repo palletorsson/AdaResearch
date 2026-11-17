@@ -1,0 +1,18 @@
+{
+  "title": "Point Zero / soft machinery",
+  "enabled": true,
+  "bpm": 84,
+  "bars": 4,
+  "key": "E minor",
+  "chords": [[52, 55, 59, 62], [52, 57, 60, 64]],
+  "seed": 171126,
+  "bed": "res://audio/opera_music/point_zero_bed.wav",
+  "pulse": "res://audio/opera_music/point_zero_pulse.wav",
+  "bed_idle_db": -8.0,
+  "bed_singing_db": -5.0,
+  "pulse_idle_db": -28.0,
+  "pulse_singing_db": -9.0,
+  "rise_seconds": 0.9,
+  "release_seconds": 3.0,
+  "note": "Player levels are relative to the existing VoidMusic bus (-16 dB by default). Soft keys and bass remain well below the voice; brushed rhythm comes forward while singing. Same continuous loop, no restart on each thought. Active on floors with sung-artifact bindings."
+}

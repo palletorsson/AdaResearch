@@ -1,0 +1,47 @@
+{
+  "renderer": "phoneme",
+  "voice": {
+    "gain": 1.0,
+    "transpose": 0.0,
+    "formant_ratio": 1.0,
+    "air": 0.62,
+    "flow_sharpness": 0.45,
+    "vocoder_mix": 0.23,
+    "clarity": 0.55,
+    "speed": 0.5,
+    "individual_tuning": true,
+    "recorded_consonants": 0.75
+  },
+  "phrases": [
+    {
+      "file": "crate_017c606249133359.wav",
+      "bytes": 426580,
+      "seconds": 4.836009070294785,
+      "sha256": "1829b9a3525ee67f7e32c201df568ef6b7eba07dc7928892e007a0f91d583add"
+    },
+    {
+      "file": "others_dc7d25d0ec510767.wav",
+      "bytes": 610640,
+      "seconds": 6.922857142857143,
+      "sha256": "cca2facc0c5d58f0d8a3dd0941ba58bf117001e3526bbf343b62a1e5612c8761"
+    },
+    {
+      "file": "clock_d9976318789712b1.wav",
+      "bytes": 547640,
+      "seconds": 6.208571428571428,
+      "sha256": "a96cccbf6f50c25c73b6b9ca9f6c8b2586bb702f381b8997ca67bd91400efca7"
+    },
+    {
+      "file": "letters_ed5c1d403627e18a.wav",
+      "bytes": 615580,
+      "seconds": 6.978866213151927,
+      "sha256": "1e4cdf593a73b3a795eefe13740ea5008ddc87074561c6d70adf92f08d317c2f"
+    },
+    {
+      "file": "here_60342896cd61fee6.wav",
+      "bytes": 358640,
+      "seconds": 4.065714285714286,
+      "sha256": "a4a0f86144d40f301bd6615cc4b74f77c94c5953b5fd46d130251757eae72e3a"
+    }
+  ]
+}

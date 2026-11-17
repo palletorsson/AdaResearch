@@ -25,26 +25,32 @@ extends Node
 ## tested, nothing is played aloud on the PC. --no-opera skips the node.
 const ATTENTION := "res://audio/runtime/InnerOperaAttention.gd"
 const VOICE := "res://commons/void/inner_voice_godot.gd"
+const ACCOMPANIMENT := "res://commons/void/inner_opera_score.gd"
 const BINDINGS := "res://commons/data/opera/tower_bindings.json"
 const GROUP := "inner_opera_object"
 const AFTER_OPENING := 2.0
 
 var game: Node3D
 var voice: Node
+var music: Node
+var music_path := ""
 var attention: RefCounted
 var listening := false
 var quiet := false
 var score_path := ""
 var score_error := ""
 var voice_options := {}
-var by_floor := {}                        # floor index -> {row or prop id: object id}
+var by_floor := {}                        # floor index -> {row[/named/child]: object id}
 var bound := {}                           # "floor/id" -> instance id of the node that was bound
 var gaze_distance := 14.0
+var gaze_angle_degrees := 3.0
 var volume_db := -2.0
 var renderer := "model_b"
 var heard: Array = []
 var _since_ready := 0.0
 var _look_again := 0.0
+var _gaze_previous := ""
+var _gaze_report_in := 0.0
 
 
 func _ready() -> void:
@@ -67,6 +73,11 @@ func _ready() -> void:
 	voice.connect("rendered", func(id, seconds, cached): print("[opera] ready: '%s' (%s)" % [id, "kept from an earlier run" if cached else "made in %.1f s" % seconds]))
 	score_error = str(voice.call("load_score", score_path, voice_options, renderer))
 	quiet = args.has("--opera-quiet")
+	if not music_path.is_empty() and ResourceLoader.exists(ACCOMPANIMENT):
+		music = (load(ACCOMPANIMENT) as GDScript).new()
+		add_child(music)
+		music.call("configure", music_path)
+		music.call("set_context", false, quiet)
 	print("[opera] Godot voice (%s); score %s%s" % [str(voice.get("renderer_name")), score_path, "" if score_error.is_empty() else "  ERROR: " + score_error])
 	game.set_meta("inner_opera", self)
 
@@ -76,7 +87,9 @@ func _read_bindings() -> bool:
 	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(BINDINGS))
 	if not parsed is Dictionary: return false
 	score_path = str(parsed.get("score", ""))
+	music_path = str(parsed.get("accompaniment", ""))
 	gaze_distance = float(parsed.get("gaze_distance", gaze_distance))
+	gaze_angle_degrees = clampf(float(parsed.get("gaze_angle_degrees", gaze_angle_degrees)), 0.0, 5.0)
 	if parsed.get("voice") is Dictionary: voice_options = parsed.voice
 	volume_db = float(parsed.get("volume_db", volume_db))
 	renderer = str(parsed.get("renderer", renderer))
@@ -104,8 +117,15 @@ func _bind_what_stands() -> void:
 		var wanted: Dictionary = by_floor[index]
 		for id in wanted:
 			var key := "%d/%s" % [index, str(id)]
-			var mount := (exhibits.get(key) if exhibits.has(key) else props.get(key)) as Node3D
+			var selector := str(id)
+			var row_key := "%d/%s" % [index, selector.get_slice("/", 0)]
+			var mount := (exhibits.get(row_key) if exhibits.has(row_key) else props.get(row_key)) as Node3D
 			if mount == null or not is_instance_valid(mount) or not mount.is_inside_tree(): continue
+			# One edited installation may contain several independent studies. Bind the
+			# named study, preserving the row-only form used by Point Zero.
+			if selector.contains("/"):
+				mount = mount.get_node_or_null(NodePath(selector.substr(selector.find("/") + 1))) as Node3D
+				if mount == null: continue
 			if int(bound.get(key, 0)) == mount.get_instance_id(): continue
 			_bind(mount, str(wanted[id]))
 			bound[key] = mount.get_instance_id()
@@ -114,7 +134,7 @@ func _bind_what_stands() -> void:
 func _bind(mount: Node3D, object_id: String) -> void:
 	mount.add_to_group(GROUP)
 	mount.set_meta("object_id", object_id)
-	var has_body := false
+	var has_body := mount is CollisionObject3D and not (mount as CollisionObject3D).get_shape_owners().is_empty()
 	for body in mount.find_children("*", "CollisionObject3D", true, false):
 		if not (body as CollisionObject3D).get_shape_owners().is_empty(): has_body = true
 	if not has_body:
@@ -144,21 +164,51 @@ func _bind(mount: Node3D, object_id: String) -> void:
 	print("[opera] bound %s -> '%s' (%s)" % [mount.name, object_id, "its own solids" if has_body else "a box for the look"])
 
 
-## What the look rests on now: the first thing hit, then up the tree to a bound thing.
+## Head gaze is a small cone, not a pixel-perfect pointer. Keep the exact hit
+## first; the surrounding rays let a small sphere survive natural head motion.
+## Each ray still stops at physical scenery, so a wall cannot earn a thought
+## for a hidden object. Invisible, unbound trigger areas are not scenery.
 func _looked_at() -> String:
-	var camera := get_viewport().get_camera_3d()
+	var camera := game.get("camera") as Camera3D
+	if camera == null: camera = get_viewport().get_camera_3d()
 	if camera == null or not camera.is_inside_tree(): return ""
+	var forward := -camera.global_basis.z.normalized()
+	var exact := _gaze_ray(camera, forward)
+	if not exact.is_empty():
+		_gaze_previous = exact
+		return exact
+	var first := ""
+	if gaze_angle_degrees > 0.0:
+		var spread := tan(deg_to_rad(gaze_angle_degrees))
+		for offset in [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN,
+			Vector2(-1, -1).normalized(), Vector2(1, -1).normalized(),
+			Vector2(-1, 1).normalized(), Vector2(1, 1).normalized()]:
+			var direction: Vector3 = (forward + spread * (camera.global_basis.x * offset.x + camera.global_basis.y * offset.y)).normalized()
+			var nearby := _gaze_ray(camera, direction)
+			if nearby.is_empty(): continue
+			if nearby == _gaze_previous: return nearby
+			if first.is_empty(): first = nearby
+	_gaze_previous = first
+	return first
+
+
+func _gaze_ray(camera: Camera3D, direction: Vector3) -> String:
 	var from: Vector3 = camera.global_position
-	var query := PhysicsRayQueryParameters3D.create(from, from - camera.global_basis.z * gaze_distance)
+	var query := PhysicsRayQueryParameters3D.create(from, from + direction * gaze_distance)
 	query.collide_with_areas = true
 	var body := game.get("body") as CollisionObject3D
 	if body != null: query.exclude = [body.get_rid()]
-	var hit: Dictionary = camera.get_world_3d().direct_space_state.intersect_ray(query)
-	if hit.is_empty(): return ""
-	var walk := hit.collider as Node
-	while walk != null:
-		if walk.is_in_group(GROUP) and walk.has_meta("object_id"): return str(walk.get_meta("object_id"))
-		walk = walk.get_parent()
+	for step in 16:
+		var hit: Dictionary = camera.get_world_3d().direct_space_state.intersect_ray(query)
+		if hit.is_empty(): return ""
+		var walk := hit.collider as Node
+		while walk != null:
+			if walk.is_in_group(GROUP) and walk.has_meta("object_id"): return str(walk.get_meta("object_id"))
+			walk = walk.get_parent()
+		if not hit.collider is Area3D: return ""
+		var exclusions: Array[RID] = query.exclude
+		exclusions.append(hit.rid)
+		query.exclude = exclusions
 	return ""
 
 
@@ -173,16 +223,48 @@ func _physics_process(delta: float) -> void:
 		if _since_ready < AFTER_OPENING: return
 		listening = true
 		var walker: Variant = game.get("body")
-		if walker is Object and (walker as Object).get("scripted_input") == true: quiet = true
+		# The human desktop launcher briefly freezes input while placing the player.
+		# That setup period is not an automated, muted probe.
+		if not OS.get_cmdline_user_args().has("--opera-human") and walker is Object and (walker as Object).get("scripted_input") == true: quiet = true
 		if quiet: voice.set("volume_db", -80.0)
 		print("[opera] listening (%d things bound%s)" % [bound.size(), "; quiet: nothing is played aloud" if quiet else ""])
-	var chosen: String = attention.call("look", _looked_at(), delta)
+	if music != null:
+		var stream: Variant = game.get("floor_stream")
+		var floor_index := int(stream.get("focus")) if stream is Object else int(game.get("checkpoint"))
+		music.call("set_context", by_floor.has(floor_index) and not game.has_meta("opening"), quiet)
+	var looking := _looked_at()
+	var chosen: String = attention.call("look", looking, delta)
+	_gaze_report_in -= delta
+	if _gaze_report_in <= 0.0:
+		_gaze_report_in = 2.0
+		_write_gaze_diagnostic(looking)
 	if chosen.is_empty(): return
 	if not bool(voice.call("has_object", chosen)):
 		attention.call("mark_silent")
 		return
 	if not bool(voice.call("sing", chosen)) and not bool(voice.call("is_sounding")):
 		print("[opera] '%s' is chosen and still being made" % chosen)
+
+
+## Optional on-device evidence for a human playtest. Creating/removing this
+## marker needs no restart and never moves the player or starts a phrase.
+func _write_gaze_diagnostic(looking: String) -> void:
+	if not FileAccess.file_exists("user://opera_debug.on"): return
+	var camera := game.get("camera") as Camera3D
+	if camera == null: return
+	var query := PhysicsRayQueryParameters3D.create(camera.global_position, camera.global_position - camera.global_basis.z * gaze_distance)
+	query.collide_with_areas = true
+	var body := game.get("body") as CollisionObject3D
+	if body != null: query.exclude = [body.get_rid()]
+	var hit: Dictionary = camera.get_world_3d().direct_space_state.intersect_ray(query)
+	var stream: Variant = game.get("floor_stream")
+	var report := {"gaze_revision": 2, "ticks_ms": Time.get_ticks_msec(), "floor": int(stream.get("focus")) if stream is Object else int(game.get("checkpoint")),
+		"camera": str(camera.global_position), "direction": str(-camera.global_basis.z), "looking_at": looking,
+		"first_collider": str(hit.collider.get_path()) if not hit.is_empty() else "", "dwell": attention.dwell_ratio(looking),
+		"speaking": attention.is_speaking(), "quiet": quiet, "ready_count": voice.streams.size(),
+		"heard": heard.slice(maxi(0, heard.size() - 8))}
+	var file := FileAccess.open("user://opera_gaze.json", FileAccess.WRITE)
+	if file != null: file.store_string(JSON.stringify(report, "  "))
 
 
 # The line being sung is written on the viewfinder (the game's charge display), and taken off when it ends.
@@ -195,17 +277,20 @@ func _show(text: String) -> bool:
 
 
 func _on_started(object_id: String, text: String) -> void:
+	if music != null: music.call("set_singing", true)
 	heard.append({"object": object_id, "text": text, "sung": true, "on_display": _show(text)})
 	print("[opera] SINGS for '%s': %s" % [object_id, text])
 
 
 func _on_finished(object_id: String) -> void:
+	if music != null: music.call("set_singing", false)
 	_show("")
 	attention.call("mark_silent")
 	print("[opera] finished: %s" % object_id)
 
 
 func _on_failed(object_id: String, message: String) -> void:
+	if music != null: music.call("set_singing", false)
 	_show("")
 	attention.call("mark_silent")
 	heard.append({"object": object_id, "text": "", "sung": false, "failed": message})
@@ -220,7 +305,7 @@ func _exit_tree() -> void:
 
 func state() -> Dictionary:
 	return {"listening": listening, "quiet": quiet, "score": score_path, "score_error": score_error, "bound": bound.keys(), "thoughts": (voice.get("order") as Array).duplicate(),
-		"ready": (voice.get("streams") as Dictionary).keys(), "costs": (voice.get("costs") as Dictionary).duplicate(true), "heard": heard.duplicate(true), "looking_at": _looked_at()}
+		"ready": (voice.get("streams") as Dictionary).keys(), "costs": (voice.get("costs") as Dictionary).duplicate(true), "heard": heard.duplicate(true), "looking_at": _looked_at(), "music": music.call("state") if music != null else {}}
 
 
 ## A rendered phrase as 16-bit samples, for a test to measure. Empty until it is ready.
