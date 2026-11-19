@@ -176,6 +176,8 @@ def render(journey, outline):
                     if song.get('keeps'):
                         out += ['- Keeps from the song before: **%s**' % song['keeps']]
                     out += ['- Hands on: %s' % song['hands_on']]
+                    if song.get('echo'):
+                        out += ['- Later, in Service (%s): %s' % (song['echo']['where'], song['echo']['text'])]
                 out += ['']
     return '\n'.join(out).rstrip() + '\n'
 
@@ -201,7 +203,10 @@ def main():
     print('%d acts, %d movements, %d stops, %d touches, %d songs; %d floors carry one in: %s; %d findings'
           % (len(journey['acts']), sum(len(a['sequences']) for a in journey['acts']), count, touched, songs, len(carried), ', '.join(carried), len(found)))
     if '--write' in sys.argv and not found:
-        PAGE.write_text(render(journey, outline), encoding='utf-8', newline='\n')
+        # Opening this page for writing fails with EINVAL while a viewer holds it; writing over it in place does not.
+        with open(PAGE, 'r+' if PAGE.exists() else 'w', encoding='utf-8', newline='\n') as page:
+            page.write(render(journey, outline))
+            page.truncate()
         print('wrote', PAGE.relative_to(ROOT).as_posix())
     return len(found)
 

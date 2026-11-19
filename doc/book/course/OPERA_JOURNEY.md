@@ -79,9 +79,9 @@ Forms. From the word here on a roof to a grid where every place has a number: po
 
 ### What act I hands on
 
-Palle, 19 November 2026: the dream is that these experiences compound, so that Care Unit Model B can guide or support the other agents in the books to a new life; it is how other working units in the tower gain a more general intelligence. Not developed yet. A first form of it: every song keeps one word from the song before and uses it for something new, and every stop leaves one sentence she could say to a unit that has not been there. At the end of an act the sentences are gathered into four lines, one for each movement, for the three still in the packing on the roof. Eight acts would make the whole of what she brings back.
+Palle, 19 November 2026: the dream is that these experiences compound, so that Care Unit Model B can guide or support the other agents in the books to a new life; it is how other working units gain a more general intelligence. Not developed yet. A first form of it: every song keeps one word from the song before and uses it for something new, and every stop leaves one thing she takes with her. The game happens before book one. In the Service novels (Residue, Threshold, Pending) five units keep their posts: a gate agent, a vice-consul, an architectural drafter, a night nurse, a farmhand. Among them comes a visitor nobody names, in a dry coat, with a fold of repair tape on the third finger of her left hand. She sits, she does not speak, and she leaves a mark. Reading that visitor as Model B is Fable's reading of the books, for Palle to confirm. If it holds, what a stop hands on is written here as a sentence but has to reach a unit as a gesture or as a thing left behind, and no song may tell a reader of the novels who she is. Where a stop already has an echo in the books it is noted under the stop. At the end of an act the sentences are gathered into four lines, one for each movement. Eight acts would make the whole of what she brings to the posts.
 
-Asked on Point_Zero: *What wakes the next one?*
+Asked on Point_Zero: *What wakes the next one?* (a proposed third line for the other care units, object others__c; written by another session, not enabled in the game)
 
 > Here first. Then a point, a line, a face, an inside.  
 > Moved, turned, grown: the same. The far side may have changed.  
@@ -103,6 +103,7 @@ Asked on Point_Zero: *What wakes the next one?*
 
 - Lines: Arrival crate: new; there now: "The boards are thin." · The frame counter: new; there now: "A number is changing." · Roof letters: new; there now: "This is not my address."
 - Hands on: Before anything else, say here.
+- Later, in Service (Residue, preface): Day 412 is counted at one desk in blank boarding passes printed each morning for no one. There too the count was running before she came.
 
 **1 · Point_One** (form)
 - Takes: The word here, from the roof.
@@ -128,6 +129,7 @@ Asked on Point_Zero: *What wakes the next one?*
 - Lines: Carry the point: new; there now: "The light comes with my hand." · Name the reference: new; there now: "One point can have two addresses."
 - Keeps from the song before: **point**
 - Hands on: Ask what a number is measured from.
+- Later, in Service (Residue, chapters 2 and 16): At the consulate her inquiry falls under the duplicate-addressee protocol, and the pass that is finally printed is for a recipient who is more than one.
 
 **3 · Point_Lines** (form, edge)
 - Takes: Two points and a chosen reference.
@@ -154,6 +156,7 @@ Asked on Point_Zero: *What wakes the next one?*
 - Lines: Leave a gap: new; there now: "My hand crossed where no mark stays." · Let waiting grow: accepted on the desk, card bubble-brush · Let it continue: new; there now: "Gravity carries the drawing on."
 - Keeps from the song before: **line**
 - Hands on: What a hand does stays behind as a thing. Waiting counts as doing.
+- Later, in Service (Residue, chapter 11): At gate 47 she presses two fingers to the glass. The last time the ovals faded in twenty-two seconds. This time they hold.
 
 **5 · Point_Triangle_Context** (form, topology)
 - Takes: A trace that became a body.
@@ -193,6 +196,7 @@ Asked on Point_Zero: *What wakes the next one?*
 - Lines: One cube, two folds: new; there now: "The same corner makes two folds." · Unfold and return: new; there now: "Each return leaves something behind." · The copies wait for a relation: the line already there, kept
 - Keeps from the song before: **face**
 - Hands on: Taken apart and put back, a thing is known better. Its copies are parts.
+- Later, in Service (Residue, chapters 4 and 12): Beds made with hospital corners every morning, slept in or not, and one bed remade by another hand with its fold two short of the nurse's own.
 
 **8 · Primitives_Ignorance** (form, edge)
 - Takes: Parts waiting for a relation.
@@ -258,6 +262,7 @@ Asked on Point_Zero: *What wakes the next one?*
 - Lines: Four corners make a place: new; there now: "My steps change how they stand together." · Did height make the centre?: the line already there, kept · The image and its unfinished tools: the line already there, kept
 - Keeps from the song before: **gap**
 - Hands on: An arrangement is one of several. Leave the tools out for whoever comes next.
+- Later, in Service (Residue, chapter 12): A fold of repair tape is left on the arm of the visitor's chair. The nurse notes it and lets it stay.
 
 ### Transformation (floors 13 to 21)
 
@@ -351,6 +356,7 @@ Asked on Point_Zero: *What wakes the next one?*
 - Lines: The opening closes behind me: new; there now: "A doorway has come to meet me." · Room appears between the blocks: new; there now: "The opening travels with me." · The cut remembers: new; there now: "My body leaves a way behind."
 - Keeps from the song before: **room**
 - Hands on: Some things open only while somebody is near. Notice what stays open afterwards.
+- Later, in Service (Residue, chapter 4): The nurse keeps her hand near the patient's hand and not on it, and the visitor sits through her hour at the door of the ward.
 
 **20 · Trans_Pit** (edge, space)
 - Takes: A boundary that answered.
@@ -410,6 +416,7 @@ Asked on Point_Zero: *What wakes the next one?*
 - Lines: A place can remain empty: new; there now: "A simple piece can hold another world." · Movement does not erase an address: new; there now: "A place repeats and leaves a space between." · An address gains depth: new; there now: "A place repeats and leaves a space between."
 - Keeps from the song before: **still**
 - Hands on: Name the place apart from what stands in it. Then a thing can be lost and put back.
+- Later, in Service (Residue, chapter 4; Pending, chapter 15): An identity band correct in form and blank in name; a bed that is not empty at the hour the form calls empty; a box left empty because an empty box is accurate.
 
 **24 · Tutorial_3D** (space, organization)
 - Takes: An address with depth.
@@ -461,6 +468,7 @@ Asked on Point_Zero: *What wakes the next one?*
 - Lines: A phase passes through the floor: new; there now: "I come around and find another way." · A silent cell is still a place: new; there now: "A place repeats and leaves a space between." · Two clocks meet: new; there now: "The world was moving long before I came."
 - Keeps from the song before: **place**
 - Hands on: What is quiet is not missing. A silent one still has its place.
+- Later, in Service (Residue, chapters 2 and 4; Threshold, chapter 2): She says nothing at any post, and each keeper makes a place for her all the same: a seat in the lobby, a chair brought to the door.
 
 ## Act II. What a surface is given
 
