@@ -145,14 +145,18 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 
 **3 · Point_Lines** (form, edge)
 - Takes: Two points and a chosen reference.
-- Discovers: Joining two points makes the first edge, and an edge can also be a boundary: something to read, and to walk around.
-- Touches: Leave a connection · Find another way · Read the warning
+- Discovers: Joining two points makes the first edge. An edge can forbid and warn, be walked and measured, be taped into a surface, and stand for a thing.
+- Touches: Leave a connection · Turn without stretching · Find another way · Read the warning · Step beside the words · association(line) / move an endpoint to drop an object · Tape / give a line a surface
 
 > Point to point. Let go. The link stays.  
-> A line across the way. The way round is longer.  
+> Two points in the dark, one in each hand. Joined: a line of light. The wall measures it. Reset, and both go home.  
+> A blue plank on sawhorses says do not cross. The way round is longer.  
 > A red line. Who gave it force?  
+> Walk this line. Six metres, gate to gate. The floor measures every step aside.  
+> Move one end. Let go. A thing a line can be falls on the table: a plank, a ruler, a warning.  
+> Three rolls of tape. Fire, move, fire: a strip between two points. Strip beside strip, the line has a surface. Any wall will take it.  
 
-- Lines: Leave a connection: new; there now: "I let go. The link stays." · Find another way: new; there now: "This line makes my journey longer." · Read the warning: new; there now: "What gives this line its force?"
+- Lines: Leave a connection: new; there now: "I let go. The link stays." · Turn without stretching: new; there now: "The length stays while I turn." · Find another way: new; there now: "This line makes my journey longer." · Read the warning: new; there now: "What gives this line its force?" · Step beside the words: new; there now: "I could step beside the words." · association(line): new; there now: "A line can guide my feet or bar the way." · Tape: new; there now: "I follow what was only once a mark."
 - Keeps from the song before: **point**
 - Hands on: A line can join or forbid. Ask which, and who drew it.
 

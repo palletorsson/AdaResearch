@@ -2220,6 +2220,24 @@
           }
         },
         {
+          "id": "walk-this-line-label",
+          "artifact": "walk_this_line_marking",
+          "station": "SE",
+          "position": [
+            5.1,
+            1.25
+          ],
+          "height": 0,
+          "facing": 90,
+          "scale": 1.8,
+          "config": {
+            "legend_text": "Walk This Line",
+            "show_stripe": false,
+            "paint_color": "ffffff",
+            "editor_label": "Label / Walk This Line - Palle 2026-11-19: a clear label at the line, before its east gate"
+          }
+        },
+        {
           "id": "point-room",
           "artifact": "point_line_room",
           "station": "SW",
