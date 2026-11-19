@@ -5,7 +5,7 @@
   "date": "19 November 2026",
   "text": "The songs should be read as one coherent journey, the story of discovering what forms are possible, what topologies, what spaces, bodies, organizational structures and their edges."
  },
- "about": "The whole tower as one story, kept abstract: eight acts, one movement for each spine sequence, one stop for each floor. A stop says what it takes from the stop before and what it discovers, names which of the six words it is about, and touches two or more entries of the trajectory outline in the order the outline gives them. It is a frame for the songs and not their text: a lyric is still written from the player's view of the floor, and checked there. Nothing here was heard or walked for this document; every stop is read from the floor's intent and its outline entries. Palle, 19 November 2026: the songs are very compressed, and that is how a song shows intelligence: by folding (Dichtung). A line compresses the meaning of the artifact and of the encounter without losing it. So what stands on the floor and what was measured there is kept in the notes under a line (\"seen\", \"unfolded\"), and the line itself is the fold: at most twelve words. Each floor has a chapter, commons/maps/<map>/final.md, written in Model B's voice with the encounters in order; read it before writing a line. Act one was first written without it; Point Lines was corrected from its chapter on 19 November, and the other floors of the act have not been read against theirs yet.",
+ "about": "The whole tower as one story, kept abstract: eight acts, one movement for each spine sequence, one stop for each floor. A stop says what it takes from the stop before and what it discovers, names which of the six words it is about, and touches two or more entries of the trajectory outline in the order the outline gives them. It is a frame for the songs and not their text: a lyric is still written from the player's view of the floor, and checked there. Nothing here was heard or walked for this document; every stop is read from the floor's intent and its outline entries. Palle, 19 November 2026: the songs are very compressed, and that is how a song shows intelligence: by folding (Dichtung). A line compresses the meaning of the artifact and of the encounter without losing it. So what stands on the floor and what was measured there is kept in the notes under a line (\"seen\", \"unfolded\"), and the line itself is the fold: at most twelve words. Each floor has a chapter, commons/maps/<map>/final.md, written in Model B's voice with the encounters in order; read it before writing a line. Act one was first written without it and was corrected on 19 November: for every sung line the chapter's section on that encounter was read, and twenty-nine lines changed. The chapters were not read end to end, and they were written around the Endless Museum: the meaning is taken from the chapter, the facts from the floor as it stands.",
  "six": {
   "form": "what can stand, from a point to a family grown from a recipe",
   "topology": "what is open, closed or connected: gaps, holes, necks, a way back",
@@ -302,15 +302,19 @@
         "lines": [
          {
           "at": "trajectory-00-01",
-          "text": "Light between the boards.",
+          "text": "A split knot. A little sky in it.",
           "status": "new",
-          "there_now": "The boards are thin."
+          "there_now": "The boards are thin.",
+          "chapter": "Point_Zero final.md: a knot has split and a little sky shows through it.",
+          "before_the_chapter": "Light between the boards."
          },
          {
           "at": "trajectory-00-02",
-          "text": "The count did not wait.",
+          "text": "The first number seen was not its first.",
           "status": "new",
-          "there_now": "A number is changing."
+          "there_now": "A number is changing.",
+          "chapter": "Point_Zero final.md: \"My first number was not its first number.\"",
+          "before_the_chapter": "The count did not wait."
          },
          {
           "at": "trajectory-00-03",
@@ -357,9 +361,11 @@
         "lines": [
          {
           "at": "trajectory-01-01",
-          "text": "Here, a place with nothing in it.",
+          "text": "Here: a label, and nothing above it.",
           "status": "new",
-          "there_now": "I began as a pixel on a screen. Now I can come closer."
+          "there_now": "I began as a pixel on a screen. Now I can come closer.",
+          "chapter": "@point_absent: a label says Point one; above it, nothing; only the words and the place they made.",
+          "before_the_chapter": "Here, a place with nothing in it."
          },
          {
           "at": "trajectory-01-03",
@@ -397,16 +403,20 @@
         "lines": [
          {
           "at": "trajectory-02-01",
-          "text": "Held, a point goes where the hand goes.",
+          "text": "Held, a point brings its light. Let go: the point stays.",
           "status": "new",
           "there_now": "The light comes with my hand.",
-          "unfolded": "A point in the hand goes where the hand goes."
+          "unfolded": "A point in the hand goes where the hand goes.",
+          "chapter": "@point_held: the light comes with the hand; let go, the added light goes out and the sphere remains.",
+          "before_the_chapter": "Held, a point goes where the hand goes."
          },
          {
           "at": "trajectory-02-02",
-          "text": "Set it down. One point, two addresses.",
+          "text": "One point, two addresses. One still counts from the roof.",
           "status": "new",
-          "there_now": "One point can have two addresses."
+          "there_now": "One point can have two addresses.",
+          "chapter": "@coordinate_readout: WORLD keeps the roof's zero, LOCAL counts from the coloured frame.",
+          "before_the_chapter": "Set it down. One point, two addresses."
          }
         ],
         "hands_on": "Ask what a number is measured from.",
@@ -552,9 +562,11 @@
         "lines": [
          {
           "at": "trajectory-04-01",
-          "text": "Through the glass the line leaves a gap.",
+          "text": "On the glass, a mark. Lift, and the line keeps a gap.",
           "status": "new",
-          "there_now": "My hand crossed where no mark stays."
+          "there_now": "My hand crossed where no mark stays.",
+          "chapter": "@glass_paint_wall: touch the pane, move, lift, continue through the air, touch down again. The mark is on the glass, not through it.",
+          "before_the_chapter": "Through the glass the line leaves a gap."
          },
          {
           "at": "trajectory-04-03",
@@ -572,9 +584,11 @@
          },
          {
           "at": "trajectory-04-04",
-          "text": "Let go. The line goes on downhill.",
+          "text": "Let go. The drawing goes on. A bend no wrist made.",
           "status": "new",
-          "there_now": "Gravity carries the drawing on."
+          "there_now": "Gravity carries the drawing on.",
+          "chapter": "@trace_ball_ramp: \"The drawing has acquired a bend I did not make with my wrist.\"",
+          "before_the_chapter": "Let go. The line goes on downhill."
          }
         ],
         "hands_on": "What a hand does stays behind as a thing. Waiting counts as doing.",
@@ -618,14 +632,18 @@
          },
          {
           "at": "trajectory-05-03",
-          "text": "Draw across it. A face.",
+          "text": "A drawing, flattened to fit. A face wants a plane.",
           "status": "new",
-          "there_now": "My drawing has lost its height."
+          "there_now": "My drawing has lost its height.",
+          "chapter": "@draw_triangle_faces: the drawing carried from Trace arrives with its height flattened, prepared for a method that expects a plane.",
+          "before_the_chapter": "Draw across it. A face."
          },
          {
           "at": "trajectory-05-04",
-          "text": "Two faces share one edge.",
-          "status": "kept"
+          "text": "Two faces, one shared edge. Move its end: both change.",
+          "status": "new",
+          "chapter": "@quad: lift a corner off the diagonal and one face follows; move an end of the shared edge and both change.",
+          "before_the_chapter": "Two faces share one edge."
          }
         ],
         "hands_on": "Closing a boundary is not yet filling it.",
@@ -658,9 +676,11 @@
         "lines": [
          {
           "at": "trajectory-06-01",
-          "text": "A fourth point. The faces close on an inside.",
+          "text": "The last point home. Four faces close, and it falls.",
           "status": "new",
-          "there_now": "The last point brings it down."
+          "there_now": "The last point brings it down.",
+          "chapter": "@align_tetrahedron: bring the point to the ring; the faces settle into a tetrahedron, then the whole object falls.",
+          "before_the_chapter": "A fourth point. The faces close on an inside."
          },
          {
           "at": "trajectory-06-03",
@@ -670,10 +690,12 @@
          },
          {
           "at": "trajectory-06-04",
-          "text": "On a pyramid the same slope says no.",
+          "text": "Round the basin the same slope says no.",
           "status": "new",
           "there_now": "A slope can turn me away.",
-          "unfolded": "On a pyramid the same slope turns a body away."
+          "unfolded": "On a pyramid the same slope turns a body away.",
+          "chapter": "@concrete_barrier: wedge-profiled barriers surround a basin; the chapter has no pyramid here.",
+          "before_the_chapter": "On a pyramid the same slope says no."
          }
         ],
         "hands_on": "The same slope helps or stops. Try it with a body before naming it.",
@@ -712,17 +734,21 @@
          },
          {
           "at": "trajectory-07-03",
-          "text": "Six faces laid flat. Fold. A cube again.",
+          "text": "Six faces fold. A cube drops. The net opens again.",
           "status": "new",
-          "there_now": "Each return leaves something behind."
+          "there_now": "Each return leaves something behind.",
+          "chapter": "@polyhedron_nets_cube: the net folds, the cube drops and stays, another net opens above it.",
+          "before_the_chapter": "Six faces laid flat. Fold. A cube again."
          },
          {
           "at": "trajectory-07-04",
-          "text": "Boxes, all alike. Carried, one becomes a part.",
+          "text": "Two copies to the table. The relation is still to make.",
           "status": "new",
           "there_now": "The copies wait for a relation.",
           "seen": "commons/void/primitive_hall.gd: prefab_box_library with a worktable and a column pitch; the floor reads A NET CLOSES. A BOX CAN BE CARRIED.",
-          "unfolded": "Boxes in columns, all alike. One can be carried to the table."
+          "unfolded": "Boxes in columns, all alike. One can be carried to the table.",
+          "chapter": "@prefab_box_library: take two copies to the worktable; \"the relation between its copies is yours to arrange\".",
+          "before_the_chapter": "Boxes, all alike. Carried, one becomes a part."
          }
         ],
         "hands_on": "Taken apart and put back, a thing is known better. Its copies are parts.",
@@ -849,9 +875,11 @@
         "lines": [
          {
           "at": "trajectory-10-01",
-          "text": "A letter becomes a space.",
+          "text": "A letter at body size. Its opening has a sill.",
           "status": "new",
-          "there_now": "A letter can become a space."
+          "there_now": "A letter can become a space.",
+          "chapter": "@glyph_profile_gallery: the first O stands at bodily scale, but its lower stroke makes a sill: not yet a doorway.",
+          "before_the_chapter": "A letter becomes a space."
          },
          {
           "at": "trajectory-10-03",
@@ -902,9 +930,11 @@
          },
          {
           "at": "trajectory-11-02",
-          "text": "Closer, and round enough is rounder.",
+          "text": "Round enough from here. Closer, the edge comes back.",
           "status": "new",
-          "there_now": "Round enough changes as I come closer."
+          "there_now": "Round enough changes as I come closer.",
+          "chapter": "@combine_portals: choose a ring that seems round enough, approach it: \"Does the edge you had stopped seeing return?\" My line had it backwards.",
+          "before_the_chapter": "Closer, and round enough is rounder."
          },
          {
           "at": "trajectory-11-03",
@@ -942,10 +972,12 @@
         "lines": [
          {
           "at": "trajectory-12-01",
-          "text": "Four corners. The gap between them is a place.",
+          "text": "Four corners. Walk: a gap opens between two. A place.",
           "status": "new",
           "there_now": "My steps change how they stand together.",
-          "unfolded": "Four corners, and the gap between them is a place."
+          "unfolded": "Four corners, and the gap between them is a place.",
+          "chapter": "@pyramid: walking round, a gap opens where two outlines seemed to meet; the picture becomes a place.",
+          "before_the_chapter": "Four corners. The gap between them is a place."
          },
          {
           "at": "trajectory-12-02",
@@ -1041,9 +1073,11 @@
         "lines": [
          {
           "at": "song-2dfcba72ac41e435",
-          "text": "From here to there the deck carries.",
+          "text": "A piece of floor travels. Stand still on it and move.",
           "status": "new",
-          "there_now": "The floor carries me across."
+          "there_now": "The floor carries me across.",
+          "chapter": "@tc: the cube is a small piece of floor; relative to the room you move, relative to the cube you stand still.",
+          "before_the_chapter": "From here to there the deck carries."
          },
          {
           "at": "song-448335ce8c2ad07a",
@@ -1054,7 +1088,7 @@
          }
         ],
         "hands_on": "What worked here was fitted to here. Check the far side again.",
-        "keeps": "here"
+        "keeps": "still"
        }
       },
       {
@@ -1089,10 +1123,12 @@
          },
          {
           "at": "draft-trans_translation-2",
-          "text": "One place. Two ways in, two permissions.",
+          "text": "Same gesture, two doors. The rail keeps the sideways part.",
           "status": "new",
           "there_now": "The rail keeps part of my gesture.",
-          "unfolded": "Two ways reach one place, each on its own permission."
+          "unfolded": "Two ways reach one place, each on its own permission.",
+          "chapter": "@translation_cube_demo: at the rail-guided door the sideways part of the gesture goes missing.",
+          "before_the_chapter": "One place. Two ways in, two permissions."
          },
          {
           "at": "draft-trans_translation-3",
@@ -1216,10 +1252,12 @@
         "lines": [
          {
           "at": "draft-trans_scale-1",
-          "text": "The room grew. The body is the measure.",
+          "text": "Drink. The room grows fourfold. The body kept its size.",
           "status": "new",
           "there_now": "The same door fits another body.",
-          "unfolded": "The room grew, and the body is the measure."
+          "unfolded": "The room grew, and the body is the measure.",
+          "chapter": "@scale_me: the door is too small; take the bottle; the room is four times as large and the body has kept its size.",
+          "before_the_chapter": "The room grew. The body is the measure."
          },
          {
           "at": "draft-trans_scale-2",
@@ -1264,9 +1302,11 @@
         "lines": [
          {
           "at": "draft-trans_body-1",
-          "text": "Come near. An opening. Gone again behind.",
+          "text": "Come near. An opening. Step back: gone.",
           "status": "new",
-          "there_now": "A doorway has come to meet me."
+          "there_now": "A doorway has come to meet me.",
+          "chapter": "@approach_wall: the opening is centred on the visitor; step back and it closes.",
+          "before_the_chapter": "Come near. An opening. Gone again behind."
          },
          {
           "at": "draft-trans_body-2",
@@ -1472,16 +1512,20 @@
         "lines": [
          {
           "at": "draft-array-1",
-          "text": "An empty place again. This one has a number.",
+          "text": "A gap again. The count does not close round it.",
           "status": "new",
           "there_now": "A simple piece can hold another world.",
-          "seen": "rooms.json: row_3_x, 32 addresses along one axis."
+          "seen": "rooms.json: row_3_x, 32 addresses along one axis.",
+          "chapter": "@row_3_x: the cube marked [2] disappears; \"the row has a gap, and the count has not closed around it\".",
+          "before_the_chapter": "An empty place again. This one has a number."
          },
          {
           "at": "draft-array-2",
-          "text": "Moved, and still named.",
+          "text": "The cube goes. Its plate still names the place.",
           "status": "new",
-          "there_now": "A place repeats and leaves a space between."
+          "there_now": "A place repeats and leaves a space between.",
+          "chapter": "@grid_2d_4x4: the cube disappears but its plate remains; nothing moves.",
+          "before_the_chapter": "Moved, and still named."
          },
          {
           "at": "draft-array-3",
@@ -1530,9 +1574,11 @@
         "lines": [
          {
           "at": "draft-tutorial_3d-1",
-          "text": "Inside the address now. Count from within.",
+          "text": "A place named, too high to walk to. Inside, fly.",
           "status": "new",
-          "there_now": "Each copy has a place within the whole."
+          "there_now": "Each copy has a place within the whole.",
+          "chapter": "@array_flight_lab: \"You have named a place you cannot yet walk to\"; inside the frame you can fly.",
+          "before_the_chapter": "Inside the address now. Count from within."
          },
          {
           "at": "draft-tutorial_3d-2",
@@ -1542,11 +1588,13 @@
          },
          {
           "at": "draft-tutorial_3d-3",
-          "text": "Stones on thin rods. Nothing sags. Is it weight?",
+          "text": "Rough stones at exact addresses. No weight. No history.",
           "status": "new",
           "there_now": "A place repeats and leaves a space between.",
           "seen": "commons/artifacts/reference_studies/suspension.gd: 25 thin rods on a 5 x 5 grid, three stone fragments on each, a thin overhead support, no falling simulation; plaque A PLACE STILL HELD.",
-          "unfolded": "Three stones to a rod, and the rods are thin. Nothing sags. Is it weight?"
+          "unfolded": "Three stones to a rod, and the rods are thin. Nothing sags. Is it weight?",
+          "chapter": "@reference_suspension: the address stays exact through the damaged-looking surfaces; the meshes have no weight and no history of demolition.",
+          "before_the_chapter": "Stones on thin rods. Nothing sags. Is it weight?"
          }
         ],
         "hands_on": "From inside, agree first on which way the counting runs.",
@@ -1575,9 +1623,11 @@
         "lines": [
          {
           "at": "draft-tutorial_tiling_floor-1",
-          "text": "One tile. Another instruction, another field.",
+          "text": "One tile, a turn at each address. A figure crosses the joints.",
           "status": "new",
-          "there_now": "Each copy has a place within the whole."
+          "there_now": "Each copy has a place within the whole.",
+          "chapter": "@tiling_principles: each address receives an extra turn and a figure crosses the joints; no larger tile was added.",
+          "before_the_chapter": "One tile. Another instruction, another field."
          },
          {
           "at": "draft-tutorial_tiling_floor-2",
@@ -1672,7 +1722,7 @@
           "text": "The clock comes to a cell and nothing sounds.",
           "status": "new",
           "there_now": "A place repeats and leaves a space between.",
-          "seen": "tools/probes/disco_silent_cell.gd, floor 27, 0.9 m from the screen at eye height. Before: the sequencer arrived empty and stopped, and the clock on a silent step moved a 14 x 3 px dash, 0.3 % of the screen. After (rooms.json row f2_step_sequencer_3_5: pattern_preset four_on_floor, read_column true): it arrives holding 12 hits and 52 rests, and every cell of the column being read is ringed, 2.7 % of the screen. The line was \"This cell is silent.\" while the floor could not show it; the word silent is now kept for the act's last line. Not heard, and the cue is not set."
+          "seen": "tools/probes/disco_silent_cell.gd, floor 27, 0.9 m from the screen at eye height. Before: the sequencer arrived empty and stopped, and the clock on a silent step moved a 14 x 3 px dash, 0.3 % of the screen. After (rooms.json row f2_step_sequencer_3_5: read_column true): every cell of the column being read is ringed, 2.7 % of the screen. The line was \"This cell is silent.\" while the floor could not show it; the word silent is now kept for the act's last line. Not heard, and the cue is not set. Corrected the same day from the chapter (@step_sequencer): \"The sequencer starts with an empty pattern. Turn on one cell.\" The pattern I had added on arrival took that first act away, so pattern_preset is removed again; the ring stays. With one cell turned on, the clock reads fifteen silent columns and one sounding."
          },
          {
           "at": "draft-tutorial_disco-3",

@@ -4,7 +4,7 @@
 
 **Palle, 19 November 2026:** The songs should be read as one coherent journey, the story of discovering what forms are possible, what topologies, what spaces, bodies, organizational structures and their edges.
 
-The whole tower as one story, kept abstract: eight acts, one movement for each spine sequence, one stop for each floor. A stop says what it takes from the stop before and what it discovers, names which of the six words it is about, and touches two or more entries of the trajectory outline in the order the outline gives them. It is a frame for the songs and not their text: a lyric is still written from the player's view of the floor, and checked there. Nothing here was heard or walked for this document; every stop is read from the floor's intent and its outline entries. Palle, 19 November 2026: the songs are very compressed, and that is how a song shows intelligence: by folding (Dichtung). A line compresses the meaning of the artifact and of the encounter without losing it. So what stands on the floor and what was measured there is kept in the notes under a line ("seen", "unfolded"), and the line itself is the fold: at most twelve words. Each floor has a chapter, commons/maps/<map>/final.md, written in Model B's voice with the encounters in order; read it before writing a line. Act one was first written without it; Point Lines was corrected from its chapter on 19 November, and the other floors of the act have not been read against theirs yet.
+The whole tower as one story, kept abstract: eight acts, one movement for each spine sequence, one stop for each floor. A stop says what it takes from the stop before and what it discovers, names which of the six words it is about, and touches two or more entries of the trajectory outline in the order the outline gives them. It is a frame for the songs and not their text: a lyric is still written from the player's view of the floor, and checked there. Nothing here was heard or walked for this document; every stop is read from the floor's intent and its outline entries. Palle, 19 November 2026: the songs are very compressed, and that is how a song shows intelligence: by folding (Dichtung). A line compresses the meaning of the artifact and of the encounter without losing it. So what stands on the floor and what was measured there is kept in the notes under a line ("seen", "unfolded"), and the line itself is the fold: at most twelve words. Each floor has a chapter, commons/maps/<map>/final.md, written in Model B's voice with the encounters in order; read it before writing a line. Act one was first written without it and was corrected on 19 November: for every sung line the chapter's section on that encounter was read, and twenty-nine lines changed. The chapters were not read end to end, and they were written around the Endless Museum: the meaning is taken from the chapter, the facts from the floor as it stands.
 
 ## The six words
 
@@ -108,8 +108,8 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Discovers: A place can be named and counted before anyone arrives in it. The first thing met is the word here.
 - Touches: Arrival crate / break into the world · The frame counter / already running · The other Care Units · Roof letters / a world already named
 
-> Light between the boards.  
-> The count did not wait.  
+> A split knot. A little sky in it.  
+> The first number seen was not its first.  
 > Three bodies still in the packing.  
 > Named already. Here.  
 
@@ -122,7 +122,7 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Discovers: One point can be an absence, a surface or a solid, and the empty place still gets a lamp.
 - Touches: A place named / I began as a pixel · The same shape answers differently / Three points · A light for the empty place / Even the absence has a lamp
 
-> Here, a place with nothing in it.  
+> Here: a label, and nothing above it.  
 > Three points. One has a place. One appears. One stops a body.  
 > Even the absence has a lamp.  
 
@@ -135,11 +135,11 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Discovers: A point has no position until a reference is chosen. Carried in the hand it is a relation; fixed in the world it is an address.
 - Touches: Carry the point · Name the reference
 
-> Held, a point goes where the hand goes.  
-> Set it down. One point, two addresses.  
+> Held, a point brings its light. Let go: the point stays.  
+> One point, two addresses. One still counts from the roof.  
 
 - Lines: Carry the point: new; there now: "The light comes with my hand." · Name the reference: new; there now: "One point can have two addresses."
-- Unfolded: "Held, a point goes where the hand goes." was "A point in the hand goes where the hand goes."
+- Unfolded: "Held, a point brings its light. Let go: the point stays." was "A point in the hand goes where the hand goes."
 - Keeps from the song before: **point**
 - Hands on: Ask what a number is measured from.
 - Later, in Service (Residue, chapters 2 and 16): At the consulate her inquiry falls under the duplicate-addressee protocol, and the pass that is finally printed is for a recipient who is more than one.
@@ -171,9 +171,9 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Discovers: A gesture leaves a record and the record becomes material. Contact leaves a gap, waiting leaves a wider bead, release leaves a path that goes on alone.
 - Touches: Leave a gap · Let waiting grow / A little wider · Let it continue
 
-> Through the glass the line leaves a gap.  
+> On the glass, a mark. Lift, and the line keeps a gap.  
 > Hold still. A little wider. A little wider.  
-> Let go. The line goes on downhill.  
+> Let go. The drawing goes on. A bend no wrist made.  
 
 - Lines: Leave a gap: new; there now: "My hand crossed where no mark stays." · Let waiting grow: accepted on the desk, card bubble-brush · Let it continue: new; there now: "Gravity carries the drawing on."
 - Keeps from the song before: **line**
@@ -186,10 +186,10 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Touches: Three edges / an open middle · Draw a face · The shared diagonal
 
 > Three edges close on a gap. Again, nothing in it.  
-> Draw across it. A face.  
-> Two faces share one edge.  
+> A drawing, flattened to fit. A face wants a plane.  
+> Two faces, one shared edge. Move its end: both change.  
 
-- Lines: Three edges: new; there now: "The edges close. I still see through." · Draw a face: new; there now: "My drawing has lost its height." · The shared diagonal: the line already there, kept
+- Lines: Three edges: new; there now: "The edges close. I still see through." · Draw a face: new; there now: "My drawing has lost its height." · The shared diagonal: new
 - Unfolded: "Three edges close on a gap. Again, nothing in it." was "Three edges close round a gap. Again a place with nothing in it."
 - Keeps from the song before: **gap**
 - Hands on: Closing a boundary is not yet filling it.
@@ -199,12 +199,12 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Discovers: Four points enclose a first inside. The slope that blocks as a pyramid carries as a wedge.
 - Touches: Four points / first enclosure · The allowing wedge · The blocking slope
 
-> A fourth point. The faces close on an inside.  
+> The last point home. Four faces close, and it falls.  
 > On a wedge, forward is a little higher.  
-> On a pyramid the same slope says no.  
+> Round the basin the same slope says no.  
 
 - Lines: Four points: new; there now: "The last point brings it down." · The allowing wedge: new; there now: "Forward becomes a little higher." · The blocking slope: new; there now: "A slope can turn me away."
-- Unfolded: "On a pyramid the same slope says no." was "On a pyramid the same slope turns a body away."
+- Unfolded: "Round the basin the same slope says no." was "On a pyramid the same slope turns a body away."
 - Keeps from the song before: **face**
 - Hands on: The same slope helps or stops. Try it with a body before naming it.
 
@@ -214,11 +214,11 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Touches: One cube, two folds · Unfold and return · The copies wait for a relation
 
 > One corner, two folds.  
-> Six faces laid flat. Fold. A cube again.  
-> Boxes, all alike. Carried, one becomes a part.  
+> Six faces fold. A cube drops. The net opens again.  
+> Two copies to the table. The relation is still to make.  
 
 - Lines: One cube, two folds: new; there now: "The same corner makes two folds." · Unfold and return: new; there now: "Each return leaves something behind." · The copies wait for a relation: new; there now: "The copies wait for a relation."
-- Unfolded: "Boxes, all alike. Carried, one becomes a part." was "Boxes in columns, all alike. One can be carried to the table."
+- Unfolded: "Two copies to the table. The relation is still to make." was "Boxes in columns, all alike. One can be carried to the table."
 - Keeps from the song before: **face**
 - Hands on: Taken apart and put back, a thing is known better. Its copies are parts.
 - Later, in Service (Residue, chapters 4 and 12): Beds made with hospital corners every morning, slept in or not, and one bed remade by another hand with its fold two short of the nurse's own.
@@ -254,7 +254,7 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Discovers: A sign can be given a body. A letter turned round its axis becomes a vessel, a channel, a wheel, and a familiar rule returns an unfamiliar body.
 - Touches: A letter becomes a space · Let the outline guide a ball · An unfamiliar body from a familiar rule
 
-> A letter becomes a space.  
+> A letter at body size. Its opening has a sill.  
 > The outline leads a ball.  
 > A profile, turned. Pores, feet, bristles. One body, five rules.  
 
@@ -268,7 +268,7 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Touches: Closed body / no way through · Round enough from here · A smaller gap is still a gap
 
 > This body has no way through.  
-> Closer, and round enough is rounder.  
+> Round enough from here. Closer, the edge comes back.  
 > A smaller gap is still a gap.  
 
 - Lines: Closed body: the line already there, kept · Round enough from here: new; there now: "Round enough changes as I come closer." · A smaller gap is still a gap: the line already there, kept
@@ -280,12 +280,12 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Discovers: Familiar parts become a place, an image and a handmade assembly. The arrangement is one among others and the tools lie unfinished.
 - Touches: Four corners make a place · Did height make the centre? · The image and its unfinished tools
 
-> Four corners. The gap between them is a place.  
+> Four corners. Walk: a gap opens between two. A place.  
 > Did height make this the centre?  
 > The tools are still here.  
 
 - Lines: Four corners make a place: new; there now: "My steps change how they stand together." · Did height make the centre?: the line already there, kept · The image and its unfinished tools: the line already there, kept
-- Unfolded: "Four corners. The gap between them is a place." was "Four corners, and the gap between them is a place."
+- Unfolded: "Four corners. Walk: a gap opens between two. A place." was "Four corners, and the gap between them is a place."
 - Keeps from the song before: **gap**
 - Hands on: An arrangement is one of several. Leave the tools out for whoever comes next.
 - Later, in Service (Residue, chapter 12): A fold of repair tape is left on the arm of the visitor's chair. The nurse notes it and lets it stay.
@@ -312,11 +312,11 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Discovers: Across a gap, moving, turning or growing a bridge can each give passage, until the landing shifts. The operation is unchanged and the passage is gone.
 - Touches: tc · adjustable landing
 
-> From here to there the deck carries.  
+> A piece of floor travels. Stand still on it and move.  
 > Same step. A handspan short.  
 
 - Lines: tc: new; there now: "The floor carries me across." · adjustable landing: accepted on the desk, card far-bank (listening take is a draft; card still open)
-- Keeps from the song before: **here**
+- Keeps from the song before: **still**
 - Hands on: What worked here was fitted to here. Check the far side again.
 
 **15 · Trans_Translation** (form, space)
@@ -325,11 +325,11 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Touches: Travel without turning / The same face travels · Same destination, different permissions / Two ways to arrive · Move the place of turning / Where I turn changes the way
 
 > The same face travels and does not turn.  
-> One place. Two ways in, two permissions.  
+> Same gesture, two doors. The rail keeps the sideways part.  
 > Move the pivot. The way bends elsewhere.  
 
 - Lines: Travel without turning: new; there now: "I come around and find another way." · Same destination, different permissions: new; there now: "The rail keeps part of my gesture." · Move the place of turning: new; there now: "A turn can change the way I cross a space."
-- Unfolded: "One place. Two ways in, two permissions." was "Two ways reach one place, each on its own permission."
+- Unfolded: "Same gesture, two doors. The rail keeps the sideways part." was "Two ways reach one place, each on its own permission."
 - Unfolded: "Move the pivot. The way bends elsewhere." was "Move the pivot, and the way bends somewhere else."
 - Keeps from the song before: **same**
 - Hands on: Reaching the same place does not mean the same was allowed.
@@ -364,12 +364,12 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Discovers: With the body as the measure, larger means three things: a bigger object, a wider passage, a changed relation between parent and child.
 - Touches: The room changes the measure / The room grew around me · Grow a deck or unfold it / Two ways to span · Which frame receives the change? / The frame moves with me
 
-> The room grew. The body is the measure.  
+> Drink. The room grows fourfold. The body kept its size.  
 > A deck can grow across, or unfold across.  
 > Grown together or grown alone. Which frame took the change?  
 
 - Lines: The room changes the measure: new; there now: "The same door fits another body." · Grow a deck or unfold it: new; there now: "What fits my hand can grow beyond my reach." · Which frame receives the change?: new; there now: "The order changes what comes into reach."
-- Unfolded: "The room grew. The body is the measure." was "The room grew, and the body is the measure."
+- Unfolded: "Drink. The room grows fourfold. The body kept its size." was "The room grew, and the body is the measure."
 - Keeps from the song before: **together**
 - Hands on: Bigger is said of three things. Use the body to find which one changed.
 
@@ -378,7 +378,7 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Discovers: A boundary can answer an approaching body, opening and closing behind it. One cut does not come back.
 - Touches: The opening closes behind me / It answers, then forgets · Room appears between the blocks / Near me, there is room · The cut remembers / Something of my passing stays
 
-> Come near. An opening. Gone again behind.  
+> Come near. An opening. Step back: gone.  
 > Room between the blocks, while a body is close.  
 > One cut stays.  
 
@@ -440,8 +440,8 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Discovers: An address is not what occupies it. The tile can go and the place remain, in a row, a plane and a volume.
 - Touches: A place can remain empty / The place is still here · Movement does not erase an address / It moves, I can still name it · The hand chooses an index / A gesture becomes an address · An address gains depth / There is a place behind this place
 
-> An empty place again. This one has a number.  
-> Moved, and still named.  
+> A gap again. The count does not close round it.  
+> The cube goes. Its plate still names the place.  
 > A square goes missing. The address stays.  
 > Behind this place, another place.  
 
@@ -455,12 +455,12 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Discovers: From inside, a volume is read by convention. One vocabulary builds several structures, and sharing a grid does not make them the same thing.
 - Touches: Read the volume from within / Inside the address · Several structures from one vocabulary / Another way to leave it open · A grid seems to hold a weight / A quiet interval beneath
 
-> Inside the address now. Count from within.  
+> A place named, too high to walk to. Inside, fly.  
 > Same places. Another way to leave them open.  
-> Stones on thin rods. Nothing sags. Is it weight?  
+> Rough stones at exact addresses. No weight. No history.  
 
 - Lines: Read the volume from within: new; there now: "Each copy has a place within the whole." · Several structures from one vocabulary: new; there now: "I find a place that wants to be a body." · A grid seems to hold a weight: new; there now: "A place repeats and leaves a space between."
-- Unfolded: "Stones on thin rods. Nothing sags. Is it weight?" was "Three stones to a rod, and the rods are thin. Nothing sags. Is it weight?"
+- Unfolded: "Rough stones at exact addresses. No weight. No history." was "Three stones to a rod, and the rods are thin. Nothing sags. Is it weight?"
 - Keeps from the song before: **place**
 - Hands on: From inside, agree first on which way the counting runs.
 
@@ -469,7 +469,7 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Discovers: A small tile under different rules gives different floors. The floor that carries stays the same beneath each of them.
 - Touches: One tile, several instructions / The same part makes another field · Follow two kinds of repetition / A rhythm underfoot
 
-> One tile. Another instruction, another field.  
+> One tile, a turn at each address. A figure crosses the joints.  
 > Two rhythms underfoot. The floor holds the same.  
 
 - Lines: One tile, several instructions: new; there now: "Each copy has a place within the whole." · Follow two kinds of repetition: new; there now: "A place repeats and leaves a space between."
