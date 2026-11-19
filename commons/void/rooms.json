@@ -2209,7 +2209,7 @@
           "facing": 0,
           "scale": 1,
           "config": {
-            "editor_label": "Rod stock / 4 × 8 and four perspective studies",
+            "editor_label": "Rod stock / 4 \u00d7 8 and four perspective studies",
             "exterior_walk": true
           }
         }
@@ -11377,7 +11377,7 @@
           "scale": 1,
           "config": {
             "support": false,
-            "editor_label": "01 / STILL · Position, direction and size stay fixed.",
+            "editor_label": "01 / STILL \u00b7 Position, direction and size stay fixed.",
             "demonstration": true,
             "dna": "061",
             "accent": "65dff8",
@@ -11414,7 +11414,7 @@
           "scale": 1,
           "config": {
             "support": false,
-            "editor_label": "02 / TRANSLATE · Shift in X along the floor.",
+            "editor_label": "02 / TRANSLATE \u00b7 Shift in X along the floor.",
             "demonstration": true,
             "dna": "061",
             "accent": "65dff8",
@@ -11456,7 +11456,7 @@
           "scale": 1,
           "config": {
             "support": false,
-            "editor_label": "03 / ROTATE · Turn in place about the vertical axis.",
+            "editor_label": "03 / ROTATE \u00b7 Turn in place about the vertical axis.",
             "demonstration": true,
             "dna": "061",
             "accent": "65dff8",
@@ -11494,7 +11494,7 @@
           "scale": 1,
           "config": {
             "support": false,
-            "editor_label": "04 / SCALE · Grow and shrink about the same centre.",
+            "editor_label": "04 / SCALE \u00b7 Grow and shrink about the same centre.",
             "demonstration": true,
             "dna": "061",
             "accent": "65dff8",
@@ -11532,7 +11532,7 @@
           "scale": 1,
           "config": {
             "support": false,
-            "editor_label": "05 / COMBINE · Follow X then Z, turning and growing.",
+            "editor_label": "05 / COMBINE \u00b7 Follow X then Z, turning and growing.",
             "demonstration": true,
             "dna": "061",
             "accent": "65dff8",
@@ -32735,7 +32735,7 @@
             "pause_seconds": 2.4,
             "motion": "automatic",
             "staging": "route",
-            "editor_label": "C Ã¢â€ â€™ A Ã¢â€ â€™ B / raised pivot route",
+            "editor_label": "C \u00c3\u00a2\u00e2\u20ac\u00a0\u00e2\u20ac\u2122 A \u00c3\u00a2\u00e2\u20ac\u00a0\u00e2\u20ac\u2122 B / raised pivot route",
             "prefab_id": "pivot_variant_0f0eabb9294c465d"
           }
         },
@@ -47012,7 +47012,7 @@
           "facing": 0,
           "scale": 1,
           "config": {
-            "editor_label": "01–02 / Slide the opening, then change its width"
+            "editor_label": "01\u201302 / Slide the opening, then change its width"
           }
         },
         {
@@ -47083,7 +47083,7 @@
           ]
         },
         {
-          "label": "SHAFT B / EAST →",
+          "label": "SHAFT B / EAST \u2192",
           "position": [
             3.75,
             -8.42
@@ -47623,7 +47623,7 @@
           "scale": 1,
           "facing": 0,
           "config": {
-            "editor_label": "AND / OR / return — two hand levers and a feedback linkage"
+            "editor_label": "AND / OR / return \u2014 two hand levers and a feedback linkage"
           }
         },
         {
@@ -51404,7 +51404,7 @@
           "station": "SE",
           "position": [
             0,
-            -1
+            0
           ],
           "facing": 180,
           "height": 0,
@@ -51412,7 +51412,9 @@
           "config": {
             "layout": "planes",
             "compare": "visibility",
-            "plinth": "0"
+            "plinth": "0",
+            "expanded": true,
+            "editor_label": "Color constellation office | 24 overlapping chromatic filters (Filter / Additive Light / Opaque)"
           }
         },
         {
@@ -51420,10 +51422,10 @@
           "artifact": "subpixel_display",
           "station": "NW",
           "position": [
-            -19,
-            -2.8
+            -12.4,
+            -5.2
           ],
-          "facing": 180,
+          "facing": 0,
           "height": 0,
           "scale": 1,
           "config": {}
@@ -51497,15 +51499,17 @@
           "artifact": "colour_wall_studies",
           "station": "NW",
           "position": [
-            -17.5,
-            -0.25
+            -17,
+            0
           ],
           "facing": 90,
           "height": 0,
           "scale": 1,
           "config": {
             "plinth": "0",
-            "pin": "1"
+            "pin": "1",
+            "gallery_bay": true,
+            "editor_label": "Wall relations | 9 studies fitted inside 3 column-aligned gallery walls"
           }
         },
         {
@@ -57590,7 +57594,7 @@
               "label": "Veil twist",
               "low": -27,
               "high": 52,
-              "unit": "°"
+              "unit": "\u00b0"
             }
           }
         },
@@ -58180,7 +58184,7 @@
           "config": {
             "variant": "bench",
             "start_revealed": false,
-            "editor_label": "Hall Bench · Mesh Morph"
+            "editor_label": "Hall Bench \u00b7 Mesh Morph"
           }
         },
         {
@@ -58197,7 +58201,7 @@
           "config": {
             "variant": "stool",
             "start_revealed": false,
-            "editor_label": "Workshop Stool · Mesh Morph"
+            "editor_label": "Workshop Stool \u00b7 Mesh Morph"
           }
         },
         {
@@ -58214,7 +58218,7 @@
           "config": {
             "variant": "side_table",
             "start_revealed": false,
-            "editor_label": "Side Table · Mesh Morph"
+            "editor_label": "Side Table \u00b7 Mesh Morph"
           }
         },
         {
@@ -58231,7 +58235,7 @@
           "config": {
             "variant": "cabinet",
             "start_revealed": false,
-            "editor_label": "Hall Cabinet · Bifold Doors"
+            "editor_label": "Hall Cabinet \u00b7 Bifold Doors"
           }
         },
         {
@@ -64943,7 +64947,7 @@
           "height": 0,
           "scale": 1,
           "config": {
-            "editor_label": "Pyramid drop / 5 × 5 inverted blockers"
+            "editor_label": "Pyramid drop / 5 \u00d7 5 inverted blockers"
           }
         }
       ],
@@ -70690,7 +70694,7 @@
                       "content": "shader",
                       "shader": "res://algorithms/shaders/book_of_shaders/drag_extravaganza.gdshader",
                       "params": {},
-                      "title": "05  ★ DRAG EXTRAVAGANZA ★"
+                      "title": "05  \u2605 DRAG EXTRAVAGANZA \u2605"
                     }
                   ],
                   "label": true

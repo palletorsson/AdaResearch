@@ -68,7 +68,12 @@ var _built: bool = false
 var cubicle_office := false
 var open_office := false
 var office_panes: Array[MeshInstance3D] = []
+var floor_washes: Array[MeshInstance3D] = []
+var extra_panes: Array[MeshInstance3D] = []
+var extra_washes: Array[MeshInstance3D] = []
 var glass_visible := true
+var plane_mode: int = 0  # 0 = FILTER, 1 = ADDITIVE LIGHT, 2 = OPAQUE
+var expanded_density := true
 var glass_button: Node3D
 var glass_readout: Label
 
@@ -277,6 +282,11 @@ func _build_cubicles() -> void:
 		_office_box(self,"VisibilityPlinth",Vector3(0,0.45,-8),Vector3(0.85,0.9,0.65),Color("cdc5ba"))
 
 func toggle_office_glass() -> void:
+	if open_office and bool(get_meta("config_expanded", false)):
+		plane_mode = (plane_mode + 1) % 3
+		glass_visible = plane_mode != 2
+		_apply_expanded_plane_mode()
+		return
 	glass_visible = not glass_visible
 	if open_office:
 		for pane in office_panes:
@@ -292,3 +302,52 @@ func toggle_office_glass() -> void:
 		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA if glass_visible else BaseMaterial3D.TRANSPARENCY_DISABLED
 		mat.albedo_color.a = 0.26 if glass_visible else 1.0
 	if glass_readout: glass_readout.text = "GLASS / SAME WALLS" if glass_visible else "OPAQUE / SAME WALLS"
+
+func toggle_office_density() -> void:
+	expanded_density = not expanded_density
+	for p in extra_panes:
+		p.visible = expanded_density
+		var body := p.get_node_or_null("PaneBody") as StaticBody3D
+		if body != null:
+			body.collision_layer = 1 if expanded_density else 0
+	_apply_expanded_plane_mode()
+
+func _apply_expanded_plane_mode() -> void:
+	var mode_names: Array[String] = ["FILTER", "ADDITIVE LIGHT", "OPAQUE"]
+	var floor_col := Color("2b2838") if plane_mode == 1 else Color("e5e0d7")
+	for child in get_children():
+		if child is MeshInstance3D and str(child.name).begins_with("QuietFloor"):
+			var fmat := (child as MeshInstance3D).material_override as StandardMaterial3D
+			if fmat != null:
+				fmat.albedo_color = floor_col
+	for pane in office_panes:
+		var surface: StandardMaterial3D = pane.material_override
+		if plane_mode == 0:  # FILTER (layered alpha tint)
+			surface.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+			surface.blend_mode = BaseMaterial3D.BLEND_MODE_MIX
+			surface.albedo_color.a = 0.54
+			pane.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		elif plane_mode == 1:  # ADDITIVE LIGHT (panes sum toward luminous secondary & white cores!)
+			surface.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+			surface.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+			surface.albedo_color.a = 0.44
+			pane.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		else:  # OPAQUE (solid pigment partitions, same passages!)
+			surface.transparency = BaseMaterial3D.TRANSPARENCY_DISABLED
+			surface.blend_mode = BaseMaterial3D.BLEND_MODE_MIX
+			surface.albedo_color.a = 1.0
+			pane.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_ON
+	for w in floor_washes:
+		var is_extra := w in extra_washes
+		w.visible = (plane_mode != 2) and (expanded_density or not is_extra)
+		var wmat: StandardMaterial3D = w.material_override
+		if wmat != null:
+			if plane_mode == 1:
+				wmat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+				wmat.albedo_color.a = 0.28
+			else:
+				wmat.blend_mode = BaseMaterial3D.BLEND_MODE_MIX
+				wmat.albedo_color.a = 0.26
+	var count := 24 if expanded_density else 12
+	if glass_readout:
+		glass_readout.text = "%s • %d PANES / SAME PASSAGES" % [mode_names[plane_mode], count]
