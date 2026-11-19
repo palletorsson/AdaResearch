@@ -84,8 +84,8 @@ Palle, 19 November 2026: the dream is that these experiences compound, so that C
 Asked on Point_Zero: *What wakes the next one?* (a proposed third line for the other care units, object others__c; written by another session, not enabled in the game)
 
 > Here first. Then a point, a line, a face, an inside.  
-> Moved, turned, grown: the same. The far side may have changed.  
-> All well so far is not yet all well.  
+> Moved, turned, grown, and still the same. The far side may have changed.  
+> Almost is a distance. One change can be enough.  
 > A silent cell is still a place.  
 
 ### Primitives (floors 0 to 12)
@@ -95,13 +95,14 @@ Asked on Point_Zero: *What wakes the next one?* (a proposed third line for the o
 **0 · Point_Zero** (space)
 - Takes: Nothing yet. The crate opens on a world that is already running.
 - Discovers: A place can be named and counted before anyone arrives in it. The first thing met is the word here.
-- Touches: Arrival crate / break into the world · The frame counter / already running · Roof letters / a world already named
+- Touches: Arrival crate / break into the world · The frame counter / already running · The other Care Units · Roof letters / a world already named
 
 > Light between the boards.  
 > The count did not wait.  
+> Three bodies still in the packing.  
 > Named already. Here.  
 
-- Lines: Arrival crate: new; there now: "The boards are thin." · The frame counter: new; there now: "A number is changing." · Roof letters: new; there now: "This is not my address."
+- Lines: Arrival crate: new; there now: "The boards are thin." · The frame counter: new; there now: "A number is changing." · The other Care Units: the line already there, kept · Roof letters: new; there now: "This is not my address."
 - Hands on: Before anything else, say here.
 - Later, in Service (Residue, preface): Day 412 is counted at one desk in blank boarding passes printed each morning for no one. There too the count was running before she came.
 
@@ -124,7 +125,7 @@ Asked on Point_Zero: *What wakes the next one?* (a proposed third line for the o
 - Touches: Carry the point · Name the reference
 
 > A point in the hand goes where the hand goes.  
-> Set down: one point, two addresses.  
+> Set it down. One point, two addresses.  
 
 - Lines: Carry the point: new; there now: "The light comes with my hand." · Name the reference: new; there now: "One point can have two addresses."
 - Keeps from the song before: **point**
@@ -137,7 +138,7 @@ Asked on Point_Zero: *What wakes the next one?* (a proposed third line for the o
 - Touches: Leave a connection · Find another way · Read the warning
 
 > Point to point. Let go. The link stays.  
-> A line across the way. Round it is longer.  
+> A line across the way. The way round is longer.  
 > A red line. Who gave it force?  
 
 - Lines: Leave a connection: new; there now: "I let go. The link stays." · Find another way: new; there now: "This line makes my journey longer." · Read the warning: new; there now: "What gives this line its force?"
@@ -164,7 +165,7 @@ Asked on Point_Zero: *What wakes the next one?* (a proposed third line for the o
 - Touches: Three edges / an open middle · Draw a face · The shared diagonal
 
 > Three edges close. The gap in the middle stays.  
-> Draw across it: a face.  
+> Draw across it. A face.  
 > Two faces share one edge.  
 
 - Lines: Three edges: new; there now: "The edges close. I still see through." · Draw a face: new; there now: "My drawing has lost its height." · The shared diagonal: the line already there, kept
@@ -177,8 +178,8 @@ Asked on Point_Zero: *What wakes the next one?* (a proposed third line for the o
 - Touches: Four points / first enclosure · The allowing wedge · The blocking slope
 
 > A fourth point. The faces close on an inside.  
-> A wedge: forward, and a little higher.  
-> A pyramid: the same slope turns a body away.  
+> On a wedge, forward is a little higher.  
+> On a pyramid the same slope turns a body away.  
 
 - Lines: Four points: new; there now: "The last point brings it down." · The allowing wedge: new; there now: "Forward becomes a little higher." · The blocking slope: new; there now: "A slope can turn me away."
 - Keeps from the song before: **face**
@@ -217,8 +218,8 @@ Asked on Point_Zero: *What wakes the next one?* (a proposed third line for the o
 - Touches: One outline, many columns · A cylinder becomes a container · The column becomes a passage
 
 > One outline. More sides, another column.  
-> Hollow: the column holds.  
-> Open at both ends: a way through.  
+> Hollow, the column holds something.  
+> Open at both ends, it lets a body through.  
 
 - Lines: One outline, many columns: new; there now: "An outline can become many bodies." · A cylinder becomes a container: new; there now: "A moving shape can become what I hear." · The column becomes a passage: new; there now: "An opening changes where my body goes."
 - Keeps from the song before: **side**
@@ -255,7 +256,7 @@ Asked on Point_Zero: *What wakes the next one?* (a proposed third line for the o
 - Discovers: Familiar parts become a place, an image and a handmade assembly. The arrangement is one among others and the tools lie unfinished.
 - Touches: Four corners make a place · Did height make the centre? · The image and its unfinished tools
 
-> Four corners and the gap between them: a place.  
+> Four corners, and the gap between them is a place.  
 > Did height make this the centre?  
 > The tools are still here.  
 
@@ -298,9 +299,9 @@ Asked on Point_Zero: *What wakes the next one?* (a proposed third line for the o
 - Discovers: A displacement keeps the object recognisable. The same destination is reached under different permissions.
 - Touches: Travel without turning / The same face travels · Same destination, different permissions / Two ways to arrive · Move the place of turning / Where I turn changes the way
 
-> The same face travels. No turn.  
-> One place to reach. Two permissions.  
-> Move the pivot. The way bends elsewhere.  
+> The same face travels and does not turn.  
+> Two ways reach one place, each on its own permission.  
+> Move the pivot, and the way bends somewhere else.  
 
 - Lines: Travel without turning: new; there now: "I come around and find another way." · Same destination, different permissions: new; there now: "The rail keeps part of my gesture." · Move the place of turning: new; there now: "A turn can change the way I cross a space."
 - Keeps from the song before: **same**
@@ -336,9 +337,9 @@ Asked on Point_Zero: *What wakes the next one?* (a proposed third line for the o
 - Discovers: With the body as the measure, larger means three things: a bigger object, a wider passage, a changed relation between parent and child.
 - Touches: The room changes the measure / The room grew around me · Grow a deck or unfold it / Two ways to span · Which frame receives the change? / The frame moves with me
 
-> The room grew. The body is the measure.  
-> Two ways to span: grow the deck, or unfold it.  
-> Grown together, or one alone: which frame took the change?  
+> The room grew, and the body is the measure.  
+> A deck can grow across, or unfold across.  
+> Grown together or grown alone. Which frame took the change?  
 
 - Lines: The room changes the measure: new; there now: "The same door fits another body." · Grow a deck or unfold it: new; there now: "What fits my hand can grow beyond my reach." · Which frame receives the change?: new; there now: "The order changes what comes into reach."
 - Keeps from the song before: **together**
@@ -350,7 +351,7 @@ Asked on Point_Zero: *What wakes the next one?* (a proposed third line for the o
 - Touches: The opening closes behind me / It answers, then forgets · Room appears between the blocks / Near me, there is room · The cut remembers / Something of my passing stays
 
 > Come near. An opening. Gone again behind.  
-> Between the blocks, room, while a body is close.  
+> Between the blocks there is room while a body is close.  
 > One cut stays.  
 
 - Lines: The opening closes behind me: new; there now: "A doorway has come to meet me." · Room appears between the blocks: new; there now: "The opening travels with me." · The cut remembers: new; there now: "My body leaves a way behind."
@@ -407,13 +408,13 @@ Asked on Point_Zero: *What wakes the next one?* (a proposed third line for the o
 **23 · Array** (organization, space)
 - Takes: A condition that withdrew support.
 - Discovers: An address is not what occupies it. The tile can go and the place remain, in a row, a plane and a volume.
-- Touches: A place can remain empty / The place is still here · Movement does not erase an address / It moves, I can still name it · An address gains depth / There is a place behind this place
+- Touches: Movement does not erase an address / It moves, I can still name it · The hand chooses an index / A gesture becomes an address · An address gains depth / There is a place behind this place
 
-> Empty, and the place is still here.  
 > Moved, and still named.  
+> A square goes missing. The address stays.  
 > Behind this place, another place.  
 
-- Lines: A place can remain empty: new; there now: "A simple piece can hold another world." · Movement does not erase an address: new; there now: "A place repeats and leaves a space between." · An address gains depth: new; there now: "A place repeats and leaves a space between."
+- Lines: Movement does not erase an address: new; there now: "A place repeats and leaves a space between." · The hand chooses an index: accepted on the desk, card array-address · An address gains depth: new; there now: "A place repeats and leaves a space between."
 - Keeps from the song before: **still**
 - Hands on: Name the place apart from what stands in it. Then a thing can be lost and put back.
 - Later, in Service (Residue, chapter 4; Pending, chapter 15): An identity band correct in form and blank in name; a bed that is not empty at the hour the form calls empty; a box left empty because an empty box is accurate.

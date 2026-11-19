@@ -259,6 +259,10 @@
          "title": "The frame counter / already running"
         },
         {
+         "id": "trajectory-00-03",
+         "title": "The other Care Units"
+        },
+        {
          "id": "trajectory-00-04",
          "title": "Roof letters / a world already named"
         }
@@ -276,6 +280,12 @@
           "text": "The count did not wait.",
           "status": "new",
           "there_now": "A number is changing."
+         },
+         {
+          "at": "trajectory-00-03",
+          "text": "Three bodies still in the packing.",
+          "status": "kept",
+          "note": "the second enabled line on this entry (others__b), written by another session"
          },
          {
           "at": "trajectory-00-04",
@@ -362,7 +372,7 @@
          },
          {
           "at": "trajectory-02-02",
-          "text": "Set down: one point, two addresses.",
+          "text": "Set it down. One point, two addresses.",
           "status": "new",
           "there_now": "One point can have two addresses."
          }
@@ -407,7 +417,7 @@
          },
          {
           "at": "trajectory-03-03",
-          "text": "A line across the way. Round it is longer.",
+          "text": "A line across the way. The way round is longer.",
           "status": "new",
           "there_now": "This line makes my journey longer."
          },
@@ -506,7 +516,7 @@
          },
          {
           "at": "trajectory-05-03",
-          "text": "Draw across it: a face.",
+          "text": "Draw across it. A face.",
           "status": "new",
           "there_now": "My drawing has lost its height."
          },
@@ -552,13 +562,13 @@
          },
          {
           "at": "trajectory-06-03",
-          "text": "A wedge: forward, and a little higher.",
+          "text": "On a wedge, forward is a little higher.",
           "status": "new",
           "there_now": "Forward becomes a little higher."
          },
          {
           "at": "trajectory-06-04",
-          "text": "A pyramid: the same slope turns a body away.",
+          "text": "On a pyramid the same slope turns a body away.",
           "status": "new",
           "there_now": "A slope can turn me away."
          }
@@ -693,13 +703,13 @@
          },
          {
           "at": "trajectory-09-03",
-          "text": "Hollow: the column holds.",
+          "text": "Hollow, the column holds something.",
           "status": "new",
           "there_now": "A moving shape can become what I hear."
          },
          {
           "at": "trajectory-09-04",
-          "text": "Open at both ends: a way through.",
+          "text": "Open at both ends, it lets a body through.",
           "status": "new",
           "there_now": "An opening changes where my body goes."
          }
@@ -825,7 +835,7 @@
         "lines": [
          {
           "at": "trajectory-12-01",
-          "text": "Four corners and the gap between them: a place.",
+          "text": "Four corners, and the gap between them is a place.",
           "status": "new",
           "there_now": "My steps change how they stand together."
          },
@@ -965,19 +975,19 @@
         "lines": [
          {
           "at": "draft-trans_translation-1",
-          "text": "The same face travels. No turn.",
+          "text": "The same face travels and does not turn.",
           "status": "new",
           "there_now": "I come around and find another way."
          },
          {
           "at": "draft-trans_translation-2",
-          "text": "One place to reach. Two permissions.",
+          "text": "Two ways reach one place, each on its own permission.",
           "status": "new",
           "there_now": "The rail keeps part of my gesture."
          },
          {
           "at": "draft-trans_translation-3",
-          "text": "Move the pivot. The way bends elsewhere.",
+          "text": "Move the pivot, and the way bends somewhere else.",
           "status": "new",
           "there_now": "A turn can change the way I cross a space."
          }
@@ -1096,19 +1106,19 @@
         "lines": [
          {
           "at": "draft-trans_scale-1",
-          "text": "The room grew. The body is the measure.",
+          "text": "The room grew, and the body is the measure.",
           "status": "new",
           "there_now": "The same door fits another body."
          },
          {
           "at": "draft-trans_scale-2",
-          "text": "Two ways to span: grow the deck, or unfold it.",
+          "text": "A deck can grow across, or unfold across.",
           "status": "new",
           "there_now": "What fits my hand can grow beyond my reach."
          },
          {
           "at": "draft-trans_scale-3",
-          "text": "Grown together, or one alone: which frame took the change?",
+          "text": "Grown together or grown alone. Which frame took the change?",
           "status": "new",
           "there_now": "The order changes what comes into reach."
          }
@@ -1149,7 +1159,7 @@
          },
          {
           "at": "draft-trans_body-2",
-          "text": "Between the blocks, room, while a body is close.",
+          "text": "Between the blocks there is room while a body is close.",
           "status": "new",
           "there_now": "The opening travels with me."
          },
@@ -1323,12 +1333,12 @@
        "discovers": "An address is not what occupies it. The tile can go and the place remain, in a row, a plane and a volume.",
        "touches": [
         {
-         "id": "draft-array-1",
-         "title": "A place can remain empty / The place is still here"
-        },
-        {
          "id": "draft-array-2",
          "title": "Movement does not erase an address / It moves, I can still name it"
+        },
+        {
+         "id": "draft-array-3",
+         "title": "The hand chooses an index / A gesture becomes an address"
         },
         {
          "id": "draft-array-4",
@@ -1338,16 +1348,16 @@
        "song": {
         "lines": [
          {
-          "at": "draft-array-1",
-          "text": "Empty, and the place is still here.",
-          "status": "new",
-          "there_now": "A simple piece can hold another world."
-         },
-         {
           "at": "draft-array-2",
           "text": "Moved, and still named.",
           "status": "new",
           "there_now": "A place repeats and leaves a space between."
+         },
+         {
+          "at": "draft-array-3",
+          "text": "A square goes missing. The address stays.",
+          "status": "reviewed",
+          "card": "array-address"
          },
          {
           "at": "draft-array-4",
@@ -1564,11 +1574,11 @@
      },
      {
       "from": "transformation",
-      "text": "Moved, turned, grown: the same. The far side may have changed."
+      "text": "Moved, turned, grown, and still the same. The far side may have changed."
      },
      {
       "from": "logic",
-      "text": "All well so far is not yet all well."
+      "text": "Almost is a distance. One change can be enough."
      },
      {
       "from": "array_tutorial",

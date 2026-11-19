@@ -31,6 +31,7 @@ OUTLINE = ROOT / 'commons/data/encounters/trajectory_outline.json'
 SEQUENCES = ROOT / 'commons/data/encounters/trajectory_sequences.json'
 ROOMS = ROOT / 'commons/void/rooms.json'
 PAGE = ROOT / 'doc/book/course/OPERA_JOURNEY.md'
+MANUSCRIPT = ROOT / 'doc/book/course/OPERA_MANUSCRIPT.txt'
 SIX = ['form', 'topology', 'space', 'body', 'organization', 'edge']
 PRONOUNS = {'i', 'me', 'my', 'mine', 'we', 'us', 'our', 'ours', 'you', 'your', 'yours'}
 
@@ -182,6 +183,38 @@ def render(journey, outline):
     return '\n'.join(out).rstrip() + '\n'
 
 
+def manuscript(journey):
+    """The songs alone, as one raw text: an act, its floors in order, and after each movement the lines the act has
+    gathered so far, one more each time."""
+    out = []
+    for act in journey['acts']:
+        if not any(s.get('song') for seq in act['sequences'] for s in seq['stops']):
+            continue
+        carry, gathered = act.get('carry'), []
+        out += ['ACT %s' % act['id'], act['title'].upper(), '']
+        number = sum(1 for _ in stops(journey))
+        floor = {s['map']: k for k, (_, _, s) in enumerate(stops(journey))}
+        for seq in act['sequences']:
+            out += ['', seq['title'].upper(), '']
+            for stop in seq['stops']:
+                out += ['%d. %s' % (floor[stop['map']], stop['map'].replace('_', ' '))]
+                out += [line['text'] for line in stop['song']['lines']] + ['']
+                if carry and stop['map'] == carry['asked_at']['map']:
+                    out += ['        ' + carry['asked_at']['line'], '']
+            if carry:
+                gathered += [line['text'] for line in carry['lines'] if line['from'] == seq['id']]
+                out += ['        ' + text for text in gathered] + ['']
+        out += ['']
+    return '\n'.join(out).rstrip() + '\n'
+
+
+def write(path, text):
+    # Opening a page for writing fails with EINVAL while a viewer holds it; writing over it in place does not.
+    with open(path, 'r+' if path.exists() else 'w', encoding='utf-8', newline='\n') as page:
+        page.write(text)
+        page.truncate()
+
+
 def main():
     sys.stdout.reconfigure(encoding='utf-8')
     journey, outline, sequences = load(JOURNEY), load(OUTLINE), load(SEQUENCES)
@@ -203,10 +236,9 @@ def main():
     print('%d acts, %d movements, %d stops, %d touches, %d songs; %d floors carry one in: %s; %d findings'
           % (len(journey['acts']), sum(len(a['sequences']) for a in journey['acts']), count, touched, songs, len(carried), ', '.join(carried), len(found)))
     if '--write' in sys.argv and not found:
-        # Opening this page for writing fails with EINVAL while a viewer holds it; writing over it in place does not.
-        with open(PAGE, 'r+' if PAGE.exists() else 'w', encoding='utf-8', newline='\n') as page:
-            page.write(render(journey, outline))
-            page.truncate()
+        write(PAGE, render(journey, outline))
+        write(MANUSCRIPT, manuscript(journey))
+        print('wrote', MANUSCRIPT.relative_to(ROOT).as_posix())
         print('wrote', PAGE.relative_to(ROOT).as_posix())
     return len(found)
 
