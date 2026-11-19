@@ -156,7 +156,10 @@ def render(journey, outline):
         if carry:
             out += ['### What act %s hands on' % act['id'], '', carry['about'], '',
                     'Asked on %s: *%s* (%s)' % (carry['asked_at']['map'], carry['asked_at']['line'], carry['asked_at']['status']), '']
-            out += ['> %s  ' % line['text'] for line in carry['lines']] + ['']
+            for line in carry['lines']:
+                out += ['> %s  ' % line['text']]
+                out += ['> *after %s:* %s  ' % (r['after'], r['text']) for r in line.get('revised', [])]
+            out += ['', carry.get('delivery', ''), '']
         for seq in act['sequences']:
             first, final = seq['stops'][0]['map'], seq['stops'][-1]['map']
             span = ' (floors %d to %d)' % (floor[first], floor[final]) if first in floor and first != final else (' (floor %d)' % floor[first] if first in floor else '')
@@ -202,8 +205,14 @@ def manuscript(journey):
                 if carry and stop['map'] == carry['asked_at']['map']:
                     out += ['        ' + carry['asked_at']['line'], '']
             if carry:
-                gathered += [line['text'] for line in carry['lines'] if line['from'] == seq['id']]
-                out += ['        ' + text for text in gathered] + ['']
+                gathered.append(seq['id'])
+                for line in carry['lines']:
+                    if line['from'] not in gathered:
+                        continue
+                    # A gathered line may be corrected by a later movement; the manuscript sings the latest wording.
+                    text = ([line['text']] + [r['text'] for r in line.get('revised', []) if r['after'] in gathered])[-1]
+                    out += ([''] if line.get('pause') else []) + ['        ' + text]
+                out += ['']
         out += ['']
     return '\n'.join(out).rstrip() + '\n'
 

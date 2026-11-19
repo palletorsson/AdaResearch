@@ -73,6 +73,14 @@ Stops per act that are about each word. A stop may be about two.
 - floor 193, QFEP_F_Term: shannon workbench / Predictable according to whom?
 - floor 199, QFEP_Synthesis: queer morphology specimen / What should this body keep?
 
+**next.** The question on the roof, What wakes the next one? It comes back as one movement leading to the next, one event asking the next and waking it, and a next moment that has an address.
+
+- floor 0, Point_Zero: The other Care Units
+- floor 21, Trans_Playground: A route made from changes / One movement leads to another
+- floor 22, Logic_Event: Follow the contact / One thing asks the next
+- floor 22, Logic_Event: One change becomes enough / Just enough to happen
+- floor 27, Tutorial_Disco: A phase passes through the floor / The next moment has an address
+
 ## Act I. A place, and what can stand in it
 
 Forms. From the word here on a roof to a grid where every place has a number: points, edges, faces and solids, what stays the same when a form is moved, turned or grown, the first condition and the first address.
@@ -85,8 +93,11 @@ Asked on Point_Zero: *What wakes the next one?* (a proposed third line for the o
 
 > Here first. Then a point, a line, a face, an inside.  
 > Moved, turned, grown, and still the same. The far side may have changed.  
+> *after logic:* Moved, turned, grown, and almost the same.  
 > Almost is a distance. One change can be enough.  
 > A silent cell is still a place.  
+
+Kept apart from the floor songs, so that it is heard as what she remembers: the same notes each time, slower, so the one changed word stands out. Shown as a kept list in which the earlier wording stays visible, struck through, under the corrected line. A rest before the last line. A proposal: nothing of this is built or heard.
 
 ### Primitives (floors 0 to 12)
 
@@ -395,7 +406,7 @@ Asked on Point_Zero: *What wakes the next one?* (a proposed third line for the o
 
 > One movement asks the next.  
 > Almost is still a distance.  
-> One change. Just enough to happen.  
+> One change. Just enough to wake it.  
 
 - Lines: Follow the contact: new; there now: "A small event can make the next one possible." · Almost reaches: new; there now: "An opening changes where my body goes." · One change becomes enough: new; there now: "An opening changes where my body goes."
 - Keeps from the song before: **movement**

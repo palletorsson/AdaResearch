@@ -229,6 +229,37 @@
      "title": "queer morphology specimen / What should this body keep?"
     }
    ]
+  },
+  {
+   "word": "next",
+   "line": "The question on the roof, What wakes the next one? It comes back as one movement leading to the next, one event asking the next and waking it, and a next moment that has an address.",
+   "stops": [
+    {
+     "map": "Point_Zero",
+     "id": "trajectory-00-03",
+     "title": "The other Care Units"
+    },
+    {
+     "map": "Trans_Playground",
+     "id": "draft-trans_playground-1",
+     "title": "A route made from changes / One movement leads to another"
+    },
+    {
+     "map": "Logic_Event",
+     "id": "draft-logic_event-1",
+     "title": "Follow the contact / One thing asks the next"
+    },
+    {
+     "map": "Logic_Event",
+     "id": "draft-logic_event-3",
+     "title": "One change becomes enough / Just enough to happen"
+    },
+    {
+     "map": "Tutorial_Disco",
+     "id": "draft-tutorial_disco-1",
+     "title": "A phase passes through the floor / The next moment has an address"
+    }
+   ]
   }
  ],
  "acts": [
@@ -1307,7 +1338,7 @@
          },
          {
           "at": "draft-logic_event-3",
-          "text": "One change. Just enough to happen.",
+          "text": "One change. Just enough to wake it.",
           "status": "new",
           "there_now": "An opening changes where my body goes."
          }
@@ -1574,7 +1605,13 @@
      },
      {
       "from": "transformation",
-      "text": "Moved, turned, grown, and still the same. The far side may have changed."
+      "text": "Moved, turned, grown, and still the same. The far side may have changed.",
+      "revised": [
+       {
+        "after": "logic",
+        "text": "Moved, turned, grown, and almost the same."
+       }
+      ]
      },
      {
       "from": "logic",
@@ -1582,9 +1619,11 @@
      },
      {
       "from": "array_tutorial",
-      "text": "A silent cell is still a place."
+      "text": "A silent cell is still a place.",
+      "pause": true
      }
-    ]
+    ],
+    "delivery": "Kept apart from the floor songs, so that it is heard as what she remembers: the same notes each time, slower, so the one changed word stands out. Shown as a kept list in which the earlier wording stays visible, struck through, under the corrected line. A rest before the last line. A proposal: nothing of this is built or heard."
    }
   },
   {
