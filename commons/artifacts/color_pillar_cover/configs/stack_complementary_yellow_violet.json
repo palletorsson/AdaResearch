@@ -1,0 +1,24 @@
+{
+  "id": "stack_complementary_yellow_violet",
+  "notes": "Yellow <-> Violet \u2014 strongest value contrast, weakest hue-opposition. Light vs. heavy.",
+  "layout": "vertical_stack",
+  "palette": "color_pedagogy",
+  "base_scale": 0.25,
+  "sequence": [
+    {
+      "shape": "sphere",
+      "color": "#6a30a0",
+      "scale": 1.2
+    },
+    {
+      "shape": "cube",
+      "color": "#f0d020",
+      "scale": 1.4
+    },
+    {
+      "shape": "sphere",
+      "color": "#6a30a0",
+      "scale": 0.9
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "stack_complementary_blue_orange",
+  "notes": "Blue <-> Orange complementary. Color-temperature opposition: cool/warm at maximum.",
+  "layout": "vertical_stack",
+  "palette": "color_pedagogy",
+  "base_scale": 0.25,
+  "sequence": [
+    {
+      "shape": "cuboid",
+      "color": "#1844a0",
+      "scale": 1.3
+    },
+    {
+      "shape": "cube",
+      "color": "#e87018",
+      "scale": 1.1
+    },
+    {
+      "shape": "cuboid",
+      "color": "#1844a0",
+      "scale": 0.9
+    }
+  ]
+}

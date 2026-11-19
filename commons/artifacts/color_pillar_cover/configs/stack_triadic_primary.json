@@ -1,0 +1,24 @@
+{
+  "id": "stack_triadic_primary",
+  "notes": "Triadic harmony: red-yellow-blue at equal intervals on the wheel. Bauhaus primary.",
+  "layout": "vertical_stack",
+  "palette": "bauhaus",
+  "base_scale": 0.25,
+  "sequence": [
+    {
+      "shape": "cube",
+      "color": "#cc1f1f",
+      "scale": 1.2
+    },
+    {
+      "shape": "sphere",
+      "color": "#f0c020",
+      "scale": 1.0
+    },
+    {
+      "shape": "cuboid",
+      "color": "#1f4ecc",
+      "scale": 1.3
+    }
+  ]
+}

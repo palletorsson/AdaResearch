@@ -18,6 +18,151 @@
     ]
   },
   "artifacts": {
+    "point_one_chamber": {
+      "scene": "res://commons/artifacts/point_one_chamber/point_one_chamber.tscn",
+      "label": "Point one / spherical chamber",
+      "category": "primitives",
+      "footprint": [
+        5.6,
+        7.0
+      ]
+    },
+    "random_live_monitors": {
+      "scene": "res://commons/artifacts/randomness_room/live_monitors.tscn",
+      "label": "Random live / pixels, lines, colour",
+      "category": "randomness",
+      "footprint": [
+        5.9,
+        1.5
+      ]
+    },
+    "cloth_simulation": {
+      "name": "Cloth Simulation",
+      "scene": "res://algorithms/physicssimulation/clothsimulation/clothsimulation.tscn",
+      "category": "physics",
+      "configure_before_ready": true,
+      "description": "Release taut and slack cloths from identical four-corner pins and compare their sag under gravity.",
+      "footprint": [
+        2.57,
+        1.62,
+        2.57
+      ]
+    },
+    "pendulum_slap": {
+      "name": "Pendulum Slap",
+      "scene": "res://algorithms/softbodies/slap_test/pendulum_slap.tscn",
+      "category": "physics",
+      "configure_before_ready": true,
+      "description": "Apply the same load to two double pendulums and compare a rigid slab with a yielding cushion.",
+      "footprint": [
+        2.12,
+        3.24,
+        2.45
+      ]
+    },
+    "folding_transformer": {
+      "name": "Folding Furniture Transformer",
+      "scene": "res://commons/artifacts/furniture_transformer/folding_transformer.tscn",
+      "category": "formfinding",
+      "configure_before_ready": true,
+      "description": "Touch an ordinary furniture piece to unfold its rigid timber panels, two-link legs, hinges and tucked-away robot head. Touch again to reverse the folds.",
+      "footprint": [
+        0.79,
+        1.65,
+        2.0
+      ]
+    },
+    "furniture_transformer": {
+      "name": "Furniture Transformer",
+      "scene": "res://commons/artifacts/furniture_transformer/furniture_transformer.tscn",
+      "category": "formfinding",
+      "configure_before_ready": true,
+      "description": "A bench, stool or side table unfolds into a robot on the same welded cage. Touch the piece again to return it to furniture.",
+      "footprint": [
+        0.84,
+        1.9,
+        1.93
+      ]
+    },
+    "body_morphogenesis": {
+      "name": "Body Morphogenesis",
+      "scene": "res://commons/artifacts/body_morphogenesis/body_morphogenesis.tscn",
+      "category": "formfinding",
+      "configure_before_ready": true,
+      "description": "Choose any two forms and morph directly between them on one welded cage. Inspect the base cage, divide every triangle, or apply Loop smoothing to the same split.",
+      "footprint": [
+        3.33,
+        2.5,
+        1.54
+      ]
+    },
+    "morphology_study": {
+      "name": "Morphology Study",
+      "scene": "res://commons/artifacts/morphology_study/morphology_study.tscn",
+      "configure_before_ready": true,
+      "description": "A live face grammar. Build from the seed one rule at a time and change one DNA parameter to see its effect on the generated form."
+    },
+    "void_ten_print_c64": {
+      "scene": "res://commons/void/ten_print_c64.tscn",
+      "label": "10 PRINT / Commodore 64",
+      "description": "A four-metre 40 × 25 display prints the shared 10 PRINT rule with selectable probabilities."
+    },
+    "chair_factory": {
+      "scene": "res://commons/void/chair_factory.tscn",
+      "label": "Chair factory",
+      "description": "Cut two timber profiles to length, lay out a chair, and nail parts together."
+    },
+    "point_zero_return": {
+      "scene": "res://commons/void/point_zero_return.tscn",
+      "label": "Point Zero return stick",
+      "description": "A grabbable origin on a tether. The lower dock returns a visitor to Point Zero.",
+      "configure_before_ready": true
+    },
+    "logic_lever_gate": {
+      "scene": "res://commons/void/logic_lever_gate.tscn",
+      "label": "Hand lever / lift the stopper",
+      "description": "A hand lever raises a striped stopper along its guide rails to open a passage."
+    },
+    "pyramid_drop_grid": {
+      "scene": "res://commons/void/pyramid_drop_grid.tscn",
+      "label": "Pyramid Drop / 5 × 5",
+      "description": "Twenty-five inverted Polyhedra blockers start with their tips two metres above a marked tray and tumble under gravity."
+    },
+    "line_rod_gallery": {
+      "scene": "res://commons/void/line_rod_gallery.tscn",
+      "label": "Rod stock and perspective studies",
+      "description": "A 4 by 8 rack of movable two-metre rods and four figures with marked viewpoints."
+    },
+    "line_count_wall": {
+      "scene": "res://commons/void/line_count_wall.tscn",
+      "label": "Line wall / count, arrange, connect",
+      "description": "Segments from 1 to 8, a closing triangle, and mutations."
+    },
+    "coin_pedestal": {
+      "scene": "res://commons/void/coin_pedestal.tscn",
+      "label": "Coin / association(cylinder)",
+      "description": "A thin upright cylinder on a cylindrical pedestal."
+    },
+    "void_pickup_coin": {
+      "scene": "res://commons/void/coin_pickup.tscn",
+      "label": "Cylinder coin",
+      "description": "Coin version of the original moving, score-bearing pickup."
+    },
+    "void_gift_cube": {
+      "scene": "res://commons/void/gift_cube.tscn",
+      "label": "Gift pickup cube",
+      "description": "Collect the ribboned crate to drop its configured throwable prefab at the pickup location.",
+      "footprint": [
+        0.6,
+        0.8,
+        0.6
+      ]
+    },
+    "tile_floor_study": {
+      "scene": "res://commons/void/tile_floor_study.tscn",
+      "label": "Fishbone + square floor study",
+      "description": "The same two walkable layouts in pattern, palette and wear modes."
+    },
     "void_ca_history_wall": {
       "lookup_name": "void_ca_history_wall",
       "name": "CA / architectural history receiver",
@@ -36,6 +181,30 @@
         2
       ],
       "color": "#e854a6"
+    },
+    "color_pillar_cover": {
+      "name": "Colour / pillar covering from color-stacks-gallery",
+      "scene": "res://commons/artifacts/color_pillar_cover/color_pillar_cover.tscn",
+      "label": "Colour pillar cover",
+      "category": "color",
+      "configure_before_ready": true,
+      "footprint": [
+        1.5,
+        5.64,
+        1.5
+      ]
+    },
+    "color_mushroom_basket": {
+      "name": "Colour / basket of world-colouring mushrooms",
+      "scene": "res://commons/artifacts/color_mushroom_basket/color_mushroom_basket.tscn",
+      "label": "Colour mushroom basket",
+      "category": "color",
+      "configure_before_ready": true,
+      "footprint": [
+        0.9,
+        1.5,
+        0.9
+      ]
     },
     "array_index_bridge": {
       "name": "Array / hand selects the shaft",
@@ -189,6 +358,14 @@
       "scene": "res://commons/primitives/point/point_absent.tscn",
       "label": "Point One — absent point"
     },
+    "point_partition_sphere": {
+      "scene": "res://commons/void/point_partition_sphere.tscn",
+      "label": "Point One / pass-through partition sphere",
+      "footprint": [
+        0.5,
+        0.5
+      ]
+    },
     "point_visible": {
       "scene": "res://commons/primitives/point/point_visible.tscn",
       "label": "Point One â€” visible point"
@@ -233,6 +410,11 @@
       "label": "03 / Assemble a structure",
       "group": true,
       "description": "Collection of existing Point Lines artifacts; edit this work area as one assembly."
+    },
+    "line_association_table": {
+      "scene": "res://commons/void/line_association_table.tscn",
+      "label": "association(line)",
+      "description": "Move and release either endpoint to drop a random material association onto the table."
     },
     "void_lines_consequences": {
       "scene": "res://commons/void/lines_consequences.tscn",
@@ -304,6 +486,14 @@
       "label": "Polyhedra / support, sculpture and maze",
       "group": true
     },
+    "void_roof_anomaly": {
+      "scene": "res://commons/void/roof_anomaly.tscn",
+      "label": "transition/anomaly / rooftop service back",
+      "footprint": [
+        5.8,
+        2.2
+      ]
+    },
     "void_roof_letters": {
       "scene": "res://commons/void/roof_letters.tscn",
       "label": "ADA RESEARCH / roof lettering",
@@ -314,6 +504,14 @@
       "label": "Cube / existing museum artifacts",
       "group": true
     },
+    "paired_cube_diagonals": {
+      "scene": "res://commons/artifacts/primitive_encounters/paired_cube_diagonals.tscn",
+      "label": "Cube / eight movable vertices",
+      "footprint": [
+        1.55,
+        1.93
+      ]
+    },
     "void_primitive_primitives": {
       "scene": "res://commons/void/primitive_primitives.tscn",
       "label": "Primitives / existing museum artifacts",
@@ -323,6 +521,14 @@
       "scene": "res://commons/void/primitive_godot.tscn",
       "label": "Godot Primitives / existing museum artifacts",
       "group": true
+    },
+    "void_columns_pipe_slide": {
+      "scene": "res://commons/void/columns_pipe_slide.tscn",
+      "label": "Columns / pipe slide to Profiles",
+      "footprint": [
+        6,
+        7
+      ]
     },
     "void_primitive_columns": {
       "scene": "res://commons/void/primitive_columns.tscn",
@@ -7884,6 +8090,11 @@
       "label": "Introduction / steel frame and three transformations",
       "group": true
     },
+    "void_comparison_crossing": {
+      "scene": "res://commons/void/trials/transformation/comparison_crossing.tscn",
+      "label": "Same Gap / Three Bridges",
+      "group": true
+    },
     "void_trial_translation_sequence": {
       "scene": "res://commons/void/trials/transformation/translation_sequence.tscn",
       "label": "Translation / seven rides through the shafts",
@@ -7893,6 +8104,42 @@
       "scene": "res://commons/void/trials/transformation/translation_crossing.tscn",
       "label": "Translation / one suspended crossing",
       "group": true
+    },
+    "void_slab_scaffold_ferry": {
+      "scene": "res://commons/void/trials/transformation_slab/ferry.tscn",
+      "label": "Translation / one-metre ferry"
+    },
+    "void_slab_turning_bridge": {
+      "scene": "res://commons/void/trials/transformation_slab/turning_bridge.tscn",
+      "label": "Rotation / two-board crossing"
+    },
+    "void_slab_scale_bridge": {
+      "scene": "res://commons/void/trials/transformation_slab/scale_bridge.tscn",
+      "label": "Scale / centred cube"
+    },
+    "void_rotation_playground_course": {
+      "scene": "res://commons/void/trials/rotation_playground/course.tscn",
+      "label": "Rotation / two-level scaffold"
+    },
+    "void_rotation_playground_mechanism": {
+      "scene": "res://commons/void/trials/rotation_playground/mechanism.tscn",
+      "label": "Rotation / timed mechanism"
+    },
+    "void_rotation_playground_turntable": {
+      "scene": "res://commons/void/trials/rotation_playground/turntable.tscn",
+      "label": "Rotation / ride-on turntable"
+    },
+    "void_rotation_playground_seesaw": {
+      "scene": "res://commons/void/trials/rotation_playground/seesaw.tscn",
+      "label": "Rotation / seesaw bridge"
+    },
+    "void_rotation_playground_order_ferry": {
+      "scene": "res://commons/void/trials/rotation_playground/order_ferry.tscn",
+      "label": "Transformations / two-way ferry"
+    },
+    "void_rotation_playground_hoverboard": {
+      "scene": "res://commons/void/trials/rotation_playground/hoverboard.tscn",
+      "label": "Transformations / hoverboard"
     },
     "void_step_health_box": {
       "scene": "res://commons/void/step_health_box.tscn",
@@ -7915,6 +8162,11 @@
         6
       ],
       "museum_import": true
+    },
+    "void_rotation_floor_guides": {
+      "scene": "res://commons/void/rotation_floor_guides.tscn",
+      "label": "Rotation / bay and ring wayfinding",
+      "configure_before_ready": true
     },
     "void_rotation_boolean_descent": {
       "scene": "res://commons/void/rotation_boolean_descent.tscn",
@@ -7996,6 +8248,26 @@
         26.9
       ],
       "description": "Original fourfold room, bottle, serving-plate descent and fixed witness doorway. The foundation and return route stay full size."
+    },
+    "void_scale_span_comparison": {
+      "scene": "res://commons/void/scale_span_comparison.tscn",
+      "label": "Scale / growing and folding crossings",
+      "footprint": [
+        8,
+        3,
+        12
+      ],
+      "description": "Cross the same gap on a deck that scales and a bridge that unfolds on rigid hinges."
+    },
+    "void_body_boundary_readouts": {
+      "scene": "res://commons/void/body_boundary_readouts.tscn",
+      "label": "The Body / boundary readouts",
+      "wall_mounted": true
+    },
+    "void_moving_boundary_doorways": {
+      "scene": "res://commons/void/moving_boundary_doorways.tscn",
+      "label": "Moving Boundary / sliding and scaling doors",
+      "description": "Compare an opening that moves sideways at fixed width with an opening that changes width in place."
     },
     "void_array_worksite": {
       "name": "Array / addressed worksite",
@@ -22361,6 +22633,28 @@
       },
       "museum_import": true
     },
+    "great_wave_study": {
+      "name": "The Great Wave / Growing the Foam",
+      "scene": "res://commons/artifacts/great_wave_study/great_wave_study.tscn",
+      "category": "shaders",
+      "description": "Compare three recursive foam budgets over one fixed logarithmic curl. The seed, palette and wave body stay fixed as the foam branches.",
+      "footprint": [
+        5.7,
+        3.1,
+        1.6
+      ]
+    },
+    "ledger_comparison": {
+      "name": "Whose edit can you still find?",
+      "scene": "res://commons/artifacts/ledger_comparison/ledger_comparison.tscn",
+      "category": "postfoundationscrisis",
+      "description": "Scrub the same 24 edits in two ledgers. In the compacted view, the first 20 edits share a block and only the last four can be inspected separately.",
+      "footprint": [
+        2.55,
+        2.5,
+        0.95
+      ]
+    },
     "peer_production_tool": {
       "lookup_name": "peer_production_tool",
       "scene": "res://commons/artifacts/peer_production_tool/peer_production_tool.tscn",
@@ -24245,6 +24539,17 @@
       ],
       "qfep_connection": "A local exception in a repeated image differs from an exception in the enclosure: the receiver and its collision decide whether the body can pass.",
       "museum_import": true
+    },
+    "prime_addresses": {
+      "name": "Prime Addresses",
+      "scene": "res://commons/artifacts/prime_addresses/prime_addresses.tscn",
+      "category": "arrays",
+      "description": "Scan addresses 0 to 59 in row-major order. Primes light up and the current composite displays a factor pair.",
+      "footprint": [
+        4.28,
+        2.63,
+        0.71
+      ]
     },
     "disco_controls": {
       "lookup_name": "disco_controls",
@@ -26708,7 +27013,7 @@
       },
       "category": "unknown",
       "complexity": "beginner",
-      "description": "Color_Walls selects twelve freestanding colour filters, three workstations and a pale open gallery setting; filter/opaque comparison preserves passage. Cubicles and default mixing installation remain separate configurations.",
+      "description": "Color_Walls selects twelve freestanding colour filters and three tripod work lights on an open floor, without outer walls or canopy; filter/opaque comparison preserves passage. Cubicles and default mixing installation remain separate configurations.",
       "dev_themes": [
         "color",
         "perception"
@@ -26827,7 +27132,7 @@
         }
       },
       "configuration_notes": {
-        "layout": "Color_Walls selects twelve freestanding colour filters, three workstations and a pale open gallery setting; filter/opaque comparison preserves passage. Cubicles and default mixing installation remain separate configurations."
+        "layout": "Color_Walls selects twelve freestanding colour filters and three tripod work lights on an open floor, without outer walls or canopy; filter/opaque comparison preserves passage. Cubicles and default mixing installation remain separate configurations."
       },
       "museum_import": true
     },
@@ -30310,7 +30615,7 @@
       "lookup_name": "jacquard_studio",
       "name": "Cards become cloth — loom and layers",
       "scene": "res://commons/artifacts/jacquard_weaver/jacquard_studio.tscn",
-      "description": "Choose stripes, checks, tartan, chevron, herringbone, houndstooth or optical checks with seven physical buttons. Each starts a fresh 96-pick sample. Open its actual yarn geometry with LAYERS or the slider; FLAT closes the same cloth. Clear and run to watch the laced punch-card chain weave the chosen sample one pass at a time. Card lifts and warp/weft colour periods are independent. Edit cards or colours to change future picks while preserving earlier cloth. Dense 96-warp cloth, up to 128 actual picks, with a linked top-thread drawdown. Optical checks use graduated burgundy/cream colour bands in 2/2 twill; the cloth remains flat until deliberately opened. Longer colour sequences have paged controls.",
+      "description": "Choose stripes, checks, tartan, chevron, herringbone, houndstooth, optical checks or Trans Pride with eight physical buttons. Each starts a fresh 96-pick sample. Open its actual yarn geometry with LAYERS or the slider; FLAT closes the same cloth. Clear and run to watch the laced punch-card chain weave the chosen sample one pass at a time. Card lifts and warp/weft colour periods are independent. Edit cards or colours to change future picks while preserving earlier cloth. Dense 96-warp cloth, up to 128 actual picks, with a linked top-thread drawdown. Optical checks use graduated burgundy/cream colour bands in 2/2 twill; the cloth remains flat until deliberately opened. Longer colour sequences have paged controls.",
       "category": "patterns",
       "complexity": "intermediate",
       "include_in_map_data": true,
@@ -52260,6 +52565,28 @@
       },
       "museum_import": true
     },
+    "svm_kernel_comparison": {
+      "name": "Same Points, Different Boundaries",
+      "scene": "res://commons/artifacts/svm_kernel_comparison/svm_kernel_comparison.tscn",
+      "category": "machinelearning",
+      "description": "Fit linear and radial-basis support vector machines to the same 100 seeded ring samples. Compare the decision regions and training scores.",
+      "footprint": [
+        4.18,
+        2.84,
+        0.68
+      ]
+    },
+    "galton_comparison": {
+      "name": "Galton Boards / Four and Eight Rows",
+      "scene": "res://commons/artifacts/galton_comparison/galton_comparison.tscn",
+      "category": "randomness",
+      "description": "Release a matched batch into four and eight physical peg rows. Compare the five- and nine-bin histograms on the same count scale.",
+      "footprint": [
+        2.9,
+        2.75,
+        0.93
+      ]
+    },
     "galton_board": {
       "dna": {
         "axes": {
@@ -53436,7 +53763,7 @@
       },
       "category": "procedural",
       "complexity": "intermediate",
-      "description": "Automatic Pollock-inspired painting on a 2D canvas in 3D: sampled marks, a moving stroke cursor, and floor/table/easel/wall supports.",
+      "description": "Pollock-inspired canvas with floor/table/easel/wall supports. Floor 88 uses a hand-held action-painting tool: ballistic droplets accumulate splashes, with adjustable spread, colour and seeded gesture replay.",
       "dev_themes": [
         "art",
         "probability",
@@ -66645,6 +66972,58 @@
         "derived_from": "aabb_size + category"
       },
       "museum_import": true
+    },
+    "frame_partition_study": {
+      "name": "The Frame You Were Given / One curve, five counts",
+      "scene": "res://commons/artifacts/the_frame_you_were_given/partition_comparison.tscn",
+      "category": "mathematics",
+      "description": "Keep the same authored curve and compare left-edge rectangles across five partitions from 1 through 256 slices.",
+      "footprint": [
+        3.96,
+        2.92,
+        0.92
+      ]
+    },
+    "where_the_machine_stops_comparison": {
+      "name": "Where the Machine Stops / Tetrahedron depth limit",
+      "scene": "res://commons/artifacts/where_the_machine_stops/depth_limit_comparison.tscn",
+      "category": "fractals",
+      "description": "Compare the rendered depth-6 lattice of 4,096 tetrahedra with the refused depth-7 request for 16,384.",
+      "footprint": [
+        3.75,
+        2.66,
+        1.82
+      ]
+    },
+    "elasticity_press_comparison": {
+      "name": "Elasticity Press / Wide plate and narrow punch",
+      "scene": "res://commons/artifacts/elasticity_press/press_comparison.tscn",
+      "category": "physics",
+      "description": "Press two identical jelly blocks to the same travel with a wide plate and a narrow punch, and compare their free shoulders.",
+      "footprint": [
+        3.02,
+        2.3,
+        1.07
+      ]
+    },
+    "trans_pride_tartan_sett": {
+      "name": "Trans Pride Tartan / Change the Sett",
+      "scene": "res://commons/artifacts/jacquard_weaver/tartan_comparison.tscn",
+      "category": "symmetry",
+      "description": "Compare the gallery palette as two woven drawdowns. Double the colour-band width in the warp or weft while keeping the 2/2 twill crossing rule."
+    },
+    "order_matters_floor_study": {
+      "name": "Order Matters / Move, Turn and Scale",
+      "scene": "res://commons/artifacts/order_matters/floor_comparison.tscn",
+      "category": "transformation",
+      "configure_before_ready": true,
+      "description": "Switch the order of turning and non-uniform scaling with one fixed translation, one figure and one measuring frame."
+    },
+    "reaction_diffusion_pair": {
+      "name": "Reaction–Diffusion / Lattice and Dust",
+      "scene": "res://commons/artifacts/reaction_diffusion_pair/reaction_diffusion_pair.tscn",
+      "category": "procedural",
+      "description": "Two live fields with shared Gray–Scott chemistry and a shared step counter. Run, step or reset both to compare a regular lattice with scattered dust."
     },
     "reaction_diffusion": {
       "dna": {
@@ -83402,6 +83781,400 @@
         8.6
       ],
       "museum_import": true
+    },
+    "care_shared_crossing": {
+      "lookup_name": "care_shared_crossing",
+      "name": "Care / shared crossing",
+      "label": "Care / shared crossing",
+      "scene": "res://commons/artifacts/movable_pivot/care_crossing.tscn",
+      "description": "An optional hand-adjusted timber crossing between the existing Rotation gantries. Move the bearing and turn the end grip; compare whose approach gains room and whose becomes awkward. Independently editable landings and mechanism.",
+      "qfep_connection": "Shared infrastructure carries competing uses. A chosen centre changes reach; maintaining a commons includes negotiating, waiting and sometimes leaving an arrangement alone.",
+      "category": "transforms",
+      "dev_category": "transforms",
+      "complexity": "beginner",
+      "tags": [
+        "care",
+        "commons",
+        "pivot",
+        "walkway",
+        "editable"
+      ]
+    },
+    "floor21_fork": {
+      "scene": "res://commons/modular/playgrounds/floor21_fork.tscn",
+      "label": "Floor 21 / Throw or detour",
+      "description": "A gift ball, moving throw deck, bomb landing and long scaffold bypass share the same authored layout with the browser playground.",
+      "museum_import": true
+    },
+    "native_revolving_playground": {
+      "lookup_name": "native_revolving_playground",
+      "name": "Revolving playground / native Jolt",
+      "scene": "res://commons/modular/grid_playground.tscn",
+      "museum_import": true,
+      "description": "Shared metre-grid recipe with native moving collision, checkpoint landings and electrical fins. Same scene for desktop and XR."
+    },
+    "native_crossing_fan_x": {
+      "lookup_name": "native_crossing_fan_x",
+      "name": "Padded fan / feel the push",
+      "scene": "res://commons/modular/crossings/fan-x.tscn",
+      "museum_import": true,
+      "description": "Supported editable crossing: Padded fan / feel the push. Electrical ground returns the player to the approach."
+    },
+    "native_crossing_gates": {
+      "lookup_name": "native_crossing_gates",
+      "name": "Turning portals / find the opening",
+      "scene": "res://commons/modular/crossings/gates.tscn",
+      "museum_import": true,
+      "description": "Supported editable crossing: Turning portals / find the opening. Electrical ground returns the player to the approach."
+    },
+    "scaffold_playground_motion": {
+      "lookup_name": "scaffold_playground_motion",
+      "name": "Supported movement / full scaffold circuit",
+      "scene": "res://commons/modular/playgrounds/motion.tscn",
+      "museum_import": true,
+      "description": "Complete editable six-bay circuit, 3 m deck height on a 1 m construction grid; TC boarding and local electrical-ground recovery."
+    },
+    "scaffold_playground_revolving": {
+      "lookup_name": "scaffold_playground_revolving",
+      "name": "Revolving playground / full scaffold circuit",
+      "scene": "res://commons/modular/playgrounds/revolving.tscn",
+      "museum_import": true,
+      "description": "Complete editable six-bay circuit, 3 m deck height on a 1 m construction grid; TC boarding and local electrical-ground recovery."
+    },
+    "scaffold_playground_connection": {
+      "lookup_name": "scaffold_playground_connection",
+      "name": "Shared scaffold crossing / TC down to Logic",
+      "scene": "res://commons/modular/playgrounds/connection.tscn",
+      "museum_import": true,
+      "description": "Cross between the two scaffold studies, then board TC for the next floor. The electrical ground stays beneath the construction and away from the shafts.",
+      "interactions": [
+        "Walk between the two scaffold setups",
+        "Board TC; ride one floor down",
+        "Step onto the lower landing; TC returns empty"
+      ]
+    },
+    "scaffold_workstation_points": {
+      "lookup_name": "scaffold_workstation_points",
+      "name": "Scaffold workstation / points",
+      "scene": "res://commons/artifacts/scaffold_workstation/points.tscn",
+      "museum_import": true,
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "One saved construction: six-port points, two-metre rods and complementary halves of a 2 x 2 m square. A 20 cm hand-model edge becomes 2 m at BUILD. Neutral construction materials precede the Colour sequence.",
+      "qfep_connection": "The six-direction lattice enables repeatable construction while making its restriction to orthogonal relationships visible. The same connection graph becomes a model or inhabited structure.",
+      "interactions": [
+        "Grip / RMB: take stock and release at the bright preview.",
+        "BUILD 1:1 creates the walkable output; UNDO revises the small model."
+      ],
+      "footprint": [
+        6.6,
+        6.6,
+        10.9
+      ]
+    },
+    "scaffold_workstation_lines": {
+      "lookup_name": "scaffold_workstation_lines",
+      "name": "Scaffold workstation / lines",
+      "scene": "res://commons/artifacts/scaffold_workstation/lines.tscn",
+      "museum_import": true,
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "One saved construction: six-port points, two-metre rods and complementary halves of a 2 x 2 m square. A 20 cm hand-model edge becomes 2 m at BUILD. Neutral construction materials precede the Colour sequence.",
+      "qfep_connection": "The six-direction lattice enables repeatable construction while making its restriction to orthogonal relationships visible. The same connection graph becomes a model or inhabited structure.",
+      "interactions": [
+        "Grip / RMB: take stock and release at the bright preview.",
+        "BUILD 1:1 creates the walkable output; UNDO revises the small model."
+      ],
+      "footprint": [
+        6.6,
+        6.6,
+        10.9
+      ]
+    },
+    "scaffold_workstation_surfaces": {
+      "lookup_name": "scaffold_workstation_surfaces",
+      "name": "Scaffold workstation / surfaces",
+      "scene": "res://commons/artifacts/scaffold_workstation/surfaces.tscn",
+      "museum_import": true,
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "One saved construction: six-port points, two-metre rods and complementary halves of a 2 x 2 m square. A 20 cm hand-model edge becomes 2 m at BUILD. Neutral construction materials precede the Colour sequence.",
+      "qfep_connection": "The six-direction lattice enables repeatable construction while making its restriction to orthogonal relationships visible. The same connection graph becomes a model or inhabited structure.",
+      "interactions": [
+        "Grip / RMB: take stock and release at the bright preview.",
+        "BUILD 1:1 creates the walkable output; UNDO revises the small model."
+      ],
+      "footprint": [
+        6.6,
+        6.6,
+        10.9
+      ]
+    },
+    "scaffold_workstation_crossing": {
+      "lookup_name": "scaffold_workstation_crossing",
+      "name": "Scaffold workstation / carried crossing",
+      "scene": "res://commons/artifacts/scaffold_workstation/crossing.tscn",
+      "museum_import": true,
+      "category": "transformation",
+      "complexity": "beginner",
+      "description": "One saved construction: six-port points, two-metre rods and complementary halves of a 2 x 2 m square. A 20 cm hand-model edge becomes 2 m at BUILD. Neutral construction materials precede the Colour sequence.",
+      "qfep_connection": "The six-direction lattice enables repeatable construction while making its restriction to orthogonal relationships visible. The same connection graph becomes a model or inhabited structure.",
+      "interactions": [
+        "Continue the construction saved in Primitives.",
+        "Complete a horizontal square with four rods and either two halves or one quad.",
+        "BUILD installs the entire graph at the receiver; walk across your square."
+      ],
+      "footprint": [
+        6.6,
+        6.6,
+        10.9
+      ]
+    },
+    "scaffold_workstation_quads": {
+      "lookup_name": "scaffold_workstation_quads",
+      "name": "Scaffold workstation / full square faces",
+      "scene": "res://commons/artifacts/scaffold_workstation/quads.tscn",
+      "museum_import": true,
+      "category": "primitives",
+      "complexity": "beginner",
+      "description": "Animated Cube adds a full 2 x 2 m quad: fill an empty four-rod frame in one release. The earlier points, two-metre rods and triangular halves remain available. Same miniature, shared save and 1:10 output.",
+      "qfep_connection": "The six-direction lattice enables repeatable construction while making its restriction to orthogonal relationships visible. The same connection graph becomes a model or inhabited structure.",
+      "interactions": [
+        "Grip / RMB: take stock and release at the bright preview.",
+        "BUILD 1:1 creates the walkable output; UNDO revises the small model."
+      ],
+      "footprint": [
+        6.6,
+        6.6,
+        10.9
+      ]
+    },
+    "scaffold_workstation_display": {
+      "lookup_name": "scaffold_workstation_display",
+      "uses_building_capabilities": true,
+      "name": "Assembly shop / glass test bay",
+      "scene": "res://commons/artifacts/scaffold_workstation/display.tscn",
+      "museum_import": true,
+      "category": "transformation",
+      "complexity": "beginner",
+      "description": "Build with points, 1m and 2m rods, halves and quads; the same construction appears at full size in a glass chamber above the shaft. Drop a real ball to test support.",
+      "qfep_connection": "The six-direction lattice enables repeatable construction while making its restriction to orthogonal relationships visible. The same connection graph becomes a model or inhabited structure.",
+      "interactions": [
+        "Grip stock and release at a valid preview.",
+        "BUILD the same construction at full size.",
+        "DROP TEST checks whether your construction catches a falling ball.",
+        "UNDO revises the hand model."
+      ],
+      "footprint": [
+        6.6,
+        6.6,
+        10.9
+      ]
+    },
+    "principal_places": {
+      "lookup_name": "principal_places",
+      "scene": "res://commons/void/trials/principal_places/places.tscn",
+      "name": "Principal places / floor, court and hanging basin",
+      "description": "Playground frames and catwalks carry three separate activity pieces: an 8m disco plate, a 10m hard-plastic biome bath and an 8m hanging steel bath. Walk the rims and descend into each shell. Frame parts and mounted inserts are independently editable in the playground recipe.",
+      "qfep_connection": "The receiving place determines what can be observed, entered and changed. Compare looking from a rim with inhabiting its interior before assigning an algorithm to it.",
+      "interactions": [
+        "Walk from the ground floor to the court",
+        "Descend into the court and return to its rim",
+        "Climb to the basin gantry and enter its surface",
+        "Compare sightlines and clearances",
+        "R / B retries the trial"
+      ],
+      "category": "spatial",
+      "tags": [
+        "playground",
+        "construction",
+        "basin",
+        "biome",
+        "spatial trial"
+      ]
+    },
+    "place_workshop_5fcebaaa02744416b9500e810b560a54": {
+      "lookup_name": "place_workshop_5fcebaaa02744416b9500e810b560a54",
+      "name": "Place / plastic pool",
+      "scene": "res://commons/void/trials/place_workshop_5fcebaaa02744416b9500e810b560a54/place.tscn",
+      "description": "Generated receiving place with matched workbench; retained as an independent experiment.",
+      "category": "spatial",
+      "tags": [
+        "playground",
+        "place parameters"
+      ]
+    },
+    "place_workshop_7f4480baf3a2414f9e018afa5bd60f45": {
+      "lookup_name": "place_workshop_7f4480baf3a2414f9e018afa5bd60f45",
+      "name": "Place / plastic pool",
+      "scene": "res://commons/void/trials/place_workshop_7f4480baf3a2414f9e018afa5bd60f45/place.tscn",
+      "description": "Generated receiving place with matched workbench; retained as an independent experiment.",
+      "category": "spatial",
+      "tags": [
+        "playground",
+        "place parameters"
+      ]
+    },
+    "sine_slide": {
+      "name": "Sine slide / one, two, sideways",
+      "scene": "res://algorithms/wavefunctions/sine_slide/sine_slide.tscn",
+      "museum_import": false,
+      "footprint": [
+        3,
+        3.9,
+        7.5
+      ],
+      "color": "#f5a9b8"
+    },
+    "constructive_walk_bench": {
+      "lookup_name": "constructive_walk_bench",
+      "name": "A walk builds / 24 choices",
+      "scene": "res://commons/artifacts/constructive_walk/bench.tscn",
+      "description": "A seeded planar walk builds legal workshop points and rods. Step, run/pause, keep/load, replay, next seed and speed controls. Revisits reuse members; boundary proposals consume a draw and stay put. Installed in Void Random Walk, floor 83; optional room-scale copy uses the same record.",
+      "category": "randomness",
+      "tags": [
+        "random-walk",
+        "construction",
+        "seed",
+        "replay",
+        "workshop"
+      ],
+      "qfep_connection": "Independent direction choices accumulate inside a bounded construction grammar; an event history and the resulting set of members retain different information.",
+      "configure_before_ready": true,
+      "museum_import": true
+    },
+    "scaffold_net_green": {
+      "scene": "res://commons/artifacts/construction_site/scaffold_net.tscn",
+      "label": "Green debris net / loose corners",
+      "category": "soft_bodies",
+      "configure_before_ready": true,
+      "footprint": [
+        4.4,
+        3.4
+      ],
+      "description": "Two scaffold bays with translucent green debris netting, attached at the top corners. Gravity and gusts move the spring-mass cloth; the braced frame stays rigid."
+    },
+    "scaffold_net_tied": {
+      "scene": "res://commons/artifacts/construction_site/scaffold_net.tscn",
+      "label": "Green debris net / five ties",
+      "category": "soft_bodies",
+      "configure_before_ready": true,
+      "footprint": [
+        4.4,
+        3.4
+      ],
+      "description": "The same frame, colour and wind, with five top ties instead of two. Compare the free hem and sag between attachment points."
+    },
+    "scaffold_net_orange": {
+      "scene": "res://commons/artifacts/construction_site/scaffold_net.tscn",
+      "label": "Orange construction screen",
+      "category": "soft_bodies",
+      "configure_before_ready": true,
+      "footprint": [
+        4.4,
+        3.4
+      ],
+      "description": "The same tied two-bay apparatus in safety orange. A colour comparison with the green net: the structure remains visible through the woven screen."
+    },
+    "scaffold_net_overlap": {
+      "scene": "res://commons/artifacts/construction_site/scaffold_net.tscn",
+      "label": "Cyan / magenta overlapping screens",
+      "category": "soft_bodies",
+      "configure_before_ready": true,
+      "footprint": [
+        2.4,
+        3.4
+      ],
+      "description": "Two translucent cloth layers on one scaffold bay. Their overlap changes with wind and viewpoint. Rendered alpha blending, not a spectral model of dyed fabric."
+    },
+    "scaffold_net_frame": {
+      "scene": "res://commons/artifacts/construction_site/scaffold_net.tscn",
+      "label": "Three bays / the exposed graph",
+      "category": "soft_bodies",
+      "configure_before_ready": true,
+      "footprint": [
+        6.4,
+        3.4
+      ],
+      "description": "Three applications of the scaffold-bay graph rule. Adjacent bays share joints and members; netting is removed to expose uprights, ledgers, transoms and diagonal braces."
+    },
+    "scaffold_net_tower": {
+      "scene": "res://commons/artifacts/construction_site/scaffold_net.tscn",
+      "label": "Two bays / two storeys",
+      "category": "soft_bodies",
+      "configure_before_ready": true,
+      "footprint": [
+        4.4,
+        3.4
+      ],
+      "description": "A graph rule grows shared scaffold joints and rails, with rear diagonal braces. Four independently tied cloth panels turn the rigid two-storey frame into a moving enclosure."
+    },
+    "graph_grammar_station": {
+      "scene": "res://commons/artifacts/graph_grammar_station/graph_grammar_station.tscn",
+      "label": "Graph grammar workbench",
+      "category": "lsystems",
+      "configure_before_ready": true,
+      "footprint": [
+        3.6,
+        3.4
+      ]
+    },
+    "random_line_cloud": {
+      "scene": "res://commons/artifacts/randomness_room/line_cloud.tscn",
+      "label": "Independent random lines",
+      "category": "randomness",
+      "footprint": [
+        4.2,
+        2.8
+      ]
+    },
+    "random_walk_monitors": {
+      "scene": "res://commons/artifacts/randomness_room/walk_monitors.tscn",
+      "label": "Three ceiling walks / replay",
+      "category": "randomness",
+      "footprint": [
+        5.9,
+        1.5
+      ]
+    },
+    "random_question_board": {
+      "scene": "res://commons/artifacts/randomness_room/question_board.tscn",
+      "label": "How random is random? / writable board",
+      "category": "randomness",
+      "footprint": [
+        3.2,
+        1.2
+      ]
+    },
+    "random_perimeter_weather": {
+      "scene": "res://commons/artifacts/randomness_room/perimeter_weather.tscn",
+      "label": "Pink sky / slab-edge rain",
+      "category": "randomness",
+      "footprint": [
+        42.08,
+        18.08
+      ]
+    },
+    "branching_lamp": {
+      "scene": "res://commons/artifacts/graph_grammar_station/branching_lamp.tscn",
+      "label": "Branching lamp",
+      "category": "lsystems",
+      "configure_before_ready": true,
+      "footprint": [
+        3.5,
+        3.8
+      ]
+    },
+    "sequence_descent": {
+      "scene": "res://commons/void/sequence_descent.tscn",
+      "label": "Sequence descent / jumps, slides, stairs, subtraction",
+      "category": "architecture",
+      "configure_before_ready": true,
+      "footprint": [
+        11,
+        13
+      ],
+      "description": "A physical route between adjacent tower floors. Configure kind, drop, destination, and hole_z."
     }
   },
   "props": {
@@ -83721,7 +84494,7 @@
       "group": "Architectural interfaces"
     },
     "arrival_crate": {
-      "label": "Model B arrival crate â€” strike inside panel",
+      "label": "Model B arrival crate — strike inside panel",
       "size": [
         3.2,
         2.6,

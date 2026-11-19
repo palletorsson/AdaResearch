@@ -15,7 +15,7 @@
 # Eating detection:
 #   - VR: When held, checks distance from mushroom to XRCamera3D (head).
 #         If within `eat_distance`, the mushroom is consumed.
-#   - Desktop: Press 'E' while holding the mushroom (via debug/demo).
+#   - Desktop: Placements with eat_on_action use the held item's normal action.
 #
 # On consumption:
 #   - Finds or creates a MushroomEffect in the scene
@@ -34,12 +34,13 @@ class_name EdibleMushroom
 @export var glow_energy: float = 0.8
 @export var effect_shader_path: String = "res://commons/resourses/shaders/mushroom_trip.gdshader"  ## Which post-processing effect
 @export var effect_duration: float = 10.0     ## How long the effect lasts (seconds)
+@export var effect_settles_from_peak: bool = false
+@export var heal_amount: float = 5.0
 
 # ── State ─────────────────────────────────────────────────────────────────
 var _is_eaten: bool = false
 var _dissolve_timer: float = 0.0
 var _held: bool = false
-var _original_scale: Vector3 = Vector3.ONE
 
 # ── References ────────────────────────────────────────────────────────────
 var _mesh_root: Node3D = null
@@ -49,6 +50,9 @@ var _stem: MeshInstance3D = null
 func _ready() -> void:
 	super()
 
+	var authored_cap := str(get_meta("config_cap_colour", ""))
+	if Color.html_is_valid(authored_cap):
+		cap_color = Color(authored_cap)
 	_build_mushroom()
 	_setup_collision()
 
@@ -57,9 +61,14 @@ func _ready() -> void:
 
 	picked_up.connect(_on_picked_up)
 	dropped.connect(_on_dropped)
+	if get_meta("config_eat_on_action", false):
+		action_pressed.connect(_eat_held)
 
-	_original_scale = Vector3.ONE * mushroom_scale
-	scale = _original_scale
+	scale = Vector3.ONE * mushroom_scale
+
+func _eat_held(_pickable: Node3D) -> void:
+	if _held:
+		_eat()
 
 
 func _process(delta: float) -> void:
@@ -70,9 +79,9 @@ func _process(delta: float) -> void:
 		if t >= 1.0:
 			queue_free()
 			return
-		# Shrink and spin
-		scale = _original_scale * (1.0 - t)
-		rotation.y += delta * 10.0
+		# Dissolve the visible mushroom without scaling its rigid body.
+		_mesh_root.scale = Vector3.ONE * (1.0 - t)
+		_mesh_root.rotation.y += delta * 10.0
 		return
 
 	if not _held:
@@ -116,15 +125,27 @@ func _eat() -> void:
 	if has_node("MushroomCollision"):
 		$MushroomCollision.disabled = true
 
-	# Heal 5% health
 	var gm = get_node_or_null("/root/GameManager")
-	if gm and gm.has_method("heal_player"):
-		gm.heal_player(5.0)
+	if heal_amount > 0.0 and gm and gm.has_method("heal_player"):
+		gm.heal_player(heal_amount)
+
+	# Opt-in world-colouring mode (used on Floor 31 Color_Rainbow so existing
+	# rose/aqua mushrooms colour the entire world in their cap hue).
+	if get_meta("config_world_colour", false):
+		var wash_script: Variant = load("res://commons/artifacts/rainbow_playground/world_color_wash.gd")
+		if wash_script != null:
+			var wash: Variant = wash_script.ensure(self, global_position.y)
+			if wash != null:
+				wash.tint_from_mushroom(cap_color, str(get_meta("config_colour_name", "")), effect_duration)
+				return
 
 	# Find or create the effect manager
 	var effect: MushroomEffect = _find_or_create_effect()
 	if effect:
-		effect.trigger_with_shader(effect_shader_path, effect_duration)
+		effect.trigger_with_shader(effect_shader_path, effect_duration, effect_settles_from_peak)
+
+func eat() -> void:
+	_eat()
 
 
 func _find_or_create_effect() -> MushroomEffect:

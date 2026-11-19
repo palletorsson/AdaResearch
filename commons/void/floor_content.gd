@@ -17,6 +17,7 @@ const LessonScore := preload("lesson_score.gd")
 const TimelineWalk := preload("timeline_walk.gd")
 var building: Node3D
 var data: Dictionary
+var rooms_revision := ""
 var catalog: Dictionary
 var exhibits: Dictionary = {}
 var cells: Dictionary = {}
@@ -32,6 +33,9 @@ var max_build_ms := 0.0
 var build_indices: Array = []
 var warming: Dictionary = {}
 var warm_resources: Dictionary = {}
+var factory_target_floor := -1
+var factory_layout: Dictionary = {}
+var factory_only := false # A saved museum collection reuses this same instance factory.
 signal floor_changed(index: int)
 ## One queued work was built (before floor_changed for it): `added` is every node the build hung on the floor - the
 ## work's mount, its supply lead, its support - so the residency can pause those alone (floor_stream.gd).
@@ -39,8 +43,11 @@ signal artifact_built(index: int, added: Array)
 signal panel_activated(world_position: Vector3)
 
 func _ready() -> void:
+	if factory_only:return
 	building = get_parent()
-	data = Source.read_rooms(trial_id)
+	var rooms_text := Source.read_rooms_text(trial_id)
+	data = JSON.parse_string(rooms_text)
+	rooms_revision = rooms_text.sha256_text()
 	catalog = JSON.parse_string(FileAccess.get_file_as_string(CATALOG))
 	_index_registry_in_background()
 	add_to_group("biome_grid") # Existing catalyst projectiles call react_at_world.
@@ -150,7 +157,7 @@ func _build_content(index: int, record: Dictionary, defer_artifacts := false) ->
 	if not content_trial.is_empty() or str(record.map).begins_with("Trans_"):
 		for waypoint in record.get("route", []):
 			var caption := _text(floor_root, waypoint.label, Vector3(waypoint.position[0], float(waypoint.get("height",0))+.025, waypoint.position[1]), .002)
-			caption.rotation_degrees.x = -90
+			caption.rotation_degrees = Vector3(-90, float(waypoint.get("facing", 0)), 0)
 			caption.modulate = Color("efc5dd")
 	# the artifact timeline in the tower (2026-11-07): number captions, and the walk where no route is hand-made
 	if trial_id.is_empty(): TimelineWalk.build(floor_root, index)
@@ -159,7 +166,7 @@ func _build_content(index: int, record: Dictionary, defer_artifacts := false) ->
 	var badge_replaced: Array = badge_layer.replaced(index, str(record.map)) if badge_layer != null and badge_layer.can_instantiate() else []
 	if badge_layer != null and badge_layer.can_instantiate(): badge_layer.build(floor_root, index)
 	var abstract: bool = building.abstract_floor(index)
-	if not abstract: _build_feed(floor_root,index != 0)
+	if not abstract: _build_feed(floor_root,index != 0,float(record.get("supply_height",SUPPLY_Y)))
 	for wall in record.walls:
 		var centre_y := float(wall.get("base", 0.0)) + float(wall.height) / 2.0
 		var a := Vector3(float(wall.from[0]), centre_y, float(wall.from[1]))
@@ -183,6 +190,9 @@ func _build_content(index: int, record: Dictionary, defer_artifacts := false) ->
 		var construction := Construction.new()
 		construction.name = "Construction"
 		construction.items = record.construction
+		# Authored gantry decks can extend past the tower slab. The game still
+		# requires a real collision ray hit before allowing an exterior walk.
+		construction.add_to_group("void_exterior_walk")
 		floor_root.add_child(construction)
 	for item in record.artifacts:
 		if str(item.id) in badge_replaced: continue   # BADGE COINS (2026-11-17): a coin stands in this work's place (badge_layer.gd)
@@ -201,7 +211,7 @@ func _build_content(index: int, record: Dictionary, defer_artifacts := false) ->
 	if record.origin:
 		var origin := OriginScene.instantiate()
 		origin.name = "WorldZero"
-		origin.beam_height = 1.0
+		origin.beam_height = 0.0 if record.artifacts.any(func(item): return item.artifact == "point_zero_return") else 1.0
 		origin.beam_label = "Point zero / (0, 0, 0)"
 		# Keep the existing origin exactly at world zero. Raise only its wire
 		# cage above the slab, rather than moving zero to a decorative plinth.
@@ -224,25 +234,25 @@ func _build_content(index: int, record: Dictionary, defer_artifacts := false) ->
 		var instruction := _text(floor_root, "POINT COORDINATES\nHold grip to carry the point. Release to leave it.\nOne point. Two frames of reference.", Vector3(0, 0.025, -6.2), 0.0018)
 		instruction.rotation_degrees = Vector3(-90, 180, 0)
 
-func _build_feed(host: Node3D, show_cables := true) -> void:
+func _build_feed(host: Node3D, show_cables := true, supply_y := SUPPLY_Y) -> void:
 	# Keep service infrastructure overhead so lines on the slab belong to artifacts.
 	var points: Array[Vector3] = []
 	for station in ["NW", "NE", "SE", "SW"]:
 		var pair: Array = catalog.stations[station]
-		points.append(Vector3(float(pair[0]), SUPPLY_Y, float(pair[1])))
+		points.append(Vector3(float(pair[0]), supply_y, float(pair[1])))
 	for i in range(4):
 		var a: Vector3 = points[i]
 		var b: Vector3 = points[(i + 1) % 4]
 		building.box(host, "CeilingConduit", (a+b)/2.0, Vector3(absf(a.x-b.x)+0.14,0.08,absf(a.z-b.z)+0.14),building.steel,false)
 		if show_cables: building.pipe(host, "SupplyCable", a-Vector3.UP*0.055,b-Vector3.UP*0.055,0.025,building.pink)
-	var riser := Vector3(float(building.spec.service_x[0])+0.42,SUPPLY_Y,float(building.spec.service_z))
-	var elbow := Vector3(points[0].x,SUPPLY_Y,riser.z)
+	var riser := Vector3(float(building.spec.service_x[0])+0.42,supply_y,float(building.spec.service_z))
+	var elbow := Vector3(points[0].x,supply_y,riser.z)
 	if show_cables:
 		building.pipe(host,"SupplyFromRiser",riser,elbow,0.025,building.pink)
 		building.pipe(host,"SupplyToRing",elbow,points[0],0.025,building.pink)
 	for station in catalog.stations:
 		var pair: Array = catalog.stations[station]
-		var at := Vector3(float(pair[0]),SUPPLY_Y,float(pair[1]))
+		var at := Vector3(float(pair[0]),supply_y,float(pair[1]))
 		building.box(host,"Socket_"+station,at,Vector3(0.34,0.12,0.34),building.steel,false)
 		# Roof sockets sit on service masts; lower floors hang below the slab.
 		if is_zero_approx(host.position.y):
@@ -267,7 +277,7 @@ func _unfinished_wall(body: Node3D, size: Vector3) -> void:
 		building.box(body,"ExposedStud",at,Vector3(0.045,size.y,0.045),building.steel)
 
 func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
-	var artifact_trial := Source.artifact_trial(building.spec, index, item, trial_id)
+	var artifact_trial := Source.artifact_trial(factory_layout if factory_only else building.spec, index, item, trial_id)
 	if OS.get_environment("VOID_TRACE_ARTIFACTS") == "1": print("VOID_LOAD_BEGIN ", artifact_trial, " / ", item.id)
 	var definition := _definition(str(item.artifact))
 	if definition.is_empty():
@@ -286,6 +296,10 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 	mount.rotation_degrees.y = float(item.facing)
 	mount.set_meta("supply", "ceiling_bus")
 	mount.set_meta("station", item.station)
+	# Explicit exterior installations use the existing support-based boundary.
+	# Falling away from their actual colliders still returns the player.
+	if bool(item.get("config",{}).get("exterior_walk",false)):
+		mount.add_to_group("void_exterior_walk")
 	# A preview floor is disabled, but Jolt soft bodies need a live space while
 	# their initial transforms are submitted. Residency pauses them afterwards.
 	mount.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -293,11 +307,35 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 	var artifact: Node3D
 	if item.artifact == "gridcolorizer" and item.get("config", {}).get("lesson", "") == "addresses":
 		artifact = preload("res://commons/void/colour_address_floor.gd").new()
+	elif item.artifact == "cube_mound_scene" and item.get("config", {}).get("paired_release", false):
+		artifact = preload("res://algorithms/proceduralgeneration/hybrid_complex/cubemound/cube_mound_drop_bay.gd").new()
+		artifact.release = "chute" if item.config.get("release") == "chute" else "sheet"
+		artifact.paired_with = str(item.config.get("paired_with", ""))
+	elif item.artifact == "mirror_cellular_texture_for_3d" and item.get("config", {}).get("stencil_study", false):
+		artifact = preload("res://algorithms/proceduralgeneration/growth_systems/mirroredcellularautomata/mirror_stencil_study.gd").new()
+		artifact.stencil = "octant" if item.config.get("stencil") == "octant" else "quadrant"
+		artifact.paired_with = str(item.config.get("paired_with", ""))
 	else:
 		artifact = packed.instantiate() as Node3D
 	artifact.name = "Artifact"
+	if definition.get("uses_building_capabilities",false) and (not factory_only or factory_target_floor>=0):
+		var capability_floor := factory_target_floor if factory_only else index
+		if not trial_id.is_empty(): capability_floor = Source.spine_floor(str(host.get_meta("map","")))
+		artifact.set_meta("void_capability_floor",capability_floor)
+	if item.artifact == "folding_past" and bool(item.get("config",{}).get("delivery_fold",false)):
+		artifact.set_script(preload("res://commons/void/folding_past_delivery.gd"))
+		for key in item.config:artifact.set_meta("config_"+str(key),item.config[key])
+	if item.artifact == "line_black_box" and bool(item.get("config",{}).get("shaft_room",false)):
+		artifact.set_script(preload("res://commons/void/line_black_box_shaft.gd"))
+		artifact.apply_grid_config(item.config)
 	if item.artifact == "entropy_door_dynamics" and bool(item.get("config",{}).get("void_door_frames",false)):
 		artifact.set_script(preload("res://commons/void/entropy_door_walkthrough.gd"))
+	if item.artifact == "wave_interference_3d" and bool(item.get("config", {}).get("comparison_table", false)):
+		artifact.set_script(preload("res://commons/artifacts/wave_interference_table/wave_interference_table.gd"))
+	if item.artifact == "pendulum_slap" and bool(item.get("config", {}).get("load_study", false)):
+		artifact.set_script(preload("res://algorithms/softbodies/slap_test/pendulum_load_study.gd"))
+	if item.artifact == "cloth_simulation" and bool(item.get("config", {}).get("ease_study", false)):
+		artifact.set_script(preload("res://algorithms/physicssimulation/clothsimulation/cloth_ease_study.gd"))
 	if item.artifact == "mc_cave" and bool(item.get("config", {}).get("threshold_walk", false)):
 		# This placement samples a route-sized field with the CPU marcher so
 		# the walkable boundary is also available without a compute device.
@@ -440,7 +478,7 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 			settings[property] = artifact.get(property)
 		artifact.set_script(load("res://commons/void/strobe_laser_local.gd"))
 		for property in settings: artifact.set(property,settings[property])
-	if item.artifact == "colorballs" and (item.get("config", {}).get("case", "") == "salon" or (artifact_trial == "wavefunctions_02" and not item.get("config", {}).has("case"))):
+	if item.artifact == "colorballs" and (item.get("config", {}).get("case", "") in ["salon", "shaft_playground"] or (artifact_trial == "wavefunctions_02" and not item.get("config", {}).has("case"))):
 		var ball_count: int = artifact.ball_count
 		var spawn_area: Vector3 = artifact.spawn_area_size
 		artifact.set_script(preload("res://commons/void/salon_colorballs.gd"))
@@ -453,6 +491,9 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 	var lines_floor: bool = data.floors[index].map == "Point_Lines"
 	if artifact_trial == "isosurfaces_03" and item.artifact == "iso_specimen_stage":
 		artifact.set_script(preload("res://commons/void/trials/isosurfaces_03/setup_marker.gd"))
+	var noise_comparison: bool = item.artifact == "animated_noise_explorer" and bool(item.get("config", {}).get("noise_comparison", false))
+	if noise_comparison:
+		artifact.set_script(preload("res://commons/void/animated_noise_controls.gd"))
 	if artifact_trial == "shaders_02" and item.artifact == "shader_state_chamber":
 		artifact.set_script(preload("res://commons/void/trials/shaders_02/chamber_mobile.gd"))
 	if artifact_trial == "qfeplaboratory_03" and item.artifact == "chaos_particles":
@@ -513,6 +554,10 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 	elif transformation and "score_provider" in artifact:
 		artifact.score_provider = host.get_node("LessonScore")
 	artifact.scale = Vector3.ONE * float(item.scale)
+	# Shaft panels keep square cells and 45-degree diagonals. Add columns rather
+	# than stretching a ten-cell sheet sideways or raising it through the slab.
+	if item.artifact == "ten_print_maze_3d" and item.get("config",{}).has("shaft_columns"):
+		artifact.grid_width = clampi(int(item.config.shaft_columns), 2, 32)
 	var source_config: Dictionary = item.get("config", {}).duplicate(true)
 	if definition.has("delegate_to"):
 		# Named museum variants are scenes plus their declared presets. Token
@@ -527,7 +572,16 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 		artifact.rotation_degrees.y = float(item.get("config", {}).get("museum_yaw", 0))
 		for key in source_config:
 			artifact.set_meta("config_" + str(key), source_config[key])
-	var before_ready := bool(definition.get("configure_before_ready", false))
+	# Native playgrounds can also be registered directly in the Void catalogue.
+	# Their recipe must be in place before the receiver enters the tree.
+	if artifact.has_method("_load_placement_recipe"):
+		for key in ["playground_recipe","playground_install","transformation_grid","electrical_ground","place_spec","spec"]:
+			if source_config.has(key):artifact.set_meta("config_"+key,source_config[key])
+	var before_ready := noise_comparison or bool(definition.get("configure_before_ready", false))
+	if item.artifact in ["triangle_assembly_table","square_assembly_table"] and source_config.get("case_stock",false):
+		before_ready = true
+	if item.artifact == "stipple_jigsaw" and source_config.has("canvas_size"):
+		before_ready = true
 	if not item.get("interface", {}).is_empty() and "finish" in artifact:
 		# Use the existing kit palette before the original builds its controls.
 		artifact.finish = "rams"
@@ -548,7 +602,8 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 		# Source studies must replace standalone builds before the first frame;
 		# the authored fog preview_grid must cap allocation before _ready.
 		before_ready = true
-	if artifact_trial == "softbodies_02" and item.artifact in ["cloth_straps", "softbody_gallery_part2"]:
+	if (artifact_trial in ["softbodies", "softbodies_02"] and item.artifact == "cloth_straps") \
+			or (artifact_trial == "softbodies_02" and item.artifact == "softbody_gallery_part2"):
 		# Match the museum's pre-ready token config. Avoid building/discarding
 		# live Jolt cloth or an unwanted gallery part during initial loading.
 		before_ready = true
@@ -621,6 +676,10 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 		artifact.scale *= float(item.scale)
 	if not before_ready and artifact.has_method("apply_grid_config") and not source_config.is_empty():
 		artifact.call("apply_grid_config", runtime_config)
+	if not factory_only and source_config.get("noise_service_frame", false):
+		var layout: Dictionary = building.spec
+		var ceiling := float(layout.storey_height) - float(layout.slab_thickness)
+		preload("res://commons/void/noise_instrument_mount.gd").dress(artifact, str(item.artifact), float(layout.levels[index]), ceiling)
 	if artifact_trial in ["randomness_02", "randomness_04", "randomness_05"]:
 		# These source tokens include their museum glass enclosure/compact
 		# console. Reuse the original furnishing adapter, not just its metadata.
@@ -701,12 +760,15 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 		illumination.name = "PickupIllumination"
 		artifact.point.add_child(illumination)
 	for body in artifact.find_children("*","CollisionObject3D",true,false):
-		if body.get_meta("void_floor_surface",false): body.set_meta("void_floor_index",index)
+		if body.get_meta("void_floor_surface",false): body.set_meta("void_floor_index",factory_target_floor if factory_only and factory_target_floor>=0 else index)
 	if item.artifact == "CoordinateSystem3M":
 		var point: Node3D = artifact._find_point()
 		if point != null: point.origin_point = artifact.global_position
 	_fade_lights(artifact, index)
+	if source_config.has("display_pickup"):
+		preload("res://commons/void/primitive_pickup.gd").dress(artifact, str(source_config.display_pickup))
 	exhibits["%d/%s" % [index, item.id]] = mount
+	if factory_only:return
 	if OS.get_environment("VOID_TRACE_ARTIFACTS") == "1": print("VOID_LOAD_END ", artifact_trial, " / ", item.id)
 	# Retrofitted instruments carry their own rigid supply and structural mount.
 	if artifact.has_node("ArchitecturalHardware/HardwareSupply") or artifact.get_meta("mounted_interface",false): return
@@ -714,15 +776,17 @@ func _build_artifact(host: Node3D, index: int, item: Dictionary) -> void:
 	# Passive construction solids (including copied Polyhedra shaft barriers)
 	# need no electrical feed or instrument support rods.
 	if artifact.has_meta("construction_definition"): return
+	if not bool(source_config.get("tower_services", true)): return
 	if index == 0 or building.abstract_floor(index): return
 	if bool(data.floors[index].get("supply_leads",true)):
+		var supply_y := float(data.floors[index].get("supply_height",SUPPLY_Y))
 		var lead := Node3D.new()
 		lead.name = "Lead_" + str(item.id)
 		lead.set_meta("station",item.station)
 		host.add_child(lead)
-		var socket := Vector3(float(pair[0]),SUPPLY_Y,float(pair[1]))
-		var elbow := Vector3(float(at[0]),SUPPLY_Y,float(pair[1]))
-		var end := Vector3(float(at[0]),SUPPLY_Y,float(at[1]))
+		var socket := Vector3(float(pair[0]),supply_y,float(pair[1]))
+		var elbow := Vector3(float(at[0]),supply_y,float(pair[1]))
+		var end := Vector3(float(at[0]),supply_y,float(at[1]))
 		if socket.distance_to(elbow)>0.01: building.pipe(lead,"Across",socket,elbow,0.018,building.pink)
 		if elbow.distance_to(end)>0.01: building.pipe(lead,"Along",elbow,end,0.018,building.pink)
 		# Groups share a ceiling distribution box; there is no decorative cord to the floor.

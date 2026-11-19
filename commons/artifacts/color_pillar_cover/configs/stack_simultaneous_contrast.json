@@ -1,0 +1,39 @@
+{
+  "id": "stack_simultaneous_contrast",
+  "notes": "Simultaneous contrast study: same gray sphere reads warm/cool against different surrounds. Three identical neutral cores in red/blue/yellow contexts.",
+  "layout": "vertical_stack",
+  "palette": "color_pedagogy",
+  "base_scale": 0.2,
+  "sequence": [
+    {
+      "shape": "cube",
+      "color": "#a02020",
+      "scale": 1.3
+    },
+    {
+      "shape": "sphere",
+      "color": "#888888",
+      "scale": 0.6
+    },
+    {
+      "shape": "cube",
+      "color": "#1844a0",
+      "scale": 1.3
+    },
+    {
+      "shape": "sphere",
+      "color": "#888888",
+      "scale": 0.6
+    },
+    {
+      "shape": "cube",
+      "color": "#f0c020",
+      "scale": 1.3
+    },
+    {
+      "shape": "sphere",
+      "color": "#888888",
+      "scale": 0.6
+    }
+  ]
+}

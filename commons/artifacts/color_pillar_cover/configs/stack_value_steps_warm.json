@@ -1,0 +1,34 @@
+{
+  "id": "stack_value_steps_warm",
+  "notes": "Five-step value scale, warm hue. Constant chroma, only value changes \u2014 the brightness ladder isolated.",
+  "layout": "vertical_stack",
+  "palette": "color_pedagogy",
+  "base_scale": 0.22,
+  "sequence": [
+    {
+      "shape": "cube",
+      "color": "#3a1808",
+      "scale": 1.1
+    },
+    {
+      "shape": "cube",
+      "color": "#7a3a18",
+      "scale": 1.0
+    },
+    {
+      "shape": "cube",
+      "color": "#c06840",
+      "scale": 0.9
+    },
+    {
+      "shape": "cube",
+      "color": "#e8a878",
+      "scale": 0.8
+    },
+    {
+      "shape": "cube",
+      "color": "#f8d8b8",
+      "scale": 0.7
+    }
+  ]
+}

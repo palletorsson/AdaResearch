@@ -1,0 +1,29 @@
+{
+  "id": "stack_analogous_warm",
+  "notes": "Analogous warm: red, red-orange, orange, yellow-orange. Hues that sit next to each other on the wheel \u2014 quiet, not conflicting.",
+  "layout": "vertical_stack",
+  "palette": "color_pedagogy",
+  "base_scale": 0.25,
+  "sequence": [
+    {
+      "shape": "cube",
+      "color": "#a02020",
+      "scale": 1.2
+    },
+    {
+      "shape": "sphere",
+      "color": "#c84020",
+      "scale": 1.0
+    },
+    {
+      "shape": "cuboid",
+      "color": "#e87018",
+      "scale": 1.0
+    },
+    {
+      "shape": "sphere",
+      "color": "#f0a830",
+      "scale": 0.8
+    }
+  ]
+}

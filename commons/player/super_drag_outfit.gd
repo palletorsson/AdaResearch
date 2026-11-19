@@ -17,6 +17,8 @@ var growth_enabled: bool = false
 var _growth_amount: float = 0.0
 var _growth_tween: Tween
 var _growth_trims: Array[Dictionary] = []
+var dance_mode: String = ""
+var dance_beat: float = 0.0
 const SKIRT_WAIST := -0.515
 
 
@@ -107,18 +109,76 @@ func dress(id: String) -> bool:
 	return true
 
 func follow(head: Node3D, left: Node3D, right: Node3D) -> void:
+	var dancing: bool = not dance_mode.is_empty()
+	if dancing:
+		var sway := sin(dance_beat * PI)
+		var bounce := absf(sin(dance_beat * PI))
+		rotation.z = sway * 0.085
+		rotation.y = sway * 0.14
+		position.y = bounce * 0.045
+	else:
+		rotation.z = 0.0
+		rotation.y = 0.0
+		position.y = 0.0
 	if is_instance_valid(headpiece) and is_instance_valid(head):
 		headpiece.global_transform = head.global_transform
+		if dancing:
+			var nod := sin(dance_beat * TAU) * 0.12
+			var tilt := sin(dance_beat * PI) * 0.14
+			headpiece.rotate_object_local(Vector3.RIGHT, nod)
+			headpiece.rotate_object_local(Vector3.FORWARD, tilt)
 	for i in range(sleeves.size()):
 		var side := -1.0 if i == 0 else 1.0
 		var hand: Node3D = left if i == 0 else right
 		var start := Vector3(side * 0.24, -0.20, 0)
-		var end := to_local(hand.global_position) if is_instance_valid(hand) else Vector3(side * 0.32, -0.67, -0.10)
+		var tracked_hand := is_instance_valid(hand) and (not (hand is XRController3D) or (hand as XRController3D).get_is_active())
+		var end := to_local(hand.global_position) if tracked_hand else Vector3(side * 0.32, -0.67, -0.10)
+		if dancing and not tracked_hand:
+			end = _dance_hand_target(dance_mode, side, dance_beat)
 		var direction := end - start
 		sleeves[i].position = (start + end) * 0.5
 		sleeves[i].quaternion = Quaternion(Vector3.UP, direction.normalized()) if direction.length() > 0.001 else Quaternion.IDENTITY
 		sleeves[i].scale = Vector3(1, maxf(0.001, direction.length()), 1)
 		gloves[i].position = end
+
+
+func _dance_hand_target(mode: String, side: float, beat: float) -> Vector3:
+	match mode:
+		"fever":
+			if side > 0.0:
+				var up_t := 0.5 + 0.5 * sin(beat * PI)
+				var low_pt := Vector3(-0.12, -0.58, -0.28)
+				var high_pt := Vector3(0.56, 0.36, -0.18)
+				return low_pt.lerp(high_pt, up_t)
+			else:
+				return Vector3(-0.36, -0.52 + sin(beat * TAU) * 0.04, -0.05)
+		"hustle":
+			var wave := sin(beat * PI + (0.0 if side > 0.0 else PI))
+			return Vector3(side * (0.48 + 0.10 * cos(beat * PI)), 0.16 + wave * 0.24, -0.18 - absf(wave) * 0.10)
+		"vogue":
+			var step_idx: int = int(floorf(beat * 0.5)) % 4
+			if side > 0.0:
+				var poses: Array[Vector3] = [
+					Vector3(0.24, 0.30, -0.20),
+					Vector3(0.54, 0.08, -0.22),
+					Vector3(-0.08, 0.18, -0.28),
+					Vector3(0.42, -0.32, -0.24),
+				]
+				return poses[step_idx]
+			else:
+				var poses: Array[Vector3] = [
+					Vector3(-0.48, -0.04, -0.20),
+					Vector3(-0.24, 0.30, -0.20),
+					Vector3(-0.42, -0.36, -0.22),
+					Vector3(0.08, 0.18, -0.28),
+				]
+				return poses[step_idx]
+		"robot":
+			var q: float = floorf(beat * 2.0) * 0.5
+			var s: float = signf(sin(q * PI + (0.0 if side > 0.0 else PI * 0.5)))
+			return Vector3(side * (0.46 if int(floorf(beat)) % 2 == 0 else 0.22), -0.06 + s * 0.34, -0.28)
+		_:
+			return Vector3(side * 0.32, -0.67, -0.10)
 
 func _cone(parent: Node3D, label: String, pos: Vector3, top: float, bottom: float, height: float, mat: Material) -> MeshInstance3D:
 	var shape := CylinderMesh.new()

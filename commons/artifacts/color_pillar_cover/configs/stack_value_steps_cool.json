@@ -1,0 +1,34 @@
+{
+  "id": "stack_value_steps_cool",
+  "notes": "Five-step value scale, cool hue. Mirror of the warm scale \u2014 pair them to feel temperature.",
+  "layout": "vertical_stack",
+  "palette": "color_pedagogy",
+  "base_scale": 0.22,
+  "sequence": [
+    {
+      "shape": "cuboid",
+      "color": "#0a1830",
+      "scale": 1.1
+    },
+    {
+      "shape": "cuboid",
+      "color": "#1c3868",
+      "scale": 1.0
+    },
+    {
+      "shape": "cuboid",
+      "color": "#4070a8",
+      "scale": 0.9
+    },
+    {
+      "shape": "cuboid",
+      "color": "#80a8d0",
+      "scale": 0.8
+    },
+    {
+      "shape": "cuboid",
+      "color": "#c0d8ec",
+      "scale": 0.7
+    }
+  ]
+}

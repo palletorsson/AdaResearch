@@ -1,0 +1,29 @@
+{
+  "id": "stack_complementary_red_green",
+  "notes": "Itten complementary: Red <-> Green totem. Adjacent extremes intensify each other.",
+  "layout": "vertical_stack",
+  "palette": "color_pedagogy",
+  "base_scale": 0.25,
+  "sequence": [
+    {
+      "shape": "cube",
+      "color": "#a02020",
+      "scale": 1.4
+    },
+    {
+      "shape": "sphere",
+      "color": "#2aa040",
+      "scale": 1.2
+    },
+    {
+      "shape": "cube",
+      "color": "#a02020",
+      "scale": 1.0
+    },
+    {
+      "shape": "sphere",
+      "color": "#2aa040",
+      "scale": 0.8
+    }
+  ]
+}
