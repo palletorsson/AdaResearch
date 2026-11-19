@@ -97,7 +97,7 @@ Asked on Point_Zero: *What wakes the next one?* (a proposed third line for the o
 > Almost is a distance. One change can be enough.  
 > A silent cell is still a place.  
 
-Kept apart from the floor songs, so that it is heard as what she remembers: the same notes each time, slower, so the one changed word stands out. Shown as a kept list in which the earlier wording stays visible, struck through, under the corrected line. A rest before the last line. A proposal: nothing of this is built or heard.
+The whole list stays visible and the voice sings only what is new: the line a movement adds, and a line it corrects. In the manuscript the lines she remembers without singing stand in brackets. The earlier wording of a corrected line stays visible, struck through. A rest before the last line. A proposal: nothing of this is built or heard.
 
 ### Primitives (floors 0 to 12)
 
@@ -175,7 +175,7 @@ Kept apart from the floor songs, so that it is heard as what she remembers: the 
 - Discovers: Three edges close round an open middle. A face laid in it is the first surface, and two faces share an edge they can fold along.
 - Touches: Three edges / an open middle · Draw a face · The shared diagonal
 
-> Three edges close. The gap in the middle stays.  
+> Three edges close round a gap. Again a place with nothing in it.  
 > Draw across it. A face.  
 > Two faces share one edge.  
 
@@ -203,9 +203,9 @@ Kept apart from the floor songs, so that it is heard as what she remembers: the 
 
 > One corner, two folds.  
 > Six faces laid flat. Fold. A cube again.  
-> The copies wait for a relation.  
+> Boxes in columns, all alike. One can be carried to the table.  
 
-- Lines: One cube, two folds: new; there now: "The same corner makes two folds." · Unfold and return: new; there now: "Each return leaves something behind." · The copies wait for a relation: the line already there, kept
+- Lines: One cube, two folds: new; there now: "The same corner makes two folds." · Unfold and return: new; there now: "Each return leaves something behind." · The copies wait for a relation: new; there now: "The copies wait for a relation."
 - Keeps from the song before: **face**
 - Hands on: Taken apart and put back, a thing is known better. Its copies are parts.
 - Later, in Service (Residue, chapters 4 and 12): Beds made with hospital corners every morning, slept in or not, and one bed remade by another hand with its fold two short of the nurse's own.
@@ -243,7 +243,7 @@ Kept apart from the floor songs, so that it is heard as what she remembers: the 
 
 > A letter becomes a space.  
 > The outline leads a ball.  
-> Same rule. A body with no name yet.  
+> A profile, turned. Pores, feet, bristles. One body, five rules.  
 
 - Lines: A letter becomes a space: new; there now: "A letter can become a space." · Let the outline guide a ball: new; there now: "A little mark can ask for room to move." · An unfamiliar body from a familiar rule: new; there now: "What I can reach can change what I become."
 - Keeps from the song before: **outline**
@@ -375,7 +375,7 @@ Kept apart from the floor songs, so that it is heard as what she remembers: the 
 - Discovers: This boundary keeps its own clock. An opening can move or change width, and the two together offer a moment where there was a place.
 - Touches: Move the opening, change its width / The opening has its own time · Three operations make a moment / For a moment, enough room · The whole solid travels / It goes on without me
 
-> This opening keeps its own time.  
+> An opening again. This one keeps its own time.  
 > For a moment, enough room.  
 > The block travels on. Learn the pause.  
 
@@ -389,7 +389,7 @@ Kept apart from the floor songs, so that it is heard as what she remembers: the 
 - Touches: A route made from changes / One movement leads to another · Make another way through / We can arrange it otherwise
 
 > A pause, a passage. One movement leads to the next.  
-> The parts allow another way across.  
+> A worker on six legs carries a deck. Another way across is being built.  
 
 - Lines: A route made from changes: new; there now: "A pause can become a passage." · Make another way through: new; there now: "We can build another way across."
 - Keeps from the song before: **pause**
@@ -419,13 +419,14 @@ Kept apart from the floor songs, so that it is heard as what she remembers: the 
 **23 · Array** (organization, space)
 - Takes: A condition that withdrew support.
 - Discovers: An address is not what occupies it. The tile can go and the place remain, in a row, a plane and a volume.
-- Touches: Movement does not erase an address / It moves, I can still name it · The hand chooses an index / A gesture becomes an address · An address gains depth / There is a place behind this place
+- Touches: A place can remain empty / The place is still here · Movement does not erase an address / It moves, I can still name it · The hand chooses an index / A gesture becomes an address · An address gains depth / There is a place behind this place
 
+> An empty place again. This one has a number.  
 > Moved, and still named.  
 > A square goes missing. The address stays.  
 > Behind this place, another place.  
 
-- Lines: Movement does not erase an address: new; there now: "A place repeats and leaves a space between." · The hand chooses an index: accepted on the desk, card array-address · An address gains depth: new; there now: "A place repeats and leaves a space between."
+- Lines: A place can remain empty: new; there now: "A simple piece can hold another world." · Movement does not erase an address: new; there now: "A place repeats and leaves a space between." · The hand chooses an index: accepted on the desk, card array-address · An address gains depth: new; there now: "A place repeats and leaves a space between."
 - Keeps from the song before: **still**
 - Hands on: Name the place apart from what stands in it. Then a thing can be lost and put back.
 - Later, in Service (Residue, chapter 4; Pending, chapter 15): An identity band correct in form and blank in name; a bed that is not empty at the hour the form calls empty; a box left empty because an empty box is accurate.
@@ -437,7 +438,7 @@ Kept apart from the floor songs, so that it is heard as what she remembers: the 
 
 > Inside the address now. Count from within.  
 > Same places. Another way to leave them open.  
-> The grid seems to hold a weight.  
+> Three stones to a rod, and the rods are thin. Nothing sags. Is it weight?  
 
 - Lines: Read the volume from within: new; there now: "Each copy has a place within the whole." · Several structures from one vocabulary: new; there now: "I find a place that wants to be a body." · A grid seems to hold a weight: new; there now: "A place repeats and leaves a space between."
 - Keeps from the song before: **place**
@@ -462,7 +463,7 @@ Kept apart from the floor songs, so that it is heard as what she remembers: the 
 
 > Step back. The rule stays.  
 > A different tile is not an opening.  
-> Six places, another arrangement.  
+> Six addresses, another arrangement.  
 
 - Lines: The pattern meets the eye: new; there now: "Each copy has a place within the whole." · A different tile is not an opening: new; there now: "Each copy has a place within the whole." · The same addresses receive a recipe: new; there now: "I can make a whole that was not here before."
 - Keeps from the song before: **tile**
@@ -474,11 +475,11 @@ Kept apart from the floor songs, so that it is heard as what she remembers: the 
 - Touches: A phase passes through the floor / The next moment has an address · A silent cell is still a place / Silence has a position · Two clocks meet / We meet, then drift apart
 
 > The next moment has an address.  
-> A silent cell is still a place.  
+> This cell is silent.  
 > Two clocks meet, then drift apart.  
 
 - Lines: A phase passes through the floor: new; there now: "I come around and find another way." · A silent cell is still a place: new; there now: "A place repeats and leaves a space between." · Two clocks meet: new; there now: "The world was moving long before I came."
-- Keeps from the song before: **place**
+- Keeps from the song before: **address**
 - Hands on: What is quiet is not missing. A silent one still has its place.
 - Later, in Service (Residue, chapters 2 and 4; Threshold, chapter 2): She says nothing at any post, and each keeper makes a place for her all the same: a seat in the lobby, a chair brought to the door.
 

@@ -498,7 +498,14 @@
           "text": "Hold still. A little wider. A little wider.",
           "status": "reviewed",
           "card": "bubble-brush",
-          "there_now": "Here, my waiting takes up space."
+          "there_now": "Here, my waiting takes up space.",
+          "layout": [
+           "Hold still.",
+           "",
+           "A little wider.",
+           "A little wider.",
+           ""
+          ]
          },
          {
           "at": "trajectory-04-04",
@@ -541,7 +548,7 @@
         "lines": [
          {
           "at": "trajectory-05-01",
-          "text": "Three edges close. The gap in the middle stays.",
+          "text": "Three edges close round a gap. Again a place with nothing in it.",
           "status": "new",
           "there_now": "The edges close. I still see through."
          },
@@ -646,8 +653,10 @@
          },
          {
           "at": "trajectory-07-04",
-          "text": "The copies wait for a relation.",
-          "status": "kept"
+          "text": "Boxes in columns, all alike. One can be carried to the table.",
+          "status": "new",
+          "there_now": "The copies wait for a relation.",
+          "seen": "commons/void/primitive_hall.gd: prefab_box_library with a worktable and a column pitch; the floor reads A NET CLOSES. A BOX CAN BE CARRIED."
          }
         ],
         "hands_on": "Taken apart and put back, a thing is known better. Its copies are parts.",
@@ -786,9 +795,10 @@
          },
          {
           "at": "trajectory-10-04",
-          "text": "Same rule. A body with no name yet.",
+          "text": "A profile, turned. Pores, feet, bristles. One body, five rules.",
           "status": "new",
-          "there_now": "What I can reach can change what I become."
+          "there_now": "What I can reach can change what I become.",
+          "seen": "commons/artifacts/cyrtoid_by_rule/cyrtoid_by_rule.gd: five rules in a row (profile, turned, pored, footed, bristled); the floor places the last stage. The row is marked keep-or-remove in rooms.json."
          }
         ],
         "hands_on": "A sign can be entered. A known rule can make an unknown thing.",
@@ -1235,7 +1245,7 @@
         "lines": [
          {
           "at": "draft-trans_pit-1",
-          "text": "This opening keeps its own time.",
+          "text": "An opening again. This one keeps its own time.",
           "status": "new",
           "there_now": "An opening changes where my body goes."
          },
@@ -1284,9 +1294,10 @@
          },
          {
           "at": "draft-trans_playground-2",
-          "text": "The parts allow another way across.",
+          "text": "A worker on six legs carries a deck. Another way across is being built.",
           "status": "new",
-          "there_now": "We can build another way across."
+          "there_now": "We can build another way across.",
+          "seen": "commons/artifacts/registry/construction_robot.json and rooms.json (job playground): a six-legged worker builds a walkable route from joints, rods, decks and ramps."
          }
         ],
         "hands_on": "A course that was laid can be laid differently. The parts are the same parts.",
@@ -1340,7 +1351,12 @@
           "at": "draft-logic_event-3",
           "text": "One change. Just enough to wake it.",
           "status": "new",
-          "there_now": "An opening changes where my body goes."
+          "there_now": "An opening changes where my body goes.",
+          "layout": [
+           "",
+           "One change.",
+           "Just enough to wake it."
+          ]
          }
         ],
         "hands_on": "Then is not if. Find the one condition a result hangs on.",
@@ -1364,6 +1380,10 @@
        "discovers": "An address is not what occupies it. The tile can go and the place remain, in a row, a plane and a volume.",
        "touches": [
         {
+         "id": "draft-array-1",
+         "title": "A place can remain empty / The place is still here"
+        },
+        {
          "id": "draft-array-2",
          "title": "Movement does not erase an address / It moves, I can still name it"
         },
@@ -1378,6 +1398,13 @@
        ],
        "song": {
         "lines": [
+         {
+          "at": "draft-array-1",
+          "text": "An empty place again. This one has a number.",
+          "status": "new",
+          "there_now": "A simple piece can hold another world.",
+          "seen": "rooms.json: row_3_x, 32 addresses along one axis."
+         },
          {
           "at": "draft-array-2",
           "text": "Moved, and still named.",
@@ -1443,9 +1470,10 @@
          },
          {
           "at": "draft-tutorial_3d-3",
-          "text": "The grid seems to hold a weight.",
+          "text": "Three stones to a rod, and the rods are thin. Nothing sags. Is it weight?",
           "status": "new",
-          "there_now": "A place repeats and leaves a space between."
+          "there_now": "A place repeats and leaves a space between.",
+          "seen": "commons/artifacts/reference_studies/suspension.gd: 25 thin rods on a 5 x 5 grid, three stone fragments on each, a thin overhead support, no falling simulation; plaque A PLACE STILL HELD."
          }
         ],
         "hands_on": "From inside, agree first on which way the counting runs.",
@@ -1527,7 +1555,7 @@
          },
          {
           "at": "draft-tutorial_tiling_walls-3",
-          "text": "Six places, another arrangement.",
+          "text": "Six addresses, another arrangement.",
           "status": "new",
           "there_now": "I can make a whole that was not here before."
          }
@@ -1568,7 +1596,7 @@
          },
          {
           "at": "draft-tutorial_disco-2",
-          "text": "A silent cell is still a place.",
+          "text": "This cell is silent.",
           "status": "new",
           "there_now": "A place repeats and leaves a space between."
          },
@@ -1580,7 +1608,7 @@
          }
         ],
         "hands_on": "What is quiet is not missing. A silent one still has its place.",
-        "keeps": "place",
+        "keeps": "address",
         "echo": {
          "where": "Residue, chapters 2 and 4; Threshold, chapter 2",
          "text": "She says nothing at any post, and each keeper makes a place for her all the same: a seat in the lobby, a chair brought to the door."
@@ -1623,7 +1651,7 @@
       "pause": true
      }
     ],
-    "delivery": "Kept apart from the floor songs, so that it is heard as what she remembers: the same notes each time, slower, so the one changed word stands out. Shown as a kept list in which the earlier wording stays visible, struck through, under the corrected line. A rest before the last line. A proposal: nothing of this is built or heard."
+    "delivery": "The whole list stays visible and the voice sings only what is new: the line a movement adds, and a line it corrects. In the manuscript the lines she remembers without singing stand in brackets. The earlier wording of a corrected line stays visible, struck through. A rest before the last line. A proposal: nothing of this is built or heard."
    }
   },
   {

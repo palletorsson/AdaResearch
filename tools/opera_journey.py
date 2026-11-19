@@ -79,6 +79,9 @@ def check(journey, outline, sequences):
             said = PRONOUNS & set(re.findall(r"[a-z']+", words.lower()))
             if said:
                 found.append('%s: a discovery song without a personal pronoun; it says %s' % (stop['map'], ', '.join(sorted(said))))
+            for line in song['lines']:
+                if line.get('layout') and ' '.join(line['layout']).split() != line['text'].split():
+                    found.append('%s: a line\'s layout does not hold the line\'s words' % stop['map'])
             if not song.get('hands_on'):
                 found.append('%s: the song hands nothing on' % stop['map'])
             if at and row[at - 1].get('song'):
@@ -201,7 +204,9 @@ def manuscript(journey):
             out += ['', seq['title'].upper(), '']
             for stop in seq['stops']:
                 out += ['%d. %s' % (floor[stop['map']], stop['map'].replace('_', ' '))]
-                out += [line['text'] for line in stop['song']['lines']] + ['']
+                for line in stop['song']['lines']:
+                    out += line.get('layout') or [line['text']]
+                out += [''] if out[-1] else []
                 if carry and stop['map'] == carry['asked_at']['map']:
                     out += ['        ' + carry['asked_at']['line'], '']
             if carry:
@@ -211,7 +216,9 @@ def manuscript(journey):
                         continue
                     # A gathered line may be corrected by a later movement; the manuscript sings the latest wording.
                     text = ([line['text']] + [r['text'] for r in line.get('revised', []) if r['after'] in gathered])[-1]
-                    out += ([''] if line.get('pause') else []) + ['        ' + text]
+                    # She sings what this movement adds or corrects; what she only remembers stands in brackets.
+                    sung = line['from'] == seq['id'] or any(r['after'] == seq['id'] for r in line.get('revised', []))
+                    out += ([''] if line.get('pause') else []) + ['        ' + (text if sung else '(%s)' % text)]
                 out += ['']
         out += ['']
     return '\n'.join(out).rstrip() + '\n'
