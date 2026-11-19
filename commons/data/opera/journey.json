@@ -1,0 +1,4595 @@
+{
+ "version": 1,
+ "premise": {
+  "by": "Palle",
+  "date": "19 November 2026",
+  "text": "The songs should be read as one coherent journey, the story of discovering what forms are possible, what topologies, what spaces, bodies, organizational structures and their edges."
+ },
+ "about": "The whole tower as one story, kept abstract: eight acts, one movement for each spine sequence, one stop for each floor. A stop says what it takes from the stop before and what it discovers, names which of the six words it is about, and touches two or more entries of the trajectory outline in the order the outline gives them. It is a frame for the songs and not their text: a lyric is still written from the player's view of the floor, and checked there. Nothing here was heard or walked for this document; every stop is read from the floor's intent and its outline entries.",
+ "six": {
+  "form": "what can stand, from a point to a family grown from a recipe",
+  "topology": "what is open, closed or connected: gaps, holes, necks, a way back",
+  "space": "where things are: references, addresses, fields, rooms",
+  "body": "what has width and weight, and has to fit, stand, cross and return",
+  "organization": "how many become one arrangement: rules, neighbours, counts, scores",
+  "edge": "where a form, a rule or a record can say no more"
+ },
+ "words": [
+  {
+   "word": "here",
+   "line": "The first word, on the roof. It comes back as an address, as a cell that is still a place when it is silent, and near the bottom of the tower as the origin the first point needed.",
+   "stops": [
+    {
+     "map": "Point_Zero",
+     "id": "trajectory-00-04",
+     "title": "Roof letters / a world already named"
+    },
+    {
+     "map": "Point_One",
+     "id": "trajectory-01-01",
+     "title": "A place named / I began as a pixel"
+    },
+    {
+     "map": "Array",
+     "id": "draft-array-2",
+     "title": "Movement does not erase an address / It moves, I can still name it"
+    },
+    {
+     "map": "Tutorial_Disco",
+     "id": "draft-tutorial_disco-2",
+     "title": "A silent cell is still a place / Silence has a position"
+    },
+    {
+     "map": "Noise_Perlin_Simplex",
+     "id": "spine-noise_perlin_simplex-1",
+     "title": "One address, two fields / shared sampling console and walk-through arches / What counts as the same?"
+    },
+    {
+     "map": "CA_BeyondBinary",
+     "id": "spine-ca_beyondbinary-1",
+     "title": "game of life petri / A pattern visits a place"
+    },
+    {
+     "map": "Crisis_Synthesis",
+     "id": "badge-85512cc32c861002",
+     "title": "A POINT NEEDED AN ORIGIN"
+    },
+    {
+     "map": "Playground_PrincipalPlaces",
+     "id": "spine-playground_principalplaces-1",
+     "title": "principal places / A place to try another arrangement"
+    }
+   ]
+  },
+  {
+   "word": "gap",
+   "line": "What is left open: a gap in a trace, the gap that stays however small it gets, the reach that almost arrives, an empty place in a row, a hole that becomes a place, a negative large enough to live in, and what a record leaves out.",
+   "stops": [
+    {
+     "map": "Point_Trace",
+     "id": "trajectory-04-01",
+     "title": "Leave a gap"
+    },
+    {
+     "map": "Primitives_Portals",
+     "id": "trajectory-11-03",
+     "title": "A smaller gap is still a gap"
+    },
+    {
+     "map": "Logic_Event",
+     "id": "draft-logic_event-2",
+     "title": "Almost reaches / Almost is still a distance"
+    },
+    {
+     "map": "Array",
+     "id": "draft-array-1",
+     "title": "A place can remain empty / The place is still here"
+    },
+    {
+     "map": "Fractal_MengerSponge",
+     "id": "spine-fractal_mengersponge-1",
+     "title": "menger sponge / A hole becomes a place"
+    },
+    {
+     "map": "Boolean_Works",
+     "id": "spine-boolean_works-1",
+     "title": "csg compose workbench / When the negative gets big"
+    },
+    {
+     "map": "PostCrisis_Synthesis",
+     "id": "badge-23e5b5df88e4ecbb",
+     "title": "LEAVES OUT"
+    }
+   ]
+  },
+  {
+   "word": "trace",
+   "line": "What a body leaves: a bend, a deposit of paint, the past of a swing, a trail the walker ignores and a trail another walker follows, and at the end a ledger.",
+   "stops": [
+    {
+     "map": "Point_Trace",
+     "id": "trajectory-04-02",
+     "title": "Leave a bend"
+    },
+    {
+     "map": "Color_Paint",
+     "id": "draft-color_paint-1",
+     "title": "A painting is already underway / The surface had other business"
+    },
+    {
+     "map": "WaveFunctions_Pendulum",
+     "id": "spine-wavefunctions_pendulum-1",
+     "title": "PendulumWave / Where a swing leaves its past"
+    },
+    {
+     "map": "Random_Walk",
+     "id": "spine-random_walk-1",
+     "title": "random walk terrarium / The trail is already elsewhere"
+    },
+    {
+     "map": "Random_Pheromone",
+     "id": "spine-random_pheromone-1",
+     "title": "scent trail ground / A path recruits another visit"
+    },
+    {
+     "map": "SwarmIntelligence_PhysarumColony",
+     "id": "spine-swarmintelligence_physarumcolony-1",
+     "title": "physarum trace gallery / Remembering in the ground"
+    },
+    {
+     "map": "SwarmIntelligence_Ant_Colony_Optimization",
+     "id": "spine-swarmintelligence_ant_colony_optimization-1",
+     "title": "ant colony walk / Directions left for someone else"
+    },
+    {
+     "map": "PostCrisis_Synthesis",
+     "id": "spine-postcrisis_synthesis-2",
+     "title": "accountability ledger"
+    }
+   ]
+  },
+  {
+   "word": "room",
+   "line": "What a body needs. A route needs it, a connection has to give it, another delivery asks for it, and a distinction can lose it.",
+   "stops": [
+    {
+     "map": "Trans_Body",
+     "id": "draft-trans_body-2",
+     "title": "Room appears between the blocks / Near me, there is room"
+    },
+    {
+     "map": "PG_Caves_Mazes",
+     "id": "spine-pg_caves_mazes-1",
+     "title": "caverandomwalk / A route needs room"
+    },
+    {
+     "map": "ISO_RhizomeBody",
+     "id": "spine-iso_rhizomebody-1",
+     "title": "rhizome inside / A connection has to fit a body"
+    },
+    {
+     "map": "GT_Flow",
+     "id": "spine-gt_flow-1",
+     "title": "graph worlds / Room for another"
+    },
+    {
+     "map": "GT_Matching",
+     "id": "spine-gt_matching-1",
+     "title": "matching workshop / Room for two"
+    },
+    {
+     "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+     "id": "spine-criticalalgorithms_algorithmic_bias_visualization-1",
+     "title": "bias from inside / Less room for a distinction"
+    },
+    {
+     "map": "SpeculativeComputation_Rhizome_Network",
+     "id": "spine-speculativecomputation_rhizome_network-1",
+     "title": "rhizome grower / A connection I can inhabit"
+    }
+   ]
+  },
+  {
+   "word": "according to",
+   "line": "Who decides: a reference, a criterion, a score, a measure, a predictor. Each time a verdict is met, the question is whose it is.",
+   "stops": [
+    {
+     "map": "Point_Coordinates",
+     "id": "trajectory-02-02",
+     "title": "Name the reference"
+    },
+    {
+     "map": "FormFinding_Forge",
+     "id": "spine-formfinding_forge-1",
+     "title": "balance puzzle / A shape that counts"
+    },
+    {
+     "map": "PG_Genetic_Evolution",
+     "id": "spine-pg_genetic_evolution-1",
+     "title": "GeneticProgramming / What does the score notice?"
+    },
+    {
+     "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+     "id": "spine-swarmintelligence_particle_swarm_optimization-1",
+     "title": "particle swarm walk / Better according to which score?"
+    },
+    {
+     "map": "GT_Network_Analysis",
+     "id": "spine-gt_network_analysis-1",
+     "title": "evidence network / Important by which measure?"
+    },
+    {
+     "map": "QFEP_F_Term",
+     "id": "spine-qfep_f_term-1",
+     "title": "shannon workbench / Predictable according to whom?"
+    },
+    {
+     "map": "QFEP_Synthesis",
+     "id": "spine-qfep_synthesis-1",
+     "title": "queer morphology specimen / What should this body keep?"
+    }
+   ]
+  }
+ ],
+ "acts": [
+  {
+   "id": "I",
+   "title": "A place, and what can stand in it",
+   "line": "Forms. From the word here on a roof to a grid where every place has a number: points, edges, faces and solids, what stays the same when a form is moved, turned or grown, the first condition and the first address.",
+   "sequences": [
+    {
+     "id": "primitives",
+     "title": "Primitives",
+     "movement": "From a word on a roof to parts that can be put together another way.",
+     "stops": [
+      {
+       "map": "Point_Zero",
+       "finds": [
+        "space"
+       ],
+       "carries": "Nothing yet. The crate opens on a world that is already running.",
+       "discovers": "A place can be named and counted before anyone arrives in it. The first thing met is the word here.",
+       "touches": [
+        {
+         "id": "trajectory-00-01",
+         "title": "Arrival crate / break into the world"
+        },
+        {
+         "id": "trajectory-00-02",
+         "title": "The frame counter / already running"
+        },
+        {
+         "id": "trajectory-00-04",
+         "title": "Roof letters / a world already named"
+        }
+       ]
+      },
+      {
+       "map": "Point_One",
+       "finds": [
+        "form"
+       ],
+       "carries": "The word here, from the roof.",
+       "discovers": "One point can be an absence, a surface or a solid, and the empty place still gets a lamp.",
+       "touches": [
+        {
+         "id": "trajectory-01-01",
+         "title": "A place named / I began as a pixel"
+        },
+        {
+         "id": "trajectory-01-03",
+         "title": "The same shape answers differently / Three points"
+        },
+        {
+         "id": "trajectory-01-04",
+         "title": "A light for the empty place / Even the absence has a lamp"
+        }
+       ]
+      },
+      {
+       "map": "Point_Coordinates",
+       "finds": [
+        "space"
+       ],
+       "carries": "A point that can be empty or solid.",
+       "discovers": "A point has no position until a reference is chosen. Carried in the hand it is a relation; fixed in the world it is an address.",
+       "touches": [
+        {
+         "id": "trajectory-02-01",
+         "title": "Carry the point"
+        },
+        {
+         "id": "trajectory-02-02",
+         "title": "Name the reference"
+        }
+       ]
+      },
+      {
+       "map": "Point_Lines",
+       "finds": [
+        "form",
+        "edge"
+       ],
+       "carries": "Two points and a chosen reference.",
+       "discovers": "Joining two points makes the first edge, and an edge can also be a boundary: something to read, and to walk around.",
+       "touches": [
+        {
+         "id": "trajectory-03-01",
+         "title": "Leave a connection"
+        },
+        {
+         "id": "trajectory-03-03",
+         "title": "Find another way"
+        },
+        {
+         "id": "trajectory-03-04",
+         "title": "Read the warning"
+        }
+       ]
+      },
+      {
+       "map": "Point_Trace",
+       "finds": [
+        "form",
+        "body"
+       ],
+       "carries": "The line between two points.",
+       "discovers": "A gesture leaves a record and the record becomes material. Contact leaves a gap, waiting leaves a wider bead, release leaves a path that goes on alone.",
+       "touches": [
+        {
+         "id": "trajectory-04-01",
+         "title": "Leave a gap"
+        },
+        {
+         "id": "trajectory-04-03",
+         "title": "Let waiting grow / A little wider"
+        },
+        {
+         "id": "trajectory-04-04",
+         "title": "Let it continue"
+        }
+       ]
+      },
+      {
+       "map": "Point_Triangle_Context",
+       "finds": [
+        "form",
+        "topology"
+       ],
+       "carries": "A trace that became a body.",
+       "discovers": "Three edges close round an open middle. A face laid in it is the first surface, and two faces share an edge they can fold along.",
+       "touches": [
+        {
+         "id": "trajectory-05-01",
+         "title": "Three edges / an open middle"
+        },
+        {
+         "id": "trajectory-05-03",
+         "title": "Draw a face"
+        },
+        {
+         "id": "trajectory-05-04",
+         "title": "The shared diagonal"
+        }
+       ]
+      },
+      {
+       "map": "Primitives_Polythedra",
+       "finds": [
+        "form",
+        "body"
+       ],
+       "carries": "Faces that fold.",
+       "discovers": "Four points enclose a first inside. The slope that blocks as a pyramid carries as a wedge.",
+       "touches": [
+        {
+         "id": "trajectory-06-01",
+         "title": "Four points / first enclosure"
+        },
+        {
+         "id": "trajectory-06-03",
+         "title": "The allowing wedge"
+        },
+        {
+         "id": "trajectory-06-04",
+         "title": "The blocking slope"
+        }
+       ]
+      },
+      {
+       "map": "Point_Animatedcube",
+       "finds": [
+        "form",
+        "organization"
+       ],
+       "carries": "An enclosure, and what its slope permits.",
+       "discovers": "A cube is a set of relations that can be unfolded and folded back. Its copies are parts waiting for a relation.",
+       "touches": [
+        {
+         "id": "trajectory-07-01",
+         "title": "One cube, two folds"
+        },
+        {
+         "id": "trajectory-07-03",
+         "title": "Unfold and return"
+        },
+        {
+         "id": "trajectory-07-04",
+         "title": "The copies wait for a relation"
+        }
+       ]
+      },
+      {
+       "map": "Primitives_Ignorance",
+       "finds": [
+        "form",
+        "edge"
+       ],
+       "carries": "Parts waiting for a relation.",
+       "discovers": "There are five ways for equal corners to meet, and every round body here is a finite one. Smoothness is a budget somebody chose.",
+       "touches": [
+        {
+         "id": "trajectory-08-01",
+         "title": "Five ways for corners to meet"
+        },
+        {
+         "id": "trajectory-08-02",
+         "title": "More around, fewer along"
+        },
+        {
+         "id": "trajectory-08-03",
+         "title": "How smooth is enough?"
+        }
+       ]
+      },
+      {
+       "map": "Primitives_Columns",
+       "finds": [
+        "form",
+        "topology"
+       ],
+       "carries": "A finite body at a chosen resolution.",
+       "discovers": "One outline carried upward gives many columns. Hollowed it is a container, and laid open it is a way through.",
+       "touches": [
+        {
+         "id": "trajectory-09-01",
+         "title": "One outline, many columns"
+        },
+        {
+         "id": "trajectory-09-03",
+         "title": "A cylinder becomes a container"
+        },
+        {
+         "id": "trajectory-09-04",
+         "title": "The column becomes a passage"
+        }
+       ]
+      },
+      {
+       "map": "Primitives_Profiles",
+       "finds": [
+        "form"
+       ],
+       "carries": "An outline that became a passage.",
+       "discovers": "A sign can be given a body. A letter turned round its axis becomes a vessel, a channel, a wheel, and a familiar rule returns an unfamiliar body.",
+       "touches": [
+        {
+         "id": "trajectory-10-01",
+         "title": "A letter becomes a space"
+        },
+        {
+         "id": "trajectory-10-03",
+         "title": "Let the outline guide a ball"
+        },
+        {
+         "id": "trajectory-10-04",
+         "title": "An unfamiliar body from a familiar rule"
+        }
+       ]
+      },
+      {
+       "map": "Primitives_Portals",
+       "finds": [
+        "topology",
+        "edge"
+       ],
+       "carries": "Bodies made from outlines.",
+       "discovers": "A closed body offers no way through, and approaching a limit is not arriving at it. The smaller gap is still a gap.",
+       "touches": [
+        {
+         "id": "trajectory-11-01",
+         "title": "Closed body / no way through"
+        },
+        {
+         "id": "trajectory-11-02",
+         "title": "Round enough from here"
+        },
+        {
+         "id": "trajectory-11-03",
+         "title": "A smaller gap is still a gap"
+        }
+       ]
+      },
+      {
+       "map": "Primitives_Melencolia",
+       "finds": [
+        "space",
+        "organization"
+       ],
+       "carries": "The gap that stays.",
+       "discovers": "Familiar parts become a place, an image and a handmade assembly. The arrangement is one among others and the tools lie unfinished.",
+       "touches": [
+        {
+         "id": "trajectory-12-01",
+         "title": "Four corners make a place"
+        },
+        {
+         "id": "trajectory-12-02",
+         "title": "Did height make the centre?"
+        },
+        {
+         "id": "trajectory-12-03",
+         "title": "The image and its unfinished tools"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "transformation",
+     "title": "Transformation",
+     "movement": "A form is kept while its position, direction and size change. Then the surroundings change, and the same operation stops carrying.",
+     "stops": [
+      {
+       "map": "Trans_Pre",
+       "finds": [
+        "form"
+       ],
+       "carries": "Parts that could be arranged another way.",
+       "discovers": "A part can change position, direction or size and stay itself: three changes that look alike until they are told apart.",
+       "touches": [
+        {
+         "id": "draft-trans_pre-1",
+         "title": "A still invitation / Already within reach"
+        },
+        {
+         "id": "draft-trans_pre-2",
+         "title": "A position changes / Here, then there"
+        },
+        {
+         "id": "draft-trans_pre-3",
+         "title": "A direction changes / A face comes back"
+        }
+       ]
+      },
+      {
+       "map": "Trans_Introduction",
+       "finds": [
+        "space",
+        "edge"
+       ],
+       "carries": "Three changes told apart.",
+       "discovers": "Across a gap, moving, turning or growing a bridge can each give passage, until the landing shifts. The operation is unchanged and the passage is gone.",
+       "touches": [
+        {
+         "id": "song-2dfcba72ac41e435",
+         "title": "tc"
+        },
+        {
+         "id": "song-448335ce8c2ad07a",
+         "title": "adjustable landing"
+        }
+       ]
+      },
+      {
+       "map": "Trans_Translation",
+       "finds": [
+        "form",
+        "space"
+       ],
+       "carries": "A passage that depended on its surroundings.",
+       "discovers": "A displacement keeps the object recognisable. The same destination is reached under different permissions.",
+       "touches": [
+        {
+         "id": "draft-trans_translation-1",
+         "title": "Travel without turning / The same face travels"
+        },
+        {
+         "id": "draft-trans_translation-2",
+         "title": "Same destination, different permissions / Two ways to arrive"
+        },
+        {
+         "id": "draft-trans_translation-3",
+         "title": "Move the place of turning / Where I turn changes the way"
+        }
+       ]
+      },
+      {
+       "map": "Trans_Rotation",
+       "finds": [
+        "form",
+        "body"
+       ],
+       "carries": "Travel without turning.",
+       "discovers": "A rigid body keeps its shape through a turn while its ability to carry changes. An end becomes a landing and a turn acquires a joint.",
+       "touches": [
+        {
+         "id": "draft-trans_rotation-1",
+         "title": "The wheel turns a route downward / A floor becomes a slope"
+        },
+        {
+         "id": "draft-trans_rotation-2",
+         "title": "An end becomes a landing / The shape stays, the foothold changes"
+        },
+        {
+         "id": "draft-trans_rotation-3",
+         "title": "A turn acquires a joint / One place holds the turn"
+        }
+       ]
+      },
+      {
+       "map": "Trans_Carousel",
+       "finds": [
+        "space",
+        "organization"
+       ],
+       "carries": "A pivot and an axis.",
+       "discovers": "Everything on the ring shares one angle and travels a different distance. Neighbours can turn against each other.",
+       "touches": [
+        {
+         "id": "draft-trans_carousel-1",
+         "title": "Same angle, different journey / Farther out, farther to go"
+        },
+        {
+         "id": "draft-trans_carousel-2",
+         "title": "Neighbouring turns disagree / Together, in opposite directions"
+        }
+       ]
+      },
+      {
+       "map": "Trans_Scale",
+       "finds": [
+        "body",
+        "space"
+       ],
+       "carries": "One turn measured at different radii.",
+       "discovers": "With the body as the measure, larger means three things: a bigger object, a wider passage, a changed relation between parent and child.",
+       "touches": [
+        {
+         "id": "draft-trans_scale-1",
+         "title": "The room changes the measure / The room grew around me"
+        },
+        {
+         "id": "draft-trans_scale-2",
+         "title": "Grow a deck or unfold it / Two ways to span"
+        },
+        {
+         "id": "draft-trans_scale-3",
+         "title": "Which frame receives the change? / The frame moves with me"
+        }
+       ]
+      },
+      {
+       "map": "Trans_Body",
+       "finds": [
+        "body",
+        "edge"
+       ],
+       "carries": "The body as the reference.",
+       "discovers": "A boundary can answer an approaching body, opening and closing behind it. One cut does not come back.",
+       "touches": [
+        {
+         "id": "draft-trans_body-1",
+         "title": "The opening closes behind me / It answers, then forgets"
+        },
+        {
+         "id": "draft-trans_body-2",
+         "title": "Room appears between the blocks / Near me, there is room"
+        },
+        {
+         "id": "draft-trans_body-3",
+         "title": "The cut remembers / Something of my passing stays"
+        }
+       ]
+      },
+      {
+       "map": "Trans_Pit",
+       "finds": [
+        "edge",
+        "space"
+       ],
+       "carries": "A boundary that answered.",
+       "discovers": "This boundary keeps its own clock. An opening can move or change width, and the two together offer a moment where there was a place.",
+       "touches": [
+        {
+         "id": "draft-trans_pit-1",
+         "title": "Move the opening, change its width / The opening has its own time"
+        },
+        {
+         "id": "draft-trans_pit-2",
+         "title": "Three operations make a moment / For a moment, enough room"
+        },
+        {
+         "id": "draft-trans_pit-3",
+         "title": "The whole solid travels / It goes on without me"
+        }
+       ]
+      },
+      {
+       "map": "Trans_Playground",
+       "finds": [
+        "space",
+        "organization"
+       ],
+       "carries": "A moment to pass in.",
+       "discovers": "The operations chain into a route and the parts allow another. The intended course and what a player can do are two things.",
+       "touches": [
+        {
+         "id": "draft-trans_playground-1",
+         "title": "A route made from changes / One movement leads to another"
+        },
+        {
+         "id": "draft-trans_playground-2",
+         "title": "Make another way through / We can arrange it otherwise"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "logic",
+     "title": "Logic",
+     "movement": "Then becomes if.",
+     "stops": [
+      {
+       "map": "Logic_Event",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "A route made of changes, each following the last.",
+       "discovers": "One contact becomes another event, and a small condition decides whether it does. Passing the first gap promises nothing about the second.",
+       "touches": [
+        {
+         "id": "draft-logic_event-1",
+         "title": "Follow the contact / One thing asks the next"
+        },
+        {
+         "id": "draft-logic_event-2",
+         "title": "Almost reaches / Almost is still a distance"
+        },
+        {
+         "id": "draft-logic_event-3",
+         "title": "One change becomes enough / Just enough to happen"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "array_tutorial",
+     "title": "Arrays",
+     "movement": "A place gets a number and keeps it, whatever stands there.",
+     "stops": [
+      {
+       "map": "Array",
+       "finds": [
+        "organization",
+        "space"
+       ],
+       "carries": "A condition that withdrew support.",
+       "discovers": "An address is not what occupies it. The tile can go and the place remain, in a row, a plane and a volume.",
+       "touches": [
+        {
+         "id": "draft-array-1",
+         "title": "A place can remain empty / The place is still here"
+        },
+        {
+         "id": "draft-array-2",
+         "title": "Movement does not erase an address / It moves, I can still name it"
+        },
+        {
+         "id": "draft-array-4",
+         "title": "An address gains depth / There is a place behind this place"
+        }
+       ]
+      },
+      {
+       "map": "Tutorial_3D",
+       "finds": [
+        "space",
+        "organization"
+       ],
+       "carries": "An address with depth.",
+       "discovers": "From inside, a volume is read by convention. One vocabulary builds several structures, and sharing a grid does not make them the same thing.",
+       "touches": [
+        {
+         "id": "draft-tutorial_3d-1",
+         "title": "Read the volume from within / Inside the address"
+        },
+        {
+         "id": "draft-tutorial_3d-2",
+         "title": "Several structures from one vocabulary / Another way to leave it open"
+        },
+        {
+         "id": "draft-tutorial_3d-3",
+         "title": "A grid seems to hold a weight / A quiet interval beneath"
+        }
+       ]
+      },
+      {
+       "map": "Tutorial_Tiling_Floor",
+       "finds": [
+        "organization",
+        "form"
+       ],
+       "carries": "One vocabulary, several structures.",
+       "discovers": "A small tile under different rules gives different floors. The floor that carries stays the same beneath each of them.",
+       "touches": [
+        {
+         "id": "draft-tutorial_tiling_floor-1",
+         "title": "One tile, several instructions / The same part makes another field"
+        },
+        {
+         "id": "draft-tutorial_tiling_floor-2",
+         "title": "Follow two kinds of repetition / A rhythm underfoot"
+        }
+       ]
+      },
+      {
+       "map": "Tutorial_Tiling_Walls",
+       "finds": [
+        "edge",
+        "form"
+       ],
+       "carries": "A rule laid over a floor.",
+       "discovers": "Turned upright, the field meets the eye. Changing its image is not changing the wall, and a different tile is not an opening.",
+       "touches": [
+        {
+         "id": "draft-tutorial_tiling_walls-1",
+         "title": "The pattern meets the eye / The rule stays as I step back"
+        },
+        {
+         "id": "draft-tutorial_tiling_walls-2",
+         "title": "A different tile is not an opening / A drawing changes, then a way opens"
+        },
+        {
+         "id": "draft-tutorial_tiling_walls-3",
+         "title": "The same addresses receive a recipe / Six places, another arrangement"
+        }
+       ]
+      },
+      {
+       "map": "Tutorial_Disco",
+       "finds": [
+        "organization",
+        "space"
+       ],
+       "carries": "Addresses that hold while their image changes.",
+       "discovers": "An arrangement is given a clock. The stored choice and the playhead reading it are separate, and a silent cell is still a place.",
+       "touches": [
+        {
+         "id": "draft-tutorial_disco-1",
+         "title": "A phase passes through the floor / The next moment has an address"
+        },
+        {
+         "id": "draft-tutorial_disco-2",
+         "title": "A silent cell is still a place / Silence has a position"
+        },
+        {
+         "id": "draft-tutorial_disco-3",
+         "title": "Two clocks meet / We meet, then drift apart"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "II",
+   "title": "What a surface is given",
+   "line": "Colour and pattern are decisions laid on forms. The floor that carries stays the same under each of them, and seeing, entering and rearranging turn out to be different permissions.",
+   "sequences": [
+    {
+     "id": "color",
+     "title": "Colour",
+     "movement": "Colour is a decision laid on a form: by a rule, a light, a body, a direction, a deposit.",
+     "stops": [
+      {
+       "map": "Color_Context_Placed",
+       "finds": [
+        "organization",
+        "form"
+       ],
+       "carries": "A cell that keeps its place while its state changes.",
+       "discovers": "One construction coloured by a single rule, by kind of part, by position. Colour is a way of grouping, a decision of composition.",
+       "touches": [
+        {
+         "id": "draft-color_context_placed-1",
+         "title": "One colour gathers the parts / One colour, several bodies"
+        },
+        {
+         "id": "draft-color_context_placed-2",
+         "title": "Colour follows a kind of part / A colour gathers a family"
+        },
+        {
+         "id": "draft-color_context_placed-3",
+         "title": "Colour follows a position / Where I stand in the arrangement"
+        }
+       ]
+      },
+      {
+       "map": "Color_Flashlight",
+       "finds": [
+        "space",
+        "edge"
+       ],
+       "carries": "Colour as a rule.",
+       "discovers": "Colour arrives with the light, is lent by the room and changes with the one looking. Light, material and setting are three sources.",
+       "touches": [
+        {
+         "id": "draft-color_flashlight-1",
+         "title": "The colour arrives with the light / What reaches me changes what I show"
+        },
+        {
+         "id": "draft-color_flashlight-2",
+         "title": "The room lends a colour / The space colours my attention"
+        },
+        {
+         "id": "draft-color_flashlight-3",
+         "title": "Pink light or pink material? / The same word, another cause"
+        }
+       ]
+      },
+      {
+       "map": "Color_Nails",
+       "finds": [
+        "body"
+       ],
+       "carries": "A colour that depends on where it is seen.",
+       "discovers": "A colour is chosen on a body. The value travels to another scale and another material; how it looks and what it means do not travel unchanged.",
+       "touches": [
+        {
+         "id": "draft-color_nails-1",
+         "title": "Colour becomes a gesture of adornment / A small surface can speak"
+        },
+        {
+         "id": "draft-color_nails-2",
+         "title": "The neighbouring colour changes / The neighbour changes what I see"
+        },
+        {
+         "id": "draft-color_nails-3",
+         "title": "A familiar gesture at two scales / The same choice meets another body"
+        }
+       ]
+      },
+      {
+       "map": "Color_Rainbow",
+       "finds": [
+        "organization"
+       ],
+       "carries": "A colour worn.",
+       "discovers": "A sweep that looks continuous is a chosen set of bands. Colour can welcome a body before it has achieved anything.",
+       "touches": [
+        {
+         "id": "draft-color_rainbow-1",
+         "title": "A colour can welcome before achievement / You can arrive without earning it"
+        },
+        {
+         "id": "draft-color_rainbow-2",
+         "title": "A rainbow is also a partition choice / Many names along one arc"
+        }
+       ]
+      },
+      {
+       "map": "Color_Pillar",
+       "finds": [
+        "space"
+       ],
+       "carries": "Bands chosen from a sweep.",
+       "discovers": "Colour has coordinates that can be walked. A sampler that reads its position differs from a swatch that keeps the value it was given.",
+       "touches": [
+        {
+         "id": "draft-color_pillar-1",
+         "title": "Walk the colour coordinates / An address can become a colour"
+        },
+        {
+         "id": "draft-color_pillar-2",
+         "title": "A palette has been chosen / Someone gathered these together"
+        },
+        {
+         "id": "draft-color_pillar-3",
+         "title": "Compare a mixture / A meeting makes another colour"
+        }
+       ]
+      },
+      {
+       "map": "Color_Grid_Pallet",
+       "finds": [
+        "space",
+        "organization"
+       ],
+       "carries": "A walked coordinate.",
+       "discovers": "An address holds a colour and a walking direction rewrites it. Colour and support stay two different things.",
+       "touches": [
+        {
+         "id": "draft-color_grid_pallet-1",
+         "title": "A direction writes a palette / My passage changes the field"
+        },
+        {
+         "id": "draft-color_grid_pallet-2",
+         "title": "The pattern keeps another palette / The rhythm stays, its colour changes"
+        },
+        {
+         "id": "draft-color_grid_pallet-3",
+         "title": "The field occupies the shaft / Colour has room between it"
+        }
+       ]
+      },
+      {
+       "map": "Color_Paint",
+       "finds": [
+        "body",
+        "edge"
+       ],
+       "carries": "A colour assigned by walking.",
+       "discovers": "A surface remembers the deposit and not the path that made it. Distance, duration and movement shape the mark, and another body paints too.",
+       "touches": [
+        {
+         "id": "draft-color_paint-1",
+         "title": "A painting is already underway / The surface had other business"
+        },
+        {
+         "id": "draft-color_paint-3",
+         "title": "Move the receiver / The surface moves beneath my mark"
+        },
+        {
+         "id": "draft-color_paint-4",
+         "title": "Another body paints / We meet on a changing surface"
+        }
+       ]
+      },
+      {
+       "map": "Color_Walls",
+       "finds": [
+        "space",
+        "edge"
+       ],
+       "carries": "A surface that remembers.",
+       "discovers": "A view passes where a body cannot. Seeing, entering and rearranging are three permissions, and two endpoints do not choose the journey between them.",
+       "touches": [
+        {
+         "id": "draft-color_walls-1",
+         "title": "A view can pass where a body cannot / Visible does not mean open"
+        },
+        {
+         "id": "draft-color_walls-3",
+         "title": "Endpoints do not choose the journey / We agree where to meet, not how to go"
+        },
+        {
+         "id": "draft-color_walls-4",
+         "title": "A room can be rearranged for gathering / Another arrangement of being together"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "tiling",
+     "title": "Patterns & tiling",
+     "movement": "One mark, repeated: what the copies share, where they break, and what they are laid upon.",
+     "stops": [
+      {
+       "map": "Pattern_Disco",
+       "finds": [
+        "organization",
+        "space"
+       ],
+       "carries": "The permissions of a wall.",
+       "discovers": "The same square wears another colour and stays the same place. A palette change and a phase change are different events on a floor that keeps carrying.",
+       "touches": [
+        {
+         "id": "spine-pattern_disco-1",
+         "title": "disco controls / The same place wears another colour"
+        },
+        {
+         "id": "spine-pattern_disco-2",
+         "title": "void pattern floor"
+        }
+       ]
+      },
+      {
+       "map": "Pattern_Foundry",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "A place that wears colours.",
+       "discovers": "One source mark reaches every copy. The local exception is the difficult thing.",
+       "touches": [
+        {
+         "id": "spine-pattern_foundry-1",
+         "title": "pattern architecture / My small decision reaches further"
+        },
+        {
+         "id": "spine-pattern_foundry-2",
+         "title": "pattern tile 4x4"
+        }
+       ]
+      },
+      {
+       "map": "Tutorial_Pattern",
+       "finds": [
+        "form",
+        "organization"
+       ],
+       "carries": "A source and its copies.",
+       "discovers": "The source cells stay and the reading of their copies changes. The same mark faces another way.",
+       "touches": [
+        {
+         "id": "spine-tutorial_pattern-1",
+         "title": "pattern maker station / The same mark faces another way"
+        },
+        {
+         "id": "spine-tutorial_pattern-2",
+         "title": "pattern studio plate"
+        }
+       ]
+      },
+      {
+       "map": "Array_Patterns",
+       "finds": [
+        "space",
+        "edge"
+       ],
+       "carries": "Copies read differently.",
+       "discovers": "An address needs a surface to appear on. At a corner some things continue and some start again.",
+       "touches": [
+        {
+         "id": "spine-array_patterns-1",
+         "title": "pattern tunnel machine / A place needs a way to appear"
+        },
+        {
+         "id": "spine-array_patterns-2",
+         "title": "pattern tile brick"
+        }
+       ]
+      },
+      {
+       "map": "Symmetry_Seventeen",
+       "finds": [
+        "organization",
+        "form"
+       ],
+       "carries": "What continues round a corner.",
+       "discovers": "The source is held still while shifts, mirrors and their combinations are compared. What counts as the same decides how many ways there are to repeat.",
+       "touches": [
+        {
+         "id": "spine-symmetry_seventeen-1",
+         "title": "vr tile editor / What counts as the same?"
+        },
+        {
+         "id": "spine-symmetry_seventeen-2",
+         "title": "wallpaper cage"
+        },
+        {
+         "id": "spine-symmetry_seventeen-3",
+         "title": "thread loom"
+        }
+       ]
+      },
+      {
+       "map": "Pattern_Temple",
+       "finds": [
+        "space",
+        "organization"
+       ],
+       "carries": "Ways of repeating, counted.",
+       "discovers": "A familiar pattern lies on separate architectural receivers. What looks like one pattern is not one editable source.",
+       "touches": [
+        {
+         "id": "spine-pattern_temple-1",
+         "title": "pattern temple / The same, for now"
+        },
+        {
+         "id": "spine-pattern_temple-2",
+         "title": "Fishbone + square / walkable tile floors"
+        }
+       ]
+      },
+      {
+       "map": "Ribbon_Patterns_01",
+       "finds": [
+        "space",
+        "edge"
+       ],
+       "carries": "A pattern spread over separate bodies.",
+       "discovers": "An indexed plane stands beside an indexed volume. A stored zero is a statement; empty space is not one.",
+       "touches": [
+        {
+         "id": "spine-ribbon_patterns_01-1",
+         "title": "grid 2d 4x4 / The mark acquires an inside"
+        },
+        {
+         "id": "spine-ribbon_patterns_01-2",
+         "title": "grid 3d 4x4x4"
+        }
+       ]
+      },
+      {
+       "map": "Ribbon_Patterns_02",
+       "finds": [
+        "form",
+        "edge"
+       ],
+       "carries": "A zero that was stored.",
+       "discovers": "A value is kept while its neighbours change, and kept again while its carrier changes: two comparisons easily taken for one.",
+       "touches": [
+        {
+         "id": "spine-ribbon_patterns_02-1",
+         "title": "SimultaneousContrast / The carrier participates"
+        },
+        {
+         "id": "spine-ribbon_patterns_02-2",
+         "title": "MetamerismLab"
+        }
+       ]
+      },
+      {
+       "map": "Ribbon_Patterns_03",
+       "finds": [
+        "body"
+       ],
+       "carries": "An appearance apart from its carrier.",
+       "discovers": "The appearance is carried onto a garment. The visible cut is one thing and the passage of the body wearing it another.",
+       "touches": [
+        {
+         "id": "spine-ribbon_patterns_03-2",
+         "title": "garment cutting table"
+        },
+        {
+         "id": "spine-ribbon_patterns_03-3",
+         "title": "super drag mirror"
+        },
+        {
+         "id": "spine-ribbon_patterns_03-4",
+         "title": "drag catwalk"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "III",
+   "title": "What moves, what settles, what returns",
+   "line": "Bodies. A push, a medium, a balance point; forms nobody drew, left where a rule stopped; motion that comes back and can be read as a clock, a trace, a sound or a stair.",
+   "sequences": [
+    {
+     "id": "forces",
+     "title": "Vectors & forces",
+     "movement": "A body is given a push: what continues, what resists, what answers back.",
+     "stops": [
+      {
+       "map": "Vectors_Act1_WhatAVectorIs",
+       "finds": [
+        "form",
+        "space"
+       ],
+       "carries": "A body passing in a garment.",
+       "discovers": "A direction with a length is the same difference wherever it is placed. Two can be added, and one can be laid along another.",
+       "touches": [
+        {
+         "id": "spine-vectors_act1_whatavectoris-1",
+         "title": "force point direction / The same difference, somewhere else"
+        },
+        {
+         "id": "spine-vectors_act1_whatavectoris-2",
+         "title": "force point addition"
+        },
+        {
+         "id": "spine-vectors_act1_whatavectoris-3",
+         "title": "force point projection"
+        }
+       ]
+      },
+      {
+       "map": "VFM_05_Launch",
+       "finds": [
+        "body",
+        "space"
+       ],
+       "carries": "A direction held in the hand.",
+       "discovers": "A launched body draws a curve that takes its time. Where it lands depends on the direction, and on how the time was counted.",
+       "touches": [
+        {
+         "id": "spine-vfm_05_launch-1",
+         "title": "launch arc / The curve takes its time"
+        },
+        {
+         "id": "spine-vfm_05_launch-2",
+         "title": "euler drift"
+        }
+       ]
+      },
+      {
+       "map": "VFM_03_Motion",
+       "finds": [
+        "body"
+       ],
+       "carries": "A curve drawn by a throw.",
+       "discovers": "Ending a push is not stopping a body. Something keeps going.",
+       "touches": [
+        {
+         "id": "spine-vfm_03_motion-1",
+         "title": "force play mass / Something keeps going"
+        },
+        {
+         "id": "spine-vfm_03_motion-2",
+         "title": "force play trolley"
+        }
+       ]
+      },
+      {
+       "map": "Vectors_Act3_FieldsAndMotion",
+       "finds": [
+        "space",
+        "organization"
+       ],
+       "carries": "Motion that outlasts its push.",
+       "discovers": "A field puts an arrow at every place, and the arrow does not decide. How a body takes it up is another rule.",
+       "touches": [
+        {
+         "id": "spine-vectors_act3_fieldsandmotion-1",
+         "title": "VectorFieldFlow / The arrow does not decide"
+        },
+        {
+         "id": "spine-vectors_act3_fieldsandmotion-2",
+         "title": "force play vortex"
+        },
+        {
+         "id": "spine-vectors_act3_fieldsandmotion-3",
+         "title": "wind room"
+        }
+       ]
+      },
+      {
+       "map": "Vectors_Act4a_KineticForces",
+       "finds": [
+        "space",
+        "body"
+       ],
+       "carries": "An arrow at every place.",
+       "discovers": "The medium changes the journey. The same push through different resistances ends somewhere else, and the slope does not choose the ending.",
+       "touches": [
+        {
+         "id": "spine-vectors_act4a_kineticforces-1",
+         "title": "force play liquids / The medium changes the journey"
+        },
+        {
+         "id": "world-5cda35028781835cd5",
+         "title": "The slope does not choose the ending"
+        }
+       ]
+      },
+      {
+       "map": "Vectors_Act4b_Oscillation",
+       "finds": [
+        "body",
+        "edge"
+       ],
+       "carries": "A journey shaped by what it passes through.",
+       "discovers": "A hanging body comes back through its balance point without stopping there. Balance is a reference, not rest.",
+       "touches": [
+        {
+         "id": "spine-vectors_act4b_oscillation-1",
+         "title": "force play springs / Coming back takes me through"
+        },
+        {
+         "id": "spine-vectors_act4b_oscillation-2",
+         "title": "spring tower"
+        }
+       ]
+      },
+      {
+       "map": "Change_Choreography",
+       "finds": [
+        "organization"
+       ],
+       "carries": "A return through the middle.",
+       "discovers": "Many returns side by side. What is seen is the relation between them: together, out of time.",
+       "touches": [
+        {
+         "id": "spine-change_choreography-1",
+         "title": "phase rod array / Together, out of time"
+        },
+        {
+         "id": "spine-change_choreography-2",
+         "title": "force trial conveyor"
+        }
+       ]
+      },
+      {
+       "map": "VFM_07_Gravity",
+       "finds": [
+        "organization",
+        "body"
+       ],
+       "carries": "Motions read by their relation.",
+       "discovers": "Attraction is mutual unless one body is held fixed. Who gets to stay still is a decision inside the calculation.",
+       "touches": [
+        {
+         "id": "spine-vfm_07_gravity-1",
+         "title": "force play mutual / Who gets to stay still?"
+        },
+        {
+         "id": "spine-vfm_07_gravity-2",
+         "title": "force play magnet"
+        }
+       ]
+      },
+      {
+       "map": "VFM_09_Legs",
+       "finds": [
+        "body"
+       ],
+       "carries": "A body allowed to stay still.",
+       "discovers": "Standing is contact and the place of a mass, not a count of limbs.",
+       "touches": [
+        {
+         "id": "spine-vfm_09_legs-1",
+         "title": "force play support / What lets a body stand?"
+        },
+        {
+         "id": "spine-vfm_09_legs-2",
+         "title": "four leg critter"
+        }
+       ]
+      },
+      {
+       "map": "VFM_08_Arena",
+       "finds": [
+        "body",
+        "organization"
+       ],
+       "carries": "A body that stands.",
+       "discovers": "A contact carries something onward, from one body into the next.",
+       "touches": [
+        {
+         "id": "spine-vfm_08_arena-1",
+         "title": "momentum cradle / A contact carries something onward"
+        },
+        {
+         "id": "spine-vfm_08_arena-2",
+         "title": "force play bowling"
+        }
+       ]
+      },
+      {
+       "map": "Vectors_Act5_ForceAsPlace",
+       "finds": [
+        "space"
+       ],
+       "carries": "Something handed on through contact.",
+       "discovers": "Two ways across: a bridge that was built, and a field that moves each receiver differently. A force can be a place.",
+       "touches": [
+        {
+         "id": "spine-vectors_act5_forceasplace-1",
+         "title": "vector machine / What carries us across?"
+        },
+        {
+         "id": "spine-vectors_act5_forceasplace-3",
+         "title": "force field zone"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "formfinding",
+     "title": "Form finding",
+     "movement": "Nobody draws the form. It is what remains when a rule stops.",
+     "stops": [
+      {
+       "map": "FormFinding_Descent",
+       "finds": [
+        "space",
+        "edge"
+       ],
+       "carries": "A field that carries.",
+       "discovers": "Following downhill, one local step at a time, has more than one end. The visitor sees the whole landscape; the rule sees the slope under it.",
+       "touches": [
+        {
+         "id": "spine-formfinding_descent-1",
+         "title": "descent landscape lab / Downhill has more than one end"
+        },
+        {
+         "id": "spine-formfinding_descent-2",
+         "title": "descent marble toy"
+        }
+       ]
+      },
+      {
+       "map": "FormFinding_Catenary",
+       "finds": [
+        "form"
+       ],
+       "carries": "A rule that stops in a hollow.",
+       "discovers": "One curve arrives by three kinds of work: drawn by hand, evaluated from a formula, settled under constraints.",
+       "touches": [
+        {
+         "id": "spine-formfinding_catenary-1",
+         "title": "cable builder / A shape can arrive by different work"
+        },
+        {
+         "id": "spine-formfinding_catenary-2",
+         "title": "laundry line cathedral"
+        }
+       ]
+      },
+      {
+       "map": "FormFinding_Relaxation",
+       "finds": [
+        "form",
+        "edge"
+       ],
+       "carries": "A form that settled.",
+       "discovers": "Repeated corrections under a finite budget leave a shape. The body is what the budget left.",
+       "touches": [
+        {
+         "id": "spine-formfinding_relaxation-1",
+         "title": "verlet workbench / A budget leaves a body"
+        },
+        {
+         "id": "spine-formfinding_relaxation-2",
+         "title": "mass spring bench"
+        }
+       ]
+      },
+      {
+       "map": "FormFinding_Equilibrium",
+       "finds": [
+        "body",
+        "form"
+       ],
+       "carries": "A shape left by correction.",
+       "discovers": "Stillness can hold opposition. A still image is not yet evidence of balance.",
+       "touches": [
+        {
+         "id": "spine-formfinding_equilibrium-1",
+         "title": "calder mobile / Stillness can hold opposition"
+        },
+        {
+         "id": "spine-formfinding_equilibrium-2",
+         "title": "tensegrity triangle"
+        }
+       ]
+      },
+      {
+       "map": "FormFinding_Annealing",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "A balance of opposed pulls.",
+       "discovers": "A search that may accept a worse step can leave the hollow that held it.",
+       "touches": [
+        {
+         "id": "spine-formfinding_annealing-1",
+         "title": "energy landscape bench / Willing to get worse"
+        },
+        {
+         "id": "spine-formfinding_annealing-2",
+         "title": "simulated annealing"
+        }
+       ]
+      },
+      {
+       "map": "FormFinding_Forge",
+       "finds": [
+        "organization",
+        "form"
+       ],
+       "carries": "The freedom to get worse.",
+       "discovers": "A form is found against a criterion. The construction and the judge of its success are two things, and the judge was chosen.",
+       "touches": [
+        {
+         "id": "spine-formfinding_forge-1",
+         "title": "balance puzzle / A shape that counts"
+        },
+        {
+         "id": "spine-formfinding_forge-2",
+         "title": "self shaping forge"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "wavefunctions",
+     "title": "Wave functions",
+     "movement": "Motion that comes back, read as a clock, a trace, a surface, a sound and a stair.",
+     "stops": [
+      {
+       "map": "WaveFunctions_Intro",
+       "finds": [
+        "form",
+        "body"
+       ],
+       "carries": "A shape judged by a criterion.",
+       "discovers": "A cube goes and comes back. Its clock can be the machine's, or a hand's driving it.",
+       "touches": [
+        {
+         "id": "spine-wavefunctions_intro-1",
+         "title": "y oscillation cube / The cube comes back"
+        },
+        {
+         "id": "spine-wavefunctions_intro-2",
+         "title": "control pendulum"
+        }
+       ]
+      },
+      {
+       "map": "WaveFunctions_Pendulum",
+       "finds": [
+        "form",
+        "edge"
+       ],
+       "carries": "A motion that returns.",
+       "discovers": "The swinging body has one state now. The line behind it is a finite trace of where it was.",
+       "touches": [
+        {
+         "id": "spine-wavefunctions_pendulum-1",
+         "title": "PendulumWave / Where a swing leaves its past"
+        },
+        {
+         "id": "spine-wavefunctions_pendulum-3",
+         "title": "seismograph"
+        }
+       ]
+      },
+      {
+       "map": "WaveFunctions_Sine_Space",
+       "finds": [
+        "space",
+        "body"
+       ],
+       "carries": "The trace of a swing.",
+       "discovers": "A visible wave and a surface that carries a ball are different things. Only one of them can hold.",
+       "touches": [
+        {
+         "id": "spine-wavefunctions_sine_space-1",
+         "title": "sine flow tray / What a wave can hold"
+        },
+        {
+         "id": "spine-wavefunctions_sine_space-2",
+         "title": "sine wall corridor"
+        }
+       ]
+      },
+      {
+       "map": "WaveFunctions_Unit_Circle",
+       "finds": [
+        "form"
+       ],
+       "carries": "A wave that can hold.",
+       "discovers": "A point going round, read on one axis, is the wave. A circle becomes a graph.",
+       "touches": [
+        {
+         "id": "spine-wavefunctions_unit_circle-1",
+         "title": "Unit Circle / 6 m traveling sine ceiling / A circle becomes a graph"
+        },
+        {
+         "id": "spine-wavefunctions_unit_circle-3",
+         "title": "Sine snake / electric discharge"
+        }
+       ]
+      },
+      {
+       "map": "WaveFunctions_3D_Wave_Propagation",
+       "finds": [
+        "organization"
+       ],
+       "carries": "A turning point and its projection.",
+       "discovers": "Each site only rises and falls. What travels is the disturbance, handed from neighbour to neighbour.",
+       "touches": [
+        {
+         "id": "spine-wavefunctions_3d_wave_propagation-1",
+         "title": "Coupled Oscillators / Nodes / The motion travels beyond me"
+        },
+        {
+         "id": "world-d9bf280f747110e01f",
+         "title": "A movement reaches its neighbours"
+        }
+       ]
+      },
+      {
+       "map": "WaveFunctions_Effect_Sound",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "A disturbance passed on.",
+       "discovers": "One changing signal enters another's rule. The sound is one thing and the scope's picture of it another.",
+       "touches": [
+        {
+         "id": "spine-wavefunctions_effect_sound-1",
+         "title": "DualBallFMController / One motion enters another"
+        },
+        {
+         "id": "spine-wavefunctions_effect_sound-2",
+         "title": "Tower Ambience / Wind, Birds, Sirens, Rain"
+        }
+       ]
+      },
+      {
+       "map": "Wavefunctions_Bernini",
+       "finds": [
+        "form"
+       ],
+       "carries": "A signal inside a signal.",
+       "discovers": "A periodic change can be kept along a form that stands still. The column does not move; the wave is in it.",
+       "touches": [
+        {
+         "id": "spine-wavefunctions_bernini-1",
+         "title": "bernini columns / A movement kept in a column"
+        },
+        {
+         "id": "spine-wavefunctions_bernini-3",
+         "title": "vowel sound board"
+        }
+       ]
+      },
+      {
+       "map": "WaveFunctions_John_Cage",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "A wave held in a body.",
+       "discovers": "Events left to chance still have an author. The timing and the limits remain composed.",
+       "touches": [
+        {
+         "id": "spine-wavefunctions_john_cage-1",
+         "title": "john cage tech noir / The limits of the unexpected"
+        },
+        {
+         "id": "spine-wavefunctions_john_cage-2",
+         "title": "Sine flight / harmonic weave"
+        }
+       ]
+      },
+      {
+       "map": "WaveFunctions_AirMusic",
+       "finds": [
+        "body"
+       ],
+       "carries": "An authored frame round chance.",
+       "discovers": "A note gets its beginning from a contact, and something continues after the contact ends.",
+       "touches": [
+        {
+         "id": "spine-wavefunctions_airmusic-1",
+         "title": "resonating metallophone / After the strike"
+        },
+        {
+         "id": "spine-wavefunctions_airmusic-3",
+         "title": "air music display case"
+        }
+       ]
+      },
+      {
+       "map": "Wavefunctions_Sky_Stairs",
+       "finds": [
+        "body",
+        "space"
+       ],
+       "carries": "What sounds after the strike.",
+       "discovers": "A curve offers a path as an outline. A walking body needs surfaces and clearance the outline does not mention.",
+       "touches": [
+        {
+         "id": "spine-wavefunctions_sky_stairs-1",
+         "title": "sine cylinder staircase / What a curve needs from a stair"
+        },
+        {
+         "id": "spine-wavefunctions_sky_stairs-2",
+         "title": "math objects"
+        }
+       ]
+      },
+      {
+       "map": "WaveFunctions_TrigWalkingPath",
+       "finds": [
+        "form",
+        "organization"
+       ],
+       "carries": "A curve made walkable.",
+       "discovers": "Two quick oscillations summed show a slow pulse that neither of them has.",
+       "touches": [
+        {
+         "id": "spine-wavefunctions_trigwalkingpath-1",
+         "title": "beat frequency demo / A slow pulse between fast motions"
+        },
+        {
+         "id": "spine-wavefunctions_trigwalkingpath-3",
+         "title": "sine oscillation"
+        }
+       ]
+      },
+      {
+       "map": "WaveFunctions_Synthesis_Lab",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "A pulse that belongs to the sum.",
+       "discovers": "A wave is built from contributions. The change is continuous and the name assigned to it is not.",
+       "touches": [
+        {
+         "id": "spine-wavefunctions_synthesis_lab-1",
+         "title": "additive wave demo / The sum on the bench"
+        },
+        {
+         "id": "world-3fed226c4f1ef5f759",
+         "title": "Service spider / oscillator, filter, amplifier and speaker"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "IV",
+   "title": "What nobody chose",
+   "line": "Chance and fields. Each time chance is let in, the frame round it shows: the range, the set, the recipe, the count. A field has a value everywhere, and the body meets only what a threshold or a floor makes of it.",
+   "sequences": [
+    {
+     "id": "randomness",
+     "title": "Randomness",
+     "movement": "Chance is admitted, and the frame round it becomes visible.",
+     "stops": [
+      {
+       "map": "Random_Definition",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "A name assigned to a continuous change.",
+       "discovers": "A draw happens inside a decision. The range was allowed first, and a state can make the sequence return.",
+       "touches": [
+        {
+         "id": "spine-random_definition-1",
+         "title": "random touch / A draw inside a decision"
+        },
+        {
+         "id": "spine-random_definition-2",
+         "title": "random number book page 1955"
+        }
+       ]
+      },
+      {
+       "map": "Random_Entropies",
+       "finds": [
+        "organization"
+       ],
+       "carries": "A draw inside its range.",
+       "discovers": "Arrangements that look alike are asked different questions by different instruments, and each answers its own.",
+       "touches": [
+        {
+         "id": "spine-random_entropies-1",
+         "title": "entropy chairs shannon / What remains uncertain?"
+        },
+        {
+         "id": "spine-random_entropies-2",
+         "title": "entropy chairs boltzmann"
+        },
+        {
+         "id": "spine-random_entropies-3",
+         "title": "entropy chairs description"
+        }
+       ]
+      },
+      {
+       "map": "Random_Entropy",
+       "finds": [
+        "edge",
+        "organization"
+       ],
+       "carries": "Several questions about one disorder.",
+       "discovers": "A measure that counts keeps the count and forgets who stood next to whom.",
+       "touches": [
+        {
+         "id": "spine-random_entropy-1",
+         "title": "shannon entropy meter / What the gauge forgets"
+        },
+        {
+         "id": "spine-random_entropy-3",
+         "title": "entropy jar"
+        }
+       ]
+      },
+      {
+       "map": "Random_Remove",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "What a count forgets.",
+       "discovers": "Before a random removal there is eligibility. The set comes before the choice.",
+       "touches": [
+        {
+         "id": "spine-random_remove-1",
+         "title": "remove random / The set comes before the choice"
+        },
+        {
+         "id": "spine-random_remove-3",
+         "title": "random removal arena"
+        }
+       ]
+      },
+      {
+       "map": "Randomness_10_PRINT_Algorithm",
+       "finds": [
+        "space",
+        "topology"
+       ],
+       "carries": "A set to draw from.",
+       "discovers": "Marks are chosen independently, one by one, and a body still finds routes among them. The maze is made by the one who walks it.",
+       "touches": [
+        {
+         "id": "spine-randomness_10_print_algorithm-1",
+         "title": "composition stochastique / A maze made of marks"
+        },
+        {
+         "id": "spine-randomness_10_print_algorithm-3",
+         "title": "ten print maze 3d"
+        }
+       ]
+      },
+      {
+       "map": "Random_Cubes",
+       "finds": [
+        "form",
+        "organization"
+       ],
+       "carries": "Routes nobody drew.",
+       "discovers": "A family of forms comes from one recipe. Its differences are the ones the recipe permits.",
+       "touches": [
+        {
+         "id": "spine-random_cubes-1",
+         "title": "random edge profile / The recipe permits these differences"
+        },
+        {
+         "id": "spine-random_cubes-2",
+         "title": "random object spawner"
+        }
+       ]
+      },
+      {
+       "map": "Random_Rotate_Random_XYZ",
+       "finds": [
+        "form"
+       ],
+       "carries": "A recipe and its family.",
+       "discovers": "The form changes while its pieces and its recipe persist.",
+       "touches": [
+        {
+         "id": "spine-random_rotate_random_xyz-1",
+         "title": "hardware entropy decay / What remains in a changing stack"
+        },
+        {
+         "id": "spine-random_rotate_random_xyz-2",
+         "title": "RotateGridCubes"
+        }
+       ]
+      },
+      {
+       "map": "Random_Walk",
+       "finds": [
+        "body",
+        "edge"
+       ],
+       "carries": "Pieces that persist through change.",
+       "discovers": "The trail shows where the walker was. The next step does not consult it.",
+       "touches": [
+        {
+         "id": "spine-random_walk-1",
+         "title": "random walk terrarium / The trail is already elsewhere"
+        },
+        {
+         "id": "spine-random_walk-3",
+         "title": "random position rails"
+        }
+       ]
+      },
+      {
+       "map": "Random_Gaussian",
+       "finds": [
+        "organization",
+        "form"
+       ],
+       "carries": "A trail the walker ignores.",
+       "discovers": "The sample stays and the grouping changes. The shape that appears is the shape of how it was counted.",
+       "touches": [
+        {
+         "id": "spine-random_gaussian-1",
+         "title": "distribution sampler / The shape we counted"
+        },
+        {
+         "id": "spine-random_gaussian-2",
+         "title": "GaussianPaintSplatter"
+        }
+       ]
+      },
+      {
+       "map": "Random_Mushrooms",
+       "finds": [
+        "body",
+        "organization"
+       ],
+       "carries": "A shape made by counting.",
+       "discovers": "A population grown from a recipe is read through the differences that were invited.",
+       "touches": [
+        {
+         "id": "spine-random_mushrooms-1",
+         "title": "mushrooms / Which differences were invited?"
+        },
+        {
+         "id": "spine-random_mushrooms-3",
+         "title": "silhouette arrivals"
+        }
+       ]
+      },
+      {
+       "map": "Random_Space_Geometry",
+       "finds": [
+        "space"
+       ],
+       "carries": "Invited differences.",
+       "discovers": "Heights chosen independently share nothing. Neighbours joined by a common field make ground.",
+       "touches": [
+        {
+         "id": "spine-random_space_geometry-1",
+         "title": "seeded room / What neighbours share"
+        },
+        {
+         "id": "spine-random_space_geometry-2",
+         "title": "perlin noise bridge"
+        }
+       ]
+      },
+      {
+       "map": "Randomness_Examples_of_Randomness",
+       "finds": [
+        "organization"
+       ],
+       "carries": "Neighbours joined by a field.",
+       "discovers": "Chance does three jobs here: a mark, an estimate, a changing form. They are not interchangeable.",
+       "touches": [
+        {
+         "id": "spine-randomness_examples_of_randomness-1",
+         "title": "pollock painting in 3d / What chance may change"
+        },
+        {
+         "id": "spine-randomness_examples_of_randomness-2",
+         "title": "monte carlo dartboard"
+        }
+       ]
+      },
+      {
+       "map": "Random_Pheromone",
+       "finds": [
+        "organization",
+        "body"
+       ],
+       "carries": "Chance put to work.",
+       "discovers": "A deposited trace can become the input of a later decision. A path recruits another visit.",
+       "touches": [
+        {
+         "id": "spine-random_pheromone-1",
+         "title": "scent trail ground / A path recruits another visit"
+        },
+        {
+         "id": "world-dbf1df38f206019f41",
+         "title": "Scent basin | the pheromone model as the activity of a pool over shaft B"
+        }
+       ]
+      },
+      {
+       "map": "Random_Space",
+       "finds": [
+        "space",
+        "edge"
+       ],
+       "carries": "A trace that is read again.",
+       "discovers": "Layers summed look like land. The landscape on show is a sum, not a stored history.",
+       "touches": [
+        {
+         "id": "spine-random_space-1",
+         "title": "noise mixer / Layers that look like land"
+        },
+        {
+         "id": "spine-random_space-2",
+         "title": "worley noise"
+        }
+       ]
+      },
+      {
+       "map": "Random_Game",
+       "finds": [
+        "edge",
+        "body"
+       ],
+       "carries": "A landscape with no past.",
+       "discovers": "A crossing has a next state, and a time nobody is told. Being told and finding out are two ways to cross.",
+       "touches": [
+        {
+         "id": "spine-random_game-1",
+         "title": "r c / Told, or finding out"
+        },
+        {
+         "id": "spine-random_game-3",
+         "title": "random doors"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "noise",
+     "title": "Noise",
+     "movement": "A field has a value everywhere. The body meets what a threshold, a wall or a floor makes of it.",
+     "stops": [
+      {
+       "map": "Random_Noise_Types",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "An uncertain crossing.",
+       "discovers": "A movement called free still runs inside rules that keep acting.",
+       "touches": [
+        {
+         "id": "spine-random_noise_types-1",
+         "title": "randompoint / Which rules keep acting?"
+        },
+        {
+         "id": "spine-random_noise_types-2",
+         "title": "WhiteNoiseGallery"
+        }
+       ]
+      },
+      {
+       "map": "Noise_Columns",
+       "finds": [
+        "body",
+        "form"
+       ],
+       "carries": "Rules under the free movement.",
+       "discovers": "A column that keeps changing still suggests a support. Appearance and the role of holding up are separate.",
+       "touches": [
+        {
+         "id": "spine-noise_columns-1",
+         "title": "MeltingBerniniScene / What keeps a body changing?"
+        },
+        {
+         "id": "spine-noise_columns-2",
+         "title": "synthesis stand"
+        }
+       ]
+      },
+      {
+       "map": "Noise_One",
+       "finds": [
+        "form",
+        "edge"
+       ],
+       "carries": "A body that will not hold still.",
+       "discovers": "One value becomes colour in one place and relief in another. Each mapping loses different distinctions.",
+       "touches": [
+        {
+         "id": "spine-noise_one-1",
+         "title": "noisetorus / What does a value become?"
+        },
+        {
+         "id": "spine-noise_one-2",
+         "title": "noise ring walk"
+        }
+       ]
+      },
+      {
+       "map": "Noise_Voxel",
+       "finds": [
+        "edge",
+        "topology"
+       ],
+       "carries": "A value and its two mappings.",
+       "discovers": "A threshold declares each cell present or absent. The value remains beneath the choice.",
+       "touches": [
+        {
+         "id": "spine-noise_voxel-1",
+         "title": "perlin terrain sculptor / The value remains beneath the choice"
+        },
+        {
+         "id": "spine-noise_voxel-2",
+         "title": "voxelnoise"
+        }
+       ]
+      },
+      {
+       "map": "Noise_6_Wall",
+       "finds": [
+        "space",
+        "body"
+       ],
+       "carries": "A cell decided by a threshold.",
+       "discovers": "The room wears the field on its surfaces. The floor goes on carrying, unchanged.",
+       "touches": [
+        {
+         "id": "spine-noise_6_wall-1",
+         "title": "Noise controls / inset into the south lining of the shader room / The room wears the sum"
+        },
+        {
+         "id": "world-22c67d5afde353f7ff",
+         "title": "Shader Noise Space"
+        }
+       ]
+      },
+      {
+       "map": "Noise_Inside_Noise",
+       "finds": [
+        "space"
+       ],
+       "carries": "A field worn by a room.",
+       "discovers": "A field can be entered when it is shown as a surrounding surface. The floor kept in view says what is holding the body.",
+       "touches": [
+        {
+         "id": "spine-noise_inside_noise-1",
+         "title": "Inside Noise / doorway markings and built-in warp console / Borrow an address"
+        },
+        {
+         "id": "spine-noise_inside_noise-2",
+         "title": "film noise relief"
+        }
+       ]
+      },
+      {
+       "map": "Noise_Cellular",
+       "finds": [
+        "topology",
+        "space"
+       ],
+       "carries": "A field stood inside.",
+       "discovers": "Each place is given to its nearest site, and a distance rule acquires a wall. The walls and clearances are built from its answer.",
+       "touches": [
+        {
+         "id": "spine-noise_cellular-1",
+         "title": "cellular womb space / A distance rule acquires a wall"
+        },
+        {
+         "id": "spine-noise_cellular-2",
+         "title": "Blob Caster / cast a walkable pink path across Shaft B"
+        }
+       ]
+      },
+      {
+       "map": "Noise_Box",
+       "finds": [
+        "edge",
+        "form"
+       ],
+       "carries": "Cells with walls.",
+       "discovers": "A finite box gives one answer across its whole volume. The grid receiving the field is coarser than the field.",
+       "touches": [
+        {
+         "id": "spine-noise_box-1",
+         "title": "box shell space / One answer across a volume"
+        },
+        {
+         "id": "spine-noise_box-2",
+         "title": "Box Atrium / one field, two sections and an adjustable box size"
+        }
+       ]
+      },
+      {
+       "map": "Noise_Space_10",
+       "finds": [
+        "body",
+        "space"
+       ],
+       "carries": "One answer per box.",
+       "discovers": "A route sampled from the field and drawn on the ground knows nothing of a body's width or the slope it can climb.",
+       "touches": [
+        {
+         "id": "spine-noise_space_10-1",
+         "title": "Noise walk / ramp wall controls change the same field from flat skin to relief / Which way will carry you?"
+        },
+        {
+         "id": "world-53235a6351f43058bc",
+         "title": "Dark Sphere"
+        }
+       ]
+      },
+      {
+       "map": "Noise_Perlin_Simplex",
+       "finds": [
+        "organization"
+       ],
+       "carries": "A route narrower than a body.",
+       "discovers": "One address is asked of two generating rules with everything else held. The difference belongs to the rule.",
+       "touches": [
+        {
+         "id": "spine-noise_perlin_simplex-1",
+         "title": "One address, two fields / shared sampling console and walk-through arches / What counts as the same?"
+        },
+        {
+         "id": "spine-noise_perlin_simplex-2",
+         "title": "perlin noise"
+        }
+       ]
+      },
+      {
+       "map": "Lab_Path",
+       "finds": [
+        "body",
+        "edge"
+       ],
+       "carries": "Two fields at one address.",
+       "discovers": "Before generalising, one encounter is gone back to. Something followed out of the room.",
+       "touches": [
+        {
+         "id": "spine-lab_path-1",
+         "title": "noise lab path / What followed me out of the room?"
+        },
+        {
+         "id": "world-981639dba10a41fb75",
+         "title": "Dark Sphere"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "patterngeneration",
+     "title": "Shaders",
+     "movement": "A surface computed at every point: what it shows is not what answers the body.",
+     "stops": [
+      {
+       "map": "Shader_01_Shaping",
+       "finds": [
+        "edge",
+        "form"
+       ],
+       "carries": "One encounter kept.",
+       "discovers": "One rule runs on receivers of different size. A boundary can jump or be softened, and that is a choice inside the rule.",
+       "touches": [
+        {
+         "id": "spine-shader_01_shaping-1",
+         "title": "shader shaping wall / Why does the wave jump?"
+        },
+        {
+         "id": "spine-shader_01_shaping-2",
+         "title": "shader 01 shaping"
+        }
+       ]
+      },
+      {
+       "map": "Shader_05_Patterns",
+       "finds": [
+        "edge",
+        "space"
+       ],
+       "carries": "A jump and a softened edge.",
+       "discovers": "Move the pattern, then the receiver. The seams show where two coordinate systems meet.",
+       "touches": [
+        {
+         "id": "spine-shader_05_patterns-1",
+         "title": "shader 05 patterns / Where are the seams?"
+        },
+        {
+         "id": "spine-shader_05_patterns-2",
+         "title": "reference pattern garden"
+        }
+       ]
+      },
+      {
+       "map": "Shader_11_QueerRubber",
+       "finds": [
+        "body",
+        "edge"
+       ],
+       "carries": "Seams between coordinates.",
+       "discovers": "A surface suggests a material; what it answers to when a body arrives is another matter. A skin can be stood inside.",
+       "touches": [
+        {
+         "id": "spine-shader_11_queerrubber-1",
+         "title": "shader 11 queerrubber / What does a surface answer to?"
+        },
+        {
+         "id": "spine-shader_11_queerrubber-3",
+         "title": "Wardrobe tunnel: latex, a skin to stand inside"
+        }
+       ]
+      },
+      {
+       "map": "Shader_09_FBM",
+       "finds": [
+        "space",
+        "body"
+       ],
+       "carries": "A surface that suggests.",
+       "discovers": "Layered water moves, and under it lies the unchanged surface that carries.",
+       "touches": [
+        {
+         "id": "spine-shader_09_fbm-1",
+         "title": "basin water / What carries me over the water?"
+        },
+        {
+         "id": "spine-shader_09_fbm-2",
+         "title": "shader 09 fbm"
+        }
+       ]
+      },
+      {
+       "map": "Shader_12_PinkExtravaganza",
+       "finds": [
+        "organization",
+        "body"
+       ],
+       "carries": "Water that does not carry.",
+       "discovers": "A room is a composition of effects, and the roles can be handed round. Which of these bodies is the lamp?",
+       "touches": [
+        {
+         "id": "spine-shader_12_pinkextravaganza-1",
+         "title": "shader composition stage / Which of these is the lamp?"
+        },
+        {
+         "id": "spine-shader_12_pinkextravaganza-3",
+         "title": "reference plural body"
+        }
+       ]
+      },
+      {
+       "map": "Shader_10_ReactionDiffusion",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "Roles in a composed room.",
+       "discovers": "A field reads its own preceding state. The hand intervenes and leaves, and what remains is in the next frame.",
+       "touches": [
+        {
+         "id": "spine-shader_10_reactiondiffusion-1",
+         "title": "shader state chamber / Where is the last frame?"
+        },
+        {
+         "id": "spine-shader_10_reactiondiffusion-2",
+         "title": "shader 10 reactiondiffusion"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "V",
+   "title": "Rules that build",
+   "line": "Organisation from below. A cell asks its neighbours, an instruction calls itself, a sentence is rewritten, a branch listens to some points and not to others. What was built is then tried by a body that needs room.",
+   "sequences": [
+    {
+     "id": "cellularautomata",
+     "title": "Cellular automata",
+     "movement": "Each cell asks only its neighbours, and a history appears that can be stood on.",
+     "stops": [
+      {
+       "map": "CA_Introduction",
+       "finds": [
+        "organization"
+       ],
+       "carries": "A field that reads its own last frame.",
+       "discovers": "One cell asks its neighbours and nobody else. A larger pattern develops that no cell was told about.",
+       "touches": [
+        {
+         "id": "spine-ca_introduction-1",
+         "title": "ca rule explorer / One cell asks its neighbours"
+        },
+        {
+         "id": "spine-ca_introduction-2",
+         "title": "persian rug"
+        }
+       ]
+      },
+      {
+       "map": "CA_ElementaryRules",
+       "finds": [
+        "organization",
+        "space"
+       ],
+       "carries": "A local rule.",
+       "discovers": "Active, fading, empty: a cell can have a past, and an empty address is still available.",
+       "touches": [
+        {
+         "id": "spine-ca_elementaryrules-1",
+         "title": "structure growth / A cell with a past"
+        },
+        {
+         "id": "spine-ca_elementaryrules-2",
+         "title": "void ca neighbour slice"
+        }
+       ]
+      },
+      {
+       "map": "CA_GameOfLife",
+       "finds": [
+        "space",
+        "body"
+       ],
+       "carries": "Cells with a past.",
+       "discovers": "One stored history is shown as a desk image, a screen and a supporting surface. A history can be inhabited.",
+       "touches": [
+        {
+         "id": "spine-ca_gameoflife-1",
+         "title": "ca bridge / A history we can inhabit"
+        },
+        {
+         "id": "spine-ca_gameoflife-2",
+         "title": "ca columns"
+        }
+       ]
+      },
+      {
+       "map": "CA_BeyondBinary",
+       "finds": [
+        "form",
+        "edge"
+       ],
+       "carries": "A history underfoot.",
+       "discovers": "A travelling pattern is recognisable and is stored nowhere as one object. It visits places.",
+       "touches": [
+        {
+         "id": "spine-ca_beyondbinary-1",
+         "title": "game of life petri / A pattern visits a place"
+        },
+        {
+         "id": "spine-ca_beyondbinary-2",
+         "title": "mold network"
+        }
+       ]
+      },
+      {
+       "map": "CA_ExpandingSpace",
+       "finds": [
+        "body",
+        "edge"
+       ],
+       "carries": "A pattern that is nowhere stored.",
+       "discovers": "A surface that responds to a body includes a measure of it. Exactly which tracked position it receives is the question.",
+       "touches": [
+        {
+         "id": "spine-ca_expandingspace-1",
+         "title": "decaying bridge / The surface includes a measure of me"
+        },
+        {
+         "id": "spine-ca_expandingspace-2",
+         "title": "crossway ca"
+        }
+       ]
+      },
+      {
+       "map": "CA_SoftRules",
+       "finds": [
+        "organization"
+       ],
+       "carries": "A body measured by the floor.",
+       "discovers": "With exchange between neighbours a cell can receive. Without it each changes alone.",
+       "touches": [
+        {
+         "id": "spine-ca_softrules-1",
+         "title": "rd artifact / What can a cell receive?"
+        },
+        {
+         "id": "spine-ca_softrules-2",
+         "title": "the clockmaker of rules"
+        }
+       ]
+      },
+      {
+       "map": "CA_AgentsCircuits",
+       "finds": [
+        "form",
+        "edge"
+       ],
+       "carries": "Cells that exchange.",
+       "discovers": "The same triangle appears from different procedures. An appearance does not name the work that made it.",
+       "touches": [
+        {
+         "id": "spine-ca_agentscircuits-1",
+         "title": "ca rule explorer / The same pattern, different work"
+        },
+        {
+         "id": "spine-ca_agentscircuits-2",
+         "title": "sierpinski pyramid"
+        }
+       ]
+      },
+      {
+       "map": "CA_EdgeOfChaos",
+       "finds": [
+        "edge",
+        "organization"
+       ],
+       "carries": "One appearance, several makers.",
+       "discovers": "One small difference is tracked under clear conditions. How far it can go depends on the rule.",
+       "touches": [
+        {
+         "id": "spine-ca_edgeofchaos-1",
+         "title": "self organization ca / How far can one difference go?"
+        },
+        {
+         "id": "spine-ca_edgeofchaos-3",
+         "title": "disease spread ca"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "fractals",
+     "title": "Fractals",
+     "movement": "The instruction is applied to its own result.",
+     "stops": [
+      {
+       "map": "Fractal_Recursion",
+       "finds": [
+        "form",
+        "edge"
+       ],
+       "carries": "A difference that travels.",
+       "discovers": "An instruction calls itself. The geometry goes on past what an eye can still tell apart.",
+       "touches": [
+        {
+         "id": "spine-fractal_recursion-1",
+         "title": "01 / One Call inside Itself (ThresholdWalk) / How many times can again happen?"
+        },
+        {
+         "id": "spine-fractal_recursion-2",
+         "title": "02 / A Call that Branches (Circles)"
+        },
+        {
+         "id": "spine-fractal_recursion-3",
+         "title": "03 / One Volume Spent into Many (Cube Subdivision)"
+        }
+       ]
+      },
+      {
+       "map": "Fractal_RecursiveTrees",
+       "finds": [
+        "form",
+        "body"
+       ],
+       "carries": "Again, inside again.",
+       "discovers": "Changing an angle, changing the branching rule and moving the finished tree are three different acts on one recursive body.",
+       "touches": [
+        {
+         "id": "spine-fractal_recursivetrees-1",
+         "title": "01 / Two Angles at Every Fork (Canopy Lesson) / Where will the next branch go?"
+        },
+        {
+         "id": "spine-fractal_recursivetrees-2",
+         "title": "02 / Three Controls on a Complex Tree"
+        }
+       ]
+      },
+      {
+       "map": "Fractal_CantorSet",
+       "finds": [
+        "topology",
+        "edge"
+       ],
+       "carries": "A rule at every fork.",
+       "discovers": "Each step leaves more pieces and less material. What is on show is also the history of the removals.",
+       "touches": [
+        {
+         "id": "spine-fractal_cantorset-1",
+         "title": "cantor set / More pieces, less material"
+        },
+        {
+         "id": "spine-fractal_cantorset-2",
+         "title": "example 8 4 cantor pagoda vr"
+        }
+       ]
+      },
+      {
+       "map": "Fractal_KochSierpinski",
+       "finds": [
+        "edge",
+        "topology"
+       ],
+       "carries": "Removal that multiplies.",
+       "discovers": "The endpoints stay and the route between them is replaced by a longer one. The boundary takes another turn.",
+       "touches": [
+        {
+         "id": "spine-fractal_kochsierpinski-1",
+         "title": "fractal koch curve / The boundary takes another turn"
+        },
+        {
+         "id": "spine-fractal_kochsierpinski-3",
+         "title": "box counting dimension"
+        }
+       ]
+      },
+      {
+       "map": "Fractal_MengerSponge",
+       "finds": [
+        "topology",
+        "body"
+       ],
+       "carries": "A boundary longer at every step.",
+       "discovers": "A hole becomes a place. Connected is one fact; large enough for this body is another.",
+       "touches": [
+        {
+         "id": "spine-fractal_mengersponge-1",
+         "title": "menger sponge / A hole becomes a place"
+        },
+        {
+         "id": "spine-fractal_mengersponge-3",
+         "title": "film menger twenty"
+        }
+       ]
+      },
+      {
+       "map": "Fractal_GoldenSpiral",
+       "finds": [
+        "form",
+        "space"
+       ],
+       "carries": "Openings measured by a body.",
+       "discovers": "A recurrence is only numbers until a mapping gives its terms a place in space.",
+       "touches": [
+        {
+         "id": "spine-fractal_goldenspiral-1",
+         "title": "fibonacci sequences / A number needs a mapping"
+        },
+        {
+         "id": "spine-fractal_goldenspiral-2",
+         "title": "golden rectangle"
+        },
+        {
+         "id": "spine-fractal_goldenspiral-3",
+         "title": "romanesco"
+        }
+       ]
+      },
+      {
+       "map": "Fractal_Synthesis",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "A number given a place.",
+       "discovers": "Say what exactly comes again. The operation is one thing and the display that shows or hides its history another.",
+       "touches": [
+        {
+         "id": "spine-fractal_synthesis-1",
+         "title": "cantor set / What exactly comes again?"
+        },
+        {
+         "id": "spine-fractal_synthesis-3",
+         "title": "fractal procedure gallery"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "lsystems",
+     "title": "L-systems & assemblage",
+     "movement": "A sentence is rewritten and then given a body.",
+     "stops": [
+      {
+       "map": "LSystems_Grammar_Lab",
+       "finds": [
+        "form",
+        "organization"
+       ],
+       "carries": "A procedure named.",
+       "discovers": "The sentence is held and its reading changed. The same letters, another body.",
+       "touches": [
+        {
+         "id": "spine-lsystems_grammar_lab-1",
+         "title": "lsystem editor / The same sentence, another body"
+        },
+        {
+         "id": "spine-lsystems_grammar_lab-2",
+         "title": "hand line"
+        }
+       ]
+      },
+      {
+       "map": "LSystems_Growth",
+       "finds": [
+        "organization",
+        "form"
+       ],
+       "carries": "A sentence and its reading.",
+       "discovers": "The turtle saves its state and goes back to it. The branch drawn in between remains.",
+       "touches": [
+        {
+         "id": "spine-lsystems_growth-1",
+         "title": "parametric lsystem / What a branch remembers"
+        },
+        {
+         "id": "spine-lsystems_growth-2",
+         "title": "Tape follower / guide line, exposed spool and rear roller"
+        }
+       ]
+      },
+      {
+       "map": "LSystems_Grammars_And_Curves",
+       "finds": [
+        "edge",
+        "organization"
+       ],
+       "carries": "A state saved and restored.",
+       "discovers": "Forward is an agreement between an instruction and a movement. Change the agreement and forward goes sideways.",
+       "touches": [
+        {
+         "id": "spine-lsystems_grammars_and_curves-1",
+         "title": "the believing turtle / When forward goes sideways"
+        },
+        {
+         "id": "spine-lsystems_grammars_and_curves-2",
+         "title": "tube painting"
+        }
+       ]
+      },
+      {
+       "map": "LSystems_Architecture",
+       "finds": [
+        "space",
+        "body"
+       ],
+       "carries": "An agreement about direction.",
+       "discovers": "The line plan is kept and boundaries are built round it. A line begins to admit a body.",
+       "touches": [
+        {
+         "id": "spine-lsystems_architecture-1",
+         "title": "lsystem dungeon / When a line admits a body"
+        },
+        {
+         "id": "spine-lsystems_architecture-3",
+         "title": "dragon room"
+        }
+       ]
+      },
+      {
+       "map": "LSystems_Competition",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "Lines grown into rooms.",
+       "discovers": "The starting rules are equal. What differs is who is given the first turn.",
+       "touches": [
+        {
+         "id": "spine-lsystems_competition-1",
+         "title": "ForestCompetition / Who gets the first turn?"
+        },
+        {
+         "id": "spine-lsystems_competition-2",
+         "title": "branching coral"
+        }
+       ]
+      },
+      {
+       "map": "LSystems_Living",
+       "finds": [
+        "edge",
+        "form"
+       ],
+       "carries": "The order of turns.",
+       "discovers": "A control moves smoothly and the compiled body changes in steps. What counts as a change is decided below the dial.",
+       "touches": [
+        {
+         "id": "spine-lsystems_living-1",
+         "title": "genetic tree sculptor / What counts as a change?"
+        },
+        {
+         "id": "spine-lsystems_living-2",
+         "title": "lsystem tree"
+        }
+       ]
+      },
+      {
+       "map": "LSystems_Shape_Grammars",
+       "finds": [
+        "form",
+        "organization"
+       ],
+       "carries": "Changes that count.",
+       "discovers": "A shape grammar is read through the operations it permits: a family the cube can become.",
+       "touches": [
+        {
+         "id": "spine-lsystems_shape_grammars-1",
+         "title": "form grammar family / A family the cube can become"
+        },
+        {
+         "id": "spine-lsystems_shape_grammars-2",
+         "title": "form grammar canopy"
+        }
+       ]
+      },
+      {
+       "map": "Assemblage_Same_Desire",
+       "finds": [
+        "topology",
+        "body"
+       ],
+       "carries": "A family from permitted operations.",
+       "discovers": "Marks are laid without consulting their neighbours, and a person still connects paths among them. Two marks, many ways through.",
+       "touches": [
+        {
+         "id": "spine-assemblage_same_desire-1",
+         "title": "ten print textile / Two marks, many ways through"
+        },
+        {
+         "id": "spine-assemblage_same_desire-2",
+         "title": "grid substrate runner"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "proceduralgeneration",
+     "title": "Procedural growth",
+     "movement": "Growth is asked what it listens to: a score, a target, a neighbour, a contact.",
+     "stops": [
+      {
+       "map": "PG_Genetic_Evolution",
+       "finds": [
+        "organization",
+        "body"
+       ],
+       "carries": "Paths found among marks.",
+       "discovers": "The candidate bodies stay and the criterion ranking them changes. A score notices some things.",
+       "touches": [
+        {
+         "id": "spine-pg_genetic_evolution-1",
+         "title": "GeneticProgramming / What does the score notice?"
+        },
+        {
+         "id": "world-ae73842a271927e2dd",
+         "title": "Science Screen"
+        }
+       ]
+      },
+      {
+       "map": "PG_Space_Colonization",
+       "finds": [
+        "organization",
+        "space"
+       ],
+       "carries": "A score that notices.",
+       "discovers": "A branch grows toward targets, and only some are eligible. Which points get a say?",
+       "touches": [
+        {
+         "id": "spine-pg_space_colonization-1",
+         "title": "space colonization algorithm / Which points get a say?"
+        },
+        {
+         "id": "spine-pg_space_colonization-2",
+         "title": "colonization floor"
+        }
+       ]
+      },
+      {
+       "map": "PG_Branching_Growth",
+       "finds": [
+        "organization",
+        "form"
+       ],
+       "carries": "Targets with a say.",
+       "discovers": "Following the nearest invitation differs from combining several requests. One request becomes the next branch.",
+       "touches": [
+        {
+         "id": "spine-pg_branching_growth-1",
+         "title": "branching growth algorithm / One request becomes the next branch"
+        },
+        {
+         "id": "spine-pg_branching_growth-3",
+         "title": "record piles"
+        }
+       ]
+      },
+      {
+       "map": "PG_Percolation_Network",
+       "finds": [
+        "topology",
+        "edge"
+       ],
+       "carries": "A branch answering requests.",
+       "discovers": "Touching is not enough. The update decides which kind of contact counts as a connection.",
+       "touches": [
+        {
+         "id": "spine-pg_percolation_network-1",
+         "title": "percolationnetwork ca / Touching is not enough"
+        },
+        {
+         "id": "spine-pg_percolation_network-3",
+         "title": "percolation crossing"
+        }
+       ]
+      },
+      {
+       "map": "PG_Caves_Mazes",
+       "finds": [
+        "space",
+        "body"
+       ],
+       "carries": "Contact that counts.",
+       "discovers": "A carving trace is a line, and the passage it leaves has a width. A route needs room.",
+       "touches": [
+        {
+         "id": "spine-pg_caves_mazes-1",
+         "title": "caverandomwalk / A route needs room"
+        },
+        {
+         "id": "spine-pg_caves_mazes-2",
+         "title": "maze generation"
+        }
+       ]
+      },
+      {
+       "map": "PG_Sculpted_Forms",
+       "finds": [
+        "form",
+        "edge"
+       ],
+       "carries": "A passage with width.",
+       "discovers": "A moving construction is sampled at a chosen moment. The new surface keeps that moment and omits the rest.",
+       "touches": [
+        {
+         "id": "spine-pg_sculpted_forms-1",
+         "title": "cube mound scene / What did the sample keep?"
+        },
+        {
+         "id": "spine-pg_sculpted_forms-2",
+         "title": "dome"
+        }
+       ]
+      },
+      {
+       "map": "PG_Mirrored_Patterns",
+       "finds": [
+        "topology",
+        "space"
+       ],
+       "carries": "A moment kept as a surface.",
+       "discovers": "One field copied in another arrangement offers other passages. Another image, another way through.",
+       "touches": [
+        {
+         "id": "spine-pg_mirrored_patterns-1",
+         "title": "mirror cellular texture for 3d / Another image, another way through"
+        },
+        {
+         "id": "spine-pg_mirrored_patterns-2",
+         "title": "rhizomatic maze space"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "VI",
+   "title": "What holds a body, and where it ends",
+   "line": "Topologies. A body is the relations between its points. A boundary is where a field crosses a value; necks, caves and openings appear that nobody placed, and a removed volume becomes a room.",
+   "sequences": [
+    {
+     "id": "softbodies",
+     "title": "Soft bodies",
+     "movement": "A body is its relations: pressed, pinned, dropped, frozen.",
+     "stops": [
+      {
+       "map": "SoftBodies_Soft_Body_Deformation",
+       "finds": [
+        "body"
+       ],
+       "carries": "Passages offered by an arrangement.",
+       "discovers": "Pressed in one place, the cube stays a cube. What holds it together is the relations between its points.",
+       "touches": [
+        {
+         "id": "spine-softbodies_soft_body_deformation-1",
+         "title": "jelly cube / What holds a cube together?"
+        },
+        {
+         "id": "spine-softbodies_soft_body_deformation-2",
+         "title": "softmill"
+        }
+       ]
+      },
+      {
+       "map": "SoftBodies_Cloth_Physics",
+       "finds": [
+        "edge",
+        "body"
+       ],
+       "carries": "Relations that hold.",
+       "discovers": "The material settings are held and the points allowed to move are changed. A different freedom at the edge gives another form.",
+       "touches": [
+        {
+         "id": "spine-softbodies_cloth_physics-1",
+         "title": "cloth straps / A different freedom at the edge"
+        },
+        {
+         "id": "spine-softbodies_cloth_physics-3",
+         "title": "tension membrane"
+        }
+       ]
+      },
+      {
+       "map": "SoftBodies_Carusell",
+       "finds": [
+        "body",
+        "organization"
+       ],
+       "carries": "Freedom at the boundary.",
+       "discovers": "The support's motion is prescribed. What hangs from it answers in its own way.",
+       "touches": [
+        {
+         "id": "spine-softbodies_carusell-1",
+         "title": "revolving joy ride / The support moves"
+        },
+        {
+         "id": "spine-softbodies_carusell-2",
+         "title": "cloth straps"
+        }
+       ]
+      },
+      {
+       "map": "SoftBodies_Obsticals",
+       "finds": [
+        "space",
+        "body"
+       ],
+       "carries": "A body answering its support.",
+       "discovers": "The room has a body. Holding the phase that drives it does not hold the body still.",
+       "touches": [
+        {
+         "id": "spine-softbodies_obsticals-1",
+         "title": "breathing room / The room has a body"
+        },
+        {
+         "id": "spine-softbodies_obsticals-2",
+         "title": "softbody gallery part2"
+        }
+       ]
+      },
+      {
+       "map": "SoftBodies_Obsticals_Part2",
+       "finds": [
+        "body",
+        "edge"
+       ],
+       "carries": "A room with a body.",
+       "discovers": "The same fall meets another encounter. Material, geometry and starting conditions come before any name for the difference.",
+       "touches": [
+        {
+         "id": "spine-softbodies_obsticals_part2-1",
+         "title": "softbody gallery part2 / Same fall, another encounter"
+        },
+        {
+         "id": "world-9bcba4f3091486fa6d",
+         "title": "Pick Up Cube"
+        }
+       ]
+      },
+      {
+       "map": "SoftBodies_Playground_of_Joy",
+       "finds": [
+        "form",
+        "body"
+       ],
+       "carries": "Falls compared.",
+       "discovers": "A soft body is measured, answered and then frozen into a retained form. When does a body become a form?",
+       "touches": [
+        {
+         "id": "spine-softbodies_playground_of_joy-1",
+         "title": "rounded softbody test / When does a body become a form?"
+        },
+        {
+         "id": "spine-softbodies_playground_of_joy-2",
+         "title": "frozen glass vessel"
+        }
+       ]
+      },
+      {
+       "map": "SoftBodies_Affect_Theory_Visualization",
+       "finds": [
+        "body",
+        "edge"
+       ],
+       "carries": "A body frozen into a form.",
+       "discovers": "Something looks alive. The look can be followed back to the operations that produce its signs.",
+       "touches": [
+        {
+         "id": "spine-softbodies_affect_theory_visualization-1",
+         "title": "radiolaria / What makes this look alive?"
+        },
+        {
+         "id": "spine-softbodies_affect_theory_visualization-2",
+         "title": "elasticity press comparison"
+        }
+       ]
+      },
+      {
+       "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+       "finds": [
+        "organization",
+        "form"
+       ],
+       "carries": "Signs of life, traced.",
+       "discovers": "Local exchanges and a disturbance keep a field changing. The pattern is maintained, not stored.",
+       "touches": [
+        {
+         "id": "spine-proceduralgeneration_reaction_diffusion_systems-1",
+         "title": "turing pattern generator / What keeps a pattern changing?"
+        },
+        {
+         "id": "spine-proceduralgeneration_reaction_diffusion_systems-2",
+         "title": "reaction diffusion"
+        }
+       ]
+      },
+      {
+       "map": "Topology_Entropy_Morphogenesis",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "A maintained pattern.",
+       "discovers": "One simple control turns out to be several settings tied together. Somebody connected them.",
+       "touches": [
+        {
+         "id": "spine-topology_entropy_morphogenesis-1",
+         "title": "entropy morphogenesis / Who connected the controls?"
+        },
+        {
+         "id": "world-a00bccbfabe1d0a86e",
+         "title": "Soft Bodies Workshop Desk"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "isosurfaces",
+     "title": "Isosurfaces",
+     "movement": "The boundary is where a field crosses a value: openings, necks and caves that nobody placed.",
+     "stops": [
+      {
+       "map": "ISO_Introduction",
+       "finds": [
+        "edge",
+        "topology"
+       ],
+       "carries": "Controls tied together.",
+       "discovers": "A visible boundary is the result of field values, a classification and a finite extraction. Nobody drew the surface.",
+       "touches": [
+        {
+         "id": "spine-iso_introduction-1",
+         "title": "voxel noise demo / A boundary made from values"
+        },
+        {
+         "id": "badge-9890d10ae8ea796f",
+         "title": "METABALLS"
+        }
+       ]
+      },
+      {
+       "map": "ISO_LookupTable",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "A boundary made from values.",
+       "discovers": "Eight corner samples and a sign convention name the case. The triangles follow from the name.",
+       "touches": [
+        {
+         "id": "spine-iso_lookuptable-1",
+         "title": "fifteen cases demo / Eight samples, one decision"
+        },
+        {
+         "id": "spine-iso_lookuptable-2",
+         "title": "the threshold opinion"
+        }
+       ]
+      },
+      {
+       "map": "ISO_ShapesGallery",
+       "finds": [
+        "body",
+        "form"
+       ],
+       "carries": "One decision per cell.",
+       "discovers": "One procedure makes many familiar bodies. Made the same way, they are not for the same use.",
+       "touches": [
+        {
+         "id": "spine-iso_shapesgallery-1",
+         "title": "mc shapes gallery / The same tool makes another body"
+        },
+        {
+         "id": "spine-iso_shapesgallery-3",
+         "title": "ada body editor"
+        }
+       ]
+      },
+      {
+       "map": "ISO_TorusGyroid",
+       "finds": [
+        "topology",
+        "body"
+       ],
+       "carries": "Bodies from one tool.",
+       "discovers": "A surface repeats without separate pieces. Its openings are periodic; the space a particular body can occupy in it is a separate fact.",
+       "touches": [
+        {
+         "id": "spine-iso_torusgyroid-1",
+         "title": "mc torus sculpture / Repetition without separate pieces"
+        },
+        {
+         "id": "spine-iso_torusgyroid-2",
+         "title": "GyroidDemo"
+        }
+       ]
+      },
+      {
+       "map": "ISO_Sculpting",
+       "finds": [
+        "topology",
+        "body"
+       ],
+       "carries": "One surface, open everywhere.",
+       "discovers": "A sculpting gesture adds to a field. Where two contributions meet, a seam gives way to a neck.",
+       "touches": [
+        {
+         "id": "spine-iso_sculpting-1",
+         "title": "mc sculpt vr / A seam gives way to a neck"
+        },
+        {
+         "id": "spine-iso_sculpting-2",
+         "title": "fountain demo"
+        }
+       ]
+      },
+      {
+       "map": "ISO_FlatTerrain",
+       "finds": [
+        "topology",
+        "space"
+       ],
+       "carries": "A neck made by a gesture.",
+       "discovers": "A height assignment gives each place one ground. A field lets the ground be above itself.",
+       "touches": [
+        {
+         "id": "spine-iso_flatterrain-1",
+         "title": "mc flat landscape / The ground can be above itself"
+        },
+        {
+         "id": "spine-iso_flatterrain-2",
+         "title": "mc overhang landscape"
+        }
+       ]
+      },
+      {
+       "map": "ISO_PortalLandscape",
+       "finds": [
+        "topology",
+        "edge"
+       ],
+       "carries": "Ground above ground.",
+       "discovers": "An opening appears where the terms of the field together allow it. Nothing in the rule says doorway.",
+       "touches": [
+        {
+         "id": "spine-iso_portallandscape-1",
+         "title": "marchingcubes portal landscape / An opening without a doorway instruction"
+        },
+        {
+         "id": "world-72230be507b09ce084",
+         "title": "Portal landscape comparison desk"
+        }
+       ]
+      },
+      {
+       "map": "ISO_Caves",
+       "finds": [
+        "space",
+        "topology"
+       ],
+       "carries": "An opening nobody ordered.",
+       "discovers": "From the enclosing side the boundary is a room. A visible portal makes a promise the body has to test.",
+       "touches": [
+        {
+         "id": "spine-iso_caves-1",
+         "title": "mc portal landscape / A portal makes a promise"
+        },
+        {
+         "id": "spine-iso_caves-2",
+         "title": "mc inside cave"
+        }
+       ]
+      },
+      {
+       "map": "ISO_CaveGeneration",
+       "finds": [
+        "space",
+        "organization"
+       ],
+       "carries": "A promise of passage.",
+       "discovers": "The corridor has no designer. Its form goes back to generating conditions and not to a hand-placed wall.",
+       "touches": [
+        {
+         "id": "spine-iso_cavegeneration-1",
+         "title": "marchingcubes cave / Who designed the corridor?"
+        },
+        {
+         "id": "spine-iso_cavegeneration-2",
+         "title": "marchingcave"
+        }
+       ]
+      },
+      {
+       "map": "ISO_AnimatedNoise",
+       "finds": [
+        "edge",
+        "form"
+       ],
+       "carries": "A corridor from conditions.",
+       "discovers": "Which block moved? A block that persists and travels is one thing; occupancy changing at fixed locations is another.",
+       "touches": [
+        {
+         "id": "spine-iso_animatednoise-1",
+         "title": "Animated Noise / Cells and crossings / Which block moved?"
+        },
+        {
+         "id": "spine-iso_animatednoise-2",
+         "title": "mc base"
+        }
+       ]
+      },
+      {
+       "map": "ISO_Metaballs",
+       "finds": [
+        "topology",
+        "body"
+       ],
+       "carries": "Motion seen where places changed.",
+       "discovers": "Two sources, one boundary. The neck between them is a threshold of the sum and is owned by neither.",
+       "touches": [
+        {
+         "id": "spine-iso_metaballs-1",
+         "title": "metaball world / Two sources, one boundary"
+        },
+        {
+         "id": "spine-iso_metaballs-2",
+         "title": "raymarched metaballs"
+        }
+       ]
+      },
+      {
+       "map": "ISO_ImplicitModeling",
+       "finds": [
+        "form",
+        "edge"
+       ],
+       "carries": "A boundary owned by a sum.",
+       "discovers": "A surface can be found in the act of looking, or handed over as a mesh already extracted.",
+       "touches": [
+        {
+         "id": "spine-iso_metaballs-2",
+         "title": "raymarched metaballs",
+         "carried": true,
+         "from": "ISO_Metaballs"
+        },
+        {
+         "id": "spine-iso_implicitmodeling-1",
+         "title": "implicit surface modeling / A surface found by looking"
+        }
+       ]
+      },
+      {
+       "map": "ISO_RhizomeBody",
+       "finds": [
+        "topology",
+        "body"
+       ],
+       "carries": "A surface that exists while it is looked for.",
+       "discovers": "Connections can be seen in every direction. A connection has to fit a body, and let it come back.",
+       "touches": [
+        {
+         "id": "spine-iso_rhizomebody-1",
+         "title": "rhizome inside / A connection has to fit a body"
+        },
+        {
+         "id": "world-3897866781fee2fd3f",
+         "title": "Side slab / room for the rhizome body (fit pass 2026-11-09)"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "boolean_surfaces",
+     "title": "Booleans",
+     "movement": "Two bodies are asked what they share, and the answer is a third.",
+     "stops": [
+      {
+       "map": "Boolean_Verbs",
+       "finds": [
+        "topology",
+        "form"
+       ],
+       "carries": "A connection that fits.",
+       "discovers": "The same two bodies make three boundaries: all of both, only the shared part, one without the other.",
+       "touches": [
+        {
+         "id": "spine-boolean_verbs-1",
+         "title": "csg union demo / The same bodies make another boundary"
+        },
+        {
+         "id": "spine-boolean_verbs-2",
+         "title": "csg intersection demo"
+        },
+        {
+         "id": "spine-boolean_verbs-3",
+         "title": "csg difference demo"
+        }
+       ]
+      },
+      {
+       "map": "Boolean_Gallery",
+       "finds": [
+        "form",
+        "edge"
+       ],
+       "carries": "Three verbs.",
+       "discovers": "A family of variants carries a name. What changes their relations is the settings, and where the faces stand to each other.",
+       "touches": [
+        {
+         "id": "spine-boolean_gallery-1",
+         "title": "csg difference demo / Where the variants stand"
+        },
+        {
+         "id": "spine-boolean_gallery-2",
+         "title": "csg union demo"
+        }
+       ]
+      },
+      {
+       "map": "Boolean_Works",
+       "finds": [
+        "space",
+        "topology"
+       ],
+       "carries": "Variants and their settings.",
+       "discovers": "A removed volume grows until it promises inhabitation. The negative becomes a room.",
+       "touches": [
+        {
+         "id": "spine-boolean_works-1",
+         "title": "csg compose workbench / When the negative gets big"
+        },
+        {
+         "id": "spine-boolean_works-2",
+         "title": "subtraction suite"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "VII",
+   "title": "Many, and the ways between them",
+   "line": "Organisational structures. Swarms that keep their memory in the ground, graphs that keep only connections, learning systems that draw boundaries round bodies and rename them.",
+   "sequences": [
+    {
+     "id": "swarmintelligence",
+     "title": "Swarms",
+     "movement": "No body leads. The ground remembers, neighbours are counted, and a score says better.",
+     "stops": [
+      {
+       "map": "SwarmIntelligence_PhysarumColony",
+       "finds": [
+        "organization",
+        "space"
+       ],
+       "carries": "A hollow large enough to enter.",
+       "discovers": "The ground keeps what was deposited. A memory can live in a field and in no single body.",
+       "touches": [
+        {
+         "id": "spine-swarmintelligence_physarumcolony-1",
+         "title": "physarum trace gallery / Remembering in the ground"
+        },
+        {
+         "id": "spine-swarmintelligence_physarumcolony-2",
+         "title": "ant agent"
+        }
+       ]
+      },
+      {
+       "map": "SwarmIntelligence_FlowFields",
+       "finds": [
+        "organization"
+       ],
+       "carries": "Remembering in the ground.",
+       "discovers": "Turns that look agreed are read from the ground by each agent alone. Nobody needs to be watching anybody.",
+       "touches": [
+        {
+         "id": "spine-swarmintelligence_flowfields-1",
+         "title": "flow direction table / Directions already in the ground"
+        },
+        {
+         "id": "spine-swarmintelligence_flowfields-2",
+         "title": "ant colony table"
+        }
+       ]
+      },
+      {
+       "map": "SwarmIntelligence_Boids_Algorithm",
+       "finds": [
+        "organization",
+        "body"
+       ],
+       "carries": "Directions already in the ground.",
+       "discovers": "A flock is three ways of being near, a containment and a response to the visitor. One body has several neighbours.",
+       "touches": [
+        {
+         "id": "spine-swarmintelligence_boids_algorithm-1",
+         "title": "boid manager / Three ways to be near"
+        },
+        {
+         "id": "world-fef3cdc57c19c39604",
+         "title": "One body, several neighbours"
+        }
+       ]
+      },
+      {
+       "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+       "finds": [
+        "body",
+        "organization"
+       ],
+       "carries": "Neighbours by nearness.",
+       "discovers": "One individual is followed. Its inner state changes which information governs the next movement.",
+       "touches": [
+        {
+         "id": "spine-swarmintelligence_agent_based_modeling_abm-1",
+         "title": "ant colony optimization / What returns with the point"
+        },
+        {
+         "id": "spine-swarmintelligence_agent_based_modeling_abm-2",
+         "title": "navigator noise"
+        }
+       ]
+      },
+      {
+       "map": "SwarmIntelligence_Ant_Colony_Optimization",
+       "finds": [
+        "organization",
+        "body"
+       ],
+       "carries": "A body with a state.",
+       "discovers": "A trail left by one body is a direction for another: an arrangement written by walking.",
+       "touches": [
+        {
+         "id": "spine-swarmintelligence_ant_colony_optimization-1",
+         "title": "ant colony walk / Directions left for someone else"
+        },
+        {
+         "id": "spine-swarmintelligence_ant_colony_optimization-2",
+         "title": "ant scale atlas"
+        }
+       ]
+      },
+      {
+       "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "Directions left for someone else.",
+       "discovers": "A particle has a position now, a remembered result and a criterion. Better according to which score?",
+       "touches": [
+        {
+         "id": "spine-swarmintelligence_particle_swarm_optimization-1",
+         "title": "particle swarm walk / Better according to which score?"
+        },
+        {
+         "id": "spine-swarmintelligence_particle_swarm_optimization-2",
+         "title": "fitness landscape politics"
+        }
+       ]
+      },
+      {
+       "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "A score for better.",
+       "discovers": "A population that seems to keep itself going is partly supplied from outside. Who keeps the ecosystem going?",
+       "touches": [
+        {
+         "id": "spine-swarmintelligence_particle_swarm_optimization-3",
+         "title": "self organizing patterns",
+         "carried": true,
+         "from": "SwarmIntelligence_Particle_Swarm_Optimization"
+        },
+        {
+         "id": "spine-swarmintelligence_swarm_intelligence_algorithms-1",
+         "title": "population account walk / Who keeps the ecosystem going?"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "graphtheory",
+     "title": "Graph theory",
+     "movement": "Only the connections are kept: order, layout, loss, return, cost and room.",
+     "stops": [
+      {
+       "map": "GT_Foundations",
+       "finds": [
+        "topology",
+        "organization"
+       ],
+       "carries": "A population and its supply.",
+       "discovers": "The connections are fixed and two travellers take them in a different order. One graph, two journeys.",
+       "touches": [
+        {
+         "id": "spine-gt_foundations-1",
+         "title": "two travelers / Two travellers, one graph"
+        },
+        {
+         "id": "spine-gt_foundations-3",
+         "title": "seven bridges"
+        }
+       ]
+      },
+      {
+       "map": "GT_Layout",
+       "finds": [
+        "topology",
+        "space"
+       ],
+       "carries": "One graph, two orders.",
+       "discovers": "The drawing changes its coordinates and the edge holds. A connection is not a coordinate.",
+       "touches": [
+        {
+         "id": "spine-gt_layout-1",
+         "title": "force directed layout / A connection is not a coordinate"
+        },
+        {
+         "id": "spine-gt_layout-2",
+         "title": "carried point"
+        }
+       ]
+      },
+      {
+       "map": "GT_Pathfinding",
+       "finds": [
+        "topology",
+        "edge"
+       ],
+       "carries": "Connection without position.",
+       "discovers": "One element of the route is taken away and the search answers. This is the route after the loss.",
+       "touches": [
+        {
+         "id": "spine-gt_pathfinding-1",
+         "title": "impatient river / The route after the loss"
+        },
+        {
+         "id": "spine-gt_pathfinding-3",
+         "title": "stone river"
+        }
+       ]
+      },
+      {
+       "map": "GT_Network_Analysis",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "A route found again.",
+       "discovers": "A recorded relation is one thing and what an observer infers from it another. Important by which measure?",
+       "touches": [
+        {
+         "id": "spine-gt_pathfinding-2",
+         "title": "pathfinding3d",
+         "carried": true,
+         "from": "GT_Pathfinding"
+        },
+        {
+         "id": "spine-gt_network_analysis-1",
+         "title": "evidence network / Important by which measure?"
+        }
+       ]
+      },
+      {
+       "map": "GT_Connectivity",
+       "finds": [
+        "topology",
+        "body"
+       ],
+       "carries": "A measure of importance.",
+       "discovers": "Reaching a place in one direction says nothing about returning. A way back is a separate fact.",
+       "touches": [
+        {
+         "id": "spine-gt_connectivity-1",
+         "title": "tarjan algorithm / A way back"
+        },
+        {
+         "id": "spine-gt_connectivity-2",
+         "title": "way back"
+        }
+       ]
+      },
+      {
+       "map": "GT_Spanning_Trees",
+       "finds": [
+        "topology",
+        "organization"
+       ],
+       "carries": "A way back.",
+       "discovers": "The cheapest connection has no second way. A cycle is the price of another route.",
+       "touches": [
+        {
+         "id": "spine-gt_spanning_trees-1",
+         "title": "mst visualization / The price of another way"
+        },
+        {
+         "id": "spine-gt_spanning_trees-2",
+         "title": "plank price"
+        }
+       ]
+      },
+      {
+       "map": "GT_Flow",
+       "finds": [
+        "organization",
+        "space"
+       ],
+       "carries": "The price of another way.",
+       "discovers": "A route that was permitted is reconsidered when another delivery needs room.",
+       "touches": [
+        {
+         "id": "spine-gt_flow-1",
+         "title": "graph worlds / Room for another"
+        },
+        {
+         "id": "world-25f1a2b5ced488639e",
+         "title": "Room for another | the hall's harbour for a body: a basin 10 x 12 m, nine one-crate bridges with one-way gates; the first delivery stands, the second must walk / Room for another | the hall's harbour for a body: a basin 10 x 12 m, nine one-crate bridges with one-way gates; the first delivery stands, the second must walk "
+        }
+       ]
+      },
+      {
+       "map": "GT_Matching",
+       "finds": [
+        "organization",
+        "body"
+       ],
+       "carries": "Room made for another.",
+       "discovers": "A match allowed locally uses up options for someone else. Room for two is a question about everybody.",
+       "touches": [
+        {
+         "id": "spine-gt_matching-1",
+         "title": "matching workshop / Room for two"
+        },
+        {
+         "id": "spine-gt_matching-3",
+         "title": "ada relations"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "machinelearning",
+     "title": "Machine learning",
+     "movement": "A system is shown bodies and draws boundaries round them. The body inside asks what it was measured by.",
+     "stops": [
+      {
+       "map": "ML_Evolution",
+       "finds": [
+        "organization",
+        "body"
+       ],
+       "carries": "Matches that constrain each other.",
+       "discovers": "Selection happens with no judge and no finish line. The conditions do the ranking.",
+       "touches": [
+        {
+         "id": "spine-ml_evolution-1",
+         "title": "non teleological evolution / Survival without a finish line"
+        },
+        {
+         "id": "spine-ml_evolution-2",
+         "title": "void ml evolved creatures"
+        }
+       ]
+      },
+      {
+       "map": "ML_Gradient_Landscape",
+       "finds": [
+        "space",
+        "organization"
+       ],
+       "carries": "Selection without a judge.",
+       "discovers": "The observations stay and the loss changes. There are different ways downhill, and each has its own bottom.",
+       "touches": [
+        {
+         "id": "spine-ml_gradient_landscape-1",
+         "title": "loss function comparator / Different ways downhill"
+        },
+        {
+         "id": "spine-ml_gradient_landscape-2",
+         "title": "gradient descent visualization"
+        }
+       ]
+      },
+      {
+       "map": "ML_Classification",
+       "finds": [
+        "edge",
+        "body"
+       ],
+       "carries": "A chosen downhill.",
+       "discovers": "The observation stands still and the centres move. A boundary moves round a body and gives it another group.",
+       "touches": [
+        {
+         "id": "spine-ml_classification-1",
+         "title": "enhanced kmeans / A boundary moves around me"
+        },
+        {
+         "id": "spine-ml_classification-2",
+         "title": "svm visualization"
+        }
+       ]
+      },
+      {
+       "map": "ML_Neural_Networks",
+       "finds": [
+        "organization"
+       ],
+       "carries": "A boundary that renames.",
+       "discovers": "A passing activation is not a kept change. What was learned is what stays in the connections.",
+       "touches": [
+        {
+         "id": "spine-ml_neural_networks-1",
+         "title": "neural network visualization / Where a network keeps a change"
+        },
+        {
+         "id": "spine-ml_neural_networks-3",
+         "title": "fine tuning vr"
+        }
+       ]
+      },
+      {
+       "map": "ML_Perception",
+       "finds": [
+        "body",
+        "edge"
+       ],
+       "carries": "Change kept in connections.",
+       "discovers": "A hand pose arrives with a label, and the classifier receives measurements. What did it recognise?",
+       "touches": [
+        {
+         "id": "spine-ml_perception-1",
+         "title": "computer vision vr / What did the sphere recognise?"
+        },
+        {
+         "id": "spine-ml_perception-2",
+         "title": "vogue timeline"
+        }
+       ]
+      },
+      {
+       "map": "ML_Sequence_Memory",
+       "finds": [
+        "body",
+        "organization"
+       ],
+       "carries": "A body received as measurements.",
+       "discovers": "The same positions visited in another order are another gesture: a history, not a set.",
+       "touches": [
+        {
+         "id": "spine-ml_sequence_memory-1",
+         "title": "lstms vr / Two hands, a history"
+        },
+        {
+         "id": "spine-ml_sequence_memory-2",
+         "title": "transformers vr"
+        }
+       ]
+      },
+      {
+       "map": "ML_Generative",
+       "finds": [
+        "body",
+        "edge"
+       ],
+       "carries": "A gesture as an order.",
+       "discovers": "A generated movement is made from examples and the relations between them. Nobody quite made it.",
+       "touches": [
+        {
+         "id": "spine-ml_sequence_memory-1",
+         "title": "lstms vr / Two hands, a history",
+         "carried": true,
+         "from": "ML_Sequence_Memory"
+        },
+        {
+         "id": "spine-ml_generative-1",
+         "title": "generative adversarial networks gans vr / A movement nobody quite made"
+        }
+       ]
+      },
+      {
+       "map": "ML_Synthesis",
+       "finds": [
+        "edge",
+        "organization"
+       ],
+       "carries": "A movement with no single maker.",
+       "discovers": "The declared intention and the system's answer are kept side by side. Their disagreement does not name its cause.",
+       "touches": [
+        {
+         "id": "spine-ml_synthesis-1",
+         "title": "anomaly detection / What I meant, what it answered"
+        },
+        {
+         "id": "spine-ml_synthesis-3",
+         "title": "explainable ai xai vr"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "VIII",
+   "title": "The edges",
+   "line": "The first forms come back and are asked what they assumed. A model of a body is taken apart handle by handle. Then the edges are lived on: who is left out, who disagrees, who came back, and what can be made with what remains.",
+   "sequences": [
+    {
+     "id": "foundationscrisis",
+     "title": "Foundations in crisis",
+     "movement": "The first forms are brought back and asked what they assumed.",
+     "stops": [
+      {
+       "map": "Euclid_Parallel",
+       "finds": [
+        "form",
+        "edge"
+       ],
+       "carries": "An answer kept beside an intention.",
+       "discovers": "The point and the triangle from the top of the tower come back, together with the assumptions their construction uses.",
+       "touches": [
+        {
+         "id": "spine-euclid_parallel-1",
+         "title": "euclid postulates plaque / Through the same point"
+        },
+        {
+         "id": "spine-euclid_parallel-3",
+         "title": "angle sum triangle"
+        }
+       ]
+      },
+      {
+       "map": "NonEuclidean_Spaces",
+       "finds": [
+        "space",
+        "form"
+       ],
+       "carries": "An assumption under a triangle.",
+       "discovers": "Change the rule for joining corners and the triangle's angles sum differently. The space was part of the form.",
+       "touches": [
+        {
+         "id": "spine-noneuclidean_spaces-1",
+         "title": "triangle curvature workbench / The triangle meets another geometry"
+        },
+        {
+         "id": "spine-noneuclidean_spaces-2",
+         "title": "poincare disk"
+        }
+       ]
+      },
+      {
+       "map": "Russell_Paradox",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "A form that depended on its space.",
+       "discovers": "A membership rule is asked to apply to its own collection. The collection asks about itself.",
+       "touches": [
+        {
+         "id": "spine-russell_paradox-1",
+         "title": "russell paradox workbench / The collection asks about itself"
+        },
+        {
+         "id": "spine-russell_paradox-2",
+         "title": "russell set box"
+        }
+       ]
+      },
+      {
+       "map": "Godel_Incompleteness",
+       "finds": [
+        "edge"
+       ],
+       "carries": "A collection that contains its own question.",
+       "discovers": "A search that stopped has shown that it stopped. A limit is a larger claim than a stopped machine.",
+       "touches": [
+        {
+         "id": "spine-godel_incompleteness-1",
+         "title": "godel sentence machine / A limit is more than a stopped machine"
+        },
+        {
+         "id": "spine-godel_incompleteness-2",
+         "title": "godel statement plaque"
+        }
+       ]
+      },
+      {
+       "map": "Escher_Impossible",
+       "finds": [
+        "topology",
+        "body"
+       ],
+       "carries": "A limit, not a halt.",
+       "discovers": "Each part of the view convinces, and the whole offers a body no continuous route. The view arrives before the body.",
+       "touches": [
+        {
+         "id": "spine-escher_impossible-1",
+         "title": "escher staircase / The view arrives before the body"
+        },
+        {
+         "id": "spine-escher_impossible-2",
+         "title": "penrose triangle"
+        }
+       ]
+      },
+      {
+       "map": "Brouwer_Intuitionism",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "A view no body can complete.",
+       "discovers": "The next term exists when an action makes it. A clock that continues by itself has constructed nothing.",
+       "touches": [
+        {
+         "id": "spine-brouwer_intuitionism-1",
+         "title": "brouwer choice sequence / Only what we can construct"
+        },
+        {
+         "id": "spine-brouwer_intuitionism-2",
+         "title": "excluded middle demo"
+        }
+       ]
+      },
+      {
+       "map": "Florensky_Paraconsistent",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "Only what is constructed.",
+       "discovers": "Two incompatible reports stay visible and each is followed to its own consequences. A disagreement can be held.",
+       "touches": [
+        {
+         "id": "spine-florensky_paraconsistent-1",
+         "title": "both true gate / Holding a disagreement"
+        },
+        {
+         "id": "spine-florensky_paraconsistent-2",
+         "title": "florensky sphere"
+        }
+       ]
+      },
+      {
+       "map": "Crisis_Synthesis",
+       "finds": [
+        "edge",
+        "space"
+       ],
+       "carries": "A held disagreement.",
+       "discovers": "A model gives one result, and relief. Its components and limits come first. The first point needed an origin all along.",
+       "touches": [
+        {
+         "id": "spine-crisis_synthesis-1",
+         "title": "qfep formula 3d / What can the model let us do?"
+        },
+        {
+         "id": "badge-85512cc32c861002",
+         "title": "A POINT NEEDED AN ORIGIN"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "qfeplaboratory",
+     "title": "QFEP laboratory",
+     "movement": "A model of a body in a few terms. Each handle is taken apart and asked what it reaches.",
+     "stops": [
+      {
+       "map": "QFEP_Introduction",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "A model inspected before it is trusted.",
+       "discovers": "Different contributions give a similar total. One result does not say which configuration made it, or what it foreclosed.",
+       "touches": [
+        {
+         "id": "spine-qfep_introduction-1",
+         "title": "qfep balance workbench / Four controls, one result"
+        },
+        {
+         "id": "badge-7c705ff5b7b93afe",
+         "title": "FORECLOSED"
+        }
+       ]
+      },
+      {
+       "map": "QFEP_F_Term",
+       "finds": [
+        "edge",
+        "organization"
+       ],
+       "carries": "One total, several makings.",
+       "discovers": "The observed bit stays and the prediction it is judged against changes. Predictable according to whom?",
+       "touches": [
+        {
+         "id": "spine-qfep_f_term-1",
+         "title": "shannon workbench / Predictable according to whom?"
+        },
+        {
+         "id": "spine-qfep_f_term-2",
+         "title": "lambda slider"
+        }
+       ]
+      },
+      {
+       "map": "QFEP_E_Term",
+       "finds": [
+        "space",
+        "edge"
+       ],
+       "carries": "Surprise relative to a predictor.",
+       "discovers": "Possibilities can be counted, but first the model decides which branchings are permitted at all.",
+       "touches": [
+        {
+         "id": "spine-qfep_e_term-1",
+         "title": "entropy fan / Counting what could happen"
+        },
+        {
+         "id": "spine-qfep_e_term-3",
+         "title": "possibility space cloud"
+        }
+       ]
+      },
+      {
+       "map": "QFEP_Lambda_Spectrum",
+       "finds": [
+        "space",
+        "body"
+       ],
+       "carries": "A permitted space of possibilities.",
+       "discovers": "A recommended route is one thing and the room with space for it another. The light moved; the room stayed.",
+       "touches": [
+        {
+         "id": "spine-qfep_lambda_spectrum-1",
+         "title": "lambda hall / The light moved; the room stayed"
+        },
+        {
+         "id": "spine-qfep_lambda_spectrum-2",
+         "title": "qfep chalkboard"
+        }
+       ]
+      },
+      {
+       "map": "QFEP_Phi_Term",
+       "finds": [
+        "edge",
+        "form"
+       ],
+       "carries": "A recommendation and a room.",
+       "discovers": "A direction and a size come before the words better and worse are attached. A sign is not yet an improvement.",
+       "touches": [
+        {
+         "id": "spine-qfep_phi_term-1",
+         "title": "phi slider / A sign is not yet an improvement"
+        },
+        {
+         "id": "spine-qfep_phi_term-2",
+         "title": "transforming pattern"
+        }
+       ]
+      },
+      {
+       "map": "QFEP_Edge_Of_Chaos",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "A sign without a verdict.",
+       "discovers": "The parameter is one thing and the schedule that drives its calculation another. Some changes belong to the driving.",
+       "touches": [
+        {
+         "id": "spine-qfep_edge_of_chaos-1",
+         "title": "edge of chaos unlocked / A pattern and the way we drive it"
+        },
+        {
+         "id": "spine-qfep_edge_of_chaos-2",
+         "title": "emergence zone"
+        }
+       ]
+      },
+      {
+       "map": "QFEP_Sandbox",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "A pattern and the way it is driven.",
+       "discovers": "A control appears to address a system. Follow it and see where it reaches, and whether it is connected at all.",
+       "touches": [
+        {
+         "id": "spine-qfep_sandbox-1",
+         "title": "lambda slider / Where the control reaches"
+        },
+        {
+         "id": "spine-qfep_sandbox-3",
+         "title": "qfep reactor"
+        }
+       ]
+      },
+      {
+       "map": "QFEP_Synthesis",
+       "finds": [
+        "body",
+        "edge"
+       ],
+       "carries": "A handle traced to what it reaches.",
+       "discovers": "Before a body is read as continuing or changing, the kind of stability that matters has to be named. What should this body keep?",
+       "touches": [
+        {
+         "id": "spine-qfep_synthesis-1",
+         "title": "queer morphology specimen / What should this body keep?"
+        },
+        {
+         "id": "spine-qfep_synthesis-2",
+         "title": "grab sphere F"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "postfoundationscrisis",
+     "title": "After the crisis",
+     "movement": "The edges are lived on: who is left out, who disagrees, who contributed, who came back.",
+     "stops": [
+      {
+       "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+       "finds": [
+        "edge",
+        "space"
+       ],
+       "carries": "A stability that was chosen.",
+       "discovers": "A representation changes and some distinctions get less room. What becomes harder to perceive is part of what it does.",
+       "touches": [
+        {
+         "id": "spine-criticalalgorithms_algorithmic_bias_visualization-1",
+         "title": "bias from inside / Less room for a distinction"
+        },
+        {
+         "id": "spine-criticalalgorithms_algorithmic_bias_visualization-2",
+         "title": "bias visualizer"
+        }
+       ]
+      },
+      {
+       "map": "CriticalAlgorithms_Applied_Ethics",
+       "finds": [
+        "space",
+        "organization"
+       ],
+       "carries": "Distinctions losing room.",
+       "discovers": "An arrangement invites and excludes before the first person speaks.",
+       "touches": [
+        {
+         "id": "spine-criticalalgorithms_applied_ethics-1",
+         "title": "room shape demonstrator / Before the first person speaks"
+        },
+        {
+         "id": "spine-criticalalgorithms_applied_ethics-2",
+         "title": "excluded class visualizer"
+        }
+       ]
+      },
+      {
+       "map": "SpeculativeComputation_Paraconsistent_Engineering",
+       "finds": [
+        "organization",
+        "edge"
+       ],
+       "carries": "A room that decides beforehand.",
+       "discovers": "Incompatible accounts are given their sources and their times. The disagreement gets a place in the system.",
+       "touches": [
+        {
+         "id": "spine-speculativecomputation_paraconsistent_engineering-1",
+         "title": "merge conflict visualizer / A place for the disagreement"
+        },
+        {
+         "id": "spine-speculativecomputation_paraconsistent_engineering-2",
+         "title": "florensky sphere"
+        }
+       ]
+      },
+      {
+       "map": "SpeculativeComputation_Situated_Computation",
+       "finds": [
+        "edge",
+        "body"
+       ],
+       "carries": "A place for the disagreement.",
+       "discovers": "One subject, four verdicts. Each has a source and a limit.",
+       "touches": [
+        {
+         "id": "spine-speculativecomputation_situated_computation-1",
+         "title": "situated readout / Four verdicts about one subject"
+        },
+        {
+         "id": "spine-speculativecomputation_situated_computation-2",
+         "title": "museum witnesses"
+        }
+       ]
+      },
+      {
+       "map": "SpeculativeComputation_Collective_Knowledge",
+       "finds": [
+        "organization"
+       ],
+       "carries": "Verdicts with positions.",
+       "discovers": "More contributions is not more contributors. The display decides how the marks are gathered.",
+       "touches": [
+        {
+         "id": "spine-speculativecomputation_collective_knowledge-1",
+         "title": "peer production tool / More marks than makers"
+        },
+        {
+         "id": "spine-speculativecomputation_collective_knowledge-2",
+         "title": "the commons table"
+        }
+       ]
+      },
+      {
+       "map": "SpeculativeComputation_Rhizome_Network",
+       "finds": [
+        "topology",
+        "body"
+       ],
+       "carries": "Marks and their makers.",
+       "discovers": "No named root, unequal connections. The relations that count are the ones a body can enter and come back through.",
+       "touches": [
+        {
+         "id": "spine-speculativecomputation_rhizome_network-1",
+         "title": "rhizome grower / A connection I can inhabit"
+        },
+        {
+         "id": "world-4760af9387486a1034",
+         "title": "No named root, unequal connections"
+        }
+       ]
+      },
+      {
+       "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+       "finds": [
+        "body",
+        "organization"
+       ],
+       "carries": "Connections that can be inhabited.",
+       "discovers": "A body's permitted movement and its return were arranged by its connections and its destination. This is where a body is expected.",
+       "touches": [
+        {
+         "id": "spine-advancedlaboratory_lab_equipment_simulation-1",
+         "title": "flex connector / Where a body is expected"
+        },
+        {
+         "id": "spine-advancedlaboratory_lab_equipment_simulation-2",
+         "title": "MolecularDesigner"
+        }
+       ]
+      },
+      {
+       "map": "PostCrisis_Synthesis",
+       "finds": [
+        "body",
+        "edge"
+       ],
+       "carries": "An expected body.",
+       "discovers": "The assembly returns and is laid beside its earlier description. The record of the journey leaves parts of it out.",
+       "touches": [
+        {
+         "id": "spine-postcrisis_synthesis-1",
+         "title": "assembly return / The body that returned"
+        },
+        {
+         "id": "spine-postcrisis_synthesis-2",
+         "title": "accountability ledger"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "id": "spine_workshops",
+     "title": "Workshops & prefab library",
+     "movement": "What remains is parts, and room to arrange them again.",
+     "stops": [
+      {
+       "map": "Playground_PrincipalPlaces",
+       "finds": [
+        "space",
+        "organization"
+       ],
+       "carries": "A body that returned, and what its record omits.",
+       "discovers": "An open floor of spatial invitations: a place to try another arrangement.",
+       "touches": [
+        {
+         "id": "spine-postcrisis_synthesis-1",
+         "title": "assembly return / The body that returned",
+         "carried": true,
+         "from": "PostCrisis_Synthesis"
+        },
+        {
+         "id": "spine-playground_principalplaces-1",
+         "title": "principal places / A place to try another arrangement"
+        }
+       ]
+      },
+      {
+       "map": "Primitives_Prefab_Library",
+       "finds": [
+        "form",
+        "organization"
+       ],
+       "carries": "Room to rearrange.",
+       "discovers": "Reusable parts on their shelves, each with an identity. The tower ends on the question it began with: what can be made with what remains.",
+       "touches": [
+        {
+         "id": "spine-primitives_prefab_library-1",
+         "title": "prefab library shelf / What we can make with what remains"
+        },
+        {
+         "id": "spine-primitives_prefab_library-3",
+         "title": "void floor transfer"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
