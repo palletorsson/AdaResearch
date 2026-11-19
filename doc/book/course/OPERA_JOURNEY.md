@@ -4,7 +4,7 @@
 
 **Palle, 19 November 2026:** The songs should be read as one coherent journey, the story of discovering what forms are possible, what topologies, what spaces, bodies, organizational structures and their edges.
 
-The whole tower as one story, kept abstract: eight acts, one movement for each spine sequence, one stop for each floor. A stop says what it takes from the stop before and what it discovers, names which of the six words it is about, and touches two or more entries of the trajectory outline in the order the outline gives them. It is a frame for the songs and not their text: a lyric is still written from the player's view of the floor, and checked there. Nothing here was heard or walked for this document; every stop is read from the floor's intent and its outline entries. Palle, 19 November 2026: the songs are very compressed, and that is how a song shows intelligence: by folding (Dichtung). A line compresses the meaning of the artifact and of the encounter without losing it. So what stands on the floor and what was measured there is kept in the notes under a line ("seen", "unfolded"), and the line itself is the fold: at most twelve words.
+The whole tower as one story, kept abstract: eight acts, one movement for each spine sequence, one stop for each floor. A stop says what it takes from the stop before and what it discovers, names which of the six words it is about, and touches two or more entries of the trajectory outline in the order the outline gives them. It is a frame for the songs and not their text: a lyric is still written from the player's view of the floor, and checked there. Nothing here was heard or walked for this document; every stop is read from the floor's intent and its outline entries. Palle, 19 November 2026: the songs are very compressed, and that is how a song shows intelligence: by folding (Dichtung). A line compresses the meaning of the artifact and of the encounter without losing it. So what stands on the floor and what was measured there is kept in the notes under a line ("seen", "unfolded"), and the line itself is the fold: at most twelve words. Each floor has a chapter, commons/maps/<map>/final.md, written in Model B's voice with the encounters in order; read it before writing a line. Act one was first written without it; Point Lines was corrected from its chapter on 19 November, and the other floors of the act have not been read against theirs yet.
 
 ## The six words
 
@@ -150,18 +150,18 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Touches: Leave a connection · Turn without stretching · Find another way · Read the warning · Step beside the words · association(line) / move an endpoint to drop an object · Tape / give a line a surface
 
 > Point to point. Let go. The link stays.  
-> Joined, a line. Measured, a number. Reset, two points.  
-> A plank says no. The way round is longer.  
+> Joined, a length. Turn it: the number wanders.  
+> A line on legs says no. The way round is longer.  
 > A red line. Who gave it force?  
-> Walk this line. Every step aside is counted.  
-> Move an end, let go: a plank. Again: a warning.  
+> Walk this line, or step aside. The refusal is measured.  
+> Move an end, let go. The line comes back as a plank.  
 > Fire, move, fire: a line with a surface, for any wall.  
 
 - Lines: Leave a connection: new; there now: "I let go. The link stays." · Turn without stretching: new; there now: "The length stays while I turn." · Find another way: new; there now: "This line makes my journey longer." · Read the warning: new; there now: "What gives this line its force?" · Step beside the words: new; there now: "I could step beside the words." · association(line): new; there now: "A line can guide my feet or bar the way." · Tape: new; there now: "I follow what was only once a mark."
-- Unfolded: "Joined, a line. Measured, a number. Reset, two points." was "Two points in the dark, one in each hand. Joined: a line of light. The wall measures it. Reset, and both go home."
-- Unfolded: "A plank says no. The way round is longer." was "A blue plank on sawhorses says do not cross. The way round is longer."
-- Unfolded: "Walk this line. Every step aside is counted." was "Walk this line. Six metres, gate to gate. The floor measures every step aside."
-- Unfolded: "Move an end, let go: a plank. Again: a warning." was "Move one end. Let go. A thing a line can be falls on the table: a plank, a ruler, a warning."
+- Unfolded: "Joined, a length. Turn it: the number wanders." was "Two points in the dark, one in each hand. Joined: a line of light. The wall measures it. Reset, and both go home."
+- Unfolded: "A line on legs says no. The way round is longer." was "A blue plank on sawhorses says do not cross. The way round is longer."
+- Unfolded: "Walk this line, or step aside. The refusal is measured." was "Walk this line. Six metres, gate to gate. The floor measures every step aside."
+- Unfolded: "Move an end, let go. The line comes back as a plank." was "Move one end. Let go. A thing a line can be falls on the table: a plank, a ruler, a warning."
 - Unfolded: "Fire, move, fire: a line with a surface, for any wall." was "Three rolls of tape. Fire, move, fire: a strip between two points. Strip beside strip, the line has a surface. Any wall will take it."
 - Keeps from the song before: **point**
 - Hands on: A line can join or forbid. Ask which, and who drew it.

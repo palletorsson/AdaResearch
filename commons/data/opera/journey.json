@@ -5,7 +5,7 @@
   "date": "19 November 2026",
   "text": "The songs should be read as one coherent journey, the story of discovering what forms are possible, what topologies, what spaces, bodies, organizational structures and their edges."
  },
- "about": "The whole tower as one story, kept abstract: eight acts, one movement for each spine sequence, one stop for each floor. A stop says what it takes from the stop before and what it discovers, names which of the six words it is about, and touches two or more entries of the trajectory outline in the order the outline gives them. It is a frame for the songs and not their text: a lyric is still written from the player's view of the floor, and checked there. Nothing here was heard or walked for this document; every stop is read from the floor's intent and its outline entries. Palle, 19 November 2026: the songs are very compressed, and that is how a song shows intelligence: by folding (Dichtung). A line compresses the meaning of the artifact and of the encounter without losing it. So what stands on the floor and what was measured there is kept in the notes under a line (\"seen\", \"unfolded\"), and the line itself is the fold: at most twelve words.",
+ "about": "The whole tower as one story, kept abstract: eight acts, one movement for each spine sequence, one stop for each floor. A stop says what it takes from the stop before and what it discovers, names which of the six words it is about, and touches two or more entries of the trajectory outline in the order the outline gives them. It is a frame for the songs and not their text: a lyric is still written from the player's view of the floor, and checked there. Nothing here was heard or walked for this document; every stop is read from the floor's intent and its outline entries. Palle, 19 November 2026: the songs are very compressed, and that is how a song shows intelligence: by folding (Dichtung). A line compresses the meaning of the artifact and of the encounter without losing it. So what stands on the floor and what was measured there is kept in the notes under a line (\"seen\", \"unfolded\"), and the line itself is the fold: at most twelve words. Each floor has a chapter, commons/maps/<map>/final.md, written in Model B's voice with the encounters in order; read it before writing a line. Act one was first written without it; Point Lines was corrected from its chapter on 19 November, and the other floors of the act have not been read against theirs yet.",
  "six": {
   "form": "what can stand, from a point to a family grown from a recipe",
   "topology": "what is open, closed or connected: gaps, holes, necks, a way back",
@@ -465,23 +465,25 @@
          },
          {
           "at": "trajectory-03-02",
-          "text": "Joined, a line. Measured, a number. Reset, two points.",
+          "text": "Joined, a length. Turn it: the number wanders.",
           "status": "new",
           "there_now": "The length stays while I turn.",
           "seen": "commons/artifacts/line_black_box/line_black_box.gd: a four metre dark room, two held endpoints, a luminous segment between them, a wall readout of its length, a RESET button that sends both points home.",
-          "unfolded": "Two points in the dark, one in each hand. Joined: a line of light. The wall measures it. Reset, and both go home."
+          "unfolded": "Two points in the dark, one in each hand. Joined: a line of light. The wall measures it. Reset, and both go home.",
+          "chapter": "final.md, @line_black_box: once joined the two points give a length; the try is to turn the segment without stretching it, and \"the number wanders as my hand wanders\"."
          },
          {
           "at": "trajectory-03-03",
-          "text": "A plank says no. The way round is longer.",
+          "text": "A line on legs says no. The way round is longer.",
           "status": "new",
           "there_now": "This line makes my journey longer.",
           "seen": "commons/void/lines_area.gd and the picture from the walk's east end: two sawhorse barricades, DO NOT CROSS, 3.6 m and 2.8 m long, solid.",
           "layout": [
            "",
-           "A plank says no. The way round is longer."
+           "A line on legs says no. The way round is longer."
           ],
-          "unfolded": "A blue plank on sawhorses says do not cross. The way round is longer."
+          "unfolded": "A blue plank on sawhorses says do not cross. The way round is longer.",
+          "chapter": "final.md, @do_not_cross_barrier: \"DO NOT CROSS has borrowed a line and given it legs.\""
          },
          {
           "at": "trajectory-03-04",
@@ -491,23 +493,25 @@
          },
          {
           "at": "trajectory-03-05",
-          "text": "Walk this line. Every step aside is counted.",
+          "text": "Walk this line, or step aside. The refusal is measured.",
           "status": "new",
           "there_now": "I could step beside the words.",
           "seen": "tools/probes/walk_this_line_label.gd, floor 3: a 6 m line with a ruler, a START / FINISH gate at each end and a floor scale that keeps the walks; it measures how far a walker strays. The visitor arrives 10.7 m east of its east end, on its axis. The words WALK THIS LINE were 6.7 cm lettering to one side, 7 px tall from before the gate. New row walk-this-line-label in rooms.json: \"Walk This Line\" painted on the floor before the east gate, 20 px tall from 4.4 m. Not heard.",
-          "unfolded": "Walk this line. Six metres, gate to gate. The floor measures every step aside."
+          "unfolded": "Walk this line. Six metres, gate to gate. The floor measures every step aside.",
+          "chapter": "final.md, @walk_this_line_marking: the space beside the stripe remains available, and \"the refusal can become a measurement\"."
          },
          {
           "at": "world-f3262176ad862a9696",
-          "text": "Move an end, let go: a plank. Again: a warning.",
+          "text": "Move an end, let go. The line comes back as a plank.",
           "status": "new",
           "there_now": "A line can guide my feet or bar the way.",
           "seen": "commons/void/line_association_table.gd (another session's, uncommitted; read only): moving and releasing either endpoint drops one of eleven named things, among them Timber plank, Large ruler and Do not cross.",
           "layout": [
            "",
-           "Move an end, let go: a plank. Again: a warning."
+           "Move an end, let go. The line comes back as a plank."
           ],
-          "unfolded": "Move one end. Let go. A thing a line can be falls on the table: a plank, a ruler, a warning."
+          "unfolded": "Move one end. Let go. A thing a line can be falls on the table: a plank, a ruler, a warning.",
+          "chapter": "final.md, @line_relations_gallery: naming it a line has not used it up; \"one length could return as a stick, a ruler, a barrier, a place to stand\"."
          },
          {
           "at": "world-7f3fc654941f69506f",
