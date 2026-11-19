@@ -1,5 +1,5 @@
 {
- "version": 1,
+ "version": 2,
  "premise": {
   "by": "Palle",
   "date": "19 November 2026",
@@ -262,7 +262,30 @@
          "id": "trajectory-00-04",
          "title": "Roof letters / a world already named"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "trajectory-00-01",
+          "text": "Light between the boards.",
+          "status": "new",
+          "there_now": "The boards are thin."
+         },
+         {
+          "at": "trajectory-00-02",
+          "text": "The count did not wait.",
+          "status": "new",
+          "there_now": "A number is changing."
+         },
+         {
+          "at": "trajectory-00-04",
+          "text": "Named already. Here.",
+          "status": "new",
+          "there_now": "This is not my address."
+         }
+        ],
+        "hands_on": "Before anything else, say here."
+       }
       },
       {
        "map": "Point_One",
@@ -284,7 +307,29 @@
          "id": "trajectory-01-04",
          "title": "A light for the empty place / Even the absence has a lamp"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "trajectory-01-01",
+          "text": "Here, a place with nothing in it.",
+          "status": "new",
+          "there_now": "I began as a pixel on a screen. Now I can come closer."
+         },
+         {
+          "at": "trajectory-01-03",
+          "text": "Three points. One has a place. One appears. One stops a body.",
+          "status": "kept"
+         },
+         {
+          "at": "trajectory-01-04",
+          "text": "Even the absence has a lamp.",
+          "status": "kept"
+         }
+        ],
+        "hands_on": "A place can be kept for what is not there yet.",
+        "keeps": "here"
+       }
       },
       {
        "map": "Point_Coordinates",
@@ -302,7 +347,25 @@
          "id": "trajectory-02-02",
          "title": "Name the reference"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "trajectory-02-01",
+          "text": "A point in the hand goes where the hand goes.",
+          "status": "new",
+          "there_now": "The light comes with my hand."
+         },
+         {
+          "at": "trajectory-02-02",
+          "text": "Set down: one point, two addresses.",
+          "status": "new",
+          "there_now": "One point can have two addresses."
+         }
+        ],
+        "hands_on": "Ask what a number is measured from.",
+        "keeps": "point"
+       }
       },
       {
        "map": "Point_Lines",
@@ -325,7 +388,31 @@
          "id": "trajectory-03-04",
          "title": "Read the warning"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "trajectory-03-01",
+          "text": "Point to point. Let go. The link stays.",
+          "status": "new",
+          "there_now": "I let go. The link stays."
+         },
+         {
+          "at": "trajectory-03-03",
+          "text": "A line across the way. Round it is longer.",
+          "status": "new",
+          "there_now": "This line makes my journey longer."
+         },
+         {
+          "at": "trajectory-03-04",
+          "text": "A red line. Who gave it force?",
+          "status": "new",
+          "there_now": "What gives this line its force?"
+         }
+        ],
+        "hands_on": "A line can join or forbid. Ask which, and who drew it.",
+        "keeps": "point"
+       }
       },
       {
        "map": "Point_Trace",
@@ -348,7 +435,32 @@
          "id": "trajectory-04-04",
          "title": "Let it continue"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "trajectory-04-01",
+          "text": "Through the glass the line leaves a gap.",
+          "status": "new",
+          "there_now": "My hand crossed where no mark stays."
+         },
+         {
+          "at": "trajectory-04-03",
+          "text": "Hold still. A little wider. A little wider.",
+          "status": "reviewed",
+          "card": "bubble-brush",
+          "there_now": "Here, my waiting takes up space."
+         },
+         {
+          "at": "trajectory-04-04",
+          "text": "Let go. The line goes on downhill.",
+          "status": "new",
+          "there_now": "Gravity carries the drawing on."
+         }
+        ],
+        "hands_on": "What a hand does stays behind as a thing. Waiting counts as doing.",
+        "keeps": "line"
+       }
       },
       {
        "map": "Point_Triangle_Context",
@@ -371,7 +483,30 @@
          "id": "trajectory-05-04",
          "title": "The shared diagonal"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "trajectory-05-01",
+          "text": "Three edges close. The gap in the middle stays.",
+          "status": "new",
+          "there_now": "The edges close. I still see through."
+         },
+         {
+          "at": "trajectory-05-03",
+          "text": "Draw across it: a face.",
+          "status": "new",
+          "there_now": "My drawing has lost its height."
+         },
+         {
+          "at": "trajectory-05-04",
+          "text": "Two faces share one edge.",
+          "status": "kept"
+         }
+        ],
+        "hands_on": "Closing a boundary is not yet filling it.",
+        "keeps": "gap"
+       }
       },
       {
        "map": "Primitives_Polythedra",
@@ -394,7 +529,31 @@
          "id": "trajectory-06-04",
          "title": "The blocking slope"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "trajectory-06-01",
+          "text": "A fourth point. The faces close on an inside.",
+          "status": "new",
+          "there_now": "The last point brings it down."
+         },
+         {
+          "at": "trajectory-06-03",
+          "text": "A wedge: forward, and a little higher.",
+          "status": "new",
+          "there_now": "Forward becomes a little higher."
+         },
+         {
+          "at": "trajectory-06-04",
+          "text": "A pyramid: the same slope turns a body away.",
+          "status": "new",
+          "there_now": "A slope can turn me away."
+         }
+        ],
+        "hands_on": "The same slope helps or stops. Try it with a body before naming it.",
+        "keeps": "face"
+       }
       },
       {
        "map": "Point_Animatedcube",
@@ -417,7 +576,30 @@
          "id": "trajectory-07-04",
          "title": "The copies wait for a relation"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "trajectory-07-01",
+          "text": "One corner, two folds.",
+          "status": "new",
+          "there_now": "The same corner makes two folds."
+         },
+         {
+          "at": "trajectory-07-03",
+          "text": "Six faces laid flat. Fold. A cube again.",
+          "status": "new",
+          "there_now": "Each return leaves something behind."
+         },
+         {
+          "at": "trajectory-07-04",
+          "text": "The copies wait for a relation.",
+          "status": "kept"
+         }
+        ],
+        "hands_on": "Taken apart and put back, a thing is known better. Its copies are parts.",
+        "keeps": "face"
+       }
       },
       {
        "map": "Primitives_Ignorance",
@@ -440,7 +622,28 @@
          "id": "trajectory-08-03",
          "title": "How smooth is enough?"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "trajectory-08-01",
+          "text": "Five ways for the corners to meet.",
+          "status": "kept"
+         },
+         {
+          "at": "trajectory-08-02",
+          "text": "More around. Fewer up the side.",
+          "status": "kept"
+         },
+         {
+          "at": "trajectory-08-03",
+          "text": "How smooth is enough from here?",
+          "status": "kept"
+         }
+        ],
+        "hands_on": "Every round thing here is made of flats. Ask how many are enough for the job.",
+        "keeps": "corner"
+       }
       },
       {
        "map": "Primitives_Columns",
@@ -463,7 +666,31 @@
          "id": "trajectory-09-04",
          "title": "The column becomes a passage"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "trajectory-09-01",
+          "text": "One outline. More sides, another column.",
+          "status": "new",
+          "there_now": "An outline can become many bodies."
+         },
+         {
+          "at": "trajectory-09-03",
+          "text": "Hollow: the column holds.",
+          "status": "new",
+          "there_now": "A moving shape can become what I hear."
+         },
+         {
+          "at": "trajectory-09-04",
+          "text": "Open at both ends: a way through.",
+          "status": "new",
+          "there_now": "An opening changes where my body goes."
+         }
+        ],
+        "hands_on": "One outline, many bodies. Ask what the hollow is for.",
+        "keeps": "side"
+       }
       },
       {
        "map": "Primitives_Profiles",
@@ -485,7 +712,31 @@
          "id": "trajectory-10-04",
          "title": "An unfamiliar body from a familiar rule"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "trajectory-10-01",
+          "text": "A letter becomes a space.",
+          "status": "new",
+          "there_now": "A letter can become a space."
+         },
+         {
+          "at": "trajectory-10-03",
+          "text": "The outline leads a ball.",
+          "status": "new",
+          "there_now": "A little mark can ask for room to move."
+         },
+         {
+          "at": "trajectory-10-04",
+          "text": "Same rule. A body with no name yet.",
+          "status": "new",
+          "there_now": "What I can reach can change what I become."
+         }
+        ],
+        "hands_on": "A sign can be entered. A known rule can make an unknown thing.",
+        "keeps": "outline"
+       }
       },
       {
        "map": "Primitives_Portals",
@@ -508,7 +759,29 @@
          "id": "trajectory-11-03",
          "title": "A smaller gap is still a gap"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "trajectory-11-01",
+          "text": "This body has no way through.",
+          "status": "kept"
+         },
+         {
+          "at": "trajectory-11-02",
+          "text": "Closer, and round enough is rounder.",
+          "status": "new",
+          "there_now": "Round enough changes as I come closer."
+         },
+         {
+          "at": "trajectory-11-03",
+          "text": "A smaller gap is still a gap.",
+          "status": "kept"
+         }
+        ],
+        "hands_on": "Getting nearer is not arriving. Know which of the two was promised.",
+        "keeps": "body"
+       }
       },
       {
        "map": "Primitives_Melencolia",
@@ -531,7 +804,29 @@
          "id": "trajectory-12-03",
          "title": "The image and its unfinished tools"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "trajectory-12-01",
+          "text": "Four corners and the gap between them: a place.",
+          "status": "new",
+          "there_now": "My steps change how they stand together."
+         },
+         {
+          "at": "trajectory-12-02",
+          "text": "Did height make this the centre?",
+          "status": "kept"
+         },
+         {
+          "at": "trajectory-12-03",
+          "text": "The tools are still here.",
+          "status": "kept"
+         }
+        ],
+        "hands_on": "An arrangement is one of several. Leave the tools out for whoever comes next.",
+        "keeps": "gap"
+       }
       }
      ]
     },
@@ -560,7 +855,31 @@
          "id": "draft-trans_pre-3",
          "title": "A direction changes / A face comes back"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "draft-trans_pre-1",
+          "text": "Still. Within reach.",
+          "status": "new",
+          "there_now": "What stays while this body moves?"
+         },
+         {
+          "at": "draft-trans_pre-2",
+          "text": "Here, then there.",
+          "status": "new",
+          "there_now": "What stays while this body moves?"
+         },
+         {
+          "at": "draft-trans_pre-3",
+          "text": "Turned. A face comes back.",
+          "status": "new",
+          "there_now": "What stays while this body moves?"
+         }
+        ],
+        "hands_on": "Moved, turned or grown, a thing can stay itself. Tell the three apart.",
+        "keeps": "here"
+       }
       },
       {
        "map": "Trans_Introduction",
@@ -579,7 +898,26 @@
          "id": "song-448335ce8c2ad07a",
          "title": "adjustable landing"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "song-2dfcba72ac41e435",
+          "text": "From here to there the deck carries.",
+          "status": "new",
+          "there_now": "The floor carries me across."
+         },
+         {
+          "at": "song-448335ce8c2ad07a",
+          "text": "Same step. A handspan short.",
+          "status": "reviewed",
+          "card": "far-bank (listening take is a draft; card still open)",
+          "there_now": "I moved the place it had to reach."
+         }
+        ],
+        "hands_on": "What worked here was fitted to here. Check the far side again.",
+        "keeps": "here"
+       }
       },
       {
        "map": "Trans_Translation",
@@ -602,7 +940,31 @@
          "id": "draft-trans_translation-3",
          "title": "Move the place of turning / Where I turn changes the way"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "draft-trans_translation-1",
+          "text": "The same face travels. No turn.",
+          "status": "new",
+          "there_now": "I come around and find another way."
+         },
+         {
+          "at": "draft-trans_translation-2",
+          "text": "One place to reach. Two permissions.",
+          "status": "new",
+          "there_now": "The rail keeps part of my gesture."
+         },
+         {
+          "at": "draft-trans_translation-3",
+          "text": "Move the pivot. The way bends elsewhere.",
+          "status": "new",
+          "there_now": "A turn can change the way I cross a space."
+         }
+        ],
+        "hands_on": "Reaching the same place does not mean the same was allowed.",
+        "keeps": "same"
+       }
       },
       {
        "map": "Trans_Rotation",
@@ -625,7 +987,31 @@
          "id": "draft-trans_rotation-3",
          "title": "A turn acquires a joint / One place holds the turn"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "draft-trans_rotation-1",
+          "text": "The wheel turns. A floor becomes a slope.",
+          "status": "new",
+          "there_now": "A turn can change the way I cross a space."
+         },
+         {
+          "at": "draft-trans_rotation-2",
+          "text": "The shape stays. The foothold changes.",
+          "status": "new",
+          "there_now": "A turn can change the way I cross a space."
+         },
+         {
+          "at": "draft-trans_rotation-3",
+          "text": "One place holds the turn.",
+          "status": "new",
+          "there_now": "I come around and find another way."
+         }
+        ],
+        "hands_on": "A thing can keep its shape and stop carrying. Test the footing after every turn.",
+        "keeps": "turn"
+       }
       },
       {
        "map": "Trans_Carousel",
@@ -644,7 +1030,25 @@
          "id": "draft-trans_carousel-2",
          "title": "Neighbouring turns disagree / Together, in opposite directions"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "draft-trans_carousel-1",
+          "text": "One turn for all. Farther out, farther to go.",
+          "status": "new",
+          "there_now": "I come around and find another way."
+         },
+         {
+          "at": "draft-trans_carousel-2",
+          "text": "Neighbours, together, in opposite directions.",
+          "status": "new",
+          "there_now": "Each layer keeps a different time."
+         }
+        ],
+        "hands_on": "Sharing a rule is not sharing a journey. Where a body stands changes the distance.",
+        "keeps": "turn"
+       }
       },
       {
        "map": "Trans_Scale",
@@ -667,7 +1071,31 @@
          "id": "draft-trans_scale-3",
          "title": "Which frame receives the change? / The frame moves with me"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "draft-trans_scale-1",
+          "text": "The room grew. The body is the measure.",
+          "status": "new",
+          "there_now": "The same door fits another body."
+         },
+         {
+          "at": "draft-trans_scale-2",
+          "text": "Two ways to span: grow the deck, or unfold it.",
+          "status": "new",
+          "there_now": "What fits my hand can grow beyond my reach."
+         },
+         {
+          "at": "draft-trans_scale-3",
+          "text": "Grown together, or one alone: which frame took the change?",
+          "status": "new",
+          "there_now": "The order changes what comes into reach."
+         }
+        ],
+        "hands_on": "Bigger is said of three things. Use the body to find which one changed.",
+        "keeps": "together"
+       }
       },
       {
        "map": "Trans_Body",
@@ -690,7 +1118,31 @@
          "id": "draft-trans_body-3",
          "title": "The cut remembers / Something of my passing stays"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "draft-trans_body-1",
+          "text": "Come near. An opening. Gone again behind.",
+          "status": "new",
+          "there_now": "A doorway has come to meet me."
+         },
+         {
+          "at": "draft-trans_body-2",
+          "text": "Between the blocks, room, while a body is close.",
+          "status": "new",
+          "there_now": "The opening travels with me."
+         },
+         {
+          "at": "draft-trans_body-3",
+          "text": "One cut stays.",
+          "status": "new",
+          "there_now": "My body leaves a way behind."
+         }
+        ],
+        "hands_on": "Some things open only while somebody is near. Notice what stays open afterwards.",
+        "keeps": "room"
+       }
       },
       {
        "map": "Trans_Pit",
@@ -713,7 +1165,31 @@
          "id": "draft-trans_pit-3",
          "title": "The whole solid travels / It goes on without me"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "draft-trans_pit-1",
+          "text": "This opening keeps its own time.",
+          "status": "new",
+          "there_now": "An opening changes where my body goes."
+         },
+         {
+          "at": "draft-trans_pit-2",
+          "text": "For a moment, enough room.",
+          "status": "new",
+          "there_now": "The frame stays. The passage changes."
+         },
+         {
+          "at": "draft-trans_pit-3",
+          "text": "The block travels on. Learn the pause.",
+          "status": "new",
+          "there_now": "I can learn the pause between."
+         }
+        ],
+        "hands_on": "When the way opens by a clock, learn the rhythm before stepping.",
+        "keeps": "opening"
+       }
       },
       {
        "map": "Trans_Playground",
@@ -732,7 +1208,25 @@
          "id": "draft-trans_playground-2",
          "title": "Make another way through / We can arrange it otherwise"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "draft-trans_playground-1",
+          "text": "A pause, a passage. One movement leads to the next.",
+          "status": "new",
+          "there_now": "A pause can become a passage."
+         },
+         {
+          "at": "draft-trans_playground-2",
+          "text": "The parts allow another way across.",
+          "status": "new",
+          "there_now": "We can build another way across."
+         }
+        ],
+        "hands_on": "A course that was laid can be laid differently. The parts are the same parts.",
+        "keeps": "pause"
+       }
       }
      ]
     },
@@ -762,7 +1256,31 @@
          "id": "draft-logic_event-3",
          "title": "One change becomes enough / Just enough to happen"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "draft-logic_event-1",
+          "text": "One movement asks the next.",
+          "status": "new",
+          "there_now": "A small event can make the next one possible."
+         },
+         {
+          "at": "draft-logic_event-2",
+          "text": "Almost is still a distance.",
+          "status": "new",
+          "there_now": "An opening changes where my body goes."
+         },
+         {
+          "at": "draft-logic_event-3",
+          "text": "One change. Just enough to happen.",
+          "status": "new",
+          "there_now": "An opening changes where my body goes."
+         }
+        ],
+        "hands_on": "Then is not if. Find the one condition a result hangs on.",
+        "keeps": "movement"
+       }
       }
      ]
     },
@@ -792,7 +1310,31 @@
          "id": "draft-array-4",
          "title": "An address gains depth / There is a place behind this place"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "draft-array-1",
+          "text": "Empty, and the place is still here.",
+          "status": "new",
+          "there_now": "A simple piece can hold another world."
+         },
+         {
+          "at": "draft-array-2",
+          "text": "Moved, and still named.",
+          "status": "new",
+          "there_now": "A place repeats and leaves a space between."
+         },
+         {
+          "at": "draft-array-4",
+          "text": "Behind this place, another place.",
+          "status": "new",
+          "there_now": "A place repeats and leaves a space between."
+         }
+        ],
+        "hands_on": "Name the place apart from what stands in it. Then a thing can be lost and put back.",
+        "keeps": "still"
+       }
       },
       {
        "map": "Tutorial_3D",
@@ -815,7 +1357,31 @@
          "id": "draft-tutorial_3d-3",
          "title": "A grid seems to hold a weight / A quiet interval beneath"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "draft-tutorial_3d-1",
+          "text": "Inside the address now. Count from within.",
+          "status": "new",
+          "there_now": "Each copy has a place within the whole."
+         },
+         {
+          "at": "draft-tutorial_3d-2",
+          "text": "Same places. Another way to leave them open.",
+          "status": "new",
+          "there_now": "I find a place that wants to be a body."
+         },
+         {
+          "at": "draft-tutorial_3d-3",
+          "text": "The grid seems to hold a weight.",
+          "status": "new",
+          "there_now": "A place repeats and leaves a space between."
+         }
+        ],
+        "hands_on": "From inside, agree first on which way the counting runs.",
+        "keeps": "place"
+       }
       },
       {
        "map": "Tutorial_Tiling_Floor",
@@ -834,7 +1400,25 @@
          "id": "draft-tutorial_tiling_floor-2",
          "title": "Follow two kinds of repetition / A rhythm underfoot"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "draft-tutorial_tiling_floor-1",
+          "text": "One tile. Another instruction, another field.",
+          "status": "new",
+          "there_now": "Each copy has a place within the whole."
+         },
+         {
+          "at": "draft-tutorial_tiling_floor-2",
+          "text": "Two rhythms underfoot. The floor holds the same.",
+          "status": "new",
+          "there_now": "A place repeats and leaves a space between."
+         }
+        ],
+        "hands_on": "Keep the part small and change the rule. See how much the rule was doing.",
+        "keeps": "same"
+       }
       },
       {
        "map": "Tutorial_Tiling_Walls",
@@ -857,7 +1441,31 @@
          "id": "draft-tutorial_tiling_walls-3",
          "title": "The same addresses receive a recipe / Six places, another arrangement"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "draft-tutorial_tiling_walls-1",
+          "text": "Step back. The rule stays.",
+          "status": "new",
+          "there_now": "Each copy has a place within the whole."
+         },
+         {
+          "at": "draft-tutorial_tiling_walls-2",
+          "text": "A different tile is not an opening.",
+          "status": "new",
+          "there_now": "Each copy has a place within the whole."
+         },
+         {
+          "at": "draft-tutorial_tiling_walls-3",
+          "text": "Six places, another arrangement.",
+          "status": "new",
+          "there_now": "I can make a whole that was not here before."
+         }
+        ],
+        "hands_on": "A change in the picture is not a change in the wall. Push before believing a door.",
+        "keeps": "tile"
+       }
       },
       {
        "map": "Tutorial_Disco",
@@ -880,11 +1488,62 @@
          "id": "draft-tutorial_disco-3",
          "title": "Two clocks meet / We meet, then drift apart"
         }
-       ]
+       ],
+       "song": {
+        "lines": [
+         {
+          "at": "draft-tutorial_disco-1",
+          "text": "The next moment has an address.",
+          "status": "new",
+          "there_now": "I come around and find another way."
+         },
+         {
+          "at": "draft-tutorial_disco-2",
+          "text": "A silent cell is still a place.",
+          "status": "new",
+          "there_now": "A place repeats and leaves a space between."
+         },
+         {
+          "at": "draft-tutorial_disco-3",
+          "text": "Two clocks meet, then drift apart.",
+          "status": "new",
+          "there_now": "The world was moving long before I came."
+         }
+        ],
+        "hands_on": "What is quiet is not missing. A silent one still has its place.",
+        "keeps": "place"
+       }
       }
      ]
     }
-   ]
+   ],
+   "carry": {
+    "asked_at": {
+     "map": "Point_Zero",
+     "entry": "trajectory-00-03",
+     "line": "What wakes the next one?",
+     "status": "a proposed third line for the other care units, object others__c; written by another session, not enabled in the game"
+    },
+    "about": "Palle, 19 November 2026: the dream is that these experiences compound, so that Care Unit Model B can guide or support the other agents in the books to a new life; it is how other working units in the tower gain a more general intelligence. Not developed yet. A first form of it: every song keeps one word from the song before and uses it for something new, and every stop leaves one sentence she could say to a unit that has not been there. At the end of an act the sentences are gathered into four lines, one for each movement, for the three still in the packing on the roof. Eight acts would make the whole of what she brings back.",
+    "lines": [
+     {
+      "from": "primitives",
+      "text": "Here first. Then a point, a line, a face, an inside."
+     },
+     {
+      "from": "transformation",
+      "text": "Moved, turned, grown: the same. The far side may have changed."
+     },
+     {
+      "from": "logic",
+      "text": "All well so far is not yet all well."
+     },
+     {
+      "from": "array_tutorial",
+      "text": "A silent cell is still a place."
+     }
+    ]
+   }
   },
   {
    "id": "II",

@@ -77,6 +77,17 @@ Stops per act that are about each word. A stop may be about two.
 
 Forms. From the word here on a roof to a grid where every place has a number: points, edges, faces and solids, what stays the same when a form is moved, turned or grown, the first condition and the first address.
 
+### What act I hands on
+
+Palle, 19 November 2026: the dream is that these experiences compound, so that Care Unit Model B can guide or support the other agents in the books to a new life; it is how other working units in the tower gain a more general intelligence. Not developed yet. A first form of it: every song keeps one word from the song before and uses it for something new, and every stop leaves one sentence she could say to a unit that has not been there. At the end of an act the sentences are gathered into four lines, one for each movement, for the three still in the packing on the roof. Eight acts would make the whole of what she brings back.
+
+Asked on Point_Zero: *What wakes the next one?*
+
+> Here first. Then a point, a line, a face, an inside.  
+> Moved, turned, grown: the same. The far side may have changed.  
+> All well so far is not yet all well.  
+> A silent cell is still a place.  
+
 ### Primitives (floors 0 to 12)
 
 *From a word on a roof to parts that can be put together another way.*
@@ -86,65 +97,167 @@ Forms. From the word here on a roof to a grid where every place has a number: po
 - Discovers: A place can be named and counted before anyone arrives in it. The first thing met is the word here.
 - Touches: Arrival crate / break into the world · The frame counter / already running · Roof letters / a world already named
 
+> Light between the boards.  
+> The count did not wait.  
+> Named already. Here.  
+
+- Lines: Arrival crate: new; there now: "The boards are thin." · The frame counter: new; there now: "A number is changing." · Roof letters: new; there now: "This is not my address."
+- Hands on: Before anything else, say here.
+
 **1 · Point_One** (form)
 - Takes: The word here, from the roof.
 - Discovers: One point can be an absence, a surface or a solid, and the empty place still gets a lamp.
 - Touches: A place named / I began as a pixel · The same shape answers differently / Three points · A light for the empty place / Even the absence has a lamp
+
+> Here, a place with nothing in it.  
+> Three points. One has a place. One appears. One stops a body.  
+> Even the absence has a lamp.  
+
+- Lines: A place named: new; there now: "I began as a pixel on a screen. Now I can come closer." · The same shape answers differently: the line already there, kept · A light for the empty place: the line already there, kept
+- Keeps from the song before: **here**
+- Hands on: A place can be kept for what is not there yet.
 
 **2 · Point_Coordinates** (space)
 - Takes: A point that can be empty or solid.
 - Discovers: A point has no position until a reference is chosen. Carried in the hand it is a relation; fixed in the world it is an address.
 - Touches: Carry the point · Name the reference
 
+> A point in the hand goes where the hand goes.  
+> Set down: one point, two addresses.  
+
+- Lines: Carry the point: new; there now: "The light comes with my hand." · Name the reference: new; there now: "One point can have two addresses."
+- Keeps from the song before: **point**
+- Hands on: Ask what a number is measured from.
+
 **3 · Point_Lines** (form, edge)
 - Takes: Two points and a chosen reference.
 - Discovers: Joining two points makes the first edge, and an edge can also be a boundary: something to read, and to walk around.
 - Touches: Leave a connection · Find another way · Read the warning
+
+> Point to point. Let go. The link stays.  
+> A line across the way. Round it is longer.  
+> A red line. Who gave it force?  
+
+- Lines: Leave a connection: new; there now: "I let go. The link stays." · Find another way: new; there now: "This line makes my journey longer." · Read the warning: new; there now: "What gives this line its force?"
+- Keeps from the song before: **point**
+- Hands on: A line can join or forbid. Ask which, and who drew it.
 
 **4 · Point_Trace** (form, body)
 - Takes: The line between two points.
 - Discovers: A gesture leaves a record and the record becomes material. Contact leaves a gap, waiting leaves a wider bead, release leaves a path that goes on alone.
 - Touches: Leave a gap · Let waiting grow / A little wider · Let it continue
 
+> Through the glass the line leaves a gap.  
+> Hold still. A little wider. A little wider.  
+> Let go. The line goes on downhill.  
+
+- Lines: Leave a gap: new; there now: "My hand crossed where no mark stays." · Let waiting grow: accepted on the desk, card bubble-brush · Let it continue: new; there now: "Gravity carries the drawing on."
+- Keeps from the song before: **line**
+- Hands on: What a hand does stays behind as a thing. Waiting counts as doing.
+
 **5 · Point_Triangle_Context** (form, topology)
 - Takes: A trace that became a body.
 - Discovers: Three edges close round an open middle. A face laid in it is the first surface, and two faces share an edge they can fold along.
 - Touches: Three edges / an open middle · Draw a face · The shared diagonal
+
+> Three edges close. The gap in the middle stays.  
+> Draw across it: a face.  
+> Two faces share one edge.  
+
+- Lines: Three edges: new; there now: "The edges close. I still see through." · Draw a face: new; there now: "My drawing has lost its height." · The shared diagonal: the line already there, kept
+- Keeps from the song before: **gap**
+- Hands on: Closing a boundary is not yet filling it.
 
 **6 · Primitives_Polythedra** (form, body)
 - Takes: Faces that fold.
 - Discovers: Four points enclose a first inside. The slope that blocks as a pyramid carries as a wedge.
 - Touches: Four points / first enclosure · The allowing wedge · The blocking slope
 
+> A fourth point. The faces close on an inside.  
+> A wedge: forward, and a little higher.  
+> A pyramid: the same slope turns a body away.  
+
+- Lines: Four points: new; there now: "The last point brings it down." · The allowing wedge: new; there now: "Forward becomes a little higher." · The blocking slope: new; there now: "A slope can turn me away."
+- Keeps from the song before: **face**
+- Hands on: The same slope helps or stops. Try it with a body before naming it.
+
 **7 · Point_Animatedcube** (form, organization)
 - Takes: An enclosure, and what its slope permits.
 - Discovers: A cube is a set of relations that can be unfolded and folded back. Its copies are parts waiting for a relation.
 - Touches: One cube, two folds · Unfold and return · The copies wait for a relation
+
+> One corner, two folds.  
+> Six faces laid flat. Fold. A cube again.  
+> The copies wait for a relation.  
+
+- Lines: One cube, two folds: new; there now: "The same corner makes two folds." · Unfold and return: new; there now: "Each return leaves something behind." · The copies wait for a relation: the line already there, kept
+- Keeps from the song before: **face**
+- Hands on: Taken apart and put back, a thing is known better. Its copies are parts.
 
 **8 · Primitives_Ignorance** (form, edge)
 - Takes: Parts waiting for a relation.
 - Discovers: There are five ways for equal corners to meet, and every round body here is a finite one. Smoothness is a budget somebody chose.
 - Touches: Five ways for corners to meet · More around, fewer along · How smooth is enough?
 
+> Five ways for the corners to meet.  
+> More around. Fewer up the side.  
+> How smooth is enough from here?  
+
+- Lines: Five ways for corners to meet: the line already there, kept · More around, fewer along: the line already there, kept · How smooth is enough?: the line already there, kept
+- Keeps from the song before: **corner**
+- Hands on: Every round thing here is made of flats. Ask how many are enough for the job.
+
 **9 · Primitives_Columns** (form, topology)
 - Takes: A finite body at a chosen resolution.
 - Discovers: One outline carried upward gives many columns. Hollowed it is a container, and laid open it is a way through.
 - Touches: One outline, many columns · A cylinder becomes a container · The column becomes a passage
+
+> One outline. More sides, another column.  
+> Hollow: the column holds.  
+> Open at both ends: a way through.  
+
+- Lines: One outline, many columns: new; there now: "An outline can become many bodies." · A cylinder becomes a container: new; there now: "A moving shape can become what I hear." · The column becomes a passage: new; there now: "An opening changes where my body goes."
+- Keeps from the song before: **side**
+- Hands on: One outline, many bodies. Ask what the hollow is for.
 
 **10 · Primitives_Profiles** (form)
 - Takes: An outline that became a passage.
 - Discovers: A sign can be given a body. A letter turned round its axis becomes a vessel, a channel, a wheel, and a familiar rule returns an unfamiliar body.
 - Touches: A letter becomes a space · Let the outline guide a ball · An unfamiliar body from a familiar rule
 
+> A letter becomes a space.  
+> The outline leads a ball.  
+> Same rule. A body with no name yet.  
+
+- Lines: A letter becomes a space: new; there now: "A letter can become a space." · Let the outline guide a ball: new; there now: "A little mark can ask for room to move." · An unfamiliar body from a familiar rule: new; there now: "What I can reach can change what I become."
+- Keeps from the song before: **outline**
+- Hands on: A sign can be entered. A known rule can make an unknown thing.
+
 **11 · Primitives_Portals** (topology, edge)
 - Takes: Bodies made from outlines.
 - Discovers: A closed body offers no way through, and approaching a limit is not arriving at it. The smaller gap is still a gap.
 - Touches: Closed body / no way through · Round enough from here · A smaller gap is still a gap
 
+> This body has no way through.  
+> Closer, and round enough is rounder.  
+> A smaller gap is still a gap.  
+
+- Lines: Closed body: the line already there, kept · Round enough from here: new; there now: "Round enough changes as I come closer." · A smaller gap is still a gap: the line already there, kept
+- Keeps from the song before: **body**
+- Hands on: Getting nearer is not arriving. Know which of the two was promised.
+
 **12 · Primitives_Melencolia** (space, organization)
 - Takes: The gap that stays.
 - Discovers: Familiar parts become a place, an image and a handmade assembly. The arrangement is one among others and the tools lie unfinished.
 - Touches: Four corners make a place · Did height make the centre? · The image and its unfinished tools
+
+> Four corners and the gap between them: a place.  
+> Did height make this the centre?  
+> The tools are still here.  
+
+- Lines: Four corners make a place: new; there now: "My steps change how they stand together." · Did height make the centre?: the line already there, kept · The image and its unfinished tools: the line already there, kept
+- Keeps from the song before: **gap**
+- Hands on: An arrangement is one of several. Leave the tools out for whoever comes next.
 
 ### Transformation (floors 13 to 21)
 
@@ -155,45 +268,114 @@ Forms. From the word here on a roof to a grid where every place has a number: po
 - Discovers: A part can change position, direction or size and stay itself: three changes that look alike until they are told apart.
 - Touches: A still invitation / Already within reach · A position changes / Here, then there · A direction changes / A face comes back
 
+> Still. Within reach.  
+> Here, then there.  
+> Turned. A face comes back.  
+
+- Lines: A still invitation: new; there now: "What stays while this body moves?" · A position changes: new; there now: "What stays while this body moves?" · A direction changes: new; there now: "What stays while this body moves?"
+- Keeps from the song before: **here**
+- Hands on: Moved, turned or grown, a thing can stay itself. Tell the three apart.
+
 **14 · Trans_Introduction** (space, edge)
 - Takes: Three changes told apart.
 - Discovers: Across a gap, moving, turning or growing a bridge can each give passage, until the landing shifts. The operation is unchanged and the passage is gone.
 - Touches: tc · adjustable landing
+
+> From here to there the deck carries.  
+> Same step. A handspan short.  
+
+- Lines: tc: new; there now: "The floor carries me across." · adjustable landing: accepted on the desk, card far-bank (listening take is a draft; card still open)
+- Keeps from the song before: **here**
+- Hands on: What worked here was fitted to here. Check the far side again.
 
 **15 · Trans_Translation** (form, space)
 - Takes: A passage that depended on its surroundings.
 - Discovers: A displacement keeps the object recognisable. The same destination is reached under different permissions.
 - Touches: Travel without turning / The same face travels · Same destination, different permissions / Two ways to arrive · Move the place of turning / Where I turn changes the way
 
+> The same face travels. No turn.  
+> One place to reach. Two permissions.  
+> Move the pivot. The way bends elsewhere.  
+
+- Lines: Travel without turning: new; there now: "I come around and find another way." · Same destination, different permissions: new; there now: "The rail keeps part of my gesture." · Move the place of turning: new; there now: "A turn can change the way I cross a space."
+- Keeps from the song before: **same**
+- Hands on: Reaching the same place does not mean the same was allowed.
+
 **16 · Trans_Rotation** (form, body)
 - Takes: Travel without turning.
 - Discovers: A rigid body keeps its shape through a turn while its ability to carry changes. An end becomes a landing and a turn acquires a joint.
 - Touches: The wheel turns a route downward / A floor becomes a slope · An end becomes a landing / The shape stays, the foothold changes · A turn acquires a joint / One place holds the turn
+
+> The wheel turns. A floor becomes a slope.  
+> The shape stays. The foothold changes.  
+> One place holds the turn.  
+
+- Lines: The wheel turns a route downward: new; there now: "A turn can change the way I cross a space." · An end becomes a landing: new; there now: "A turn can change the way I cross a space." · A turn acquires a joint: new; there now: "I come around and find another way."
+- Keeps from the song before: **turn**
+- Hands on: A thing can keep its shape and stop carrying. Test the footing after every turn.
 
 **17 · Trans_Carousel** (space, organization)
 - Takes: A pivot and an axis.
 - Discovers: Everything on the ring shares one angle and travels a different distance. Neighbours can turn against each other.
 - Touches: Same angle, different journey / Farther out, farther to go · Neighbouring turns disagree / Together, in opposite directions
 
+> One turn for all. Farther out, farther to go.  
+> Neighbours, together, in opposite directions.  
+
+- Lines: Same angle, different journey: new; there now: "I come around and find another way." · Neighbouring turns disagree: new; there now: "Each layer keeps a different time."
+- Keeps from the song before: **turn**
+- Hands on: Sharing a rule is not sharing a journey. Where a body stands changes the distance.
+
 **18 · Trans_Scale** (body, space)
 - Takes: One turn measured at different radii.
 - Discovers: With the body as the measure, larger means three things: a bigger object, a wider passage, a changed relation between parent and child.
 - Touches: The room changes the measure / The room grew around me · Grow a deck or unfold it / Two ways to span · Which frame receives the change? / The frame moves with me
+
+> The room grew. The body is the measure.  
+> Two ways to span: grow the deck, or unfold it.  
+> Grown together, or one alone: which frame took the change?  
+
+- Lines: The room changes the measure: new; there now: "The same door fits another body." · Grow a deck or unfold it: new; there now: "What fits my hand can grow beyond my reach." · Which frame receives the change?: new; there now: "The order changes what comes into reach."
+- Keeps from the song before: **together**
+- Hands on: Bigger is said of three things. Use the body to find which one changed.
 
 **19 · Trans_Body** (body, edge)
 - Takes: The body as the reference.
 - Discovers: A boundary can answer an approaching body, opening and closing behind it. One cut does not come back.
 - Touches: The opening closes behind me / It answers, then forgets · Room appears between the blocks / Near me, there is room · The cut remembers / Something of my passing stays
 
+> Come near. An opening. Gone again behind.  
+> Between the blocks, room, while a body is close.  
+> One cut stays.  
+
+- Lines: The opening closes behind me: new; there now: "A doorway has come to meet me." · Room appears between the blocks: new; there now: "The opening travels with me." · The cut remembers: new; there now: "My body leaves a way behind."
+- Keeps from the song before: **room**
+- Hands on: Some things open only while somebody is near. Notice what stays open afterwards.
+
 **20 · Trans_Pit** (edge, space)
 - Takes: A boundary that answered.
 - Discovers: This boundary keeps its own clock. An opening can move or change width, and the two together offer a moment where there was a place.
 - Touches: Move the opening, change its width / The opening has its own time · Three operations make a moment / For a moment, enough room · The whole solid travels / It goes on without me
 
+> This opening keeps its own time.  
+> For a moment, enough room.  
+> The block travels on. Learn the pause.  
+
+- Lines: Move the opening, change its width: new; there now: "An opening changes where my body goes." · Three operations make a moment: new; there now: "The frame stays. The passage changes." · The whole solid travels: new; there now: "I can learn the pause between."
+- Keeps from the song before: **opening**
+- Hands on: When the way opens by a clock, learn the rhythm before stepping.
+
 **21 · Trans_Playground** (space, organization)
 - Takes: A moment to pass in.
 - Discovers: The operations chain into a route and the parts allow another. The intended course and what a player can do are two things.
 - Touches: A route made from changes / One movement leads to another · Make another way through / We can arrange it otherwise
+
+> A pause, a passage. One movement leads to the next.  
+> The parts allow another way across.  
+
+- Lines: A route made from changes: new; there now: "A pause can become a passage." · Make another way through: new; there now: "We can build another way across."
+- Keeps from the song before: **pause**
+- Hands on: A course that was laid can be laid differently. The parts are the same parts.
 
 ### Logic (floor 22)
 
@@ -204,6 +386,14 @@ Forms. From the word here on a roof to a grid where every place has a number: po
 - Discovers: One contact becomes another event, and a small condition decides whether it does. Passing the first gap promises nothing about the second.
 - Touches: Follow the contact / One thing asks the next · Almost reaches / Almost is still a distance · One change becomes enough / Just enough to happen
 
+> One movement asks the next.  
+> Almost is still a distance.  
+> One change. Just enough to happen.  
+
+- Lines: Follow the contact: new; there now: "A small event can make the next one possible." · Almost reaches: new; there now: "An opening changes where my body goes." · One change becomes enough: new; there now: "An opening changes where my body goes."
+- Keeps from the song before: **movement**
+- Hands on: Then is not if. Find the one condition a result hangs on.
+
 ### Arrays (floors 23 to 27)
 
 *A place gets a number and keeps it, whatever stands there.*
@@ -213,25 +403,64 @@ Forms. From the word here on a roof to a grid where every place has a number: po
 - Discovers: An address is not what occupies it. The tile can go and the place remain, in a row, a plane and a volume.
 - Touches: A place can remain empty / The place is still here · Movement does not erase an address / It moves, I can still name it · An address gains depth / There is a place behind this place
 
+> Empty, and the place is still here.  
+> Moved, and still named.  
+> Behind this place, another place.  
+
+- Lines: A place can remain empty: new; there now: "A simple piece can hold another world." · Movement does not erase an address: new; there now: "A place repeats and leaves a space between." · An address gains depth: new; there now: "A place repeats and leaves a space between."
+- Keeps from the song before: **still**
+- Hands on: Name the place apart from what stands in it. Then a thing can be lost and put back.
+
 **24 · Tutorial_3D** (space, organization)
 - Takes: An address with depth.
 - Discovers: From inside, a volume is read by convention. One vocabulary builds several structures, and sharing a grid does not make them the same thing.
 - Touches: Read the volume from within / Inside the address · Several structures from one vocabulary / Another way to leave it open · A grid seems to hold a weight / A quiet interval beneath
+
+> Inside the address now. Count from within.  
+> Same places. Another way to leave them open.  
+> The grid seems to hold a weight.  
+
+- Lines: Read the volume from within: new; there now: "Each copy has a place within the whole." · Several structures from one vocabulary: new; there now: "I find a place that wants to be a body." · A grid seems to hold a weight: new; there now: "A place repeats and leaves a space between."
+- Keeps from the song before: **place**
+- Hands on: From inside, agree first on which way the counting runs.
 
 **25 · Tutorial_Tiling_Floor** (organization, form)
 - Takes: One vocabulary, several structures.
 - Discovers: A small tile under different rules gives different floors. The floor that carries stays the same beneath each of them.
 - Touches: One tile, several instructions / The same part makes another field · Follow two kinds of repetition / A rhythm underfoot
 
+> One tile. Another instruction, another field.  
+> Two rhythms underfoot. The floor holds the same.  
+
+- Lines: One tile, several instructions: new; there now: "Each copy has a place within the whole." · Follow two kinds of repetition: new; there now: "A place repeats and leaves a space between."
+- Keeps from the song before: **same**
+- Hands on: Keep the part small and change the rule. See how much the rule was doing.
+
 **26 · Tutorial_Tiling_Walls** (edge, form)
 - Takes: A rule laid over a floor.
 - Discovers: Turned upright, the field meets the eye. Changing its image is not changing the wall, and a different tile is not an opening.
 - Touches: The pattern meets the eye / The rule stays as I step back · A different tile is not an opening / A drawing changes, then a way opens · The same addresses receive a recipe / Six places, another arrangement
 
+> Step back. The rule stays.  
+> A different tile is not an opening.  
+> Six places, another arrangement.  
+
+- Lines: The pattern meets the eye: new; there now: "Each copy has a place within the whole." · A different tile is not an opening: new; there now: "Each copy has a place within the whole." · The same addresses receive a recipe: new; there now: "I can make a whole that was not here before."
+- Keeps from the song before: **tile**
+- Hands on: A change in the picture is not a change in the wall. Push before believing a door.
+
 **27 · Tutorial_Disco** (organization, space)
 - Takes: Addresses that hold while their image changes.
 - Discovers: An arrangement is given a clock. The stored choice and the playhead reading it are separate, and a silent cell is still a place.
 - Touches: A phase passes through the floor / The next moment has an address · A silent cell is still a place / Silence has a position · Two clocks meet / We meet, then drift apart
+
+> The next moment has an address.  
+> A silent cell is still a place.  
+> Two clocks meet, then drift apart.  
+
+- Lines: A phase passes through the floor: new; there now: "I come around and find another way." · A silent cell is still a place: new; there now: "A place repeats and leaves a space between." · Two clocks meet: new; there now: "The world was moving long before I came."
+- Keeps from the song before: **place**
+- Hands on: What is quiet is not missing. A silent one still has its place.
 
 ## Act II. What a surface is given
 

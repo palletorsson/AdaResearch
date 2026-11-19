@@ -14,8 +14,14 @@ Checked: every map of the outline has a stop, in the outline's order; every sequ
 trajectory_sequences.json gives it; a stop touches at least two entries, each one present in that map's
 outline and in the outline's order. A floor whose outline holds a single entry may carry one in from the
 floor before ("carried": true); no other floor may.
+
+A stop may hold a song: one line at each touched entry, in the stop's order, written without a personal
+pronoun (commons/data/opera/editorial_revisions.json). "keeps" is a word the song shares with the song of
+the stop before, so the songs compound; "hands_on" is the sentence the stop leaves for a unit that has
+not been there. An act that has begun its songs has one for every stop.
 """
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -26,6 +32,7 @@ SEQUENCES = ROOT / 'commons/data/encounters/trajectory_sequences.json'
 ROOMS = ROOT / 'commons/void/rooms.json'
 PAGE = ROOT / 'doc/book/course/OPERA_JOURNEY.md'
 SIX = ['form', 'topology', 'space', 'body', 'organization', 'edge']
+PRONOUNS = {'i', 'me', 'my', 'mine', 'we', 'us', 'our', 'ours', 'you', 'your', 'yours'}
 
 
 def load(path):
@@ -56,6 +63,28 @@ def check(journey, outline, sequences):
             found.append('%s: no word of the six' % stop['map'])
         if len(stop['touches']) < 2:
             found.append('%s: touches %d, needs two' % (stop['map'], len(stop['touches'])))
+    for act in journey['acts']:
+        row = [s for seq in act['sequences'] for s in seq['stops']]
+        sung = [s for s in row if s.get('song')]
+        if sung and len(sung) != len(row):
+            found.append('act %s: %d of %d stops have a song' % (act['id'], len(sung), len(row)))
+        for at, stop in enumerate(row):
+            song = stop.get('song')
+            if not song:
+                continue
+            words = ' '.join(line['text'] for line in song['lines'])
+            if [line['at'] for line in song['lines']] != [t['id'] for t in stop['touches']]:
+                found.append('%s: the song does not give one line to each touched entry, in order' % stop['map'])
+            said = PRONOUNS & set(re.findall(r"[a-z']+", words.lower()))
+            if said:
+                found.append('%s: a discovery song without a personal pronoun; it says %s' % (stop['map'], ', '.join(sorted(said))))
+            if not song.get('hands_on'):
+                found.append('%s: the song hands nothing on' % stop['map'])
+            if at and row[at - 1].get('song'):
+                before = ' '.join(line['text'] for line in row[at - 1]['song']['lines'])
+                keeps = song.get('keeps') or ''
+                if not keeps or not all(re.search(r'\b' + re.escape(keeps), t, re.I) for t in (words, before)):
+                    found.append('%s: keeps "%s", which is not in both this song and the one before' % (stop['map'], keeps))
     if sequences is not None:
         given = {s['id']: s['maps'] for s in sequences}
         told = [seq['id'] for act in journey['acts'] for seq in act['sequences']]
@@ -122,6 +151,11 @@ def render(journey, outline):
         out.append('')
     for act in journey['acts']:
         out += ['## Act %s. %s' % (act['id'], act['title']), '', act['line'], '']
+        carry = act.get('carry')
+        if carry:
+            out += ['### What act %s hands on' % act['id'], '', carry['about'], '',
+                    'Asked on %s: *%s* (%s)' % (carry['asked_at']['map'], carry['asked_at']['line'], carry['asked_at']['status']), '']
+            out += ['> %s  ' % line['text'] for line in carry['lines']] + ['']
         for seq in act['sequences']:
             first, final = seq['stops'][0]['map'], seq['stops'][-1]['map']
             span = ' (floors %d to %d)' % (floor[first], floor[final]) if first in floor and first != final else (' (floor %d)' % floor[first] if first in floor else '')
@@ -129,7 +163,20 @@ def render(journey, outline):
             for stop in seq['stops']:
                 touched = ' · '.join(('from %s: ' % t['from'] if t.get('carried') else '') + name(t.get('from') or stop['map'], t) for t in stop['touches'])
                 out += ['**%s%s** (%s)' % ('%d · ' % floor[stop['map']] if stop['map'] in floor else '', stop['map'], ', '.join(stop['finds'])),
-                        '- Takes: %s' % stop['carries'], '- Discovers: %s' % stop['discovers'], '- Touches: %s' % touched, '']
+                        '- Takes: %s' % stop['carries'], '- Discovers: %s' % stop['discovers'], '- Touches: %s' % touched]
+                song = stop.get('song')
+                if song:
+                    out += [''] + ['> %s  ' % line['text'] for line in song['lines']] + ['']
+                    notes = ['%s: %s' % (name(stop['map'], {'id': line['at']}).split(' / ')[0],
+                                         'accepted on the desk, card %s' % line['card'] if line['status'] == 'reviewed'
+                                         else 'the line already there, kept' if line['status'] == 'kept'
+                                         else 'new' + ('; there now: "%s"' % line['there_now'] if line.get('there_now') else ''))
+                             for line in song['lines']]
+                    out += ['- Lines: ' + ' · '.join(notes)]
+                    if song.get('keeps'):
+                        out += ['- Keeps from the song before: **%s**' % song['keeps']]
+                    out += ['- Hands on: %s' % song['hands_on']]
+                out += ['']
     return '\n'.join(out).rstrip() + '\n'
 
 
@@ -150,8 +197,9 @@ def main():
     count = sum(1 for _ in stops(journey))
     touched = sum(len(s['touches']) for _, _, s in stops(journey))
     carried = [s['map'] for _, _, s in stops(journey) if any(t.get('carried') for t in s['touches'])]
-    print('%d acts, %d movements, %d stops, %d touches; %d floors carry one in: %s; %d findings'
-          % (len(journey['acts']), sum(len(a['sequences']) for a in journey['acts']), count, touched, len(carried), ', '.join(carried), len(found)))
+    songs = sum(1 for _, _, s in stops(journey) if s.get('song'))
+    print('%d acts, %d movements, %d stops, %d touches, %d songs; %d floors carry one in: %s; %d findings'
+          % (len(journey['acts']), sum(len(a['sequences']) for a in journey['acts']), count, touched, songs, len(carried), ', '.join(carried), len(found)))
     if '--write' in sys.argv and not found:
         PAGE.write_text(render(journey, outline), encoding='utf-8', newline='\n')
         print('wrote', PAGE.relative_to(ROOT).as_posix())
