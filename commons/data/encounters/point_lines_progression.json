@@ -1,0 +1,81 @@
+{
+  "map": "Point_Lines",
+  "status": "implemented",
+  "date": "2026-11-17",
+  "decision": "Palle requested the next floor. Agent editorial choice: five action responses and five approach reflections, ready for listening feedback.",
+  "final": "commons/maps/Point_Lines/final.md",
+  "encounters": [
+    {
+      "id": "pairing_point_field",
+      "row": "setting_out",
+      "song": "chapter_03_pairing_point_field",
+      "timing": "after",
+      "badge": "lines-pairing-point-field",
+      "view_frame": {"title": "JOIN TWO POINTS", "target": "setting_out/Artifact/PairingPoints", "aim": [0.35, 1.1, 0], "offset": [-1.65, 1.40, 1.70], "width": 1.18, "height": 0.62}
+    },
+    {
+      "id": "line_black_box",
+      "row": "point-room",
+      "song": "chapter_03_line_black_box",
+      "timing": "after",
+      "badge": "lines-line-black-box"
+    },
+    {
+      "id": "do_not_cross_barrier",
+      "row": "directions",
+      "song": "chapter_03_do_not_cross_barrier",
+      "timing": "approach",
+      "badge": "lines-do-not-cross-barrier",
+      "view_frame": {"title": "DO NOT CROSS", "target": "directions/Artifact/PoliceBarricade", "aim": [0, 1.10, 0], "offset": [1.58, 1.38, -2.89], "width": 1.03, "height": 0.54}
+    },
+    {
+      "id": "redline",
+      "row": "directions",
+      "song": "chapter_03_redline",
+      "timing": "approach",
+      "badge": "lines-redline"
+    },
+    {
+      "id": "walk_this_line_marking",
+      "row": "directions",
+      "song": "chapter_03_walk_this_line_marking",
+      "timing": "approach",
+      "badge": "lines-walk-this-line-marking"
+    },
+    {
+      "id": "anamorphic_cross",
+      "row": "museum-point_lines-31-12",
+      "song": "chapter_03_anamorphic_cross",
+      "timing": "after",
+      "badge": "lines-anamorphic-cross"
+    },
+    {
+      "id": "health_cross",
+      "row": "museum-point_lines-32-12",
+      "song": "chapter_03_health_cross",
+      "timing": "after",
+      "badge": "lines-health-cross"
+    },
+    {
+      "id": "line_relations_gallery",
+      "row": "candidate-timber_plank_4m",
+      "song": "chapter_03_line_relations_gallery",
+      "timing": "approach",
+      "badge": "lines-line-relations-gallery"
+    },
+    {
+      "id": "modulor_man_demo",
+      "row": "museum-point_lines-42-3",
+      "song": "chapter_03_modulor_man_demo",
+      "timing": "approach",
+      "badge": "lines-modulor-man-demo"
+    },
+    {
+      "id": "player_trace",
+      "row": "museum-point_lines-37-2",
+      "song": "chapter_03_player_trace",
+      "timing": "after",
+      "badge": "lines-player-trace"
+    }
+  ]
+}

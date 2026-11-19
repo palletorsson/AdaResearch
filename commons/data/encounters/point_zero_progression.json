@@ -1,0 +1,13 @@
+{
+  "map": "Point_Zero",
+  "encounters": [
+    {
+      "id": "delivery_fold", "song": "spine_0842441d3693127502", "badge": "encounter-world-4d1ab7ccc6ac12ad1d",
+      "view_frame": {"title": "DELIVERY FOLD", "target": "delivery-fold/Artifact", "aim": [0, 0, 0], "offset": [0, 2.0, 0], "width": 1.15, "height": 0.72}
+    },
+    {
+      "id": "frame_counter", "song": "clock", "badge": "grammar_primitives",
+      "view_frame": {"title": "ALREADY COUNTING", "target": "clock/Artifact", "aim": [0, 0.055, 0.02], "offset": [0, 1.7, 0], "width": 0.85, "height": 0.5}
+    }
+  ]
+}

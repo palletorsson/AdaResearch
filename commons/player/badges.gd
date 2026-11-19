@@ -17,6 +17,7 @@ extends RefCounted
 const PATH_DEFAULT := "res://commons/data/badges/path.json"
 const COLLECTED_DEFAULT := "user://badges/collected.json"
 const RASTER := 256                     # px on the long side of a face texture (the stickers' size)
+const Trajectory := preload("res://commons/void/trajectory_runtime.gd")
 
 static var path_file := PATH_DEFAULT          # a probe points this at a fixture
 static var collected_file := COLLECTED_DEFAULT   # a probe points this at ada_run/badges/, never at the game's user://
@@ -35,6 +36,7 @@ static var _textures: Dictionary = {}         # "id|face" -> Texture2D (null whe
 static func reread() -> void:
 	_loaded = false;_collected_loaded = false
 	_path = {};_coins = [];_by_id = {};_collected = [];_textures = {}
+	Trajectory.reread()
 
 static func _read_path() -> void:
 	if _loaded:return
@@ -44,7 +46,9 @@ static func _read_path() -> void:
 	if not parsed is Dictionary or not (parsed as Dictionary).get("coins") is Array:
 		push_warning("badges: %s is not a coin path" % path_file);return
 	_path = parsed
-	for c in _path.coins:
+	# Fixtures opt out of the live outline; the actual game and editor share it.
+	var effective: Array = Trajectory.coins(_path.coins) if path_file == PATH_DEFAULT else _path.coins
+	for c in effective:
 		if c is Dictionary and str(c.get("id", "")) != "":_coins.append(c)
 	_coins.sort_custom(func(a, b):return float(a.get("n", 0)) < float(b.get("n", 0)))
 	for c in _coins:_by_id[str(c.id)] = c

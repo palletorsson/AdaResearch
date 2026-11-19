@@ -14,6 +14,7 @@ const XR_PIXELS := Vector2i(2048, 1536)
 const XR_DEPTH := 1.2
 const XR_FRAME_WIDTH := 2.1
 const XR_VERTICAL_OFFSET := -.095
+const VIEWFINDER_LAYER := 1 << 18
 const SEGMENTS := 5
 
 var level := ""
@@ -76,6 +77,7 @@ func _mount_xr(camera: Camera3D) -> void:
 
 	_xr_frame = MeshInstance3D.new()
 	_xr_frame.name = "Viewfinder"
+	_xr_frame.layers = VIEWFINDER_LAYER
 	# Keep the whole HUD in the common field of view, at a comfortable stereo depth.
 	_xr_frame.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	var quad := QuadMesh.new()

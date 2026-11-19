@@ -27,6 +27,8 @@ const ATTENTION := "res://audio/runtime/InnerOperaAttention.gd"
 const VOICE := "res://commons/void/inner_voice_godot.gd"
 const ACCOMPANIMENT := "res://commons/void/inner_opera_score.gd"
 const BINDINGS := "res://commons/data/opera/tower_bindings.json"
+const TWO_VISITS_SONG := "spine_c2b6fc98a64a37b397"
+const OpeningTrail := preload("res://commons/void/opening_opera_trail.gd")
 const GROUP := "inner_opera_object"
 const AFTER_OPENING := 2.0
 
@@ -82,6 +84,24 @@ func _ready() -> void:
 	game.set_meta("inner_opera", self)
 
 
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo and event.physical_keycode == KEY_F9 and not game.vr:
+		get_viewport().set_input_as_handled()
+		_desktop_photograph()
+		return
+
+func _desktop_photograph() -> void:
+	await RenderingServer.frame_post_draw
+	var directory := ProjectSettings.globalize_path("user://opera_journal/desktop")
+	var file := directory.path_join("floor-%d-%d-%d.png" % [game.checkpoint, int(Time.get_unix_time_from_system()), Time.get_ticks_msec()])
+	var image := get_viewport().get_texture().get_image()
+	if image != null and DirAccess.make_dir_recursive_absolute(directory) == OK and image.save_png(file) == OK:
+		print("[opera] Desktop photograph: ",file)
+		game.call("_notice","Photograph saved · "+file)
+	else:
+		game.call("_notice","Could not save the desktop photograph.")
+
+
 func _read_bindings() -> bool:
 	if not FileAccess.file_exists(BINDINGS): return false
 	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(BINDINGS))
@@ -128,6 +148,13 @@ func _bind_what_stands() -> void:
 				if mount == null: continue
 			if int(bound.get(key, 0)) == mount.get_instance_id(): continue
 			_bind(mount, str(wanted[id]))
+			if wanted[id] == TWO_VISITS_SONG:
+				var wheel := mount.get_node_or_null("Artifact")
+				if wheel != null and wheel.has_signal("two_visits_completed"):
+					var map := str(game.building.content.data.floors[int(index)].map)
+					var edit: Dictionary = OpeningTrail.placements(map).get(TWO_VISITS_SONG, {})
+					if edit.has("position") and is_instance_valid(wheel.view_frame):
+						wheel.view_frame.apply_floor_pose(game.building.content.roots[int(index)], edit)
 			bound[key] = mount.get_instance_id()
 
 

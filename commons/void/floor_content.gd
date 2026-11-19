@@ -154,6 +154,10 @@ func _build_content(index: int, record: Dictionary, defer_artifacts := false) ->
 			caption.modulate = Color("efc5dd")
 	# the artifact timeline in the tower (2026-11-07): number captions, and the walk where no route is hand-made
 	if trial_id.is_empty(): TimelineWalk.build(floor_root, index)
+	# BADGE COINS (2026-11-17, commons/void/badge_layer.gd): this floor's uncollected coins, and the works they stand in place of are not stood. load, not preload: a broken badge script never stops the Void compiling
+	var badge_layer: Variant = load("res://commons/void/badge_layer.gd") if trial_id.is_empty() else null
+	var badge_replaced: Array = badge_layer.replaced(index, str(record.map)) if badge_layer != null and badge_layer.can_instantiate() else []
+	if badge_layer != null and badge_layer.can_instantiate(): badge_layer.build(floor_root, index)
 	var abstract: bool = building.abstract_floor(index)
 	if not abstract: _build_feed(floor_root,index != 0)
 	for wall in record.walls:
@@ -181,6 +185,7 @@ func _build_content(index: int, record: Dictionary, defer_artifacts := false) ->
 		construction.items = record.construction
 		floor_root.add_child(construction)
 	for item in record.artifacts:
+		if str(item.id) in badge_replaced: continue   # BADGE COINS (2026-11-17): a coin stands in this work's place (badge_layer.gd)
 		if defer_artifacts: _queue_artifact(index,item)
 		else: _build_artifact(floor_root, index, item)
 	# Pasted instances share the original factory and overhead supply stations.

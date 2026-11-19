@@ -9,6 +9,10 @@ extends RefCounted
 
 const Badges := preload("res://commons/player/badges.gd")
 const CoinScene := preload("res://commons/void/badge_coin.tscn")
+const SongField := preload("res://commons/void/song_field.gd")
+const FramedField := preload("res://commons/void/framed_song_field.gd")
+const Trail := preload("res://commons/void/opening_opera_trail.gd")
+const EncounterFrame := preload("res://commons/void/encounter_note_frame.gd")
 const ViewLib := preload("res://commons/player/badges_view.gd")
 const VerbsLib := preload("res://commons/player/badge_verbs.gd")
 const HOVER := 1.1          # a 'stop' coin's centre over the stand's surface
@@ -20,17 +24,37 @@ static var _verbs: WeakRef
 static func replaced(index: int, map := "") -> Array:
 	return Badges.replaced(index, map)
 
-## Stand this floor's uncollected coins under `host` (the floor's content root). Returns the holder, or null.
+## Stand uncollected coins and persistent song fields under the floor's content root.
 static func build(host: Node3D, index: int) -> Node3D:
 	ensure_singletons(host)
 	var map := str(host.get_meta("map", ""))
-	var standing: Array = Badges.coins_on(index, map).filter(func(c):return not Badges.has(str(c.id)))
+	var placements := Trail.placements(map)
+	for id in placements:
+		var entry: Dictionary = placements[id]
+		if entry.get("kind") == "encounter":
+			var frame := EncounterFrame.new()
+			frame.set_meta("encounter_id", id)
+			frame.caption = entry.title
+			frame.aperture = Vector2(entry.width, entry.height) / 2.0
+			host.add_child(frame)
+			frame.apply_floor_pose(host, entry)
+	var standing: Array = Badges.coins_on(index, map)
 	if standing.is_empty():return null
+	var frames := Trail.frames(map)
 	var root := Node3D.new();root.name = "BadgeCoins";host.add_child(root)
-	for c in standing:
+	for source in standing:
+		var c: Dictionary = source
+		if Trail.POLICIES.has(map) and c.has("song") and frames.get(c.song, {}).get("badge", "") != c.id:
+			# A reserve badge still collects and recharges in the opening edition.
+			c = c.duplicate()
+			c.erase("song")
 		var coin: Node3D = CoinScene.instantiate()
 		coin.name = "Coin_" + str(c.get("label", c.id)).validate_node_name()
-		if str(c.get("replaces", "")) != "" and c.get("position") is Array:
+		if c.get("at") is Array and c.at.size() == 3:
+			coin.setup(c, 0.0)
+			coin.position = Vector3(float(c.at[0]), float(c.at[1]), float(c.at[2]))
+			coin.rotation_degrees.y = float(c.get("facing", 0.0))
+		elif str(c.get("replaces", "")) != "" and c.get("position") is Array:
 			var at: Array = c.position
 			coin.setup(c, REPLACE_LIFT)
 			coin.position = Vector3(float(at[0]), float(c.get("height", 0.0)), float(at[1]))
@@ -44,7 +68,22 @@ static func build(host: Node3D, index: int) -> Node3D:
 			push_warning("badges: coin %s has neither a work it replaces nor a stand" % str(c.id))
 			coin.free();continue
 		coin.set_meta("badge_n", c.get("n", 0))
-		root.add_child(coin)
+		# The listening place survives collection and streamed floor rebuilds.
+		# Its horizontal position follows the same editable badge placement.
+		if not str(c.get("song", "")).is_empty():
+			var field: SongField
+			if frames.has(c.song) and frames[c.song].badge == c.id:
+				var framed := FramedField.new()
+				framed.configure_frame(host, frames[c.song].view_frame)
+				field = framed
+			else:
+				field = SongField.new()
+			field.name = "Voice_"+str(c.id).validate_node_name()
+			field.setup(c,index)
+			field.position = Vector3(coin.position.x,maxf(0.0,coin.position.y+coin.lift-HOVER),coin.position.z)
+			root.add_child(field)
+		if Badges.has(str(c.id)): coin.free()
+		else: root.add_child(coin)
 	return root
 
 ## One collation view and one verbs node for the game (or the scene, in a probe), made the first time any floor builds.

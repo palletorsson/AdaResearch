@@ -1,0 +1,39 @@
+{
+  "map": "Point_Trace",
+  "status": "implemented",
+  "date": "2026-11-17",
+  "decision": "Palle chose recording and making, and requested Bubble Brush as the reply to the beads. Four action responses; new lyric and growth cue are agent editorial choices for listening feedback.",
+  "final": "commons/maps/Point_Trace/final.md",
+  "encounters": [
+    {
+      "id": "glass_paint_wall",
+      "row": "surface",
+      "song": "chapter_04_glass_paint_wall",
+      "timing": "after",
+      "badge": "trace-glass-paint-wall"
+    },
+    {
+      "id": "draw_dot",
+      "row": "record",
+      "song": "chapter_04_draw_dot",
+      "timing": "after",
+      "badge": "trace-draw-dot",
+      "view_frame": {"title": "LEAVE A BEND", "target": "record/Artifact/Bead10mm", "aim": [0, 0, 0], "offset": [0, 1.18, 0], "width": 0.78, "height": 0.5}
+    },
+    {
+      "id": "bubble_brush",
+      "row": "bubble-brush",
+      "song": "chapter_04_bubble_brush",
+      "timing": "after",
+      "badge": "trace-bubble-brush",
+      "view_frame": {"title": "LET WAITING GROW", "target": "bubble-brush/Artifact/Brush", "aim": [0, 0, 0], "offset": [0.85, 1.18, -0.08], "width": 0.70, "height": 0.46}
+    },
+    {
+      "id": "trace_ball_ramp",
+      "row": "release",
+      "song": "chapter_04_trace_ball_ramp",
+      "timing": "after",
+      "badge": "trace-trace-ball-ramp"
+    }
+  ]
+}

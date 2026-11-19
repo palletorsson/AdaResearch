@@ -8,8 +8,8 @@ from pathlib import Path
 import time
 
 
-def acquire_native_slot(label: str, timeout: float = 1200):
-    path = Path(__file__).resolve().parents[1] / 'ada_run' / 'void-native.lock'
+def acquire_native_slot(label: str, timeout: float = 1200, *, lock_name: str = 'void-native.lock'):
+    path = Path(__file__).resolve().parents[1] / 'ada_run' / lock_name
     path.parent.mkdir(parents=True, exist_ok=True)
     handle = path.open('a+b')
     if path.stat().st_size == 0:

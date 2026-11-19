@@ -1,0 +1,33 @@
+{
+  "map": "Point_Coordinates",
+  "status": "implemented",
+  "date": "2026-11-17",
+  "decision": "Continue the next floor. Agent editorial choice: let carrying, comparing references and the loss of a watched ball precede their songs; awaiting listening feedback.",
+  "final": "commons/maps/Point_Coordinates/final.md",
+  "encounters": [
+    {
+      "id": "point_held",
+      "row": "held",
+      "song": "chapter_02_point_held",
+      "timing": "after",
+      "badge": "coordinates-carry-point",
+      "view_frame": {"title": "CARRY THE POINT", "target": "held/Artifact/HeldPoint", "aim": [0, 0, 0], "offset": [0, 1.36, 0], "width": 0.86, "height": 0.56}
+    },
+    {
+      "id": "coordinate_readout",
+      "row": "world",
+      "song": "chapter_02_coordinate_readout",
+      "timing": "after",
+      "badge": "coordinates-name-reference",
+      "also_observe": ["local"],
+      "view_frame": {"title": "TWO ADDRESSES", "target": "world/Artifact", "aim": [0, 0, 0.06], "offset": [0, 1.60, 0], "width": 0.96, "height": 0.58}
+    },
+    {
+      "id": "drag_point_target",
+      "row": "museum-point_coordinates-10-6",
+      "song": "chapter_02_drag_point_target",
+      "timing": "after",
+      "badge": "coordinates-keep-one"
+    }
+  ]
+}
