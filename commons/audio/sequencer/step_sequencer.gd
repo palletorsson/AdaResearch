@@ -23,6 +23,8 @@ const CustomSoundGenerator := preload("res://commons/audio/generators/CustomSoun
 @export var bpm: float = 120.0
 @export var sound_preset: String = "808_kit"
 @export var auto_play: bool = false
+## Ring every cell of the column the clock reads, rests included (see SequencerUI.read_column). Off by default.
+@export var read_column: bool = false
 
 ## Signals
 signal step_triggered(track: int, step: int)
@@ -250,6 +252,7 @@ func _find_sequencer_ui() -> void:
 				for vp_child in viewport.get_children():
 					if vp_child is SequencerUI:
 						_sequencer_ui = vp_child
+						_sequencer_ui.read_column = read_column
 						_connect_ui_signals()
 						return
 
@@ -257,6 +260,7 @@ func _find_sequencer_ui() -> void:
 	var direct_ui = get_node_or_null("SequencerUI")
 	if direct_ui is SequencerUI:
 		_sequencer_ui = direct_ui
+		_sequencer_ui.read_column = read_column
 		_connect_ui_signals()
 
 
@@ -451,6 +455,11 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 	if config_data.has("auto_play"):
 		auto_play = _to_bool(config_data["auto_play"])
+
+	if config_data.has("read_column"):
+		read_column = _to_bool(config_data["read_column"])
+		if _sequencer_ui:
+			_sequencer_ui.read_column = read_column
 
 	if config_data.has("pattern_preset"):
 		# Defer pattern loading until after UI is ready

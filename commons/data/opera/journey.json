@@ -1596,9 +1596,10 @@
          },
          {
           "at": "draft-tutorial_disco-2",
-          "text": "This cell is silent.",
+          "text": "The clock comes to a cell and nothing sounds.",
           "status": "new",
-          "there_now": "A place repeats and leaves a space between."
+          "there_now": "A place repeats and leaves a space between.",
+          "seen": "tools/probes/disco_silent_cell.gd, floor 27, 0.9 m from the screen at eye height. Before: the sequencer arrived empty and stopped, and the clock on a silent step moved a 14 x 3 px dash, 0.3 % of the screen. After (rooms.json row f2_step_sequencer_3_5: pattern_preset four_on_floor, read_column true): it arrives holding 12 hits and 52 rests, and every cell of the column being read is ringed, 2.7 % of the screen. The line was \"This cell is silent.\" while the floor could not show it; the word silent is now kept for the act's last line. Not heard, and the cue is not set."
          },
          {
           "at": "draft-tutorial_disco-3",

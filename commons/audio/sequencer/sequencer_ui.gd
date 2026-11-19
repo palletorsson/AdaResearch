@@ -387,7 +387,31 @@ func _update_step_label() -> void:
 
 
 ## Called by parent to update playhead position
+## Off, the clock shows as the dash above the grid and nothing else (every placement before 2026-11-19).
+## On, every cell of the column being read is ringed, so a rest is seen being read: the clock visits a
+## silent cell as it visits a sounding one.
+var read_column := false
+
+
+func _mark_column(step: int, reading: bool) -> void:
+	if not read_column or step < 0 or step >= num_steps or _buttons.is_empty():
+		return
+	for track in _buttons.size():
+		var button: Button = _buttons[track][step]
+		var rest := button.get_theme_stylebox("normal") as StyleBoxFlat
+		var hit := button.get_theme_stylebox("pressed") as StyleBoxFlat
+		var colour: Color = TRACK_COLORS[track % TRACK_COLORS.size()]
+		if rest:
+			rest.set_border_width_all(4 if reading else 1)
+			rest.border_color = Color(0.1, 0.1, 0.14) if reading else Color(0.7, 0.7, 0.72)
+			rest.bg_color = Color(0.74, 0.74, 0.8) if reading else Color(0.98, 0.98, 1.0)
+		if hit:
+			hit.set_border_width_all(4 if reading else 1)
+			hit.border_color = Color(0.1, 0.1, 0.14) if reading else colour.darkened(0.2)
+
+
 func set_playhead(step: int) -> void:
+	_mark_column(_playhead_position, false)
 	# Clear previous
 	if _playhead_position < _playhead_indicators.size():
 		var prev_style = _playhead_indicators[_playhead_position].get_theme_stylebox("panel") as StyleBoxFlat
@@ -401,6 +425,7 @@ func set_playhead(step: int) -> void:
 		var curr_style = _playhead_indicators[_playhead_position].get_theme_stylebox("panel") as StyleBoxFlat
 		if curr_style:
 			curr_style.bg_color = Color(0.3, 0.7, 0.4)  # Green active
+	_mark_column(_playhead_position, true)
 
 	_update_step_label()
 

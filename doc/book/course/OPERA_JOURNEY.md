@@ -475,7 +475,7 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Touches: A phase passes through the floor / The next moment has an address · A silent cell is still a place / Silence has a position · Two clocks meet / We meet, then drift apart
 
 > The next moment has an address.  
-> This cell is silent.  
+> The clock comes to a cell and nothing sounds.  
 > Two clocks meet, then drift apart.  
 
 - Lines: A phase passes through the floor: new; there now: "I come around and find another way." · A silent cell is still a place: new; there now: "A place repeats and leaves a space between." · Two clocks meet: new; there now: "The world was moving long before I came."
