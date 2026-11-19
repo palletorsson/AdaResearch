@@ -16,8 +16,8 @@ outline and in the outline's order. A floor whose outline holds a single entry m
 floor before ("carried": true); no other floor may.
 
 A stop may hold a song: one line at each touched entry, in the stop's order, written without a personal
-pronoun (commons/data/opera/editorial_revisions.json). "keeps" is a word the song shares with the song of
-the stop before, so the songs compound; "hands_on" is the sentence the stop leaves for a unit that has
+pronoun (commons/data/opera/editorial_revisions.json). "keeps", where a song has it, is a word it shares with the song of
+the stop before; "hands_on" is the sentence the stop leaves for a unit that has
 not been there. An act that has begun its songs has one for every stop.
 """
 import json
@@ -76,12 +76,14 @@ def check(journey, outline, sequences):
             words = ' '.join(line['text'] for line in song['lines'])
             if [line['at'] for line in song['lines']] != [t['id'] for t in stop['touches']]:
                 found.append('%s: the song does not give one line to each touched entry, in order' % stop['map'])
-            said = PRONOUNS & set(re.findall(r"[a-z']+", words.lower()))
+            # A memory keeps its first person, and a word in capitals is a sign's word, not the singer's.
+            sung = ' '.join(re.sub(r"(?<![A-Za-z])[A-Z]{2,}(?![A-Za-z])", '', line['text']) for line in song['lines'] if not line.get('memory'))
+            said = PRONOUNS & set(re.findall(r"[a-z']+", sung.lower()))
             if said:
                 found.append('%s: a discovery song without a personal pronoun; it says %s' % (stop['map'], ', '.join(sorted(said))))
             for line in song['lines']:
                 # Palle, 19 November 2026: a song is a fold. What the floor holds goes in the notes, not in the line.
-                if len(line['text'].split()) > 12:
+                if len(line['text'].split()) > 12 and not line.get('memory'):
                     found.append('%s: a line of %d words; a song folds its meaning into twelve or fewer' % (stop['map'], len(line['text'].split())))
                 if line.get('layout') and ' '.join(line['layout']).split() != line['text'].split():
                     found.append('%s: a line\'s layout does not hold the line\'s words' % stop['map'])
@@ -90,7 +92,7 @@ def check(journey, outline, sequences):
             if at and row[at - 1].get('song'):
                 before = ' '.join(line['text'] for line in row[at - 1]['song']['lines'])
                 keeps = song.get('keeps') or ''
-                if not keeps or not all(re.search(r'\b' + re.escape(keeps), t, re.I) for t in (words, before)):
+                if keeps and not all(re.search(r'\b' + re.escape(keeps), t, re.I) for t in (words, before)):
                     found.append('%s: keeps "%s", which is not in both this song and the one before' % (stop['map'], keeps))
     if sequences is not None:
         given = {s['id']: s['maps'] for s in sequences}

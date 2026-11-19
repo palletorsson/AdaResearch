@@ -4,7 +4,7 @@
 
 **Palle, 19 November 2026:** The songs should be read as one coherent journey, the story of discovering what forms are possible, what topologies, what spaces, bodies, organizational structures and their edges.
 
-The whole tower as one story, kept abstract: eight acts, one movement for each spine sequence, one stop for each floor. A stop says what it takes from the stop before and what it discovers, names which of the six words it is about, and touches two or more entries of the trajectory outline in the order the outline gives them. It is a frame for the songs and not their text: a lyric is still written from the player's view of the floor, and checked there. Nothing here was heard or walked for this document; every stop is read from the floor's intent and its outline entries. Palle, 19 November 2026: the songs are very compressed, and that is how a song shows intelligence: by folding (Dichtung). A line compresses the meaning of the artifact and of the encounter without losing it. So what stands on the floor and what was measured there is kept in the notes under a line ("seen", "unfolded"), and the line itself is the fold: at most twelve words. Each floor has a chapter, commons/maps/<map>/final.md, written in Model B's voice with the encounters in order; read it before writing a line. Act one was first written without it and was corrected on 19 November: for every sung line the chapter's section on that encounter was read, and twenty-nine lines changed. The chapters were not read end to end, and they were written around the Endless Museum: the meaning is taken from the chapter, the facts from the floor as it stands.
+The whole tower as one story, kept abstract: eight acts, one movement for each spine sequence, one stop for each floor. A stop says what it takes from the stop before and what it discovers, names which of the six words it is about, and touches two or more entries of the trajectory outline in the order the outline gives them. It is a frame for the songs and not their text: a lyric is still written from the player's view of the floor, and checked there. Nothing here was heard or walked for this document; every stop is read from the floor's intent and its outline entries. Palle, 19 November 2026: the songs are very compressed, and that is how a song shows intelligence: by folding (Dichtung). A line compresses the meaning of the artifact and of the encounter without losing it. So what stands on the floor and what was measured there is kept in the notes under a line ("seen", "unfolded"), and the line itself is the fold: at most twelve words. Each floor has a chapter, commons/maps/<map>/final.md, written in Model B's voice with the encounters in order; read it before writing a line. Act one was first written without it and was corrected on 19 November: for every sung line the chapter's section on that encounter was read, and twenty-nine lines changed. The chapters were not read end to end, and they were written around the Endless Museum: the meaning is taken from the chapter, the facts from the floor as it stands. Palle, 19 November: take in all ideas and pick the best one. For the first sequence every line another session had written for the same encounter was laid beside mine and the better one taken: sixteen of the forty-three lines are theirs. The one-word chain between songs is kept where it still holds and is no longer required.
 
 ## The six words
 
@@ -106,14 +106,15 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 **0 · Point_Zero** (space)
 - Takes: Nothing yet. The crate opens on a world that is already running.
 - Discovers: A place can be named and counted before anyone arrives in it. The first thing met is the word here.
-- Touches: Arrival crate / break into the world · The frame counter / already running · The other Care Units · Roof letters / a world already named
+- Touches: Arrival crate / break into the world · The frame counter / already running · The other Care Units · Roof letters / a world already named · You are here
 
-> A split knot. A little sky in it.  
+> A knot in the wood holds a little sky.  
 > The first number seen was not its first.  
 > Three bodies still in the packing.  
-> Named already. Here.  
+> A roof can have the wrong address.  
+> Cross out YOU. Here stays here.  
 
-- Lines: Arrival crate: new; there now: "The boards are thin." · The frame counter: new; there now: "A number is changing." · The other Care Units: the line already there, kept · Roof letters: new; there now: "This is not my address."
+- Lines: Arrival crate: new; there now: "The boards are thin." · The frame counter: new; there now: "A number is changing." · The other Care Units: the line already there, kept · Roof letters: new; there now: "This is not my address." · You are here: new
 - Hands on: Before anything else, say here.
 - Later, in Service (Residue, preface): Day 412 is counted at one desk in blank boarding passes printed each morning for no one. There too the count was running before she came.
 
@@ -122,12 +123,11 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Discovers: One point can be an absence, a surface or a solid, and the empty place still gets a lamp.
 - Touches: A place named / I began as a pixel · The same shape answers differently / Three points · A light for the empty place / Even the absence has a lamp
 
-> Here: a label, and nothing above it.  
-> Three points. One has a place. One appears. One stops a body.  
+> I began as a pixel on a screen. Now I can come closer.  
+> A name on the floor. Through white. Up against white.  
 > Even the absence has a lamp.  
 
-- Lines: A place named: new; there now: "I began as a pixel on a screen. Now I can come closer." · The same shape answers differently: the line already there, kept · A light for the empty place: the line already there, kept
-- Keeps from the song before: **here**
+- Lines: A place named: new; there now: "I began as a pixel on a screen. Now I can come closer." · The same shape answers differently: new · A light for the empty place: the line already there, kept
 - Hands on: A place can be kept for what is not there yet.
 
 **2 · Point_Coordinates** (space)
@@ -140,7 +140,6 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 
 - Lines: Carry the point: new; there now: "The light comes with my hand." · Name the reference: new; there now: "One point can have two addresses."
 - Unfolded: "Held, a point brings its light. Let go: the point stays." was "A point in the hand goes where the hand goes."
-- Keeps from the song before: **point**
 - Hands on: Ask what a number is measured from.
 - Later, in Service (Residue, chapters 2 and 16): At the consulate her inquiry falls under the duplicate-addressee protocol, and the pass that is finally printed is for a recipient who is more than one.
 
@@ -153,16 +152,16 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 > Joined, a length. Turn it: the number wanders.  
 > A line on legs says no. The way round is longer.  
 > A red line. Who gave it force?  
-> Walk this line, or step aside. The refusal is measured.  
+> Does walking beside the line count?  
 > Move an end, let go. The line comes back as a plank.  
-> Fire, move, fire: a line with a surface, for any wall.  
+> Tape gives a stroke a skin.  
 
 - Lines: Leave a connection: new; there now: "I let go. The link stays." · Turn without stretching: new; there now: "The length stays while I turn." · Find another way: new; there now: "This line makes my journey longer." · Read the warning: new; there now: "What gives this line its force?" · Step beside the words: new; there now: "I could step beside the words." · association(line): new; there now: "A line can guide my feet or bar the way." · Tape: new; there now: "I follow what was only once a mark."
 - Unfolded: "Joined, a length. Turn it: the number wanders." was "Two points in the dark, one in each hand. Joined: a line of light. The wall measures it. Reset, and both go home."
 - Unfolded: "A line on legs says no. The way round is longer." was "A blue plank on sawhorses says do not cross. The way round is longer."
-- Unfolded: "Walk this line, or step aside. The refusal is measured." was "Walk this line. Six metres, gate to gate. The floor measures every step aside."
+- Unfolded: "Does walking beside the line count?" was "Walk this line. Six metres, gate to gate. The floor measures every step aside."
 - Unfolded: "Move an end, let go. The line comes back as a plank." was "Move one end. Let go. A thing a line can be falls on the table: a plank, a ruler, a warning."
-- Unfolded: "Fire, move, fire: a line with a surface, for any wall." was "Three rolls of tape. Fire, move, fire: a strip between two points. Strip beside strip, the line has a surface. Any wall will take it."
+- Unfolded: "Tape gives a stroke a skin." was "Three rolls of tape. Fire, move, fire: a strip between two points. Strip beside strip, the line has a surface. Any wall will take it."
 - Keeps from the song before: **point**
 - Hands on: A line can join or forbid. Ask which, and who drew it.
 
@@ -187,7 +186,7 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 
 > Three edges close on a gap. Again, nothing in it.  
 > A drawing, flattened to fit. A face wants a plane.  
-> Two faces, one shared edge. Move its end: both change.  
+> Could the square fold along the other line?  
 
 - Lines: Three edges: new; there now: "The edges close. I still see through." · Draw a face: new; there now: "My drawing has lost its height." · The shared diagonal: new
 - Unfolded: "Three edges close on a gap. Again, nothing in it." was "Three edges close round a gap. Again a place with nothing in it."
@@ -199,13 +198,12 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Discovers: Four points enclose a first inside. The slope that blocks as a pyramid carries as a wedge.
 - Touches: Four points / first enclosure · The allowing wedge · The blocking slope
 
-> The last point home. Four faces close, and it falls.  
-> On a wedge, forward is a little higher.  
+> The last point brings it down.  
+> Forward becomes a little higher.  
 > Round the basin the same slope says no.  
 
 - Lines: Four points: new; there now: "The last point brings it down." · The allowing wedge: new; there now: "Forward becomes a little higher." · The blocking slope: new; there now: "A slope can turn me away."
 - Unfolded: "Round the basin the same slope says no." was "On a pyramid the same slope turns a body away."
-- Keeps from the song before: **face**
 - Hands on: The same slope helps or stops. Try it with a body before naming it.
 
 **7 · Point_Animatedcube** (form, organization)
@@ -214,12 +212,11 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Touches: One cube, two folds · Unfold and return · The copies wait for a relation
 
 > One corner, two folds.  
-> Six faces fold. A cube drops. The net opens again.  
+> Each return leaves something behind.  
 > Two copies to the table. The relation is still to make.  
 
 - Lines: One cube, two folds: new; there now: "The same corner makes two folds." · Unfold and return: new; there now: "Each return leaves something behind." · The copies wait for a relation: new; there now: "The copies wait for a relation."
 - Unfolded: "Two copies to the table. The relation is still to make." was "Boxes in columns, all alike. One can be carried to the table."
-- Keeps from the song before: **face**
 - Hands on: Taken apart and put back, a thing is known better. Its copies are parts.
 - Later, in Service (Residue, chapters 4 and 12): Beds made with hospital corners every morning, slept in or not, and one bed remade by another hand with its fold two short of the nurse's own.
 
@@ -242,8 +239,8 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Touches: One outline, many columns · A cylinder becomes a container · The column becomes a passage
 
 > One outline. More sides, another column.  
-> Hollow, the column holds something.  
-> Open at both ends, it lets a body through.  
+> A cylinder makes a barrel of empty space.  
+> Where did the outside of the pillar go?  
 
 - Lines: One outline, many columns: new; there now: "An outline can become many bodies." · A cylinder becomes a container: new; there now: "A moving shape can become what I hear." · The column becomes a passage: new; there now: "An opening changes where my body goes."
 - Keeps from the song before: **side**
@@ -255,11 +252,10 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Touches: A letter becomes a space · Let the outline guide a ball · An unfamiliar body from a familiar rule
 
 > A letter at body size. Its opening has a sill.  
-> The outline leads a ball.  
+> Which edge keeps the ball on the page?  
 > A profile, turned. Pores, feet, bristles. One body, five rules.  
 
 - Lines: A letter becomes a space: new; there now: "A letter can become a space." · Let the outline guide a ball: new; there now: "A little mark can ask for room to move." · An unfamiliar body from a familiar rule: new; there now: "What I can reach can change what I become."
-- Keeps from the song before: **outline**
 - Hands on: A sign can be entered. A known rule can make an unknown thing.
 
 **11 · Primitives_Portals** (topology, edge)
@@ -280,13 +276,13 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 - Discovers: Familiar parts become a place, an image and a handmade assembly. The arrangement is one among others and the tools lie unfinished.
 - Touches: Four corners make a place · Did height make the centre? · The image and its unfinished tools
 
-> Four corners. Walk: a gap opens between two. A place.  
-> Did height make this the centre?  
+> Which corner first made this a place?  
+> Does height give a shape the right to lead?  
 > The tools are still here.  
 
-- Lines: Four corners make a place: new; there now: "My steps change how they stand together." · Did height make the centre?: the line already there, kept · The image and its unfinished tools: the line already there, kept
-- Unfolded: "Four corners. Walk: a gap opens between two. A place." was "Four corners, and the gap between them is a place."
-- Keeps from the song before: **gap**
+- Lines: Four corners make a place: new; there now: "My steps change how they stand together." · Did height make the centre?: new · The image and its unfinished tools: the line already there, kept
+- Unfolded: "Which corner first made this a place?" was "Four corners, and the gap between them is a place."
+- Keeps from the song before: **here**
 - Hands on: An arrangement is one of several. Leave the tools out for whoever comes next.
 - Later, in Service (Residue, chapter 12): A fold of repair tape is left on the arm of the visitor's chair. The nurse notes it and lets it stay.
 

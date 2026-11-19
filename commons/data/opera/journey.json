@@ -5,7 +5,7 @@
   "date": "19 November 2026",
   "text": "The songs should be read as one coherent journey, the story of discovering what forms are possible, what topologies, what spaces, bodies, organizational structures and their edges."
  },
- "about": "The whole tower as one story, kept abstract: eight acts, one movement for each spine sequence, one stop for each floor. A stop says what it takes from the stop before and what it discovers, names which of the six words it is about, and touches two or more entries of the trajectory outline in the order the outline gives them. It is a frame for the songs and not their text: a lyric is still written from the player's view of the floor, and checked there. Nothing here was heard or walked for this document; every stop is read from the floor's intent and its outline entries. Palle, 19 November 2026: the songs are very compressed, and that is how a song shows intelligence: by folding (Dichtung). A line compresses the meaning of the artifact and of the encounter without losing it. So what stands on the floor and what was measured there is kept in the notes under a line (\"seen\", \"unfolded\"), and the line itself is the fold: at most twelve words. Each floor has a chapter, commons/maps/<map>/final.md, written in Model B's voice with the encounters in order; read it before writing a line. Act one was first written without it and was corrected on 19 November: for every sung line the chapter's section on that encounter was read, and twenty-nine lines changed. The chapters were not read end to end, and they were written around the Endless Museum: the meaning is taken from the chapter, the facts from the floor as it stands.",
+ "about": "The whole tower as one story, kept abstract: eight acts, one movement for each spine sequence, one stop for each floor. A stop says what it takes from the stop before and what it discovers, names which of the six words it is about, and touches two or more entries of the trajectory outline in the order the outline gives them. It is a frame for the songs and not their text: a lyric is still written from the player's view of the floor, and checked there. Nothing here was heard or walked for this document; every stop is read from the floor's intent and its outline entries. Palle, 19 November 2026: the songs are very compressed, and that is how a song shows intelligence: by folding (Dichtung). A line compresses the meaning of the artifact and of the encounter without losing it. So what stands on the floor and what was measured there is kept in the notes under a line (\"seen\", \"unfolded\"), and the line itself is the fold: at most twelve words. Each floor has a chapter, commons/maps/<map>/final.md, written in Model B's voice with the encounters in order; read it before writing a line. Act one was first written without it and was corrected on 19 November: for every sung line the chapter's section on that encounter was read, and twenty-nine lines changed. The chapters were not read end to end, and they were written around the Endless Museum: the meaning is taken from the chapter, the facts from the floor as it stands. Palle, 19 November: take in all ideas and pick the best one. For the first sequence every line another session had written for the same encounter was laid beside mine and the better one taken: sixteen of the forty-three lines are theirs. The one-word chain between songs is kept where it still holds and is no longer required.",
  "six": {
   "form": "what can stand, from a point to a family grown from a recipe",
   "topology": "what is open, closed or connected: gaps, holes, necks, a way back",
@@ -296,17 +296,23 @@
         {
          "id": "trajectory-00-04",
          "title": "Roof letters / a world already named"
+        },
+        {
+         "id": "trajectory-00-05",
+         "title": "You are here"
         }
        ],
        "song": {
         "lines": [
          {
           "at": "trajectory-00-01",
-          "text": "A split knot. A little sky in it.",
-          "status": "new",
+          "text": "A knot in the wood holds a little sky.",
+          "status": "picked",
           "there_now": "The boards are thin.",
           "chapter": "Point_Zero final.md: a knot has split and a little sky shows through it.",
-          "before_the_chapter": "Light between the boards."
+          "before_the_chapter": "Light between the boards.",
+          "whose": "another session, enabled in the game",
+          "mine_was": "A split knot. A little sky in it."
          },
          {
           "at": "trajectory-00-02",
@@ -324,9 +330,17 @@
          },
          {
           "at": "trajectory-00-04",
-          "text": "Named already. Here.",
-          "status": "new",
-          "there_now": "This is not my address."
+          "text": "A roof can have the wrong address.",
+          "status": "picked",
+          "there_now": "This is not my address.",
+          "whose": "another session, enabled in the game",
+          "mine_was": "Named already. Here."
+         },
+         {
+          "at": "trajectory-00-05",
+          "text": "Cross out YOU. Here stays here.",
+          "status": "picked",
+          "whose": "another session, enabled in the game"
          }
         ],
         "hands_on": "Before anything else, say here.",
@@ -361,16 +375,21 @@
         "lines": [
          {
           "at": "trajectory-01-01",
-          "text": "Here: a label, and nothing above it.",
-          "status": "new",
+          "text": "I began as a pixel on a screen. Now I can come closer.",
+          "status": "picked",
           "there_now": "I began as a pixel on a screen. Now I can come closer.",
           "chapter": "@point_absent: a label says Point one; above it, nothing; only the words and the place they made.",
-          "before_the_chapter": "Here, a place with nothing in it."
+          "before_the_chapter": "Here, a place with nothing in it.",
+          "whose": "Palle asked for this memory on 18 November; first person is kept for a memory",
+          "mine_was": "Here: a label, and nothing above it.",
+          "memory": true
          },
          {
           "at": "trajectory-01-03",
-          "text": "Three points. One has a place. One appears. One stops a body.",
-          "status": "kept"
+          "text": "A name on the floor. Through white. Up against white.",
+          "status": "picked",
+          "whose": "another session, enabled in the game",
+          "mine_was": "Three points. One has a place. One appears. One stops a body."
          },
          {
           "at": "trajectory-01-04",
@@ -378,8 +397,7 @@
           "status": "kept"
          }
         ],
-        "hands_on": "A place can be kept for what is not there yet.",
-        "keeps": "here"
+        "hands_on": "A place can be kept for what is not there yet."
        }
       },
       {
@@ -420,7 +438,6 @@
          }
         ],
         "hands_on": "Ask what a number is measured from.",
-        "keeps": "point",
         "echo": {
          "where": "Residue, chapters 2 and 16",
          "text": "At the consulate her inquiry falls under the duplicate-addressee protocol, and the pass that is finally printed is for a recipient who is more than one."
@@ -503,12 +520,14 @@
          },
          {
           "at": "trajectory-03-05",
-          "text": "Walk this line, or step aside. The refusal is measured.",
-          "status": "new",
+          "text": "Does walking beside the line count?",
+          "status": "picked",
           "there_now": "I could step beside the words.",
           "seen": "tools/probes/walk_this_line_label.gd, floor 3: a 6 m line with a ruler, a START / FINISH gate at each end and a floor scale that keeps the walks; it measures how far a walker strays. The visitor arrives 10.7 m east of its east end, on its axis. The words WALK THIS LINE were 6.7 cm lettering to one side, 7 px tall from before the gate. New row walk-this-line-label in rooms.json: \"Walk This Line\" painted on the floor before the east gate, 20 px tall from 4.4 m. Not heard.",
           "unfolded": "Walk this line. Six metres, gate to gate. The floor measures every step aside.",
-          "chapter": "final.md, @walk_this_line_marking: the space beside the stripe remains available, and \"the refusal can become a measurement\"."
+          "chapter": "final.md, @walk_this_line_marking: the space beside the stripe remains available, and \"the refusal can become a measurement\".",
+          "whose": "another session, a proposal",
+          "mine_was": "Walk this line, or step aside. The refusal is measured."
          },
          {
           "at": "world-f3262176ad862a9696",
@@ -525,11 +544,13 @@
          },
          {
           "at": "world-7f3fc654941f69506f",
-          "text": "Fire, move, fire: a line with a surface, for any wall.",
-          "status": "new",
+          "text": "Tape gives a stroke a skin.",
+          "status": "picked",
           "there_now": "I follow what was only once a mark.",
           "seen": "commons/artifacts/tape_roll/station.gd (another session has uncommitted changes there; read only): masking, pink and barrier rolls, \"hold, fire A, move, fire B\", a canvas of 28 overlapping strips, \"tape onto this board or any solid wall/object\".",
-          "unfolded": "Three rolls of tape. Fire, move, fire: a strip between two points. Strip beside strip, the line has a surface. Any wall will take it."
+          "unfolded": "Three rolls of tape. Fire, move, fire: a strip between two points. Strip beside strip, the line has a surface. Any wall will take it.",
+          "whose": "another session, enabled in the game",
+          "mine_was": "Fire, move, fire: a line with a surface, for any wall."
          }
         ],
         "hands_on": "A line can join or forbid. Ask which, and who drew it.",
@@ -640,10 +661,12 @@
          },
          {
           "at": "trajectory-05-04",
-          "text": "Two faces, one shared edge. Move its end: both change.",
-          "status": "new",
+          "text": "Could the square fold along the other line?",
+          "status": "picked",
           "chapter": "@quad: lift a corner off the diagonal and one face follows; move an end of the shared edge and both change.",
-          "before_the_chapter": "Two faces share one edge."
+          "before_the_chapter": "Two faces share one edge.",
+          "whose": "another session, a proposal",
+          "mine_was": "Two faces, one shared edge. Move its end: both change."
          }
         ],
         "hands_on": "Closing a boundary is not yet filling it.",
@@ -676,17 +699,21 @@
         "lines": [
          {
           "at": "trajectory-06-01",
-          "text": "The last point home. Four faces close, and it falls.",
-          "status": "new",
+          "text": "The last point brings it down.",
+          "status": "picked",
           "there_now": "The last point brings it down.",
           "chapter": "@align_tetrahedron: bring the point to the ring; the faces settle into a tetrahedron, then the whole object falls.",
-          "before_the_chapter": "A fourth point. The faces close on an inside."
+          "before_the_chapter": "A fourth point. The faces close on an inside.",
+          "whose": "another session, enabled in the game",
+          "mine_was": "The last point home. Four faces close, and it falls."
          },
          {
           "at": "trajectory-06-03",
-          "text": "On a wedge, forward is a little higher.",
-          "status": "new",
-          "there_now": "Forward becomes a little higher."
+          "text": "Forward becomes a little higher.",
+          "status": "picked",
+          "there_now": "Forward becomes a little higher.",
+          "whose": "another session, enabled in the game",
+          "mine_was": "On a wedge, forward is a little higher."
          },
          {
           "at": "trajectory-06-04",
@@ -698,8 +725,7 @@
           "before_the_chapter": "On a pyramid the same slope says no."
          }
         ],
-        "hands_on": "The same slope helps or stops. Try it with a body before naming it.",
-        "keeps": "face"
+        "hands_on": "The same slope helps or stops. Try it with a body before naming it."
        }
       },
       {
@@ -734,11 +760,13 @@
          },
          {
           "at": "trajectory-07-03",
-          "text": "Six faces fold. A cube drops. The net opens again.",
-          "status": "new",
+          "text": "Each return leaves something behind.",
+          "status": "picked",
           "there_now": "Each return leaves something behind.",
           "chapter": "@polyhedron_nets_cube: the net folds, the cube drops and stays, another net opens above it.",
-          "before_the_chapter": "Six faces laid flat. Fold. A cube again."
+          "before_the_chapter": "Six faces laid flat. Fold. A cube again.",
+          "whose": "another session, enabled in the game",
+          "mine_was": "Six faces fold. A cube drops. The net opens again."
          },
          {
           "at": "trajectory-07-04",
@@ -752,7 +780,6 @@
          }
         ],
         "hands_on": "Taken apart and put back, a thing is known better. Its copies are parts.",
-        "keeps": "face",
         "echo": {
          "where": "Residue, chapters 4 and 12",
          "text": "Beds made with hospital corners every morning, slept in or not, and one bed remade by another hand with its fold two short of the nurse's own."
@@ -835,15 +862,19 @@
          },
          {
           "at": "trajectory-09-03",
-          "text": "Hollow, the column holds something.",
-          "status": "new",
-          "there_now": "A moving shape can become what I hear."
+          "text": "A cylinder makes a barrel of empty space.",
+          "status": "picked",
+          "there_now": "A moving shape can become what I hear.",
+          "whose": "another session, enabled in the game",
+          "mine_was": "Hollow, the column holds something."
          },
          {
           "at": "trajectory-09-04",
-          "text": "Open at both ends, it lets a body through.",
-          "status": "new",
-          "there_now": "An opening changes where my body goes."
+          "text": "Where did the outside of the pillar go?",
+          "status": "picked",
+          "there_now": "An opening changes where my body goes.",
+          "whose": "another session, a proposal",
+          "mine_was": "Open at both ends, it lets a body through."
          }
         ],
         "hands_on": "One outline, many bodies. Ask what the hollow is for.",
@@ -883,9 +914,11 @@
          },
          {
           "at": "trajectory-10-03",
-          "text": "The outline leads a ball.",
-          "status": "new",
-          "there_now": "A little mark can ask for room to move."
+          "text": "Which edge keeps the ball on the page?",
+          "status": "picked",
+          "there_now": "A little mark can ask for room to move.",
+          "whose": "another session, a proposal",
+          "mine_was": "The outline leads a ball."
          },
          {
           "at": "trajectory-10-04",
@@ -895,8 +928,7 @@
           "seen": "commons/artifacts/cyrtoid_by_rule/cyrtoid_by_rule.gd: five rules in a row (profile, turned, pored, footed, bristled); the floor places the last stage. The row is marked keep-or-remove in rooms.json."
          }
         ],
-        "hands_on": "A sign can be entered. A known rule can make an unknown thing.",
-        "keeps": "outline"
+        "hands_on": "A sign can be entered. A known rule can make an unknown thing."
        }
       },
       {
@@ -972,17 +1004,21 @@
         "lines": [
          {
           "at": "trajectory-12-01",
-          "text": "Four corners. Walk: a gap opens between two. A place.",
-          "status": "new",
+          "text": "Which corner first made this a place?",
+          "status": "picked",
           "there_now": "My steps change how they stand together.",
           "unfolded": "Four corners, and the gap between them is a place.",
           "chapter": "@pyramid: walking round, a gap opens where two outlines seemed to meet; the picture becomes a place.",
-          "before_the_chapter": "Four corners. The gap between them is a place."
+          "before_the_chapter": "Four corners. The gap between them is a place.",
+          "whose": "another session, a proposal",
+          "mine_was": "Four corners. Walk: a gap opens between two. A place."
          },
          {
           "at": "trajectory-12-02",
-          "text": "Did height make this the centre?",
-          "status": "kept"
+          "text": "Does height give a shape the right to lead?",
+          "status": "picked",
+          "whose": "another session, a proposal",
+          "mine_was": "Did height make this the centre?"
          },
          {
           "at": "trajectory-12-03",
@@ -991,7 +1027,7 @@
          }
         ],
         "hands_on": "An arrangement is one of several. Leave the tools out for whoever comes next.",
-        "keeps": "gap",
+        "keeps": "here",
         "echo": {
          "where": "Residue, chapter 12",
          "text": "A fold of repair tape is left on the arm of the visitor's chair. The nurse notes it and lets it stay."
