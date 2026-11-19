@@ -385,15 +385,15 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 
 **21 · Trans_Playground** (space, organization)
 - Takes: A moment to pass in.
-- Discovers: The operations chain into a route and the parts allow another. The intended course and what a player can do are two things.
+- Discovers: The operations chain into a route, and beside it a worker makes another from parts. It builds when a visitor presses and waits when the visitor presses again.
 - Touches: A route made from changes / One movement leads to another · Make another way through / We can arrange it otherwise
 
 > A pause, a passage. One movement leads to the next.  
-> A worker on six legs carries a deck. Another way across is being built.  
+> Press. A worker on six legs carries a deck. Press again, and it waits, still loaded.  
 
 - Lines: A route made from changes: new; there now: "A pause can become a passage." · Make another way through: new; there now: "We can build another way across."
 - Keeps from the song before: **pause**
-- Hands on: A course that was laid can be laid differently. The parts are the same parts.
+- Hands on: Another unit can be started, and held. It keeps what it carries while it waits.
 
 ### Logic (floor 22)
 

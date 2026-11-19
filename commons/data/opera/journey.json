@@ -1273,7 +1273,7 @@
         "organization"
        ],
        "carries": "A moment to pass in.",
-       "discovers": "The operations chain into a route and the parts allow another. The intended course and what a player can do are two things.",
+       "discovers": "The operations chain into a route, and beside it a worker makes another from parts. It builds when a visitor presses and waits when the visitor presses again.",
        "touches": [
         {
          "id": "draft-trans_playground-1",
@@ -1294,13 +1294,13 @@
          },
          {
           "at": "draft-trans_playground-2",
-          "text": "A worker on six legs carries a deck. Another way across is being built.",
+          "text": "Press. A worker on six legs carries a deck. Press again, and it waits, still loaded.",
           "status": "new",
           "there_now": "We can build another way across.",
-          "seen": "commons/artifacts/registry/construction_robot.json and rooms.json (job playground): a six-legged worker builds a walkable route from joints, rods, decks and ramps."
+          "seen": "tools/probes/playground_worker_view.gd, floor 21. On arrival the worker stands still, 16 m away and out of the line of sight. One press of BUILD / HOLD and it carries 19 parts, one of them a deck, in 58 s; a second press holds it with its part on the bed (worker and cargo moved 0.0 m in 90 frames); a third lets it finish. The line said \"Another way across is being built.\" What is built is a ramp, a deck at 1.06 m and a ramp, laid half across the serpent course's north run, whose rail passes down the middle of it: it crosses nothing, so the line now says what the visitor does and what the worker does. The worker is another session's uncommitted work; the placement is put to its owner on the forum. Not heard."
          }
         ],
-        "hands_on": "A course that was laid can be laid differently. The parts are the same parts.",
+        "hands_on": "Another unit can be started, and held. It keeps what it carries while it waits.",
         "keeps": "pause"
        }
       }
