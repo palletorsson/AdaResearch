@@ -20,7 +20,16 @@ static func merge(root: Node3D, keep: Array = []) -> MeshInstance3D:
 		if n == root or not n is MeshInstance3D:continue
 		var mi := n as MeshInstance3D
 		if mi.mesh == null or mi.is_queued_for_deletion() or mi.name in keep or mi.name == "Merged" or mi.layers == 0 or not mi.visible:continue
-		var xf: Transform3D = root.global_transform.affine_inverse() * mi.global_transform
+		var xf := Transform3D.IDENTITY
+		if root.is_inside_tree():
+			xf = root.global_transform.affine_inverse() * mi.global_transform
+		else:
+			# Prefab templates can be built before entering the scene tree. Their
+			# local hierarchy still defines the same root-relative mesh transform.
+			var ancestor: Node = mi
+			while ancestor != root:
+				if ancestor is Node3D: xf = ancestor.transform * xf
+				ancestor = ancestor.get_parent()
 		for s in mi.mesh.get_surface_count():
 			var mat: Material = mi.material_override
 			if mat == null:mat = mi.get_surface_override_material(s)

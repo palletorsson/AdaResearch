@@ -1,0 +1,73 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case": "boolean_drop",
+      "passed": true,
+      "checks": 10,
+      "xr": false
+    },
+    {
+      "case": "boolean_drop-Boolean_Gallery-xr",
+      "passed": true,
+      "checks": 10,
+      "xr": true
+    },
+    {
+      "case": "jump_terraces",
+      "passed": true,
+      "checks": 10,
+      "xr": false
+    },
+    {
+      "case": "jump_terraces-VFM_03_Motion",
+      "passed": true,
+      "checks": 11,
+      "xr": false
+    },
+    {
+      "case": "maximal_stairs",
+      "passed": true,
+      "checks": 11,
+      "xr": false
+    },
+    {
+      "case": "maximal_stairs-xr",
+      "passed": true,
+      "checks": 11,
+      "xr": true
+    },
+    {
+      "case": "wave_eased",
+      "passed": true,
+      "checks": 11,
+      "xr": false
+    },
+    {
+      "case": "wave_ripple",
+      "passed": true,
+      "checks": 12,
+      "xr": false
+    },
+    {
+      "case": "wave_s",
+      "passed": true,
+      "checks": 11,
+      "xr": false
+    },
+    {
+      "case": "wave_s-xr",
+      "passed": true,
+      "checks": 12,
+      "xr": true
+    },
+    {
+      "case": "wave_tube",
+      "passed": true,
+      "checks": 11,
+      "xr": false
+    }
+  ],
+  "checks": 120,
+  "quest_device_checked": false
+}

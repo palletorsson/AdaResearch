@@ -81,6 +81,23 @@ func _ready():
 		var mouse_pointer := preload("res://commons/scenes/main_menu/desktop_menu_pointer.gd").new()
 		mouse_pointer.name = "DesktopMenuPointer"
 		add_child(mouse_pointer)
+	_open_requested_void_floor.call_deferred()
+
+## A debug Quest update can open a requested map through the ordinary staged
+## menu path. Consume once; subsequent launches retain the normal menu.
+func _open_requested_void_floor() -> void:
+	const REQUEST := "user://void_launch.json"
+	if not OS.is_debug_build() or not FileAccess.file_exists(REQUEST): return
+	var request: Variant = JSON.parse_string(FileAccess.get_file_as_string(REQUEST))
+	if not request is Dictionary or not request.get("map", null) is String: return
+	var index := preload("res://commons/void/room_source.gd").spine_floor(request.map)
+	if index < 0: return
+	# Allow the XR session and controllers to settle, as the menu normally does.
+	await get_tree().create_timer(5.0).timeout
+	if _entering_head_arena: return
+	if DirAccess.remove_absolute(ProjectSettings.globalize_path(REQUEST)) != OK: return
+	print("[void-launch] opening %s on floor %d" % [request.map, index])
+	_open_void_floor(index)
 
 func _configure_menu_rendering() -> void:
 	var root_viewport := get_viewport()

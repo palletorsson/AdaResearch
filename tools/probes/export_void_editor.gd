@@ -12,6 +12,9 @@ var failures: Array[String] = []
 var selected_floors: Array[int] = []
 var skip_palette := false
 var export_workbench := false
+var transition_grids_only := false
+var preview_items: Variant = null
+var scaffold_weave_texture: ImageTexture
 
 func _initialize() -> void:
 	for arg in OS.get_cmdline_user_args():
@@ -21,6 +24,13 @@ func _initialize() -> void:
 			for value in arg.trim_prefix("--floors=").split(","): selected_floors.append(int(value))
 		if arg=="--skip-palette": skip_palette=true
 		if arg=="--workbench": export_workbench=true
+		if arg=="--transition-grids-only": transition_grids_only=true
+		if arg.begins_with("--preview-list="):
+			preview_items=JSON.parse_string(FileAccess.get_file_as_string(arg.trim_prefix("--preview-list=")))
+			if not preview_items is Array:
+				push_error("Invalid live preview selection file")
+				quit(1)
+				return
 	out=ModelStorage.output_directory(out)
 	run.call_deferred()
 
@@ -36,7 +46,32 @@ func run() -> void:
 	var building: Node3D = load("res://commons/void/architecture.gd").new()
 	building.stream_content=not selected_floors.is_empty()
 	export_scene.add_child(building)
+	if preview_items is Array:
+		print("VOID_PREVIEW_ITEMS ",JSON.stringify(preview_items))
+		# Controllers can attach to neighbouring instruments during startup. Build
+		# the real floor for context; restrict publication, not the native scene.
+	if transition_grids_only:
+		# Refresh the transition room, line station and shaft structure. Do not instantiate
+		# unrelated instruments or overwrite their previously exported models.
+		for index in selected_floors:
+			var record:Dictionary=building.content.data.floors[index].duplicate(true)
+			record.artifacts=record.artifacts.filter(func(item:Dictionary):
+				var cfg:Dictionary=item.get("config",{})
+				return item.artifact == "line_association_table" or bool(cfg.get("open_station",false)) or str(cfg.get("grid_map",cfg.get("transition_grid_map",""))).begins_with("TransitionGrid_"))
+			record.copies=[]
+			record.props=[];record.origin=false
+			building.content.data.floors[index]=record
 	for index in selected_floors: building.content.load_floor(index)
+	# Gameplay can replace authored works with badge coins. The editor still
+	# needs those source works for its ordinary layout and optional badge overlay.
+	if building.content.trial_id.is_empty():
+		var badges = load("res://commons/void/badge_layer.gd")
+		for index in selected_floors:
+			var record: Dictionary = building.content.data.floors[index]
+			var replaced: Array = badges.replaced(index, str(record.map))
+			for item in record.artifacts:
+				if str(item.id) in replaced and not building.content.exhibits.has("%d/%s" % [index,item.id]):
+					building.content._build_artifact(building.content.roots[index],index,item)
 	# Give mounted instruments a physics contact and their private screens a frame.
 	# Snap puzzles construct their three/four lines across successive frames;
 	# live twins also discover their source through a quarter-second timer.
@@ -112,7 +147,8 @@ func run() -> void:
 	cache_soft_body_meshes(building)
 	building.process_mode=Node.PROCESS_MODE_DISABLED
 	await process_frame
-	await export_environment()
+	if not preview_items is Array:
+		await export_environment()
 	for index in range(building.content.data.floors.size()):
 		if not selected_floors.is_empty() and index not in selected_floors: continue
 		var record: Dictionary = building.content.data.floors[index]
@@ -126,27 +162,76 @@ func run() -> void:
 			floor_data.prop_lights[prop.kind]=lamps
 			if str(prop.kind).begins_with("interface_"):
 				floor_data.interface_models[str(prop.kind)+"|"+str(prop.get("target",""))]=snapshot(built,"%d-interface-%s"%[index,prop.id])
-		for item in record.artifacts:
+		# Curatable copies can carry their own inline place specification. Export
+		# their actual geometry too, rather than requiring a surviving source item.
+		for item in record.artifacts + record.get("copies", []):
+			if preview_items is Array and str(item.id) not in preview_items: continue
+			if not building.content.exhibits.has("%d/%s" % [index,item.id]):
+				failures.append("%d/%s: source artifact did not build" % [index,item.id])
+				continue
 			var artifact: Node3D=building.content.exhibits["%d/%s"%[index,item.id]].get_node("Artifact")
 			if artifact.has_method("prepare_editor_preview"): await artifact.prepare_editor_preview()
 			var data: Dictionary={"artifact":item.artifact,"config":item.get("config",{}).duplicate(true),"parts":{}}
 			if artifact.has_meta("void_preview_kind"):
 				data["preview_kind"] = artifact.get_meta("void_preview_kind")
 				manifest.notes.append(str(item.id) + ": " + str(data.preview_kind) + "; native simulation state is unchanged.")
-			if artifact.get("part_defaults") is Dictionary:
+			# An inline place is curated as a whole: its activity, walking surface
+			# and frame must stay together. The structural member list alone omits
+			# its slotted artifacts (e.g. the mosaic or wallpaper panel).
+			if artifact.get("part_defaults") is Dictionary and item.artifact != "playground_spec_hall":
 				for child in artifact.get_children():
 					# Deferred runtime helpers (tool reactions, debris, etc.) are
 					# not authored parts and have no editable placement defaults.
-					if child is Node3D and artifact.part_defaults.has(str(child.name)):
-						var part: Dictionary=snapshot(child,"%d-%s-%s"%[index,item.id,child.name])
-						part["default"]=artifact.part_defaults[str(child.name)]
+					var id:=str(child.get_meta("grid_part",child.name))
+					if child is Node3D and artifact.part_defaults.has(id):
+						var part: Dictionary=snapshot(child,"%d-%s-%s"%[index,item.id,id])
+						part["default"]=artifact.part_defaults[id]
 						part["scale"]=[child.scale.x,child.scale.y,child.scale.z]
-						data.parts[str(child.name)]=part
+						data.parts[id]=part
+				if artifact.has_method("_load_placement_recipe"):
+					# Electrical grid, stage signs and activities are not individually
+					# editable members, but belong in the native preview too.
+					var members:Array[Node3D]=[]
+					for child in artifact.get_children():
+						if child is Node3D and child.visible and artifact.part_defaults.has(str(child.get_meta("grid_part",child.name))):
+							members.append(child);child.hide()
+					data["model"]=snapshot(artifact,"%d-%s-context"%[index,item.id])
+					for child in members:child.show()
 			else:
 				var extra: Node3D = artifact.garden if item.artifact == "force_mower" and "garden" in artifact else null
 				data["model"]=snapshot(artifact,"%d-%s"%[index,item.id],float(item.get("config",{}).get("museum_yaw",0)),extra)
+			if artifact.get("grid") is Node3D and str(artifact.grid.get("map_name")).begins_with("TransitionGrid_"):
+				for attempt in 300:
+					if artifact.built:break
+					await process_frame
+				var grid:Node3D=artifact.grid
+				var entries:Array=[]
+				var grid_data:Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://commons/maps/"+grid.map_name+"/map_data.json"))
+				var layout:Array=grid_data.layers.interactables
+				for node in grid.find_children("*","Node3D",true,false):
+					if not node.has_meta("grid_cell"):continue
+					var cell:Vector2i=node.get_meta("grid_cell")
+					entries.append({"cell":[cell.x,cell.y],"value":str(layout[cell.y][cell.x]),"height":int(grid.data_component.get_structure_data().layout_data[cell.y][cell.x]),"matrix":matrix(grid.global_transform.affine_inverse()*node.global_transform),"model":snapshot(node,"grid-%s-%d-%d"%[grid.map_name,cell.x,cell.y],0,null,false)})
+				var fixed:Array=[]
+				if item.artifact=="line_black_box":
+					for node in artifact.get_children():
+						if node is Label3D or str(node.name) in ["LineStudy","ResetCap"]:
+							fixed.append({"matrix":matrix(artifact.global_transform.affine_inverse()*node.global_transform),"model":snapshot(node,"grid-line-"+str(node.name),0,null,false)})
+				data["grid_room"]={"map":grid.map_name,"artifacts":entries,"fixed":fixed}
 			floor_data.artifacts[str(item.id)]=data
 		manifest.floors[str(index)]=floor_data
+	# Retain the previous crossing as a reusable library object after its floor
+	# station becomes a glass test bay. It is a preview, not an extra placement.
+	if 20 in selected_floors and not preview_items is Array:
+		var legacy:Node3D=load("res://commons/artifacts/scaffold_workstation/crossing.tscn").instantiate()
+		export_scene.add_child(legacy)
+		var record:Dictionary={"artifact":"scaffold_workstation_crossing","preview_only":true,"config":{},"parts":{}}
+		for child in legacy.get_children():
+			if child is Node3D and legacy.part_defaults.has(str(child.name)):
+				var part:Dictionary=snapshot(child,"library-scaffold-crossing-"+str(child.name))
+				part["default"]=legacy.part_defaults[str(child.name)];part["scale"]=[1,1,1];record.parts[str(child.name)]=part
+		manifest.floors["20"].artifacts["scaffold-crossing-library"]=record
+		legacy.free()
 	# Palette models use the exact Void prefabs, including the real-size container.
 	var host:=Node3D.new()
 	building.add_child(host)
@@ -191,8 +276,8 @@ func thumbnail(source: Node3D, key: String) -> String:
 	var first := true
 	for node in source.find_children("*","GeometryInstance3D",true,false):
 		var local: AABB
-		if node is MeshInstance3D and node.mesh!=null: local=node.mesh.get_aabb()
-		elif node is MultiMeshInstance3D and node.multimesh!=null: local=node.multimesh.get_aabb()
+		if node is MeshInstance3D and node.mesh!=null and node.mesh.get_surface_count()>0: local=node.mesh.get_aabb()
+		elif node is MultiMeshInstance3D and node.multimesh!=null and node.multimesh.instance_count>0: local=node.multimesh.get_aabb()
 		else: continue
 		local=node.global_transform*local
 		bounds=local if first else bounds.merge(local)
@@ -229,7 +314,7 @@ func thumbnail(source: Node3D, key: String) -> String:
 	viewport.queue_free()
 	return public_base+"/"+filename
 
-func snapshot(source: Node3D, key: String, intrinsic_yaw := 0.0, extra: Node3D = null) -> Dictionary:
+func snapshot(source: Node3D, key: String, intrinsic_yaw := 0.0, extra: Node3D = null, components := true) -> Dictionary:
 	var copy:=Node3D.new()
 	copy.name="Model"
 	var labels: Array=[]
@@ -257,6 +342,16 @@ func snapshot(source: Node3D, key: String, intrinsic_yaw := 0.0, extra: Node3D =
 	for child in copy.get_children():
 		if child is MeshInstance3D: child.mesh=null
 	copy.free()
+	# Pivot studies keep one editable mechanism, with native submeshes
+	# that a web preview can transform around its saved bearing. Include these
+	# in every normal export so refreshing floor16 cannot discard the adapter.
+	var script:Script=source.get_script();var parent_script:Script=source.get_parent().get_script() if source.get_parent()!=null else null
+	if components and script!=null and parent_script!=null and script.resource_path=="res://commons/artifacts/movable_pivot/mechanism.gd" and parent_script.resource_path in ["res://commons/artifacts/movable_pivot/care_crossing.gd","res://commons/artifacts/movable_pivot/movable_pivot.gd"]:
+		var deck_visible:bool=source.deck.visible;var carriage_visible:bool=source.carriage.visible
+		source.deck.hide();source.carriage.hide()
+		var fixed:Dictionary=snapshot(source,key+"-fixed",0,null,false)
+		source.deck.visible=deck_visible;source.carriage.visible=carriage_visible
+		data["pivotMechanism"]={"pivot_x":source.pivot_x,"angle_degrees":source.angle_degrees,"turn_limit":source.turn_limit,"deck_length":source.deck_length,"deck_width":source.deck_width,"base_length":source.deck_length,"base_width":source.deck_width,"fixed":fixed,"deck":snapshot(source.deck,key+"-deck"),"carriage":snapshot(source.carriage,key+"-carriage")}
 	return data
 
 # Lights are exported independently of visible geometry: pickup lights are off
@@ -443,13 +538,19 @@ func mesh_copy(mesh: Mesh, at: Transform3D, source: Node, target: Node3D, instan
 			# Thin cloth is visible from either side in Godot; retain that in GLB.
 			if mat.shader!=null and "cull_disabled" in mat.shader.code:
 				replacement.cull_mode=BaseMaterial3D.CULL_DISABLED
-			for param in ["albedo","base_color","modelColor","color","line_color","wood_color","tint"]:
+			for param in ["albedo","base_color","modelColor","color","line_color","wood_color","tint","net_color"]:
 				var value=mat.get_shader_parameter(param)
 				if value is Color: replacement.albedo_color=value;break
 			# Retain physical surface response even when GLSL cannot travel in GLB.
 			for param in ["metallic","roughness"]:
 				var value=mat.get_shader_parameter(param)
 				if value is float or value is int: replacement.set(param,clampf(float(value),0.0,1.0))
+			if mat.shader!=null and mat.shader.resource_path=="res://commons/artifacts/construction_site/scaffold_net.gdshader":
+				# Preserve the porous coloured screen in GLB; custom GLSL cannot travel.
+				replacement.albedo_texture=scaffold_weave()
+				replacement.albedo_color.a=float(mat.get_shader_parameter("opacity"))
+				replacement.transparency=BaseMaterial3D.TRANSPARENCY_ALPHA
+				replacement.roughness=.9
 			mat=replacement
 		# GLB has no Godot MultiMesh instance colours. Bake the instance tint
 		# into each exported material so an addressed pattern stays visible.
@@ -458,3 +559,15 @@ func mesh_copy(mesh: Mesh, at: Transform3D, source: Node, target: Node3D, instan
 			mat.albedo_color *= instance_tint
 		instance.set_surface_override_material(i,mat)
 	target.add_child(instance)
+
+func scaffold_weave() -> ImageTexture:
+	if scaffold_weave_texture!=null: return scaffold_weave_texture
+	# Ten pixels per shader cell, with the same 56 x 52 grid and open-cell alpha.
+	var image := Image.create(560,520,false,Image.FORMAT_RGBA8)
+	for y in 520:
+		for x in 560:
+			var thread := x%10==0 or x%10==9 or y%10==0 or y%10==9
+			image.set_pixel(x,y,Color(1,1,1,1.0 if thread else .09))
+	image.generate_mipmaps()
+	scaffold_weave_texture=ImageTexture.create_from_image(image)
+	return scaffold_weave_texture

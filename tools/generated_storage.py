@@ -7,7 +7,7 @@ import os
 from pathlib import Path
 
 PROJECT = Path(__file__).resolve().parents[1]
-DEFAULT_ROOT = Path('D:/AdaGenerated/AdaResearch_46') if os.name == 'nt' else Path.home()/'.cache/ada-generated'/PROJECT.name
+DEFAULT_ROOT = Path.home()/'AppData/Local/AdaGenerated'/PROJECT.name if os.name == 'nt' else Path.home()/'.cache/ada-generated'/PROJECT.name
 
 def generated_root() -> Path:
     root = Path(os.environ.get('ADA_GENERATED_ROOT', str(DEFAULT_ROOT))).expanduser().resolve()

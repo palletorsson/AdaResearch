@@ -1,0 +1,163 @@
+[
+  {
+    "floor": 45,
+    "map": "Vectors_Act1_WhatAVectorIs",
+    "destination_floor": 46,
+    "destination_map": "VFM_05_Launch",
+    "kind": "jump_terraces"
+  },
+  {
+    "floor": 46,
+    "map": "VFM_05_Launch",
+    "destination_floor": 47,
+    "destination_map": "VFM_03_Motion",
+    "kind": "jump_terraces"
+  },
+  {
+    "floor": 47,
+    "map": "VFM_03_Motion",
+    "destination_floor": 48,
+    "destination_map": "Vectors_Act3_FieldsAndMotion",
+    "kind": "jump_terraces"
+  },
+  {
+    "floor": 48,
+    "map": "Vectors_Act3_FieldsAndMotion",
+    "destination_floor": 49,
+    "destination_map": "Vectors_Act4a_KineticForces",
+    "kind": "jump_terraces"
+  },
+  {
+    "floor": 49,
+    "map": "Vectors_Act4a_KineticForces",
+    "destination_floor": 50,
+    "destination_map": "Vectors_Act4b_Oscillation",
+    "kind": "jump_terraces"
+  },
+  {
+    "floor": 50,
+    "map": "Vectors_Act4b_Oscillation",
+    "destination_floor": 51,
+    "destination_map": "Change_Choreography",
+    "kind": "jump_terraces"
+  },
+  {
+    "floor": 51,
+    "map": "Change_Choreography",
+    "destination_floor": 52,
+    "destination_map": "VFM_07_Gravity",
+    "kind": "jump_terraces"
+  },
+  {
+    "floor": 52,
+    "map": "VFM_07_Gravity",
+    "destination_floor": 53,
+    "destination_map": "VFM_09_Legs",
+    "kind": "jump_terraces"
+  },
+  {
+    "floor": 53,
+    "map": "VFM_09_Legs",
+    "destination_floor": 54,
+    "destination_map": "VFM_08_Arena",
+    "kind": "jump_terraces"
+  },
+  {
+    "floor": 54,
+    "map": "VFM_08_Arena",
+    "destination_floor": 55,
+    "destination_map": "Vectors_Act5_ForceAsPlace",
+    "kind": "jump_terraces"
+  },
+  {
+    "floor": 62,
+    "map": "WaveFunctions_Intro",
+    "destination_floor": 63,
+    "destination_map": "WaveFunctions_Pendulum",
+    "kind": "wave_s"
+  },
+  {
+    "floor": 63,
+    "map": "WaveFunctions_Pendulum",
+    "destination_floor": 64,
+    "destination_map": "WaveFunctions_Sine_Space",
+    "kind": "wave_eased"
+  },
+  {
+    "floor": 64,
+    "map": "WaveFunctions_Sine_Space",
+    "destination_floor": 65,
+    "destination_map": "WaveFunctions_Unit_Circle",
+    "kind": "wave_tube"
+  },
+  {
+    "floor": 65,
+    "map": "WaveFunctions_Unit_Circle",
+    "destination_floor": 66,
+    "destination_map": "WaveFunctions_3D_Wave_Propagation",
+    "kind": "maximal_stairs"
+  },
+  {
+    "floor": 66,
+    "map": "WaveFunctions_3D_Wave_Propagation",
+    "destination_floor": 67,
+    "destination_map": "WaveFunctions_Effect_Sound",
+    "kind": "wave_ripple"
+  },
+  {
+    "floor": 67,
+    "map": "WaveFunctions_Effect_Sound",
+    "destination_floor": 68,
+    "destination_map": "Wavefunctions_Bernini",
+    "kind": "wave_s"
+  },
+  {
+    "floor": 68,
+    "map": "Wavefunctions_Bernini",
+    "destination_floor": 69,
+    "destination_map": "WaveFunctions_John_Cage",
+    "kind": "maximal_stairs"
+  },
+  {
+    "floor": 69,
+    "map": "WaveFunctions_John_Cage",
+    "destination_floor": 70,
+    "destination_map": "WaveFunctions_AirMusic",
+    "kind": "wave_tube"
+  },
+  {
+    "floor": 70,
+    "map": "WaveFunctions_AirMusic",
+    "destination_floor": 71,
+    "destination_map": "Wavefunctions_Sky_Stairs",
+    "kind": "wave_eased"
+  },
+  {
+    "floor": 71,
+    "map": "Wavefunctions_Sky_Stairs",
+    "destination_floor": 72,
+    "destination_map": "WaveFunctions_TrigWalkingPath",
+    "kind": "maximal_stairs"
+  },
+  {
+    "floor": 72,
+    "map": "WaveFunctions_TrigWalkingPath",
+    "destination_floor": 73,
+    "destination_map": "WaveFunctions_Synthesis_Lab",
+    "kind": "wave_ripple"
+  },
+  {
+    "floor": 158,
+    "map": "Boolean_Verbs",
+    "destination_floor": 159,
+    "destination_map": "Boolean_Gallery",
+    "kind": "boolean_drop"
+  },
+  {
+    "floor": 159,
+    "map": "Boolean_Gallery",
+    "destination_floor": 160,
+    "destination_map": "Boolean_Works",
+    "kind": "boolean_drop"
+  }
+]
