@@ -80,6 +80,9 @@ def check(journey, outline, sequences):
             if said:
                 found.append('%s: a discovery song without a personal pronoun; it says %s' % (stop['map'], ', '.join(sorted(said))))
             for line in song['lines']:
+                # Palle, 19 November 2026: a song is a fold. What the floor holds goes in the notes, not in the line.
+                if len(line['text'].split()) > 12:
+                    found.append('%s: a line of %d words; a song folds its meaning into twelve or fewer' % (stop['map'], len(line['text'].split())))
                 if line.get('layout') and ' '.join(line['layout']).split() != line['text'].split():
                     found.append('%s: a line\'s layout does not hold the line\'s words' % stop['map'])
             if not song.get('hands_on'):
@@ -180,6 +183,7 @@ def render(journey, outline):
                                          else 'new' + ('; there now: "%s"' % line['there_now'] if line.get('there_now') else ''))
                              for line in song['lines']]
                     out += ['- Lines: ' + ' · '.join(notes)]
+                    out += ['- Unfolded: "%s" was "%s"' % (line['text'], line['unfolded']) for line in song['lines'] if line.get('unfolded')]
                     if song.get('keeps'):
                         out += ['- Keeps from the song before: **%s**' % song['keeps']]
                     out += ['- Hands on: %s' % song['hands_on']]
