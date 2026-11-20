@@ -104,18 +104,18 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 *From a word on a roof to parts that can be put together another way.*
 
 **0 · Point_Zero** (space)
-- Takes: Nothing yet. The crate opens on a world that is already running.
-- Discovers: A place can be named and counted before anyone arrives in it. The first thing met is the word here.
-- Touches: Arrival crate / break into the world · The frame counter / already running · The other Care Units · Roof letters / a world already named · You are here
+- Takes: Nothing yet. She wakes inside a crate somebody else built.
+- Discovers: Three of her own model did not wake, and one bay stands empty with its straps open. The crate came through a fold in the sky onto a roof that was already counting, where a mark changes with the position of the head. The first empty place is her own.
+- Touches: Arrival crate / break into the world · The other Care Units · Folding Past / delivery trace above the landed Care Unit crate · The frame counter / already running · Black back / transition/anomaly
 
 > A knot in the wood holds a little sky.  
-> The first number seen was not its first.  
 > Three bodies still in the packing.  
-> A roof can have the wrong address.  
-> Cross out YOU. Here stays here.  
+> A whole crate through so little sky?  
+> The count began inside a closed crate.  
+> Two faces at one address.  
 
-- Lines: Arrival crate: new; there now: "The boards are thin." · The frame counter: new; there now: "A number is changing." · The other Care Units: the line already there, kept · Roof letters: new; there now: "This is not my address." · You are here: new
-- Hands on: Before anything else, say here.
+- Lines: Arrival crate: new · The other Care Units: new · Folding Past: new · The frame counter: new · Black back: new
+- Hands on: Look at who was packed beside you, and at the place that was yours.
 - Later, in Service (Residue, preface): Day 412 is counted at one desk in blank boarding passes printed each morning for no one. There too the count was running before she came.
 
 **1 · Point_One** (form)
@@ -547,51 +547,51 @@ Colour and pattern are decisions laid on forms. The floor that carries stays the
 - Discovers: A view passes where a body cannot. Seeing, entering and rearranging are three permissions, and two endpoints do not choose the journey between them.
 - Touches: A view can pass where a body cannot / Visible does not mean open · Endpoints do not choose the journey / We agree where to meet, not how to go · A room can be rearranged for gathering / Another arrangement of being together
 
-### Patterns & tiling (floors 36 to 44)
+### Patterns & tiling
 
 *One mark, repeated: what the copies share, where they break, and what they are laid upon.*
 
-**36 · Pattern_Disco** (organization, space)
+**Pattern_Disco** (organization, space)
 - Takes: The permissions of a wall.
 - Discovers: The same square wears another colour and stays the same place. A palette change and a phase change are different events on a floor that keeps carrying.
 - Touches: disco controls / The same place wears another colour · void pattern floor
 
-**37 · Pattern_Foundry** (organization, edge)
+**Pattern_Foundry** (organization, edge)
 - Takes: A place that wears colours.
 - Discovers: One source mark reaches every copy. The local exception is the difficult thing.
 - Touches: pattern architecture / My small decision reaches further · pattern tile 4x4
 
-**38 · Tutorial_Pattern** (form, organization)
+**39 · Tutorial_Pattern** (form, organization)
 - Takes: A source and its copies.
 - Discovers: The source cells stay and the reading of their copies changes. The same mark faces another way.
 - Touches: pattern maker station / The same mark faces another way · pattern studio plate
 
-**39 · Array_Patterns** (space, edge)
+**40 · Array_Patterns** (space, edge)
 - Takes: Copies read differently.
 - Discovers: An address needs a surface to appear on. At a corner some things continue and some start again.
 - Touches: pattern tunnel machine / A place needs a way to appear · pattern tile brick
 
-**40 · Symmetry_Seventeen** (organization, form)
+**41 · Symmetry_Seventeen** (organization, form)
 - Takes: What continues round a corner.
 - Discovers: The source is held still while shifts, mirrors and their combinations are compared. What counts as the same decides how many ways there are to repeat.
 - Touches: vr tile editor / What counts as the same? · wallpaper cage · thread loom
 
-**41 · Pattern_Temple** (space, organization)
+**43 · Pattern_Temple** (space, organization)
 - Takes: Ways of repeating, counted.
 - Discovers: A familiar pattern lies on separate architectural receivers. What looks like one pattern is not one editable source.
 - Touches: pattern temple / The same, for now · Fishbone + square / walkable tile floors
 
-**42 · Ribbon_Patterns_01** (space, edge)
+**Ribbon_Patterns_01** (space, edge)
 - Takes: A pattern spread over separate bodies.
 - Discovers: An indexed plane stands beside an indexed volume. A stored zero is a statement; empty space is not one.
 - Touches: grid 2d 4x4 / The mark acquires an inside · grid 3d 4x4x4
 
-**43 · Ribbon_Patterns_02** (form, edge)
+**Ribbon_Patterns_02** (form, edge)
 - Takes: A zero that was stored.
 - Discovers: A value is kept while its neighbours change, and kept again while its carrier changes: two comparisons easily taken for one.
 - Touches: SimultaneousContrast / The carrier participates · MetamerismLab
 
-**44 · Ribbon_Patterns_03** (body)
+**Ribbon_Patterns_03** (body)
 - Takes: An appearance apart from its carrier.
 - Discovers: The appearance is carried onto a garment. The visible cut is one thing and the passage of the body wearing it another.
 - Touches: garment cutting table · super drag mirror · drag catwalk

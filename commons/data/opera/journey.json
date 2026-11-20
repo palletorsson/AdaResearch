@@ -278,28 +278,28 @@
        "finds": [
         "space"
        ],
-       "carries": "Nothing yet. The crate opens on a world that is already running.",
-       "discovers": "A place can be named and counted before anyone arrives in it. The first thing met is the word here.",
+       "carries": "Nothing yet. She wakes inside a crate somebody else built.",
+       "discovers": "Three of her own model did not wake, and one bay stands empty with its straps open. The crate came through a fold in the sky onto a roof that was already counting, where a mark changes with the position of the head. The first empty place is her own.",
        "touches": [
         {
          "id": "trajectory-00-01",
          "title": "Arrival crate / break into the world"
         },
         {
-         "id": "trajectory-00-02",
-         "title": "The frame counter / already running"
-        },
-        {
          "id": "trajectory-00-03",
          "title": "The other Care Units"
         },
         {
-         "id": "trajectory-00-04",
-         "title": "Roof letters / a world already named"
+         "id": "world-4d1ab7ccc6ac12ad1d",
+         "title": "Folding Past / delivery trace above the landed Care Unit crate"
         },
         {
-         "id": "trajectory-00-05",
-         "title": "You are here"
+         "id": "trajectory-00-02",
+         "title": "The frame counter / already running"
+        },
+        {
+         "id": "world-6cddd9390a2613ebb8",
+         "title": "Black back / transition/anomaly"
         }
        ],
        "song": {
@@ -308,47 +308,59 @@
           "at": "trajectory-00-01",
           "text": "A knot in the wood holds a little sky.",
           "status": "picked",
-          "there_now": "The boards are thin.",
-          "chapter": "Point_Zero final.md: a knot has split and a little sky shows through it.",
-          "before_the_chapter": "Light between the boards.",
           "whose": "another session, enabled in the game",
-          "mine_was": "A split knot. A little sky in it."
-         },
-         {
-          "at": "trajectory-00-02",
-          "text": "The first number seen was not its first.",
-          "status": "new",
-          "there_now": "A number is changing.",
-          "chapter": "Point_Zero final.md: \"My first number was not its first number.\"",
-          "before_the_chapter": "The count did not wait."
+          "frame": "INSIDE THE CRATE"
          },
          {
           "at": "trajectory-00-03",
           "text": "Three bodies still in the packing.",
-          "status": "kept",
-          "note": "the second enabled line on this entry (others__b), written by another session"
+          "status": "picked",
+          "whose": "another session, enabled in the game",
+          "frame": "THE OTHER UNITS"
          },
+         {
+          "at": "world-4d1ab7ccc6ac12ad1d",
+          "text": "A whole crate through so little sky?",
+          "status": "picked",
+          "whose": "another session, enabled in the game",
+          "frame": "DELIVERY FOLD"
+         },
+         {
+          "at": "trajectory-00-02",
+          "text": "The count began inside a closed crate.",
+          "status": "picked",
+          "whose": "another session, enabled in the game",
+          "frame": "ALREADY COUNTING",
+          "mine_was": "The first number seen was not its first."
+         },
+         {
+          "at": "world-6cddd9390a2613ebb8",
+          "text": "Two faces at one address.",
+          "status": "picked",
+          "whose": "another session, enabled in the game",
+          "frame": "THE PIPE MARK"
+         }
+        ],
+        "hands_on": "Look at who was packed beside you, and at the place that was yours.",
+        "echo": {
+         "where": "Residue, preface",
+         "text": "Day 412 is counted at one desk in blank boarding passes printed each morning for no one. There too the count was running before she came."
+        },
+        "unframed": [
          {
           "at": "trajectory-00-04",
           "text": "A roof can have the wrong address.",
-          "status": "picked",
-          "there_now": "This is not my address.",
-          "whose": "another session, enabled in the game",
-          "mine_was": "Named already. Here."
+          "why": "its view frame is not active on the roof, so it has no cue"
          },
          {
           "at": "trajectory-00-05",
           "text": "Cross out YOU. Here stays here.",
-          "status": "picked",
-          "whose": "another session, enabled in the game"
+          "why": "its view frame is not active on the roof, so it has no cue"
          }
-        ],
-        "hands_on": "Before anything else, say here.",
-        "echo": {
-         "where": "Residue, preface",
-         "text": "Day 412 is counted at one desk in blank boarding passes printed each morning for no one. There too the count was running before she came."
-        }
-       }
+        ]
+       },
+       "walk_order": true,
+       "void_md": "commons/maps/Point_Zero/void.md walks these five frames in this order (20 November 2026)."
       },
       {
        "map": "Point_One",

@@ -122,7 +122,7 @@ def check(journey, outline, sequences):
                 continue
             if touch['id'] not in here:
                 found.append('%s: no outline entry %s' % (stop['map'], touch['id']))
-            elif here[touch['id']] <= last:
+            elif here[touch['id']] <= last and not stop.get('walk_order'):  # a stop may follow the order its frames are met in
                 found.append('%s: %s is touched out of the outline\'s order' % (stop['map'], touch['id']))
             else:
                 last = here[touch['id']]
