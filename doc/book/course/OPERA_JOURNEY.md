@@ -157,7 +157,7 @@ The whole list stays visible and the voice sings only what is new: the line a mo
 > Tape gives a stroke a skin.  
 
 - Lines: Leave a connection: new; there now: "I let go. The link stays." · Turn without stretching: new; there now: "The length stays while I turn." · Find another way: new; there now: "This line makes my journey longer." · Read the warning: new; there now: "What gives this line its force?" · Step beside the words: new; there now: "I could step beside the words." · association(line): new; there now: "A line can guide my feet or bar the way." · Tape: new; there now: "I follow what was only once a mark."
-- Unfolded: "Joined, a length. Turn it: the number wanders." was "Two points in the dark, one in each hand. Joined: a line of light. The wall measures it. Reset, and both go home."
+- Unfolded: "Joined, a length. Turn it: the number wanders." was "Two points on pillars before a pale wall. Brought together and let go: a line, a length on the wall, a door open at the side. Draw them apart and turn an end: the number follows the hand."
 - Unfolded: "A line on legs says no. The way round is longer." was "A blue plank on sawhorses says do not cross. The way round is longer."
 - Unfolded: "Does walking beside the line count?" was "Walk this line. Six metres, gate to gate. The floor measures every step aside."
 - Unfolded: "Move an end, let go. The line comes back as a plank." was "Move one end. Let go. A thing a line can be falls on the table: a plank, a ruler, a warning."
