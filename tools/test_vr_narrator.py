@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """test_vr_narrator.py — the hall reader, proven without a voice.
 
-The text cleaning is checked against real final.md files (Point_One's two
-chapters, Random_Walk's headed body, Trans_Pre with no notes). The narrator's
+The cleaning RULES (code listings, inline code, note numbering, links) are
+checked on a fixture essay this file owns; real final.md files (Point_One,
+Random_Walk, Trans_Pre) are checked only for what can be derived from them. The narrator's
 behaviour — settle, flicker, switch mid-reading, not-again, two halls of one
 map, vestibules, pre-rendered audio, off — runs against a NullSpeaker whose
 fake processes finish at once or wait to be released.
@@ -52,12 +53,11 @@ def test_text_point_one() -> None:
     check(len(chs) == 2, "two chapters: the essay and the notes (got %d)" % len(chs))
     body, notes = chs[0], chs[1]
     check(body.kind == "body" and notes.kind == "notes", "in that order")
-    check(body.words > 1500, "the body keeps its words (%d)" % body.words)
+    src = (vn.MAPS / "Point_One" / "final.md").read_text(encoding="utf-8")
+    src_words = len(" ".join(l for l in src.splitlines() if not l.startswith("[^")).split())
+    check(body.words * 2 >= src_words > 0, "the body keeps its words (%d of %d in the file)" % (body.words, src_words))
     for bad in ("```", "<!--", "[^", "](", "`", "**"):
         check(bad not in body.text, "no %r left in the body" % bad)
-    check(vn.CODE_CUE in body.text, "code listings are announced, not spelled")
-    check("Engine dot get process frames" in body.text, "inline code is read as words")
-    src = (vn.MAPS / "Point_One" / "final.md").read_text(encoding="utf-8")
     h1 = next((l[2:].strip() for l in src.splitlines() if l.startswith("# ")), "")
     check(body.title == (h1 or "Point One"), "the chapter title is the essay's H1 when it has one: %r" % body.title)
     check(body.text.startswith(body.title), "the body opens with its title")
@@ -65,13 +65,52 @@ def test_text_point_one() -> None:
           "the notes chapter is named after the essay")
     n_defs = sum(1 for l in src.splitlines() if l.startswith("[^") and "]:" in l)
     check(notes.text.count("Note ") == n_defs and n_defs > 0, "one note per footnote definition (%d)" % n_defs)
-    check("Note 1. Heidegger" in notes.text and "Note 4. Donna Haraway" in notes.text,
-          "notes numbered by first mention in the body")
-    check("Being and Time, §29" in notes.text and "beyng.com" not in notes.text, "links become their text")
     only_body = vn.chapters_for("Point_One", notes=False)
     check(len(only_body) == 1, "--no-notes leaves the essay alone")
-    with_code = vn.chapters_for("Point_One", read_code=True)[0].text
-    check(vn.CODE_CUE not in with_code and "count += 1" in with_code, "--read-code keeps the listing")
+
+
+FIXTURE = """# A fixture essay
+
+It opens with `Engine.get_process_frames()` in a sentence.[^late]
+
+```gdscript
+count += 1
+```
+
+A second claim.[^early] See [the site](https://example.org/x).
+
+[^early]: Alpha, [Being and Time, §29](https://beyng.example/x).
+[^late]: Beta note.
+"""
+
+
+def test_text_rules_on_a_fixture() -> None:
+    """The cleaning rules, on an essay this file owns. They stood on Point_One
+    until 2026-11-20, and went red when the hall's essay lost its code listing
+    and three of its four notes: seven checks failing, none of them about the
+    narrator. A hall's text follows its map; a rule is proven on a fixture."""
+    print("text: the rules, on a fixture essay")
+    maps_keep = vn.MAPS
+    try:
+        vn.MAPS = Path(tempfile.mkdtemp())
+        (vn.MAPS / "Fixture_Essay").mkdir()
+        (vn.MAPS / "Fixture_Essay" / "final.md").write_text(FIXTURE, encoding="utf-8")
+        chs = vn.chapters_for("Fixture_Essay")
+        check([c.kind for c in chs] == ["body", "notes"], "the essay, then the notes")
+        body, notes = chs[0], chs[1]
+        check(body.text == "\n\n".join(["A fixture essay.", "It opens with Engine dot get process frames in a sentence.",
+                                        vn.CODE_CUE, "A second claim. See the site."]),
+              "listing announced, inline code as words, links as their text: %r" % body.text)
+        check(vn.CODE_CUE in body.text and "count" not in body.text, "code listings are announced, not spelled")
+        check("Engine dot get process frames" in body.text, "inline code is read as words")
+        check(notes.text == "\n\n".join(["Notes for A fixture essay.", "Note 1. Beta note.",
+                                         "Note 2. Alpha, Being and Time, §29."]),
+              "notes numbered by first mention in the body, not by definition order: %r" % notes.text)
+        check("Being and Time, §29" in notes.text and "beyng" not in notes.text, "links become their text")
+        with_code = vn.chapters_for("Fixture_Essay", read_code=True)[0].text
+        check(vn.CODE_CUE not in with_code and "count += 1" in with_code, "--read-code keeps the listing")
+    finally:
+        vn.MAPS = maps_keep
 
 
 def test_text_headed_and_plain() -> None:
@@ -254,11 +293,26 @@ def test_render() -> None:
           "the manifest names them")
     check([f.name for f in vn.find_audio("Point_One", out)] == ["01-body.wav", "02-notes.wav"],
           "…and the narrator would find them")
-    check(vn.sequence_maps("primitives")[:2] == ["Point_One", "Point_Lines"], "--seq resolves a sequence's maps")
+    live = vn.sequence_maps("primitives")
+    check("Point_One" in live and all(isinstance(x, str) for x in live),
+          "--seq resolves a live sequence's maps (%d in primitives)" % len(live))
+    root_keep = vn.ROOT
+    try:
+        vn.ROOT = Path(tempfile.mkdtemp())
+        sq = vn.ROOT / "commons" / "maps" / "sequences"
+        sq.mkdir(parents=True)
+        (sq / "nested.json").write_text(json.dumps({"sequences": {"nested": {"maps": ["B_Hall", "A_Hall"]}}}), encoding="utf-8")
+        (sq / "flat.json").write_text(json.dumps({"flat": {"maps": ["Only_Hall"]}}), encoding="utf-8")
+        check(vn.sequence_maps("nested") == ["B_Hall", "A_Hall"], "--seq keeps the file's order")
+        check(vn.sequence_maps("flat") == ["Only_Hall"], "…with or without the 'sequences' wrapper")
+        check(vn.sequence_maps("absent") == [], "no sequence file: no maps")
+    finally:
+        vn.ROOT = root_keep
 
 
 def main() -> int:
     test_text_point_one()
+    test_text_rules_on_a_fixture()
     test_text_headed_and_plain()
     test_narrator_settle_and_switch()
     test_narrator_interrupt()
