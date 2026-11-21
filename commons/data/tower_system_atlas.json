@@ -819,13 +819,13 @@
     },
     "Color_Paint": {
       "desiringMachine": {
-        "machine": "Four Graffiti Drones (unit_drone_graffiti: track, figure_eight, rosette, spirograph flying the 3-can graffiti_stick on a rotating hub) + Automated Ball Painting Demo + Four Moving Canvases (rotate/shake/scale/lift)",
-        "activates": "Persistent spatial pigment traces laid down by autonomous drones and hand spray cans across moving and floor canvases",
-        "couplesInto": "F51 Change_Choreography (The Unit's bare 3-action chassis coupled via rods/cords) and F65 WaveFunctions_Unit_Circle (unit_drone_graffiti repurposed on a sine swell route)"
+        "machine": "",
+        "activates": "",
+        "couplesInto": "F51 Change_Choreography (The Unit's bare 3-action chassis) + F65 WaveFunctions_Unit_Circle (same 3-can spray drone tracing a single sine swell) -> F69 WaveFunctions_John_Cage (adding a third harmonic) -> F70 WaveFunctions_AirMusic"
       },
       "plainBreadcrumb": "Watch the automated spray rack and four graffiti drones (track, figure-eight, rosette, spirograph) paint twisting three-stripe bands across the floor before testing the three-can graffiti stick and moving canvases yourself.",
       "bodyHook": "Wait and watch the automated spray can and four floor drones lay twisting three-stripe ribbons before taking a can or moving canvas yourself.",
-      "note": "Queue B machine coupling authored from live rooms.json + the_unit.json + final.md (evidence remains planned).",
+      "note": "Preserved Codex's F34 (twisting band) -> F65 (single sine swell) -> F69 (third harmonic) 3-can spray drone comparison alongside Queue B enrichment.",
       "queerOperator": {
         "mode": "re-couple",
         "note": "Painting is already underway before your hand arrives — bolting Color Paint's three-can graffiti stick onto The Unit's rotating drone hub turns a three-verb robot into a twisting ribbon painter."
@@ -889,21 +889,266 @@
     },
     "WaveFunctions_Unit_Circle": {
       "desiringMachine": {
-        "machine": "Sine Swell Graffiti Drone (unit_drone_graffiti, flight_pattern=sine, 14 m single swell) + Unit Circle Advanced (6 m traveling sine ceiling) + Electric Sine & Cosine Snakes + Oscillating Bridge",
-        "activates": "Unrolling circular angular speed (radians) into a horizontal sine/cosine path across ceiling, floor spray ribbon, electric discharges, and a walkable oscillating bridge",
-        "couplesInto": "F62 WaveFunctions_Intro (earlier two-visit rise/fall harmonic experience) and F66 WaveFunctions_3D_Wave_Propagation (via maximal_stairs descent)"
+        "machine": "",
+        "activates": "",
+        "couplesInto": "F34 Color_Paint (same 3-can spray drone painting twisting bands) -> F69 WaveFunctions_John_Cage (same drone adding a third harmonic weave) -> F70 WaveFunctions_AirMusic, plus F62 WaveFunctions_Intro and F66 WaveFunctions_3D_Wave_Propagation"
       },
       "plainBreadcrumb": "Follow a point turning round the unit circle as its height unrolls into a 6 m traveling sine ceiling, sine and cosine electric snakes, a 14 m sine-swell graffiti drone, and an oscillating bridge.",
       "bodyHook": "Follow the turning point on the circle against the projection rods and 6 m sine ceiling, cross the Simple Oscillating Bridge, and compare the sine and cosine snakes.",
-      "note": "Queue B machine coupling authored from live rooms.json + the_unit.json + final.md (evidence remains planned).",
+      "note": "Preserved Codex's F34 -> F65 -> F69 3-can spray drone harmonic progression alongside Queue B enrichment.",
       "queerOperator": {
         "mode": "multi-reading",
         "note": "After two turns the projected graph stops growing while the point on the circle keeps turning — separating a finished trace from an ongoing periodic movement, while Color Paint's graffiti drone reappears as a sine-swell painter."
       }
+    },
+    "WaveFunctions_John_Cage": {
+      "plainBreadcrumb": "Listen to the chance-timed John Cage Tech Noir soundscape where events arrive without regular return, and compare the 14 m harmonic-weave graffiti drone (adding a third harmonic to F65's single sine swell) beside Ruth Asawa's looped wire sculpture.",
+      "bodyHook": "Stand still while the chance soundscape unfolds around you, then trace the 14 m three-colour harmonic ribbon across the slab.",
+      "note": "Queue D machine coupling authored from live rooms.json + the_unit.json + final.md, preserving Codex's F34->F65->F69 drone link (evidence remains planned).",
+      "desiringMachine": {
+        "machine": "Harmonic-Weave Graffiti Drone (unit_drone_graffiti, flight_pattern=sine, sine_route=harmonic, 14 m x 3.6 m) + John Cage Tech Noir Soundscape + Ruth Asawa Sculpture",
+        "activates": "Composite harmonic motion (third harmonic added to the same three-can spray drone from F34 and F65) alongside non-periodic chance-timed sound events",
+        "couplesInto": "F34 Color_Paint (twisting band) & F65 WaveFunctions_Unit_Circle (single sine swell) -> F70 WaveFunctions_AirMusic (sine paint flight + acoustic resonance) and F76 Random_Entropy"
+      },
+      "queerOperator": {
+        "mode": "multi-reading",
+        "note": "The clock still ticks even when events stop repeating on cue — pairing chance-governed silence with the same three-can spray drone adding a third harmonic tests what remains composed when regularity breaks."
+      }
+    },
+    "WaveFunctions_AirMusic": {
+      "plainBreadcrumb": "Strike the longest metal bar on the resonating metallophone and let go while its sound continues, compare Rack Ambient Drone and Big Pipe System, and run the 14 m sine-paint-flight graffiti drone.",
+      "bodyHook": "Lift the mallet from the left cradle, strike the graduated metal bars, and step away while the tone keeps sounding through the hall.",
+      "note": "Queue D machine coupling authored from live rooms.json + the_unit.json + final.md (evidence remains planned).",
+      "desiringMachine": {
+        "machine": "Sine Paint Flight Drone (unit_drone_graffiti, flight_pattern=sine, 14 m x 3.6 m) + Resonating Metallophone + Rack Ambient Drone + Systems Music Test + Big Pipe System",
+        "activates": "Sustained acoustic resonance after hand release paired with modular drone audio racks and the fourth floor installation of the three-can spray drone",
+        "couplesInto": "F69 WaveFunctions_John_Cage (chance timing & harmonic weave drone) and F76 Random_Entropy (transition from periodic sound into disorder)"
+      },
+      "queerOperator": {
+        "mode": "bodily-remainder",
+        "note": "Your hand only supplies the strike — once the bar rings, the consequence outlasts your grip and belongs to the room's air and pipe resonance."
+      }
+    },
+    "Random_Entropy": {
+      "plainBreadcrumb": "Slide Prefab Disorder from 0 (originals: box, CRT, stool, microscope) through 0.5 (50 separated parts) to 1.0 (four seeded three-source hybrids), then press SORT on the Shannon Entropy Meter to see what the gauge forgets.",
+      "bodyHook": "Scrub the reversible disorder slider and trigger KEEP/REPLAY beside the sorting table to judge hybrid structure with your eyes rather than the scalar gauge alone.",
+      "note": "Queue D machine coupling authored from live rooms.json + prefab_disorder registry + final.md (evidence remains planned).",
+      "desiringMachine": {
+        "machine": "Prefab Disorder Reversible Slider (prefab_disorder: 4 prefabs / 50 conserved parts -> originals, scattered parts, seeded 3-source hybrids with KEEP/REPLAY) + Shannon Entropy Meter + Entropy Jars + Hardware Entropy Decay",
+        "activates": "Reversible disassembly and three-source prefab hybridization while conserving all 50 mesh parts, contrasted against scalar Shannon entropy readings",
+        "couplesInto": "F81 Random_Walk (seeded stochastic construction) and F209 Primitives_Prefab_Library (reusable catalogue prefabs)"
+      },
+      "queerOperator": {
+        "mode": "re-couple",
+        "note": "Disorder is not destruction — conserving all fifty parts of a box, CRT, stool, and microscope across a reversible slider turns entropy into four playable three-source hybrids while exposing what a single entropy number erases."
+      }
+    },
+    "Random_Walk": {
+      "plainBreadcrumb": "Watch five beads wander inside the Random Walk Terrarium, then step or run the Constructive Walk Bench (with its room-scale growing copy) to turn a seeded 24-choice planar walk into legal workshop points and rods.",
+      "bodyHook": "Follow the single bright red bead in the terrarium, then walk beside the room-scale growing scaffold built from the bench's exact kept seed.",
+      "note": "Queue D machine coupling authored from live rooms.json + constructive_walk_bench registry + final.md (evidence remains planned).",
+      "desiringMachine": {
+        "machine": "Constructive Walk Bench (constructive_walk_bench: seeded planar/volume walk building legal workshop points & rods with step/run/keep/load/replay and room-scale growing copy) + Random Walk Terrarium + Leash Ensemble + Random Walk 128",
+        "activates": "Compiling stochastic walk draws directly into reusable workshop points-and-rods structures where revisits reuse members and boundary proposals spend a draw in place",
+        "couplesInto": "F3 Point_Lines & F209 Primitives_Prefab_Library (shared workshop points/rods grammar) and F106 CA_Introduction (local discrete update rules)"
+      },
+      "queerOperator": {
+        "mode": "denaturalize",
+        "note": "A random trail looks like hesitation or intent only in hindsight — feeding seeded draws straight into workshop rods turns memoryless steps into load-bearing geometry."
+      }
+    },
+    "CA_ExpandingSpace": {
+      "plainBreadcrumb": "Step onto the Decaying Bridge while its cellular-automata tiles vanish into the addressed basin below, and claim the Becoming Catalyst from the floor prompter box (45 s lease) to convert grey-goo Catalyst Foes emerging from the vent into spreading friends.",
+      "bodyHook": "Approach the floor hatch so its lid lifts the crystal, fire to convert approaching foes while watching which bridge tiles remain solid under your feet.",
+      "note": "Queue D machine coupling authored from live rooms.json + hazards.json + final.md (evidence remains planned).",
+      "desiringMachine": {
+        "machine": "Catalyst Vent (catalyst_vent: 3-foe wave every 2.5 s) + Catalyst Prompter Box (catalyst_prompter_box: floor hatch doors, 45 s crystal lease) + Decaying Bridge + Crossway CA + 3D CA Tree",
+        "activates": "Timed Becoming Catalyst deployment turning biome-borne Catalyst Foe waves into friend-propagating agents across an actively decaying cellular-automata floor",
+        "couplesInto": "F106 CA_Introduction (local CA rules) and F124 LSystems_Architecture & F164 SwarmIntelligence_Agent_Based_Modeling_ABM (shared vent/prompter-box transformation loop)"
+      },
+      "queerOperator": {
+        "mode": "re-couple",
+        "note": "The catalyst never kills a biome-borne foe — one hit phase-shifts it into a coloured friend that walks over to convert its neighbours, propagating care by the same local contagion rules that drive the decaying tiles."
+      }
+    },
+    "LSystems_Architecture": {
+      "plainBreadcrumb": "Compare flat floor segments that your feet can ignore against extruded L-System Dungeon walls that channel your route, explore branching grammars (Dragon Room, CityGenerator, Coral Fingers), and deploy the floor-hatch catalyst crystal against the vent wave.",
+      "bodyHook": "Step freely over the unextruded segments, build the L-System Dungeon plan so walls rise around you, and draw the catalyst crystal from the vent-side floor hatch.",
+      "note": "Queue D machine coupling authored from live rooms.json + hazards.json + final.md (evidence remains planned).",
+      "desiringMachine": {
+        "machine": "Catalyst Vent (catalyst_vent, 3-foe wave) + Catalyst Prompter Box (catalyst_prompter_box, emergence=vent, 45 s lease) + L-System Dungeon + CityGenerator + Mesh Grammar Petal/Coral + Scaffold Net Frame & Tower",
+        "activates": "Extruding symbolic L-system rewrite lines into solid architectural walls and towers paired with live vent-emitted catalyst transformation",
+        "couplesInto": "F110 CA_ExpandingSpace & F164 SwarmIntelligence_Agent_Based_Modeling_ABM (catalyst vent/hatch ecosystem) and F128 Assemblage_Same_Desire (grid substrate & dragon bench)"
+      },
+      "queerOperator": {
+        "mode": "denaturalize",
+        "note": "On the floor a line is a suggestion you can step across; extruded into a wall by the exact same rewrite string, it decides where a body is admitted or turned back."
+      }
+    },
+    "Assemblage_Same_Desire": {
+      "plainBreadcrumb": "Edit threading, tie-up, and treadling cells across the three VR panels of the Panel Bridge Loom Simulator to watch the weaving drawdown recompute live, then trace diagonal paths across Ten-Print Textile beside early Gödel plaques.",
+      "bodyHook": "Tap cells directly on the three Panel Bridge Loom panels to recompute the drawdown, then read the Ten-Print Textile from both ends to watch your chosen route shift.",
+      "note": "Queue D machine coupling authored from live rooms.json + panel_bridge_loom registry + final.md (evidence remains planned).",
+      "desiringMachine": {
+        "machine": "Panel Bridge Loom Simulator (panel_bridge_loom: 3 interactive VR panels for threading, tie-up, treadling, and real-time drawdown from web loom JSON) + Ten-Print Textile + Grid Substrate Runner + Synthesis Stand + Dragon Bench",
+        "activates": "Live bidirectional web-to-VR weaving draft editing where changing a single tie-up or treadling cell rewires the whole computed fabric drawdown",
+        "couplesInto": "F44 Cloth_Factory (physical hand loom & jacquard studio) and F187 Godel_Incompleteness (godel_statement_plaque & incompleteness_scale previewed here)"
+      },
+      "queerOperator": {
+        "mode": "re-couple",
+        "note": "Whether in a 10-PRINT diagonal textile or a live loom tie-up grid, the marks stay still while the observer's traversal and edited tie-up re-couple them into competing paths."
+      }
+    },
+    "SwarmIntelligence_Agent_Based_Modeling_ABM": {
+      "plainBreadcrumb": "Follow one ant turning home after finding food, compare three paired Unit robots (ease, phase, and cord-linked keep), and trigger the vent-side catalyst prompter box to convert a curious Catalyst Foe wave into contagious friends.",
+      "bodyHook": "Follow a single ant across its state flip, compare the three paired Unit benches side by side, and lift the catalyst crystal from the hatch as foes approach.",
+      "note": "Queue D machine coupling authored from live rooms.json + hazards.json + the_unit.json + final.md (evidence remains planned).",
+      "desiringMachine": {
+        "machine": "Three Paired Unit Robots (the_unit: ease, phase on rigid bar, keep on tendon cord) + Catalyst Vent + Curious Catalyst Foe + Catalyst Prompter Box + Ant Colony Optimization + ABM State Table + Listening Horde",
+        "activates": "Agent state-switching (foraging vs returning ant, curious foe -> friend contagion, and paired back-drivable Unit force/cord controllers) showing how internal state rewrites which local signal matters",
+        "couplesInto": "F51 Change_Choreography (earlier coupled Unit pairs), F163 SwarmIntelligence_Boids_Algorithm (neighbour radius lens), and F110/F124 catalyst vent ecosystem"
+      },
+      "queerOperator": {
+        "mode": "multi-reading",
+        "note": "The exact same small body obeys completely different cues once its state flips — an ant carrying food ignores search trails, a curious Catalyst Foe flips to friend-propagator, and paired Units negotiate distance via ease, phase, or cord."
+      }
+    },
+    "Godel_Incompleteness": {
+      "plainBreadcrumb": "Step on the three Checking Station plates (SSS0, SSSSSSSS0, 0S) to watch the cube-on-trace-balls robot bring derivations to the crate gate — separating finding from checking — then follow the loop marked G on the Gödel Sentence Machine.",
+      "bodyHook": "Stand on the SSS0, SSSSSSSS0, and 0S plates to dispatch the robot to the gate, and walk between the standing words TRUE and PROVABLE.",
+      "note": "Queue D machine coupling authored from live rooms.json + checking_station registry + final.md (evidence remains planned).",
+      "desiringMachine": {
+        "machine": "The Checking Station (checking_station: cube-on-trace-balls robot feeding toy-syntax derivations axiom 0 / w->Sw to a crate-and-timber verifier gate for SSS0, SSSSSSSS0, 0S) + Gödel Sentence Machine + Rice Verifier Booth + Provability Sorter + Incompleteness Tower",
+        "activates": "Physical separation of search (finding a candidate) from mechanical verification (checking a derivation line-by-line) and three distinct ways a formal search can stop",
+        "couplesInto": "F128 Assemblage_Same_Desire (earlier Gödel plaque) and F203 SpeculativeComputation_Situated_Computation (claims exceeding any single formal standpoint)"
+      },
+      "queerOperator": {
+        "mode": "denaturalize",
+        "note": "A machine failing to find a proof never proves that no proof exists — watching a dropped middle line fail the crate gate exposes the seam between TRUE and PROVABLE."
+      }
+    },
+    "AdvancedLaboratory_Lab_Equipment_Simulation": {
+      "plainBreadcrumb": "Pull the MolecularDesigner hand beyond normal arm reach so the figure keeps your alteration, then step onto the 6 m floor figure at A Joint More (13 joints, 12 connections) — stand still to plant a joint or hold one to rewire its neighbour.",
+      "bodyHook": "Stretch the hand on MolecularDesigner and let go, then stand still on bare floor and on existing joints at A Joint More to plant and rewire connections with your feet.",
+      "note": "Queue D machine coupling authored from live rooms.json + joint_more registry + final.md (evidence remains planned).",
+      "desiringMachine": {
+        "machine": "A Joint More (joint_more: 6 m floor body of 13 joints & 12 connections where standing still plants or rewires joints) + MolecularDesigner (editable persistent body) + Markov Blanket Room + Boolean Neck + Bridge Cut",
+        "activates": "Persistent bodily reconfiguration (coordinates and neighbour links saved locally) separating spatial POSITION from topological NEIGHBOUR relations",
+        "couplesInto": "F207 PostCrisis_Synthesis (assembly_return directly reconstructs the exact altered body kept here beside the blue original)"
+      },
+      "queerOperator": {
+        "mode": "bodily-remainder",
+        "note": "Pulling a hand past where an arm 'ought' to reach and planting a fourteenth joint on the floor refuses anatomical preset norms — the body keeps your alteration across rooms."
+      }
+    },
+    "PostCrisis_Synthesis": {
+      "plainBreadcrumb": "Look at The Body That Returned (assembly_return): compare the blue original starting body beside the amber locally kept pose carried over from Floor 206 (with changed links lit turquoise), and inspect what ARRIVED versus what is MISSING.",
+      "bodyHook": "Walk between the blue starting figure and the amber returned figure, trace every turquoise connection, and read the standing words ARRIVED and MISSING beside the Accountability Ledger.",
+      "note": "Queue D machine coupling authored from live rooms.json + assembly_return registry + final.md (evidence remains planned).",
+      "desiringMachine": {
+        "machine": "The Body That Returned (assembly_return: dual standing reconstruction comparing original blue Assembly body against latest locally kept F206 amber body, changed links in turquoise) + Two Arrivals + Accountability Ledger + QFEP Formula 3D + Bias From Inside",
+        "activates": "Cross-floor state audit showing exact coordinates and rewired connections preserved from F206 while explicitly omitting hand trajectory and intention",
+        "couplesInto": "F206 AdvancedLaboratory_Lab_Equipment_Simulation (source of the kept body pose) and F209 Primitives_Prefab_Library (carrying reusable parts back into the tower)"
+      },
+      "queerOperator": {
+        "mode": "bodily-remainder",
+        "note": "The altered pose crosses floors without making the journey — coordinates and turquoise rewired links ARRIVE, while the gesture, effort, and intention that moved the hand stay MISSING."
+      }
     }
   },
-  "revision": 92,
+  "revision": 105,
   "history": [
+    {
+      "at": "2026-11-21T14:44:52.816Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "PostCrisis_Synthesis",
+      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:44:52.633Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:44:52.458Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Godel_Incompleteness",
+      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:44:52.175Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:44:52.003Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Assemblage_Same_Desire",
+      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:44:51.825Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "LSystems_Architecture",
+      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:44:51.314Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "CA_ExpandingSpace",
+      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:44:51.137Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Random_Walk",
+      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:44:50.958Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Random_Entropy",
+      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:44:50.780Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "WaveFunctions_AirMusic",
+      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:44:50.598Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "WaveFunctions_John_Cage",
+      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:44:50.405Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "WaveFunctions_Unit_Circle",
+      "summary": "Updated desiringMachine.machine, desiringMachine.activates, desiringMachine.couplesInto, note"
+    },
+    {
+      "at": "2026-11-21T14:44:50.206Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Color_Paint",
+      "summary": "Updated desiringMachine.machine, desiringMachine.activates, desiringMachine.couplesInto, note"
+    },
     {
       "at": "2026-11-21T14:32:51.526Z",
       "by": "Antigravity",
