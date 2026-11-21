@@ -762,8 +762,8 @@
       }
     },
     "Point_Animatedcube": {
-      "plainBreadcrumb": "Unfold a cube net, feed cube configurations down the Prefab Belt, and build full 2x2 m square faces at the Square Assembly Table to turn one CubeBody class into crates, pallets, dominoes, dice, and salvaged furniture.",
-      "bodyHook": "Pick two identical copies off the belt and carry them to the table — copies stay inert until your hands stage a relation between them.",
+      "plainBreadcrumb": "Unfold a cube net, step the Prefab Belt to the things this floor gives, and build full 2x2 m square faces at the Square Assembly Table to turn one CubeBody class into crates, pallets, dominoes, dice, and salvaged furniture.",
+      "bodyHook": "Take two copies of one box from the library shelf and carry them to the worktable — copies stay inert until your hands stage a relation between them. The belt puts a thing into the inventory; nothing is carried off it.",
       "note": "Authored F7 machine coupling (joining live prefab_belt[registry] + 17 items.json entries), queer operator, and body hook (evidence remains planned pending desktop probe).",
       "desiringMachine": {
         "machine": "Prefab Belt (prefab_belt) + Square Assembly Table + Vending Machine",
@@ -790,8 +790,169 @@
       }
     }
   },
-  "revision": 53,
+  "revision": 76,
   "history": [
+    {
+      "at": "2026-11-21T14:29:03.767Z",
+      "by": "fable-prefab-belt",
+      "action": "update_floor",
+      "target": "Point_Animatedcube",
+      "summary": "Updated plainBreadcrumb, bodyHook"
+    },
+    {
+      "at": "2026-11-21T14:28:46.906Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "chapter_08_form_in_hand",
+      "summary": "Take the black point. While you hold it the form loses rings and segments and corners appear. Press the trigger to send "
+    },
+    {
+      "at": "2026-11-21T14:28:46.583Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "chapter_08_budget_of_smoothness",
+      "summary": "Choose one of the four turning spheres for a far background and one to inspect close up. Then press SHOW / HIDE COUNTS a"
+    },
+    {
+      "at": "2026-11-21T14:28:46.298Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "chapter_08_sphere_resolution_atlas",
+      "summary": "Walk along the twelve small spheres. Across a row the rings increase; down a column the segments do. Follow one change w"
+    },
+    {
+      "at": "2026-11-21T14:28:45.855Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "chapter_08_geometry_courtyard",
+      "summary": "Lift one of the five solids from its block and count how many faces meet at a corner. Compare it with the next one."
+    },
+    {
+      "at": "2026-11-21T14:28:45.577Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "chapter_07_prefab_box_library",
+      "summary": "Take two copies of one box from the shelf to the worktable. Move one: the other stays. Put them side by side, apart, or "
+    },
+    {
+      "at": "2026-11-21T14:28:45.342Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "chapter_07_polyhedron_nets_cube",
+      "summary": "Follow the pink square as the net folds into a cube. The cube shrinks, drops to the floor and stays, and another net ope"
+    },
+    {
+      "at": "2026-11-21T14:28:44.958Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "chapter_07_cube_lines",
+      "summary": "Look at the outline cube: no faces, only edges, and you still read a box."
+    },
+    {
+      "at": "2026-11-21T14:28:44.618Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "chapter_07_paired_cube_diagonals",
+      "summary": "Hold the pink corner on cube A and pull it out of its face. Cube B's corner follows, and the two front faces fold along "
+    },
+    {
+      "at": "2026-11-21T14:28:44.353Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "chapter_06_pyramid_edit",
+      "summary": "Take the apex of the pyramid and move it. Every face that meets it tilts at once."
+    },
+    {
+      "at": "2026-11-21T14:28:44.060Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "chapter_06_concrete_barrier",
+      "summary": "Walk up to the striped barriers round the basin. The wedge profile that carried you up now turns you away."
+    },
+    {
+      "at": "2026-11-21T14:28:43.824Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "chapter_06_wedge_palace",
+      "summary": "Follow the arrows up one of the low wedges to the platform. Walking forward lifts you a metre."
+    },
+    {
+      "at": "2026-11-21T14:28:43.582Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "chapter_06_align_tetrahedron",
+      "summary": "Take the pink point and bring it to the small ring. The faces settle into a tetrahedron and the whole solid falls: now y"
+    },
+    {
+      "at": "2026-11-21T14:28:43.086Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "faces_make_shelter",
+      "summary": "Look through the frame at the joined faces on the assembly table. Try adding another face at a free edge."
+    },
+    {
+      "at": "2026-11-21T14:28:42.759Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "shared_diagonal",
+      "summary": "Find the diagonal where the two coloured triangles meet."
+    },
+    {
+      "at": "2026-11-21T14:28:42.489Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "draw_a_face",
+      "summary": "Frame the drawing point, then take it in hand and draw out a face."
+    },
+    {
+      "at": "2026-11-21T14:28:42.123Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "three_edges",
+      "summary": "Look through the frame at the three edges and the empty space between them."
+    },
+    {
+      "at": "2026-11-21T14:28:41.866Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_17293a78fb2c777454",
+      "summary": "Touch the glass with one fingertip, then with more of the hand, and watch the mark widen."
+    },
+    {
+      "at": "2026-11-21T14:28:41.618Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "draw_dot",
+      "summary": "Hold any of the three beads, draw a bend, pause and release. Walk around the line that stays."
+    },
+    {
+      "at": "2026-11-21T14:28:41.348Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "encounter-635aefdfd29759aa92df081413759ced",
+      "summary": "Spray the canvas with the left can, then tap that can again to step the spacing through 20, 80 and 200 mm. The right can"
+    },
+    {
+      "at": "2026-11-21T14:28:40.996Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "glass_paint_wall",
+      "summary": "Draw on the glass, lift the pen, and make a second mark across the gap."
+    },
+    {
+      "at": "2026-11-21T14:28:40.676Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "bubble_brush",
+      "summary": "Pause with a drawing bead and its count rests. Then hold the black Bubble Brush still, let a sphere grow, move past its "
+    },
+    {
+      "at": "2026-11-21T14:28:40.412Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "encounter-79529f7938fe52d39696ae5314f39277",
+      "summary": "Lift the black point from its plinth, draw a bend in the air and put it back. The line stays where the point moved."
+    },
     {
       "at": "2026-11-21T14:20:08.287Z",
       "by": "Antigravity",
@@ -1194,6 +1355,28 @@
     "spine_0b2dcee16292548d8d": "Measure a span with the ruler stick and walk along it — a line drawn to measure quickly becomes a path your feet obey.",
     "walk_this_line_marking": "Walk along the painted stripe, then step deliberately off to one side and compare your recorded detour against the prescribed line.",
     "player_trace": "Walk away from the straight path and look back through your camera frame — your wandering body has drawn its own persistent line.",
-    "spine_dd3ff280670046fe92": "Unroll printed tape across the floor to mark a span or boundary — notice how a thin strip of tape immediately organizes how bodies move."
+    "spine_dd3ff280670046fe92": "Unroll printed tape across the floor to mark a span or boundary — notice how a thin strip of tape immediately organizes how bodies move.",
+    "encounter-79529f7938fe52d39696ae5314f39277": "Lift the black point from its plinth, draw a bend in the air and put it back. The line stays where the point moved.",
+    "bubble_brush": "Pause with a drawing bead and its count rests. Then hold the black Bubble Brush still, let a sphere grow, move past its edge and release the linked chain.",
+    "glass_paint_wall": "Draw on the glass, lift the pen, and make a second mark across the gap.",
+    "encounter-635aefdfd29759aa92df081413759ced": "Spray the canvas with the left can, then tap that can again to step the spacing through 20, 80 and 200 mm. The right can sprays without snapping.",
+    "draw_dot": "Hold any of the three beads, draw a bend, pause and release. Walk around the line that stays.",
+    "spine_17293a78fb2c777454": "Touch the glass with one fingertip, then with more of the hand, and watch the mark widen.",
+    "three_edges": "Look through the frame at the three edges and the empty space between them.",
+    "draw_a_face": "Frame the drawing point, then take it in hand and draw out a face.",
+    "shared_diagonal": "Find the diagonal where the two coloured triangles meet.",
+    "faces_make_shelter": "Look through the frame at the joined faces on the assembly table. Try adding another face at a free edge.",
+    "chapter_06_align_tetrahedron": "Take the pink point and bring it to the small ring. The faces settle into a tetrahedron and the whole solid falls: now you can pick it up.",
+    "chapter_06_wedge_palace": "Follow the arrows up one of the low wedges to the platform. Walking forward lifts you a metre.",
+    "chapter_06_concrete_barrier": "Walk up to the striped barriers round the basin. The wedge profile that carried you up now turns you away.",
+    "chapter_06_pyramid_edit": "Take the apex of the pyramid and move it. Every face that meets it tilts at once.",
+    "chapter_07_paired_cube_diagonals": "Hold the pink corner on cube A and pull it out of its face. Cube B's corner follows, and the two front faces fold along different diagonals.",
+    "chapter_07_cube_lines": "Look at the outline cube: no faces, only edges, and you still read a box.",
+    "chapter_07_polyhedron_nets_cube": "Follow the pink square as the net folds into a cube. The cube shrinks, drops to the floor and stays, and another net opens above it.",
+    "chapter_07_prefab_box_library": "Take two copies of one box from the shelf to the worktable. Move one: the other stays. Put them side by side, apart, or stacked.",
+    "chapter_08_geometry_courtyard": "Lift one of the five solids from its block and count how many faces meet at a corner. Compare it with the next one.",
+    "chapter_08_sphere_resolution_atlas": "Walk along the twelve small spheres. Across a row the rings increase; down a column the segments do. Follow one change while the other holds still.",
+    "chapter_08_budget_of_smoothness": "Choose one of the four turning spheres for a far background and one to inspect close up. Then press SHOW / HIDE COUNTS and see whether the numbers change your choice.",
+    "chapter_08_form_in_hand": "Take the black point. While you hold it the form loses rings and segments and corners appear. Press the trigger to send out a copy as it is at that moment."
   }
 }
