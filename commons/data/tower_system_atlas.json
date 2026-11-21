@@ -1056,8 +1056,85 @@
       }
     }
   },
-  "revision": 146,
+  "revision": 157,
   "history": [
+    {
+      "at": "2026-11-21T15:20:22.020Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_ab35f6979d2ccb7bfd",
+      "summary": "Toggle one step off on the step sequencer and listen as the read column sweeps past — leaving a rest silences that beat "
+    },
+    {
+      "at": "2026-11-21T15:20:21.672Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_5175c9cafccc79dc9e",
+      "summary": "Compare rotating only a tile's painted motif against rotating the physical wall panel itself — turning the solid slab ch"
+    },
+    {
+      "at": "2026-11-21T15:20:21.403Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_794a21c6582dcafe49",
+      "summary": "Walk across both halves of the paired tile floor — fishbone beside square — and compare what changes underfoot when the "
+    },
+    {
+      "at": "2026-11-21T15:20:21.184Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_68623d8553620ecb9c",
+      "summary": "At the console beside the 4 x 4 x 4 flight lab, step X +, Y +, and Z + to move the transparent selector marker through t"
+    },
+    {
+      "at": "2026-11-21T15:20:21.036Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_1ba35f3f6f55c6044d",
+      "summary": "Watch the seven-by-seven grid of moving coins and track one row-and-column plate — the coin moves on while the grid addr"
+    },
+    {
+      "at": "2026-11-21T15:20:20.889Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_154ec5956b5e45cb00",
+      "summary": "Walk along the 32 numbered addresses in the row and take one occupant away — its slot and address label remain in sequen"
+    },
+    {
+      "at": "2026-11-21T15:20:20.742Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_0693670c5f38e37908",
+      "summary": "Adjust one control by a small step at the Just threshold mechanism and compare adjacent attempts to find the narrow edge"
+    },
+    {
+      "at": "2026-11-21T15:20:20.595Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_8a1a5e9ee31cbaebe6",
+      "summary": "Run the Almost threshold mechanism and watch the highest point the motion reaches — notice the exact remaining gap where"
+    },
+    {
+      "at": "2026-11-21T15:20:20.450Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_5ebeb00ab5ae9d79ab",
+      "summary": "Release the ball with the NOT track clear so it passes, then place the blocker and release again — blocking the input tu"
+    },
+    {
+      "at": "2026-11-21T15:20:20.303Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_84373d11bd204c5f76",
+      "summary": "Support only the left path, then only the right path, then neither, and release the ball at the OR ramp — either single "
+    },
+    {
+      "at": "2026-11-21T15:20:20.136Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_963d87dbf70533d161",
+      "summary": "Support both gaps on the AND ramp and release the ball so it crosses, then remove either single support and test again —"
+    },
     {
       "at": "2026-11-21T15:16:44.291Z",
       "by": "fable-prefab-belt",
@@ -2174,6 +2251,17 @@
     "spine_5bf601bb591a0f686d": "Take one of the twelve palette sets off the wall and carry it through the hall. Hold it up against other colours and under other light.",
     "spine_a28e4d510b95182509": "Walk along X, then along Z, in the central bay, and watch the grid recolour as your address changes.",
     "spine_acf3461fcabb02c41b": "Take a spray can from the rack and press the trigger at the canvas the machine is already painting. Distance, angle and time shape your mark beside its marks.",
-    "spine_d367a51470fe856bd1": "Look through two of the freestanding colour filters at once, then walk around them. The mixed colour changes with where you stand."
+    "spine_d367a51470fe856bd1": "Look through two of the freestanding colour filters at once, then walk around them. The mixed colour changes with where you stand.",
+    "spine_963d87dbf70533d161": "Support both gaps on the AND ramp and release the ball so it crosses, then remove either single support and test again — both conditions must hold together.",
+    "spine_84373d11bd204c5f76": "Support only the left path, then only the right path, then neither, and release the ball at the OR ramp — either single supported route is enough for passage.",
+    "spine_5ebeb00ab5ae9d79ab": "Release the ball with the NOT track clear so it passes, then place the blocker and release again — blocking the input turns passage into an intentional stop.",
+    "spine_8a1a5e9ee31cbaebe6": "Run the Almost threshold mechanism and watch the highest point the motion reaches — notice the exact remaining gap where it falls short of crossing.",
+    "spine_0693670c5f38e37908": "Adjust one control by a small step at the Just threshold mechanism and compare adjacent attempts to find the narrow edge where failure tips into crossing.",
+    "spine_154ec5956b5e45cb00": "Walk along the 32 numbered addresses in the row and take one occupant away — its slot and address label remain in sequence even when the occupant is gone.",
+    "spine_1ba35f3f6f55c6044d": "Watch the seven-by-seven grid of moving coins and track one row-and-column plate — the coin moves on while the grid address stays fixed in place.",
+    "spine_68623d8553620ecb9c": "At the console beside the 4 x 4 x 4 flight lab, step X +, Y +, and Z + to move the transparent selector marker through three dimensions and note that an address remains after its cube is taken.",
+    "spine_794a21c6582dcafe49": "Walk across both halves of the paired tile floor — fishbone beside square — and compare what changes underfoot when the same motif is laid under two different tiling rules.",
+    "spine_5175c9cafccc79dc9e": "Compare rotating only a tile's painted motif against rotating the physical wall panel itself — turning the solid slab changes both what you see and where your body can pass.",
+    "spine_ab35f6979d2ccb7bfd": "Toggle one step off on the step sequencer and listen as the read column sweeps past — leaving a rest silences that beat without removing its column from the clock."
   }
 }
