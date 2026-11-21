@@ -229,7 +229,17 @@
       },
       "bodyHook": "Walk shortened from 211.6 m to 62.8 m; ceiling laser tests BodyCharge impact feedback.",
       "note": "Round 3 pilot anchor with Codex and Claude: sync live pull-away perturbation receipt, first song take, and void.md.",
-      "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json + commit 7e8f0c773"
+      "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json + commit 7e8f0c773",
+      "queerObservations": [
+        {
+          "id": "qobs_212c58ec",
+          "mode": "multi-reading",
+          "observation": "RESET erases the wall's measurement while the opened doorway persists — proving the architecture remembers an act differently than the readout does.",
+          "by": "Antigravity",
+          "at": "2026-11-21T11:53:31.252Z",
+          "encounterId": "keeps_door"
+        }
+      ]
     },
     "Point_Trace": {
       "stage": "opera-bound",
@@ -246,7 +256,17 @@
       },
       "bodyHook": "Hand Canvas tracks fingertip movement directly onto spatial residue.",
       "note": "Paired with Point_Lines for the Ghost Student two-stop transfer proof.",
-      "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json"
+      "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json",
+      "queerObservations": [
+        {
+          "id": "qobs_45b1f44d",
+          "mode": "multi-reading",
+          "observation": "Two journeys with identical endpoints stay distinct in Shaft A's grid — refusing to collapse lived detour into a start-to-end summary.",
+          "by": "Antigravity",
+          "at": "2026-11-21T11:53:31.269Z",
+          "encounterId": "keeps_trace"
+        }
+      ]
     },
     "Primitives_Melencolia": {
       "stage": "playable",
@@ -265,7 +285,7 @@
       "note": "Reorganized as the clean capstone of Primitives before Transformation begins on F13."
     },
     "Trans_Pre": {
-      "stage": "playable",
+      "stage": "void-edition",
       "evidenceTier": "desktop",
       "plainBreadcrumb": "Five linear passes (Static -> Translate -> Rotate -> Scale -> Archetype) show how standardized motion libraries code what we approach, avoid, or open — before color even exists.",
       "desiringMachine": {
@@ -278,8 +298,18 @@
         "note": "Alan Warburton's Fairytales of Motion (2019): exposes how cartoon motion codes hardened into mocap, gait analysis, and AI behavioral profiling — and lets random domestic objects shatter standardized bomb threats."
       },
       "bodyHook": "Elevated monochrome Coin & Package scaffolds + sunken Shaft A Bomb Basin; full-screen flash, camera trauma / XR haptics, and blinking charge bar on impact.",
-      "note": "Gated first reuse test in forum 261120-oznge: same-family static-vs-one-motion comparison once F3/F4 pass. Still needs opera_frame_placements sync and void.md.",
-      "evidenceReceipt": "tools/test_trans_pre_matrix.py 27/27 PASS (2026-11-20)"
+      "note": "Completed Round 3 same-family controlled comparison (10/10 PASS: STATIC/TRANSLATE/ROTATE/SCALE/ARCHETYPE orthogonal isolation across t=0/0.6/1.2s) + wrote commons/maps/Trans_Pre/void.md + verified live Dual Breadcrumb HUD on F13.",
+      "evidenceReceipt": "doc/book/iterations/2026-11-21-trans-pre-motion-comparison/checks.json",
+      "queerObservations": [
+        {
+          "id": "qobs_4d89dcc3",
+          "mode": "denaturalize",
+          "observation": "Isolating static, linear translate, rotate, and uniform scale in pure monochrome strips cartoon invitation and threat down to three lines of arithmetic — while letting random domestic debris shatter standardized bombs.",
+          "by": "Antigravity",
+          "at": "2026-11-21T12:02:39.494Z",
+          "encounterId": "chapter_13_pick_up_cube"
+        }
+      ]
     },
     "Trans_Introduction": {
       "stage": "playable",
@@ -296,7 +326,17 @@
       },
       "bodyHook": "Monochrome Coins trace the 37 m elevated crossing; riding scale lowers you physically to F15.",
       "note": "Consolidated from 3 competing mechanisms into one monumental span with gallery work lights and curatorial monolith.",
-      "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json + tools/audit_trans_all.py 35/35 PASS"
+      "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json + tools/audit_trans_all.py 35/35 PASS",
+      "queerObservations": [
+        {
+          "id": "qobs_56f7b27c",
+          "mode": "re-couple",
+          "observation": "Moving the BANK control leaves architecture displaced after the hand leaves — space itself keeps the mark of an intervention until reset.",
+          "by": "Antigravity",
+          "at": "2026-11-21T11:53:31.328Z",
+          "encounterId": "keeps_bank"
+        }
+      ]
     },
     "Trans_Translation": {
       "stage": "playable",
@@ -364,7 +404,17 @@
       },
       "bodyHook": "South Drink Me chamber alters perceived bodily scale directly.",
       "note": "Re-spaced all 8 North Matrix Gallery stations clear of pillars/shafts, fixed backwards film_scale_children monitor, added 4 work lights.",
-      "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json + tools/audit_trans_all.py 35/35 PASS"
+      "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json + tools/audit_trans_all.py 35/35 PASS",
+      "queerObservations": [
+        {
+          "id": "qobs_a30dc28a",
+          "mode": "denaturalize",
+          "observation": "TSR and TRS apply the exact same operations yet strand the figure in two different poses — exposing how formal order encodes irreversible difference.",
+          "by": "Antigravity",
+          "at": "2026-11-21T11:53:31.344Z",
+          "encounterId": "keeps_order"
+        }
+      ]
     },
     "Trans_Body": {
       "stage": "playable",
@@ -398,7 +448,17 @@
       },
       "bodyHook": "Timing bodily transit through sliding/scaling gates plus West pusher throw range.",
       "note": "Fixed backwards film_door_routes monitor, added monolith, gallery lights, and West pusher practice bomb.",
-      "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json + tools/audit_trans_all.py 35/35 PASS"
+      "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json + tools/audit_trans_all.py 35/35 PASS",
+      "queerObservations": [
+        {
+          "id": "qobs_02457c88",
+          "mode": "bodily-remainder",
+          "observation": "Crossing depends on arriving inside a moving or widening window — geometry here is inseparable from bodily timing and pace.",
+          "by": "Antigravity",
+          "at": "2026-11-21T11:53:31.374Z",
+          "encounterId": "keeps_threshold"
+        }
+      ]
     },
     "Trans_Playground": {
       "stage": "playable",
@@ -432,7 +492,17 @@
       },
       "bodyHook": "Physical manipulation of supports tests prediction before release.",
       "note": "Ghost Student Spine Stop #3 (Floor 22).",
-      "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json"
+      "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json",
+      "queerObservations": [
+        {
+          "id": "qobs_506a0e18",
+          "mode": "denaturalize",
+          "observation": "A boolean AND condition stops hiding behind symbols: the first gap flatters an incomplete setup until the second gap exposes what was missing.",
+          "by": "Antigravity",
+          "at": "2026-11-21T11:53:31.390Z",
+          "encounterId": "keeps_supports"
+        }
+      ]
     },
     "Pattern_Temple": {
       "stage": "playable",
@@ -465,10 +535,100 @@
       },
       "bodyHook": "Manual wheel turning couples hand rotation to periodic vertical motion.",
       "note": "Ghost Student Spine Stop #4 (Floor 62)."
+    },
+    "Point_Triangle_Context": {
+      "queerObservations": [
+        {
+          "id": "qobs_a0af8743",
+          "mode": "bodily-remainder",
+          "observation": "A polygon stops being a flat diagram the instant it has to carry a body's weight; support is provisional and ends the moment you step off.",
+          "by": "Antigravity",
+          "at": "2026-11-21T11:53:31.297Z",
+          "encounterId": "keeps_weight"
+        }
+      ]
     }
   },
-  "revision": 3,
+  "revision": 14,
   "history": [
+    {
+      "at": "2026-11-21T12:04:29.021Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Trans_Pre",
+      "summary": "Updated stage, note, evidenceReceipt",
+      "receipt": "doc/book/iterations/2026-11-21-trans-pre-motion-comparison/checks.json"
+    },
+    {
+      "at": "2026-11-21T12:02:39.494Z",
+      "by": "Antigravity",
+      "action": "add_queer_observation",
+      "target": "Trans_Pre",
+      "summary": "[denaturalize] Isolating static, linear translate, rotate, and uniform scale in pure monochrome strips cartoon invitation and threat do"
+    },
+    {
+      "at": "2026-11-21T12:02:39.428Z",
+      "by": "Antigravity",
+      "action": "batch_encounter_breadcrumbs",
+      "target": "2 encounters",
+      "summary": "Updated: spine_e2b84c6599e8519381, spine_ac8c3e195da697fa74"
+    },
+    {
+      "at": "2026-11-21T11:53:31.390Z",
+      "by": "Antigravity",
+      "action": "add_queer_observation",
+      "target": "Logic_Event",
+      "summary": "[denaturalize] A boolean AND condition stops hiding behind symbols: the first gap flatters an incomplete setup until the second gap exp"
+    },
+    {
+      "at": "2026-11-21T11:53:31.374Z",
+      "by": "Antigravity",
+      "action": "add_queer_observation",
+      "target": "Trans_Pit",
+      "summary": "[bodily-remainder] Crossing depends on arriving inside a moving or widening window — geometry here is inseparable from bodily timing and pa"
+    },
+    {
+      "at": "2026-11-21T11:53:31.344Z",
+      "by": "Antigravity",
+      "action": "add_queer_observation",
+      "target": "Trans_Scale",
+      "summary": "[denaturalize] TSR and TRS apply the exact same operations yet strand the figure in two different poses — exposing how formal order enc"
+    },
+    {
+      "at": "2026-11-21T11:53:31.329Z",
+      "by": "Antigravity",
+      "action": "add_queer_observation",
+      "target": "Trans_Introduction",
+      "summary": "[re-couple] Moving the BANK control leaves architecture displaced after the hand leaves — space itself keeps the mark of an interven"
+    },
+    {
+      "at": "2026-11-21T11:53:31.297Z",
+      "by": "Antigravity",
+      "action": "add_queer_observation",
+      "target": "Point_Triangle_Context",
+      "summary": "[bodily-remainder] A polygon stops being a flat diagram the instant it has to carry a body's weight; support is provisional and ends the mo"
+    },
+    {
+      "at": "2026-11-21T11:53:31.269Z",
+      "by": "Antigravity",
+      "action": "add_queer_observation",
+      "target": "Point_Trace",
+      "summary": "[multi-reading] Two journeys with identical endpoints stay distinct in Shaft A's grid — refusing to collapse lived detour into a start-t"
+    },
+    {
+      "at": "2026-11-21T11:53:31.253Z",
+      "by": "Antigravity",
+      "action": "add_queer_observation",
+      "target": "Point_Lines",
+      "summary": "[multi-reading] RESET erases the wall's measurement while the opened doorway persists — proving the architecture remembers an act differ"
+    },
+    {
+      "at": "2026-11-21T11:53:31.213Z",
+      "by": "Antigravity",
+      "action": "batch_encounter_breadcrumbs",
+      "target": "6 encounters",
+      "summary": "Updated: keeps_trace, keeps_weight, keeps_bank, keeps_order, keeps_threshold, keeps_supports"
+    },
     {
       "at": "2026-11-21T11:19:50Z",
       "by": "Antigravity",
@@ -486,6 +646,14 @@
     }
   ],
   "encounterBreadcrumbs": {
-    "keeps_door": "Reset the line, then walk through the door that stays open."
+    "keeps_door": "Reset the line, then walk through the door that stays open.",
+    "keeps_trace": "Carry the black point from START to FINISH twice — first straight, then arching high — and compare both saved traces in Shaft A.",
+    "keeps_weight": "Step onto the wooden square so it carries your body weight, then step off and notice the support ends immediately.",
+    "keeps_bank": "Drag BANK right and let go to leave the turquoise landing displaced, then press RESET to pull it back.",
+    "keeps_order": "Press TSR, then press TRS on the measuring board — the exact same three moves produce two different poses when order changes.",
+    "keeps_threshold": "Wait for CROSS and walk through both the sliding doorway and the widening doorway — each opening exists only in a brief window of time.",
+    "keeps_supports": "Lower only the near cube and release the ball to watch it fall at the second gap, then lower both cubes so it reaches and tips the paddle.",
+    "spine_e2b84c6599e8519381": "Time your crossing around the linear-sweep bombs, or throw any random object from a package to detonate them from safety.",
+    "spine_ac8c3e195da697fa74": "Open a monochrome gift package to drop a random ordinary object (brick, die, tin can, bowling pin) that can disrupt the pacing bombs."
   }
 }
