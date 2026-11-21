@@ -693,10 +693,59 @@
         "mode": "denaturalize",
         "note": "Covering a footer (erasure) performs the god-trick and bolting a symbolic eye mast (witness) performs authority without earning any evidence — objectivity is accounting for position, sight arc, definition, and timestamp."
       }
+    },
+    "Primitives_Prefab_Library": {
+      "queerObservations": [
+        {
+          "id": "qobs_ad4c03cb",
+          "mode": "re-couple",
+          "observation": "A library of parts is never neutral inventory — removing a prefab from its stand detaches it into live physics while collecting it into the hand, turning a museum archive back into tools another ghost can re-couple onto a different floor.",
+          "by": "Antigravity",
+          "at": "2026-11-21T14:15:14.720Z",
+          "encounterId": "spine_62884bf3e1aa10927f"
+        }
+      ],
+      "stage": "void-edition",
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "doc/book/iterations/2026-11-21-prefab-library-take-forward/checks.json",
+      "plainBreadcrumb": "Pick a reusable part from the 8 open prefab shelves (88 items) or 5 full-size stock rails (53 parts), compose two testable arrangements at the Tier-3 Scaffold Workstation, and carry your collected part back into the tower through a transfer threshold.",
+      "bodyHook": "Take a full-size part (rod) directly off the rail into your hand so it detaches into live gravity while equipping your bracelet, then press TransferKey on the threshold jamb to carry it to another floor.",
+      "note": "Ghost Student Spine Stop #10 (10/10 COMPLETE!) verified live in Godot 4.6 (8/8 PASS): 8/8 open shelves (88 items), 5/5 full-size rails (53 parts), live rod detach/collect (12->11), live tape tool equip+return, Tier-3 quads workstation, both transfer portals resolved (Trans_Pre->F13, Primitives_Melencolia->F12), Dual Breadcrumb HUD, void.md authored.",
+      "desiringMachine": {
+        "machine": "8 glassless prefab_library_shelf banks (88 live items.json entries) + 5 full-size hanging_stock rails (53 removable physical parts & self-returning tools) + Tier-3 scaffold_workstation_quads + 2 void_floor_transfer portals (Trans_Pre F13, Primitives_Melencolia F12)",
+        "activates": "Detaching reusable primitives into live physics while collecting them into inventory_hands, keeping tools anchored for the next visitor, and looping carried parts back into earlier tower sequences",
+        "couplesInto": "F13 Trans_Pre (CONTINUE TO TRANSFORMATION) & F12 Primitives_Melencolia (BACK TO MELENCOLIA) — closing the 10-stop Ghost Student Spine into a repeatable workshop loop"
+      },
+      "queerOperator": {
+        "mode": "re-couple",
+        "note": "Removing the glass from a museum archive turns passive stock into detachable, collectable parts that re-couple onto other floors while tools automatically return to their stands for the next ghost."
+      }
     }
   },
-  "revision": 33,
+  "revision": 36,
   "history": [
+    {
+      "at": "2026-11-21T14:16:27.436Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Primitives_Prefab_Library",
+      "summary": "Updated stage, evidenceTier, evidenceReceipt, plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator",
+      "receipt": "doc/book/iterations/2026-11-21-prefab-library-take-forward/checks.json"
+    },
+    {
+      "at": "2026-11-21T14:15:14.720Z",
+      "by": "Antigravity",
+      "action": "add_queer_observation",
+      "target": "Primitives_Prefab_Library",
+      "summary": "[re-couple] A library of parts is never neutral inventory — removing a prefab from its stand detaches it into live physics while col"
+    },
+    {
+      "at": "2026-11-21T14:15:12.636Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_62884bf3e1aa10927f",
+      "summary": "Pick a reusable part from the open shelves or full-size stock rails, test it at the Scaffold Workstation, and carry it f"
+    },
     {
       "at": "2026-11-21T14:11:01.641Z",
       "by": "Antigravity",
@@ -945,6 +994,7 @@
     "spine_0bb13a478364ee1e66": "Step the Menger sponge from 1 to 20 to 400 cubes, then compare the large opening against a smaller copy — the shape repeats, yet your body fits only one.",
     "spine_5222bc1a1c40201257": "Pause the boids table and slide the black point left or right to widen the gold radius — bodies stay still, yet who enters the circle rewrites every steering arrow.",
     "spine_3b5bbaf63cf7d38ca2": "Stand on one candidate line, compare Squared, Huber, and Wavy error bars, flip OUTLIER to watch one point pull them apart, then test STEP=long overshoot.",
-    "spine_bb456826fb63e94b53": "Read all four SUBJECT #4729 panels, toggle COVER/WITNESS on DANGEROUS 92%, then compare ONE DEFINITION vs ONE RECORD at Four Stations to separate missing evidence from different rules."
+    "spine_bb456826fb63e94b53": "Read all four SUBJECT #4729 panels, toggle COVER/WITNESS on DANGEROUS 92%, then compare ONE DEFINITION vs ONE RECORD at Four Stations to separate missing evidence from different rules.",
+    "spine_62884bf3e1aa10927f": "Pick a reusable part from the open shelves or full-size stock rails, test it at the Scaffold Workstation, and carry it forward through a transfer threshold into another floor."
   }
 }
