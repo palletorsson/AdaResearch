@@ -88,7 +88,7 @@ def _http_get(params: dict[str, str]) -> tuple[str, str] | None:
     qs = urlparse.urlencode({k: v for k, v in params.items() if v is not None and v != ""})
     url = f"{API}?{qs}" if qs else API
     try:
-        with urlrequest.urlopen(url, timeout=4.0) as resp:
+        with urlrequest.urlopen(url, timeout=12.0) as resp:
             ctype = resp.headers.get("Content-Type", "application/json")
             return resp.read().decode("utf-8"), ctype
     except HTTPError as exc:
@@ -103,7 +103,7 @@ def _http_post(payload: dict) -> dict | None:
     data = json.dumps(payload).encode("utf-8")
     req = urlrequest.Request(API, data=data, headers={"Content-Type": "application/json"}, method="POST")
     try:
-        with urlrequest.urlopen(req, timeout=5.0) as resp:
+        with urlrequest.urlopen(req, timeout=15.0) as resp:
             return json.loads(resp.read().decode("utf-8"))
     except HTTPError as exc:
         body = exc.read().decode("utf-8", errors="replace")
