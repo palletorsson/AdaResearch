@@ -666,10 +666,59 @@
         "mode": "multi-reading",
         "note": "An outlier has no intrinsic mathematical meaning — loss rules only decide whether one anomalous observation hijacks the majority fit (Squared) or gets dampened away (Huber)."
       }
+    },
+    "SpeculativeComputation_Situated_Computation": {
+      "queerObservations": [
+        {
+          "id": "qobs_9fc33e9b",
+          "mode": "denaturalize",
+          "observation": "Objectivity is not the view from nowhere — covering a panel's footer or bolting a symbolic eye onto it earns zero evidence, while Four Stations proves 1.87 s of the walk went unseen by every corner and even full visibility still splits verdicts whenever definitions differ.",
+          "by": "Antigravity",
+          "at": "2026-11-21T14:08:28.667Z",
+          "encounterId": "spine_bb456826fb63e94b53"
+        }
+      ],
+      "stage": "void-edition",
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "doc/book/iterations/2026-11-21-situated-four-accounts/checks.json",
+      "plainBreadcrumb": "Read all four SUBJECT #4729 panels (ORDERLY 87%, CREATIVE 64%, DANGEROUS 92%, IRRELEVANT 22%), toggle COVER/WITNESS on DANGEROUS 92%, then compare ONE DEFINITION vs ONE RECORD at Four Stations to separate missing evidence from different definitions.",
+      "bodyHook": "Walk the 6 m field under four 3.4 m sight arcs so your own movement leaves colored traces where seen and grey dots where unseen (1.88 s unseen on the builder walk), while the head-crab separates screen verdict from bodily consequence.",
+      "note": "Ghost Student Spine Stop #9 verified live in Godot 4.6 (8/8 PASS): four situated_readout panels on SUBJECT #4729, erasure/witness unchanged DANGEROUS 92%, four-stations own (1v3, 1.88 s unseen) -> one_definition (2v2) -> one_record (3v1) -> both (4/4 agree), museum_witnesses, Dual Breadcrumb HUD, void.md authored.",
+      "desiringMachine": {
+        "machine": "Four inward situated_readout panels (erasure/footnote/witness) + Four Stations walk-trace arena (3.4 m sight arcs, 4 definitions of DANGEROUS, ONE DEFINITION & ONE RECORD dwell plates) + five museum_witnesses monitors (live/delayed/held)",
+        "activates": "Separating disagreement caused by partial observation (ONE DEFINITION -> 2 vs 2) from disagreement caused by differing definitions (ONE RECORD -> 3 vs 1) and auditing unearned confidence vs earned share seen",
+        "couplesInto": "F209 Primitives_Prefab_Library (taking a tested reusable part forward into a new arrangement another ghost can test)"
+      },
+      "queerOperator": {
+        "mode": "denaturalize",
+        "note": "Covering a footer (erasure) performs the god-trick and bolting a symbolic eye mast (witness) performs authority without earning any evidence — objectivity is accounting for position, sight arc, definition, and timestamp."
+      }
     }
   },
-  "revision": 30,
+  "revision": 33,
   "history": [
+    {
+      "at": "2026-11-21T14:11:01.641Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "SpeculativeComputation_Situated_Computation",
+      "summary": "Updated stage, evidenceTier, evidenceReceipt, plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator",
+      "receipt": "doc/book/iterations/2026-11-21-situated-four-accounts/checks.json"
+    },
+    {
+      "at": "2026-11-21T14:08:28.667Z",
+      "by": "Antigravity",
+      "action": "add_queer_observation",
+      "target": "SpeculativeComputation_Situated_Computation",
+      "summary": "[denaturalize] Objectivity is not the view from nowhere — covering a panel's footer or bolting a symbolic eye onto it earns zero eviden"
+    },
+    {
+      "at": "2026-11-21T14:08:26.217Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_bb456826fb63e94b53",
+      "summary": "Read all four SUBJECT #4729 panels, toggle COVER/WITNESS on DANGEROUS 92%, then compare ONE DEFINITION vs ONE RECORD at "
+    },
     {
       "at": "2026-11-21T13:50:45.988Z",
       "by": "Antigravity",
@@ -895,6 +944,7 @@
     "spine_554ad276c59f013b7e": "Pick one cell and its two neighbours, predict its next state under Rule 90, press STEP to compare — then try Rule 30 on the same seed.",
     "spine_0bb13a478364ee1e66": "Step the Menger sponge from 1 to 20 to 400 cubes, then compare the large opening against a smaller copy — the shape repeats, yet your body fits only one.",
     "spine_5222bc1a1c40201257": "Pause the boids table and slide the black point left or right to widen the gold radius — bodies stay still, yet who enters the circle rewrites every steering arrow.",
-    "spine_3b5bbaf63cf7d38ca2": "Stand on one candidate line, compare Squared, Huber, and Wavy error bars, flip OUTLIER to watch one point pull them apart, then test STEP=long overshoot."
+    "spine_3b5bbaf63cf7d38ca2": "Stand on one candidate line, compare Squared, Huber, and Wavy error bars, flip OUTLIER to watch one point pull them apart, then test STEP=long overshoot.",
+    "spine_bb456826fb63e94b53": "Read all four SUBJECT #4729 panels, toggle COVER/WITNESS on DANGEROUS 92%, then compare ONE DEFINITION vs ONE RECORD at Four Stations to separate missing evidence from different rules."
   }
 }
