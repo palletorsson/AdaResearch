@@ -521,8 +521,8 @@
       "note": "Pattern sequence verified on Desktop (38/38) and signed Quest 3 APK v22 (6/6)."
     },
     "WaveFunctions_Intro": {
-      "stage": "scaffold",
-      "evidenceTier": "planned",
+      "stage": "void-edition",
+      "evidenceTier": "desktop",
       "plainBreadcrumb": "Turn the wheel until the cube hits the mark going up, then predict when it hits the same height coming down — one reading hides two opposite directions.",
       "desiringMachine": {
         "machine": "Sine Wheel & Oscillation Study",
@@ -534,7 +534,18 @@
         "note": "Demonstrates why a single static measurement is ambiguous without direction and phase."
       },
       "bodyHook": "Manual wheel turning couples hand rotation to periodic vertical motion.",
-      "note": "Ghost Student Spine Stop #4 (Floor 62)."
+      "note": "Ghost Student Spine Stop #4 (Floor 62) verified live: hand-sine-yoke OperaFrame06 Two Visits 9/9 PASS (harmonic deceleration ratio 3.73x, return height delta 0.0000 m, live Dual Breadcrumb HUD) + wrote commons/maps/WaveFunctions_Intro/void.md.",
+      "queerObservations": [
+        {
+          "id": "qobs_4602c092",
+          "mode": "multi-reading",
+          "observation": "A single snapshot at the pink RailMark reads height=0 on both Visit #1 (rising) and Visit #2 (falling) — exposing why a static measurement flattens direction and phase until the hand stays in motion.",
+          "by": "Antigravity",
+          "at": "2026-11-21T12:22:29.022Z",
+          "encounterId": "spine_c2b6fc98a64a37b397"
+        }
+      ],
+      "evidenceReceipt": "doc/book/iterations/2026-11-21-wavefunctions-two-visits/checks.json"
     },
     "Point_Triangle_Context": {
       "queerObservations": [
@@ -549,8 +560,37 @@
       ]
     }
   },
-  "revision": 14,
+  "revision": 18,
   "history": [
+    {
+      "at": "2026-11-21T12:23:53.160Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "WaveFunctions_Intro",
+      "summary": "Updated stage, evidenceTier, note, evidenceReceipt",
+      "receipt": "doc/book/iterations/2026-11-21-wavefunctions-two-visits/checks.json"
+    },
+    {
+      "at": "2026-11-21T12:23:53.124Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_c2b6fc98a64a37b397",
+      "summary": "Turn the wheel until the cube crosses the pink mark going up, then keep turning until it crosses the same height going d"
+    },
+    {
+      "at": "2026-11-21T12:22:29.022Z",
+      "by": "Antigravity",
+      "action": "add_queer_observation",
+      "target": "WaveFunctions_Intro",
+      "summary": "[multi-reading] A single snapshot at the pink RailMark reads height=0 on both Visit #1 (rising) and Visit #2 (falling) — exposing why a "
+    },
+    {
+      "at": "2026-11-21T12:22:28.513Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_c2b6fc98a64a37b397",
+      "summary": "Turn the wheel until the cube crosses the pink mark going up, crest the top, then watch it cross the exact same height g"
+    },
     {
       "at": "2026-11-21T12:04:29.021Z",
       "by": "Antigravity",
@@ -654,6 +694,7 @@
     "keeps_threshold": "Wait for CROSS and walk through both the sliding doorway and the widening doorway — each opening exists only in a brief window of time.",
     "keeps_supports": "Lower only the near cube and release the ball to watch it fall at the second gap, then lower both cubes so it reaches and tips the paddle.",
     "spine_e2b84c6599e8519381": "Time your crossing around the linear-sweep bombs, or throw any random object from a package to detonate them from safety.",
-    "spine_ac8c3e195da697fa74": "Open a monochrome gift package to drop a random ordinary object (brick, die, tin can, bowling pin) that can disrupt the pacing bombs."
+    "spine_ac8c3e195da697fa74": "Open a monochrome gift package to drop a random ordinary object (brick, die, tin can, bowling pin) that can disrupt the pacing bombs.",
+    "spine_c2b6fc98a64a37b397": "Turn the wheel until the cube crosses the pink mark going up, then keep turning until it crosses the same height going down."
   }
 }
