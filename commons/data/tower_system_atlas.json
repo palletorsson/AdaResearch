@@ -325,7 +325,7 @@
         "note": "Space is no longer a fixed neutral container — transformation itself fabricates the floor beneath your feet."
       },
       "bodyHook": "Monochrome Coins trace the 37 m elevated crossing; riding scale lowers you physically to F15.",
-      "note": "Consolidated from 3 competing mechanisms into one monumental span with gallery work lights and curatorial monolith.",
+      "note": "Consolidated from 3 competing mechanisms into one monumental span with gallery work lights and curatorial monolith.\n[2026-11-21 · Antigravity] Drift audit (2026-11-21): spine_5ec66bfd0405274e09 (Swap the Order) originally targeted transform_composition (now on F18 Trans_Scale); spine_8a75dc7ba8da871f9f (Let It Balance) originally targeted physics_play_plank_ball (now on F59 FormFinding_Equilibrium). Breadcrumbs reflect the live Shaft B/Center/Shaft A spans.",
       "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json + tools/audit_trans_all.py 35/35 PASS",
       "queerObservations": [
         {
@@ -352,7 +352,7 @@
         "note": "The Unit pair and ten packed blue barriers reveal how pure displacement repeats power and order across space."
       },
       "bodyHook": "Upper-deck mortar throwing exercises bodily arc estimation and unified boom feedback.",
-      "note": "Cleared stray pyramid blockers, fixed colliding floor sign, upgraded mortar mines to monochrome linear lerp.",
+      "note": "Cleared stray pyramid blockers, fixed colliding floor sign, upgraded mortar mines to monochrome linear lerp.\n[2026-11-21 · Antigravity] Drift audit (2026-11-21): spine_0e0e54d03a14a06e19 (Move the Pivot) originally targeted movable-pivot (now on F16 Trans_Rotation); spine_ebe6f65f724f97f1b2 (The Growing Feather) originally targeted barrier-scale-line (now on F18 Trans_Scale), while F15 holds barrier-packed (ten packed blue barriers). Breadcrumbs match live F15.",
       "evidenceReceipt": "tools/audit_trans_all.py 35/35 PASS + tools/rooms_door.py check 0 findings (2026-11-20)"
     },
     "Trans_Rotation": {
@@ -1030,7 +1030,7 @@
     "AdvancedLaboratory_Lab_Equipment_Simulation": {
       "plainBreadcrumb": "Pull the MolecularDesigner hand beyond normal arm reach so the figure keeps your alteration, then step onto the 6 m floor figure at A Joint More (13 joints, 12 connections) — stand still to plant a joint or hold one to rewire its neighbour.",
       "bodyHook": "Stretch the hand on MolecularDesigner and let go, then stand still on bare floor and on existing joints at A Joint More to plant and rewire connections with your feet.",
-      "note": "Queue D machine coupling authored from live rooms.json + joint_more registry + final.md (evidence remains planned).",
+      "note": "Queue D machine coupling authored from live rooms.json + joint_more registry + final.md (evidence remains planned).\n[2026-11-21 · Antigravity] Drift audit (2026-11-21): spine_16f56d18998509902e ('Follow the Hand') frames f1_flex_connector_7_3 (two poles joined by a red cord) while its older outline text described a floating inventory ring; breadcrumb matches the live flex connector.",
       "desiringMachine": {
         "machine": "A Joint More (joint_more: 6 m floor body of 13 joints & 12 connections where standing still plants or rewires joints) + MolecularDesigner (editable persistent body) + Markov Blanket Room + Boolean Neck + Bridge Cut",
         "activates": "Persistent bodily reconfiguration (coordinates and neighbour links saved locally) separating spatial POSITION from topological NEIGHBOUR relations",
@@ -1054,10 +1054,63 @@
         "mode": "bodily-remainder",
         "note": "The altered pose crosses floors without making the journey — coordinates and turquoise rewired links ARRIVE, while the gesture, effort, and intention that moved the hand stay MISSING."
       }
+    },
+    "Wavefunctions_Sky_Stairs": {
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "doc/book/iterations/2026-11-21-sky-stairs-walk/checks.json",
+      "plainBreadcrumb": "Look down into Shaft B to see the ivory ceramic spiral's radius breathe sinusoidally, then walk all 51 treads down the 6 m drop from the upper ivory landing straight onto Floor 72's lower jade landing.",
+      "bodyHook": "Walk the full 51-step sine-modulated spiral inside Shaft B (r breathes 1.751 m to 2.090 m) — verified continuous walkable collision across all 21 sampled stations and solid footing at top, mid-flight, and lower jade landing.",
+      "note": "Live desktop walk verified in Godot 4.6 (6/6 PASS, doc/book/iterations/2026-11-21-sky-stairs-walk/checks.json): ShaftFlight 51 ceramic treads + WalkableSpiral + Guardrails, sinusoidal radius span 0.339 m (WAVE_AMPLITUDE=0.17), 21/21 continuous raycast hits across 6.00 m drop (max delta 0.31 m), Model B settled cleanly at top/mid/bottom (|dy|<=0.08 m)."
+    },
+    "Color_Nails": {
+      "note": "[2026-11-21 · Antigravity] Drift audit (2026-11-21): spine_83e5ba4835f83e5507 ('Change the Surround') sits at [0.75, 1.45, 1.25] facing the right salon plinth (Skin RGB) beside the left plinth (Nails RGB) — skin colour is the Albers simultaneous-contrast surround for the nails. Breadcrumb honestly names changing hand/skin colour."
     }
   },
-  "revision": 321,
+  "revision": 327,
   "history": [
+    {
+      "at": "2026-11-21T17:41:47.245Z",
+      "by": "Antigravity",
+      "action": "append_note",
+      "target": "AdvancedLaboratory_Lab_Equipment_Simulation",
+      "summary": "Drift audit (2026-11-21): spine_16f56d18998509902e ('Follow the Hand') frames f1_flex_connector_7_3 (two poles joined by a red cord) while i"
+    },
+    {
+      "at": "2026-11-21T17:41:47.086Z",
+      "by": "Antigravity",
+      "action": "append_note",
+      "target": "Color_Nails",
+      "summary": "Drift audit (2026-11-21): spine_83e5ba4835f83e5507 ('Change the Surround') sits at [0.75, 1.45, 1.25] facing the right salon plinth (Skin RG"
+    },
+    {
+      "at": "2026-11-21T17:41:46.932Z",
+      "by": "Antigravity",
+      "action": "append_note",
+      "target": "Trans_Translation",
+      "summary": "Drift audit (2026-11-21): spine_0e0e54d03a14a06e19 (Move the Pivot) originally targeted movable-pivot (now on F16 Trans_Rotation); spine_ebe"
+    },
+    {
+      "at": "2026-11-21T17:41:46.772Z",
+      "by": "Antigravity",
+      "action": "append_note",
+      "target": "Trans_Introduction",
+      "summary": "Drift audit (2026-11-21): spine_5ec66bfd0405274e09 (Swap the Order) originally targeted transform_composition (now on F18 Trans_Scale); spin"
+    },
+    {
+      "at": "2026-11-21T17:41:46.623Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_6647a3086c36f99d8f",
+      "summary": "Before stepping onto the ivory spiral stair in Shaft B, trace its treads with your eyes — each sits slightly nearer to o"
+    },
+    {
+      "at": "2026-11-21T17:41:46.475Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Wavefunctions_Sky_Stairs",
+      "summary": "Updated evidenceTier, evidenceReceipt, plainBreadcrumb, bodyHook, note",
+      "receipt": "doc/book/iterations/2026-11-21-sky-stairs-walk/checks.json"
+    },
     {
       "at": "2026-11-21T17:33:18.629Z",
       "by": "Antigravity",
@@ -3118,50 +3171,6 @@
       "action": "set_encounter_breadcrumb",
       "target": "spine_3b5bbaf63cf7d38ca2",
       "summary": "Stand on one candidate line, compare Squared, Huber, and Wavy error bars, flip OUTLIER to watch one point pull them apar"
-    },
-    {
-      "at": "2026-11-21T13:29:37.878Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "SwarmIntelligence_Boids_Algorithm",
-      "summary": "Updated stage, evidenceTier, evidenceReceipt, plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator",
-      "receipt": "doc/book/iterations/2026-11-21-swarm-first-neighbour/checks.json"
-    },
-    {
-      "at": "2026-11-21T13:28:11.063Z",
-      "by": "Antigravity",
-      "action": "add_queer_observation",
-      "target": "SwarmIntelligence_Boids_Algorithm",
-      "summary": "[denaturalize] Alignment is not consent and cohesion is not belonging: widening one perception radius changes who every boid must obey "
-    },
-    {
-      "at": "2026-11-21T13:28:10.180Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_5222bc1a1c40201257",
-      "summary": "Pause the boids table and slide the black point left or right to widen the gold radius — bodies stay still, yet who ente"
-    },
-    {
-      "at": "2026-11-21T12:45:24.870Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "Fractal_MengerSponge",
-      "summary": "Updated stage, evidenceTier, evidenceReceipt, plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator",
-      "receipt": "doc/book/iterations/2026-11-21-fractal-menger-body/checks.json"
-    },
-    {
-      "at": "2026-11-21T12:43:55.324Z",
-      "by": "Antigravity",
-      "action": "add_queer_observation",
-      "target": "Fractal_MengerSponge",
-      "summary": "[bodily-remainder] Self-similar fractal geometry promises the same square opening at every depth, yet Model B's physical body passes throug"
-    },
-    {
-      "at": "2026-11-21T12:43:55.298Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_0bb13a478364ee1e66",
-      "summary": "Step the Menger sponge from 1 to 20 to 400 cubes, then compare the large opening against a smaller copy — the shape repe"
     }
   ],
   "encounterBreadcrumbs": {
@@ -3296,7 +3305,7 @@
     "spine_b4e3b54b7813019122": "Pick one ridge on a spiral column and follow it upward with your eyes while the shaft turns. Then look down the colonnade through the gaps between the columns.",
     "spine_8d59752502b2be935f": "Stand still and listen: short sounds arrive by chance over a steady drone, and a shape lights when its sound plays. Wait for one to come again.",
     "spine_8b9a2bbae673e81622": "Strike a bar and listen until its tone has died away. Strike a longer bar, then the first one twice: each strike starts that bar's tone again.",
-    "spine_6647a3086c36f99d8f": "Before stepping onto the spiral stair in the shaft, trace its treads with your eyes: each sits a little nearer to or farther from the centre than the last. Then try the first steps.",
+    "spine_6647a3086c36f99d8f": "Before stepping onto the ivory spiral stair in Shaft B, trace its treads with your eyes — each sits slightly nearer to or farther from the centre — then walk the full 51-step spiral down 6 m onto Floor 72's jade landing (walkability verified on desktop).",
     "spine_8ec586d90890cfb277": "Move one frequency slider toward the other and watch the third row, their sum. As the two come close, it swells and fades slowly.",
     "spine_94790855aee49591be": "At the bench, move one of the five sliders and watch the summed wave change shape. Press H1 ALONE to see the first voice by itself, then BASELINE to return.",
     "spine_e35e2b04fe7e2d0182": "Touch a dark bead on the five-rod abacus and watch it settle, then depart along the rod — notice which variable chance is allowed to move while the rods and wall marks stay fixed.",
