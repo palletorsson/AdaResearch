@@ -212,6 +212,14 @@ def test_reverse_tick() -> None:
         vr_link.adb, vr_link.device_present = real_adb, real_dev
 
 
+def occupied_cells(g) -> set:
+    """Cells a planted or walled thing must leave alone: works, spawn, teleporters."""
+    cells = {(a["row"], a["col"]) for a in g.artifacts}
+    cells |= {tuple(t) for t in g.teleports}
+    cells.add(tuple(va.plan_tour(g, "Point_One").spawn))
+    return cells
+
+
 def test_plan_is_a_walk() -> None:
     print("plan: Point_One")
     tour, g = va.plan_map("Point_One")
@@ -233,7 +241,21 @@ def test_plan_is_a_walk() -> None:
     wanted = [t["token"] for t in va.artifact_targets(g)]
     check(sorted(visited) == sorted(wanted) and len(set(visited)) == len(visited),
           "every artifact visited exactly once (%d)" % len(wanted))
-    check(any(s["token"] == "3t" for s in tour.skipped), "the floating text is skipped and says so")
+    # The rule, not the room: Point_One holds no floating text today, so one is
+    # planted on a free cell of a copy and the plan is asked what it did with it.
+    data = copy.deepcopy(mp.load_map(mp.resolve_map_path("Point_One")))
+    rows = data["layers"]["interactables"]
+    taken = occupied_cells(g)
+    free = next((r, c) for r in range(len(rows)) for c in range(len(rows[r]))
+                if not str(rows[r][c]).strip() and (r, c) in g.walkable and (r, c) not in taken)
+    rows[free[0]][free[1]] = "3t"
+    planted = va.plan_tour(mp.MapGraph(data), "Point_One")
+    sk = [s for s in planted.skipped if s["token"] == "3t"]
+    check(len(sk) == 1 and tuple(sk[0]["cell"]) == free and "text" in sk[0]["reason"],
+          "a floating text is skipped and says so")
+    check(not any(l.token == "3t" for l in planted.artifact_legs())
+          and len(planted.artifact_legs()) == len(tour.artifact_legs()),
+          "…and the tour of the works is no shorter for it")
     # legs go round other works, not through them
     occupied = {tuple(t["cell"]) for t in va.artifact_targets(g)}
     for leg in tour.legs:
@@ -250,7 +272,18 @@ def test_walled_off_is_reported() -> None:
     p = mp.resolve_map_path("Point_One")
     data = mp.load_map(p)
     g0 = mp.MapGraph(copy.deepcopy(data))
-    token, cell = "drag_point_target", (10, 6)
+    # A work of the map as it stands: one whose eight neighbours are inside the
+    # grid and hold no other work, spawn or teleporter, so walling it in closes
+    # that work and nothing else.
+    taken = occupied_cells(g0)
+    struct = data["layers"]["structure"]
+
+    def ring(cell):
+        return [(cell[0] + dr, cell[1] + dc) for dr in (-1, 0, 1) for dc in (-1, 0, 1) if dr or dc]
+
+    token, cell = next((t["token"], t["cell"]) for t in va.artifact_targets(g0)
+                       if all(0 <= r < len(struct) and 0 <= c < len(struct[r]) and (r, c) not in taken
+                              for r, c in ring(t["cell"])))
     base = va.plan_tour(g0, "Point_One")
     check(any(l.token == token for l in base.artifact_legs()), "unwalled, %s is in the tour" % token)
     walled = copy.deepcopy(data)
@@ -338,8 +371,12 @@ def test_play_in_process() -> None:
     check(all(e.get("confirmed") for e in done), "the grid's `activated` was heard for every act")
     check(all(e["seen"]["ok"] for e in report["legs"] if e["kind"] == "artifact"), "every work was seen")
     md = (tmp / "vr_agent_Point_One.md").read_text(encoding="utf-8")
-    check("## origin" in md and "**Did:** interact" in md, "the markdown report names the work and the verb")
-    check(any("looking at origin" in n for n in link.notes), "narration went to the link's log")
+    acted = [e for e in report["legs"] if e["kind"] == "artifact" and e.get("acted")]
+    check(bool(acted) and all(("## %s " % e["token"]) in md and ("**Did:** %s" % e["acted"]["verb"]) in md
+                              for e in acted),
+          "the markdown report names each work acted on and its verb (%d)" % len(acted))
+    check(all(any(("looking at %s " % t) in n for n in link.notes) for t in arts),
+          "narration went to the link's log, one line per work")
     # cells were sent, not world points — the game converts with its own grid
     check(all("cells" in c for c in game.commands if c["cmd"] == "walker"), "walks are sent as cells")
 
