@@ -557,7 +557,19 @@
           "at": "2026-11-21T11:53:31.297Z",
           "encounterId": "keeps_weight"
         }
-      ]
+      ],
+      "plainBreadcrumb": "Close three edges into a triangle, join two triangles along a shared diagonal into a wooden square, and step onto it to feel a flat diagram carry your body weight.",
+      "bodyHook": "Step onto the wooden square so it bears your weight, then step off and notice the load-bearing relation immediately ends.",
+      "note": "Authored F5 machine coupling, queer operator, and body hook (preserving existing desktop receipt from what-the-world-keeps).",
+      "desiringMachine": {
+        "machine": "Triangle Assembly Table + Scaffold Workstation (triangles) + Vending Machine",
+        "activates": "Diagonal brace, wooden_board = association(config(quad)), warning_triangle = association(config(triangle)), and pink_triangle_sign",
+        "couplesInto": "F6 Primitives_Polythedra (folding planar faces into 3D enclosures) and F209 Primitives_Prefab_Library (brace & woodenboard on FRAMING AND MEASURE)"
+      },
+      "queerOperator": {
+        "mode": "bodily-remainder",
+        "note": "A triangle stops being weightless geometry the moment two faces share a diagonal and carry your body — support exists only while weight stays on the plank."
+      }
     },
     "CA_Introduction": {
       "queerObservations": [
@@ -720,10 +732,185 @@
         "mode": "re-couple",
         "note": "Removing the glass from a museum archive turns passive stock into detachable, collectable parts that re-couple onto other floors while tools automatically return to their stands for the next ghost."
       }
+    },
+    "Point_One": {
+      "plainBreadcrumb": "Test three kinds of point at the same kind of address — invisible, visible light, and solid obstacle — then toggle the sun switch and collect your first spherical point primitives.",
+      "bodyHook": "Step through the visible point and collide physically with the solid point; toggle the room lights to feel absence stay located.",
+      "note": "Authored F1 machine coupling, queer operator, body hook, and both installed encounter Dual Breadcrumbs (evidence remains planned pending desktop probe).",
+      "desiringMachine": {
+        "machine": "Scaffold Workstation (Tier 0 points) + Open Vending Machine + Sun Switch",
+        "activates": "First physical point-derived inventory items (marble = association(config(point)), rubber_ball = association(config(point)), work_light)",
+        "couplesInto": "F2 Point_Coordinates (local vs roof addresses), F15 Trans_Translation & F64 WaveFunctions_Sine_Space (rubberball reused)"
+      },
+      "queerOperator": {
+        "mode": "denaturalize",
+        "note": "A point is never merely zero-dimensional — depending on whether it carries a lamp or a collider, the exact same coordinate either disappears, beckons, or halts your body."
+      }
+    },
+    "Primitives_Polythedra": {
+      "plainBreadcrumb": "Align a tetrahedron to enclose volume from four points, test how the exact same angled wedge works as a walkable ramp on one side and a concrete barrier on the other, then drag a pyramid apex to warp every face.",
+      "bodyHook": "Climb the allowing wedge versus walking around the blocking slope — your stride tests geometry as access or refusal.",
+      "note": "Authored F6 machine coupling, queer operator, and body hook (evidence remains planned pending desktop probe).",
+      "desiringMachine": {
+        "machine": "Rock Spawner & Scanner + Scaffold Workstation (polyhedra) + Vending Machine",
+        "activates": "walk_ramp = association(wedge), door_stop = association(config(wedge)), gem = association(config(bipyramid)), and blocking barriers",
+        "couplesInto": "F7 Point_Animatedcube (orthogonal cube prefabs) and F209 Primitives_Prefab_Library (wedge & pyramid stock)"
+      },
+      "queerOperator": {
+        "mode": "multi-reading",
+        "note": "The identical angled wedge acts as an inviting ramp (walk_ramp), a doorstop, or a hostile concrete_barrier depending solely on orientation and context."
+      }
+    },
+    "Point_Animatedcube": {
+      "plainBreadcrumb": "Unfold a cube net, feed cube configurations down the Prefab Belt, and build full 2x2 m square faces at the Square Assembly Table to turn one CubeBody class into crates, pallets, dominoes, dice, and salvaged furniture.",
+      "bodyHook": "Pick two identical copies off the belt and carry them to the table — copies stay inert until your hands stage a relation between them.",
+      "note": "Authored F7 machine coupling (joining live prefab_belt[registry] + 17 items.json entries), queer operator, and body hook (evidence remains planned pending desktop probe).",
+      "desiringMachine": {
+        "machine": "Prefab Belt (prefab_belt) + Square Assembly Table + Vending Machine",
+        "activates": "17 cube-derived inventory items (7 on prefab_belt: wooden_block, domino_tile, cinder_block, eu_pallet, brick, wooden_box, dice, plus crates & salvaged furniture)",
+        "couplesInto": "F209 Primitives_Prefab_Library (BLOCKS AND BODIES + Tier-3 quads workstation) and downstream construction floors"
+      },
+      "queerOperator": {
+        "mode": "re-couple",
+        "note": "One reusable CubeBody class forks across the Prefab Belt into domestic furniture, shipping pallets, games (dice/dominoes), and masonry — industrial standardization waiting to be re-coupled into an unscripted relation."
+      }
+    },
+    "Primitives_Ignorance": {
+      "plainBreadcrumb": "Walk the five-primitive courtyard, compare sphere latitude/longitude resolution on the smoothness atlas against frame budget, and shape Form in Hand to feel how grip alters procedural mesh generation.",
+      "bodyHook": "Hold Form in Hand and shift your grip while stepping closer and farther from the Sphere Resolution Atlas to judge smoothness with your own eyes.",
+      "note": "Authored F8 machine coupling (form_in_hand[registry] + beachball), queer operator, and body hook (evidence remains planned pending desktop probe).",
+      "desiringMachine": {
+        "machine": "Form in Hand (form_in_hand) + Sphere Resolution Atlas",
+        "activates": "beach_ball = association(config(sphere)) on prefab_belt and interactive resolution/smoothness budget awareness",
+        "couplesInto": "F62 WaveFunctions_Intro (smooth periodic motion) and F118 Fractal_MengerSponge (mesh budget limits under subdivision)"
+      },
+      "queerOperator": {
+        "mode": "bodily-remainder",
+        "note": "Smoothness is never free truth — it is a negotiated triangle budget where your viewing distance and physical grip decide when facets stop mattering."
+      }
     }
   },
-  "revision": 36,
+  "revision": 53,
   "history": [
+    {
+      "at": "2026-11-21T14:20:08.287Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Primitives_Ignorance",
+      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:20:08.091Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Point_Animatedcube",
+      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:20:07.778Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Primitives_Polythedra",
+      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:20:07.599Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Point_Triangle_Context",
+      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:20:07.381Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Point_One",
+      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:20:07.220Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_dd3ff280670046fe92",
+      "summary": "Unroll printed tape across the floor to mark a span or boundary — notice how a thin strip of tape immediately organizes "
+    },
+    {
+      "at": "2026-11-21T14:20:07.047Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "player_trace",
+      "summary": "Walk away from the straight path and look back through your camera frame — your wandering body has drawn its own persist"
+    },
+    {
+      "at": "2026-11-21T14:20:06.855Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "walk_this_line_marking",
+      "summary": "Walk along the painted stripe, then step deliberately off to one side and compare your recorded detour against the presc"
+    },
+    {
+      "at": "2026-11-21T14:20:06.615Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_0b2dcee16292548d8d",
+      "summary": "Measure a span with the ruler stick and walk along it — a line drawn to measure quickly becomes a path your feet obey."
+    },
+    {
+      "at": "2026-11-21T14:20:06.378Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "line_relations_gallery",
+      "summary": "Compare the thin geometric line segment beside the retained wooden planks — the same two-point relation embodied as timb"
+    },
+    {
+      "at": "2026-11-21T14:20:06.228Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_823b0b9cc338729e85",
+      "summary": "Drag one endpoint of the line and release it — the mathematical segment materializes into a solid wooden plank you can c"
+    },
+    {
+      "at": "2026-11-21T14:20:05.985Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "coordinate_readout",
+      "summary": "Move the point and compare its two live numbers: local coordinates shift from the room's corner while world coordinates "
+    },
+    {
+      "at": "2026-11-21T14:20:05.844Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "point_held",
+      "summary": "Pick up the luminous point, carry it across the floor, and release it — its light travels with your hand, and its new po"
+    },
+    {
+      "at": "2026-11-21T14:20:05.687Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "point_sun_switch",
+      "summary": "Switch off the room lights, turn them back on, then walk within a metre of the empty label to notice that an absence is "
+    },
+    {
+      "at": "2026-11-21T14:20:05.551Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "point_solid",
+      "summary": "Cross the invisible point, pass through the visible light point, and bump into the solid point — same coordinate, three "
+    },
+    {
+      "at": "2026-11-21T14:20:05.401Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "pipe_mark",
+      "summary": "Look down through the frame at the mark beside the pipe, then lean sideways to see how perspective opens room around it."
+    },
+    {
+      "at": "2026-11-21T14:20:05.258Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "delivery_fold",
+      "summary": "Drop or place a part on the roof and step back — what you leave behind stays in the world even after your hand moves on."
+    },
     {
       "at": "2026-11-21T14:16:27.436Z",
       "by": "Antigravity",
@@ -995,6 +1182,18 @@
     "spine_5222bc1a1c40201257": "Pause the boids table and slide the black point left or right to widen the gold radius — bodies stay still, yet who enters the circle rewrites every steering arrow.",
     "spine_3b5bbaf63cf7d38ca2": "Stand on one candidate line, compare Squared, Huber, and Wavy error bars, flip OUTLIER to watch one point pull them apart, then test STEP=long overshoot.",
     "spine_bb456826fb63e94b53": "Read all four SUBJECT #4729 panels, toggle COVER/WITNESS on DANGEROUS 92%, then compare ONE DEFINITION vs ONE RECORD at Four Stations to separate missing evidence from different rules.",
-    "spine_62884bf3e1aa10927f": "Pick a reusable part from the open shelves or full-size stock rails, test it at the Scaffold Workstation, and carry it forward through a transfer threshold into another floor."
+    "spine_62884bf3e1aa10927f": "Pick a reusable part from the open shelves or full-size stock rails, test it at the Scaffold Workstation, and carry it forward through a transfer threshold into another floor.",
+    "delivery_fold": "Drop or place a part on the roof and step back — what you leave behind stays in the world even after your hand moves on.",
+    "pipe_mark": "Look down through the frame at the mark beside the pipe, then lean sideways to see how perspective opens room around it.",
+    "point_solid": "Cross the invisible point, pass through the visible light point, and bump into the solid point — same coordinate, three different material behaviours.",
+    "point_sun_switch": "Switch off the room lights, turn them back on, then walk within a metre of the empty label to notice that an absence is still marked.",
+    "point_held": "Pick up the luminous point, carry it across the floor, and release it — its light travels with your hand, and its new position remains when you let go.",
+    "coordinate_readout": "Move the point and compare its two live numbers: local coordinates shift from the room's corner while world coordinates still measure from the tower roof.",
+    "spine_823b0b9cc338729e85": "Drag one endpoint of the line and release it — the mathematical segment materializes into a solid wooden plank you can carry.",
+    "line_relations_gallery": "Compare the thin geometric line segment beside the retained wooden planks — the same two-point relation embodied as timber.",
+    "spine_0b2dcee16292548d8d": "Measure a span with the ruler stick and walk along it — a line drawn to measure quickly becomes a path your feet obey.",
+    "walk_this_line_marking": "Walk along the painted stripe, then step deliberately off to one side and compare your recorded detour against the prescribed line.",
+    "player_trace": "Walk away from the straight path and look back through your camera frame — your wandering body has drawn its own persistent line.",
+    "spine_dd3ff280670046fe92": "Unroll printed tape across the floor to mark a span or boundary — notice how a thin strip of tape immediately organizes how bodies move."
   }
 }
