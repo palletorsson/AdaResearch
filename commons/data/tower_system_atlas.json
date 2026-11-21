@@ -1056,8 +1056,92 @@
       }
     }
   },
-  "revision": 205,
+  "revision": 217,
   "history": [
+    {
+      "at": "2026-11-21T16:21:10.043Z",
+      "by": "Codex",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_9b119b1e6de2797312",
+      "summary": "Press NEXT and follow the new peak along the line. Look at the two ends again, then check how much longer the path betwe"
+    },
+    {
+      "at": "2026-11-21T16:21:09.043Z",
+      "by": "Codex",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_cffeeff5497a0579a5",
+      "summary": "Press NEXT twice and read the piece count and kept length after each cut. Look for the new gaps while the first gap stay"
+    },
+    {
+      "at": "2026-11-21T16:21:07.973Z",
+      "by": "Codex",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_e7ee0703802737b6c7",
+      "summary": "Slow the fractal at the control stand. Pick one small sphere at the end of a branch and follow it as the inner pieces tu"
+    },
+    {
+      "at": "2026-11-21T16:21:07.276Z",
+      "by": "Codex",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_6c7b5019fa6ed482fb",
+      "summary": "Choose a branch tip and predict where its next fork will go. Press GROW and follow the two new branches from that tip."
+    },
+    {
+      "at": "2026-11-21T16:21:06.513Z",
+      "by": "Codex",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_8cd6356625868d5501",
+      "summary": "Press MORE and see the next square appear half as wide. Walk up to the matching doorframes and find where the opening fi"
+    },
+    {
+      "at": "2026-11-21T16:21:05.607Z",
+      "by": "Codex",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_e29d0cd877c048bde7",
+      "summary": "Before stepping, walk from slice five to six and back. Find the difference that reappears at five. Press STEP and follow"
+    },
+    {
+      "at": "2026-11-21T16:21:04.780Z",
+      "by": "Codex",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_21851cf389f7ec3bfe",
+      "summary": "Choose rule 90 and press RST, then STEP a few times. Find a triangular gap in the floor pattern and look for a similar g"
+    },
+    {
+      "at": "2026-11-21T16:21:03.786Z",
+      "by": "Codex",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_91bb41163890c69d6d",
+      "summary": "Find W just outside the seeded square and press STEP. Compare the V readouts. With exchange off in B, only the left fiel"
+    },
+    {
+      "at": "2026-11-21T16:21:03.078Z",
+      "by": "Codex",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_530b5aad5b12a9da7f",
+      "summary": "Set SOURCE to PROBE and run with the probe near. Watch tile W fade. Switch to FAR and watch where the colour returns fir"
+    },
+    {
+      "at": "2026-11-21T16:21:02.412Z",
+      "by": "Codex",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_a657b6174c68e88daa",
+      "summary": "Press REPLAY, then STEP four times. Find the same five-cell shape one square farther along each axis. Use a gold square "
+    },
+    {
+      "at": "2026-11-21T16:21:01.609Z",
+      "by": "Codex",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_d0b0a23e56e197b59e",
+      "summary": "Walk along the basin rim and follow the gold row across the desk, floor tiles and upright lattice. Turn back and see tha"
+    },
+    {
+      "at": "2026-11-21T16:21:00.805Z",
+      "by": "Codex",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_e8b3bbc08eaec022aa",
+      "summary": "Press REPLAY, then STEP. Find the green cell in the gold frame. Step again and watch it disappear while the frame holds "
+    },
     {
       "at": "2026-11-21T16:17:11.859Z",
       "by": "Antigravity",
@@ -2646,6 +2730,18 @@
     "spine_e84d0357e0699bf380": "Walk across the scent-trail ground and compare it with the pheromone basin console (+1 STEP / +20 STEPS) — watch how each passing walker leaves a trace that biases the next step.",
     "spine_e35a2815e1da44170c": "Drop OCT to 1 on the noise mixer to see the broad light-and-dark boundary, step OCT upward with LAC and PER held fixed to add fine ridges, then dial OCT back down to confirm the original field returns unchanged.",
     "spine_3f7f650a316fcc8812": "Watch the three cyan stepping stones across the rectangular pit and time the advance warning cue — the order stays fixed while random wait lengths decide whether each stone is still there when your foot arrives.",
-    "spine_f6934fb7bc932e49f6": "Take the point inside the metal square, carry it sideways and release it, then try pulling it out of the square's plane toward yourself — notice which direction the boundary rule refuses."
+    "spine_f6934fb7bc932e49f6": "Take the point inside the metal square, carry it sideways and release it, then try pulling it out of the square's plane toward yourself — notice which direction the boundary rule refuses.",
+    "spine_e8b3bbc08eaec022aa": "Press REPLAY, then STEP. Find the green cell in the gold frame. Step again and watch it disappear while the frame holds its address.",
+    "spine_d0b0a23e56e197b59e": "Walk along the basin rim and follow the gold row across the desk, floor tiles and upright lattice. Turn back and see that the later rows are still there.",
+    "spine_a657b6174c68e88daa": "Press REPLAY, then STEP four times. Find the same five-cell shape one square farther along each axis. Use a gold square to check which part stayed put.",
+    "spine_530b5aad5b12a9da7f": "Set SOURCE to PROBE and run with the probe near. Watch tile W fade. Switch to FAR and watch where the colour returns first.",
+    "spine_91bb41163890c69d6d": "Find W just outside the seeded square and press STEP. Compare the V readouts. With exchange off in B, only the left field receives anything at W.",
+    "spine_21851cf389f7ec3bfe": "Choose rule 90 and press RST, then STEP a few times. Find a triangular gap in the floor pattern and look for a similar gap in the nearby cube pyramid.",
+    "spine_e29d0cd877c048bde7": "Before stepping, walk from slice five to six and back. Find the difference that reappears at five. Press STEP and follow what changes in the same slice.",
+    "spine_8cd6356625868d5501": "Press MORE and see the next square appear half as wide. Walk up to the matching doorframes and find where the opening first becomes too small for you.",
+    "spine_6c7b5019fa6ed482fb": "Choose a branch tip and predict where its next fork will go. Press GROW and follow the two new branches from that tip.",
+    "spine_e7ee0703802737b6c7": "Slow the fractal at the control stand. Pick one small sphere at the end of a branch and follow it as the inner pieces turn against the larger assembly.",
+    "spine_cffeeff5497a0579a5": "Press NEXT twice and read the piece count and kept length after each cut. Look for the new gaps while the first gap stays open.",
+    "spine_9b119b1e6de2797312": "Press NEXT and follow the new peak along the line. Look at the two ends again, then check how much longer the path between them has become."
   }
 }
