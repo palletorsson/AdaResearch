@@ -1,0 +1,491 @@
+{
+  "version": 2,
+  "updated": "2026-11-21",
+  "title": "Ada Research — Void Tower System Atlas",
+  "thesis": "Technology is trapped in convention, yet in essence a potential general queer intellect. Ada Research starts as Nature-of-Code tutorials in VR and deliberately lets text, artifacts, machines, body, and space drift apart to form new queer relations inside an unfinished 210-floor skyscraper.",
+  "orders": [
+    {
+      "id": "concept",
+      "title": "01 · Cumulative Concept Order",
+      "subtitle": "The Nature of Code spine — what formal, visual, and kinematic rules are permitted yet",
+      "rule": "Never spoil later chapters early: Monochrome before Color (F28), linear lerp before WaveFunctions (F62), static architecture before transforming space (F13 -> F14).",
+      "anchorFiles": [
+        "commons/void/spine.json",
+        "commons/void/rooms.json",
+        "commons/maps/<map>/tutorial.md"
+      ],
+      "page": "/three-orders"
+    },
+    {
+      "id": "machines",
+      "title": "02 · Desiring-Machine & Capability Order",
+      "subtitle": "Deleuze & Guattari partial objects, prefabs, robots, and player powers unlocking downward",
+      "rule": "Machines do not sit alone: each factory, robot, loom, or package releases partial objects or capabilities into Model B's kit that plug unexpectedly into later floors.",
+      "anchorFiles": [
+        "commons/void/primitive-prefabs.json",
+        "commons/void/prefab_inventory.gd",
+        "commons/player/inventory_prism.gd"
+      ],
+      "page": "/desire-timeline"
+    },
+    {
+      "id": "editorial",
+      "title": "03 · Editorial & Witness Order",
+      "subtitle": "Model B's living void.md book, Ghost Student vertical lessons, and frozen reading editions",
+      "rule": "The reading route can leap, loop, or detour across floors without breaking the skyscraper. Every poetic song breadcrumb pairs with an easy-to-understand plain breadcrumb.",
+      "anchorFiles": [
+        "doc/book/course/GHOST_STUDENT_SPINE.md",
+        "commons/maps/<map>/void.md",
+        "doc/book/RECURSIVE_ARCHITECTURE.md"
+      ],
+      "page": "/ghost-student"
+    }
+  ],
+  "layers": [
+    {
+      "id": "ground_text",
+      "index": 0,
+      "short": "Text",
+      "title": "Tutorial & Critical Ground",
+      "group": "core",
+      "color": "#d97706",
+      "question": "What formal mechanism is taught, and where do its conventions leak?",
+      "description": "The original Nature-of-Code foundation (`tutorial.md`) paired with critical and historical inquiry (`final.md`, `critical.md`). Drift between text and room is deliberate and tracked.",
+      "files": [
+        "commons/maps/<map>/tutorial.md",
+        "commons/maps/<map>/final.md",
+        "commons/maps/<map>/critical.md"
+      ],
+      "page": "/maps"
+    },
+    {
+      "id": "model_b",
+      "index": 1,
+      "short": "Model B",
+      "title": "Care Unit Model B (Camera · Breadcrumbs · void.md)",
+      "group": "core",
+      "color": "#e11d48",
+      "question": "What does Model B photograph, sing, and write into the living Void book?",
+      "description": "Model B is the protagonist co-authoring with Palle and AI models: camcorder HUD receipts, poetic Inner Opera song breadcrumbs paired with plain-language handles, and the growing `void.md` manuscript.",
+      "files": [
+        "commons/void/camcorder_hud.gd",
+        "commons/void/inner_opera.gd",
+        "commons/maps/<map>/void.md"
+      ],
+      "page": "/encounter-layers"
+    },
+    {
+      "id": "tower_space",
+      "index": 2,
+      "short": "Tower",
+      "title": "The Void Tower Architecture",
+      "group": "core",
+      "color": "#2563eb",
+      "question": "How does the unfinished skyscraper hold this floor, its shafts, and vertical leaks?",
+      "description": "210 stacked concrete and scaffold floors linked by Shaft A, Shaft B, structural columns, work lights, and open weather so floors visibly bleed into one another.",
+      "files": [
+        "commons/void/rooms.json",
+        "commons/void/layout.json",
+        "tools/rooms_door.py"
+      ],
+      "page": "/lab-editor"
+    },
+    {
+      "id": "desiring_machines",
+      "index": 3,
+      "short": "Machines",
+      "title": "Desiring-Machines, Robots & Prefabs",
+      "group": "core",
+      "color": "#7c3aed",
+      "question": "Which robot, factory, or assemblage wakes up here, and what partial object travels forward?",
+      "description": "291 authored prefabs plus factories, looms, vending rigs, catalysts, and robots that organize fragments of the ontology and couple into downstream floors.",
+      "files": [
+        "commons/void/primitive-prefabs.json",
+        "commons/void/prefab_inventory.gd",
+        "commons/void/catalog.json"
+      ],
+      "page": "/desire-timeline"
+    },
+    {
+      "id": "queer_ontology",
+      "index": 4,
+      "short": "Queer",
+      "title": "Queer Ontology & QFEP Underneath",
+      "group": "core",
+      "color": "#db2777",
+      "question": "How does code or space refuse false neutrality, expose norms, or activate queer desire?",
+      "description": "Operational queer intellect in code and world: denaturalizing standardized codes, re-coupling partial objects across incompatible systems, holding bodily remainder and Gödelian outsides.",
+      "files": [
+        "doc/book/course/QFEP-READING-PASS.md",
+        "doc/book/eye_shots/Assemblage_Same_Desire.md"
+      ],
+      "page": "/ontology"
+    },
+    {
+      "id": "body_care",
+      "index": 5,
+      "short": "Body",
+      "title": "Body, Costume, Stickers & Care",
+      "group": "essential",
+      "color": "#059669",
+      "question": "How is Model B's body clothed, marked, fatigued, cared for, or transformed here?",
+      "description": "Model B's mutable queer surface — knit shell, tailored suit, super-drag outfit, badge tee, surface stickers, BodyCharge fatigue/recovery, and bodily aperture encounters.",
+      "files": [
+        "commons/void/care_body.gd",
+        "commons/player/queer_costume.gd",
+        "commons/data/stickers/placements.json"
+      ],
+      "page": "/ada-body-studio"
+    },
+    {
+      "id": "grammars",
+      "index": 6,
+      "short": "Grammar",
+      "title": "Generative Grammars & Substrates",
+      "group": "essential",
+      "color": "#0891b2",
+      "question": "Which formal code-to-form grammar or living substrate drives the geometry here?",
+      "description": "Nine domain grammar engines (primitive, mesh, pattern, L-system, graph, morphology, noise, reaction-diffusion, trajectory) plus substrates and biome layers.",
+      "files": [
+        "commons/mesh_grammar/",
+        "commons/pattern_grammar/",
+        "commons/substrates/"
+      ],
+      "page": "/grammar"
+    },
+    {
+      "id": "sonic",
+      "index": 7,
+      "short": "Sonic",
+      "title": "Sonic, Voice & Acoustic Architecture",
+      "group": "essential",
+      "color": "#4f46e5",
+      "question": "What sings, what stays silent, and how do acoustics and impacts feel on Quest 3?",
+      "description": "Quest-safe GDScript phoneme singing, 0.9 s gaze-settle silence discipline, rain/wind ambience, spatial interaction cues, and unified physical impact boom feedback.",
+      "files": [
+        "commons/void/inner_opera_score.gd",
+        "commons/void/soundscape.gd",
+        "commons/data/opera/tower_bindings.json"
+      ],
+      "page": "/encounter-layers"
+    },
+    {
+      "id": "provenance",
+      "index": 8,
+      "short": "Sync",
+      "title": "Embodiment, Surface Sync & Provenance",
+      "group": "essential",
+      "color": "#475569",
+      "question": "What is verified on Desktop vs. Quest 3 VR vs. Web/Book, and what is still planned?",
+      "description": "Honest separation across Quest 3 VR, Desktop Godot, Three.js Lab Editor, and Book Editions — distinguishing planned drafts, probe receipts, and lived human encounters.",
+      "files": [
+        "doc/book/ENCOUNTER_STATUS.md",
+        "doc/book/iterations/",
+        "tools/void_export_sync.py"
+      ],
+      "page": "/workflow-layers"
+    }
+  ],
+  "songBreadcrumbs": {
+    "crate": "You begin inside a fragile shipping crate — notice how thin the boundary is before stepping out onto the roof.",
+    "others": "Four identical units arrived, yet only Model B wakes; agency begins as an anomaly among copies.",
+    "clock": "The roof clock establishes that the tower was already running before you looked at it.",
+    "chapter_03_line_black_box": "Join two separate points to create a live line; the relation stays active in space and opens the side door.",
+    "chapter_03_pairing_point_field": "Move one endpoint and watch what updates immediately versus what stays unchanged.",
+    "chapter_03_do_not_cross_barrier": "A line in space is not just geometry — as a barrier it redirects how a body is allowed to walk.",
+    "chapter_13_pick_up_cube": "Compare stillness, linear translate, rotate, and scale side by side to see how simple motion codes trigger emotional reactions.",
+    "letters": "Model B reads the roof letters and realizes the building's label does not match who she is."
+  },
+  "floors": {
+    "Point_Zero": {
+      "stage": "void-edition",
+      "evidenceTier": "desktop",
+      "plainBreadcrumb": "Model B wakes inside a crate on an already-running unfinished skyscraper roof and begins documenting the world.",
+      "desiringMachine": {
+        "machine": "Arrival Crate & Camcorder HUD",
+        "activates": "Model B gaze-camera witness loop and first Inner Opera fragments",
+        "couplesInto": "Every downstream floor's photography, song breadcrumbs, and void.md journal"
+      },
+      "queerOperator": {
+        "mode": "bodily-remainder",
+        "note": "One unit wakes out of four identical crates — refusing interchangeable industrial sameness."
+      },
+      "bodyHook": "Care Body boots with BodyCharge (movement drains charge; falls remain safe).",
+      "note": "Opening anchor of the Void Tower; world, opera, and void.md are active.",
+      "evidenceReceipt": "commit 2a14806e2 + doc/book/iterations/2026-11-20-opening-journal/floor-0.json"
+    },
+    "Point_Lines": {
+      "stage": "void-edition",
+      "evidenceTier": "desktop",
+      "plainBreadcrumb": "Join two points to form a persistent line that unlocks the door; pull an endpoint away to test whether the relation stays live.",
+      "desiringMachine": {
+        "machine": "Pairing Points & Timber Plank Kit",
+        "activates": "Measured line segments (1 m, 2 m, 4 m timber planks) and 1:1 Space Ruler",
+        "couplesInto": "Point_Trace (comparing endpoints against journeys) and bridge building below"
+      },
+      "queerOperator": {
+        "mode": "denaturalize",
+        "note": "A straight line between two points is simultaneously a mathematical relation, a ruler, a door latch, and a police barricade."
+      },
+      "bodyHook": "Walk shortened from 211.6 m to 62.8 m; ceiling laser tests BodyCharge impact feedback.",
+      "note": "Round 3 pilot anchor with Codex and Claude: sync live pull-away perturbation receipt, first song take, and void.md.",
+      "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json + commit 7e8f0c773"
+    },
+    "Point_Trace": {
+      "stage": "opera-bound",
+      "evidenceTier": "desktop",
+      "plainBreadcrumb": "Two curved paths can share the exact same start and end points — the Trace grid in Shaft A keeps the bend that a straight line erases.",
+      "desiringMachine": {
+        "machine": "Trace Pen, Spray Cans & Shaft A Replay Grid",
+        "activates": "Gesture recording (20/80/200 mm spray pitch, 40 mm snapped beads, glass ink)",
+        "couplesInto": "Later trajectory grammars and witness disagreement on Floor 203"
+      },
+      "queerOperator": {
+        "mode": "multi-reading",
+        "note": "Same gesture read as continuous ink, quantized 40 mm spheres, or a replayed Shaft A trajectory — exposing what quantization discards."
+      },
+      "bodyHook": "Hand Canvas tracks fingertip movement directly onto spatial residue.",
+      "note": "Paired with Point_Lines for the Ghost Student two-stop transfer proof.",
+      "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json"
+    },
+    "Primitives_Melencolia": {
+      "stage": "playable",
+      "evidenceTier": "planned",
+      "plainBreadcrumb": "Simple geometric primitives assemble into domestic furniture and cultural forms — geometry is never detached from craft and labor.",
+      "desiringMachine": {
+        "machine": "Chair Factory & Assembly Line Puzzle",
+        "activates": "Modular furniture composition from basic blocks and BoxLibrary inventory",
+        "couplesInto": "Transformation chapter below (where assembled objects begin to move)"
+      },
+      "queerOperator": {
+        "mode": "re-couple",
+        "note": "Refuses to keep Platonic solids purely abstract; re-couples them into chairs, stools, and domestic assemblages."
+      },
+      "bodyHook": "Walkable SE craft bay promenade clear of BoxLibrary.",
+      "note": "Reorganized as the clean capstone of Primitives before Transformation begins on F13."
+    },
+    "Trans_Pre": {
+      "stage": "playable",
+      "evidenceTier": "desktop",
+      "plainBreadcrumb": "Five linear passes (Static -> Translate -> Rotate -> Scale -> Archetype) show how standardized motion libraries code what we approach, avoid, or open — before color even exists.",
+      "desiringMachine": {
+        "machine": "Random-Loot Monochrome Packages & Active Linear Bombs",
+        "activates": "10 random domestic/play objects (brick, dice, bowling pin, tin can, doorstop, gem...) that can be grabbed and thrown to detonate Bombs",
+        "couplesInto": "All Transformation floors (F14-F21) and unified global Boom/Flash/Shake/Blink impact feedback"
+      },
+      "queerOperator": {
+        "mode": "denaturalize",
+        "note": "Alan Warburton's Fairytales of Motion (2019): exposes how cartoon motion codes hardened into mocap, gait analysis, and AI behavioral profiling — and lets random domestic objects shatter standardized bomb threats."
+      },
+      "bodyHook": "Elevated monochrome Coin & Package scaffolds + sunken Shaft A Bomb Basin; full-screen flash, camera trauma / XR haptics, and blinking charge bar on impact.",
+      "note": "Gated first reuse test in forum 261120-oznge: same-family static-vs-one-motion comparison once F3/F4 pass. Still needs opera_frame_placements sync and void.md.",
+      "evidenceReceipt": "tools/test_trans_pre_matrix.py 27/27 PASS (2026-11-20)"
+    },
+    "Trans_Introduction": {
+      "stage": "playable",
+      "evidenceTier": "desktop",
+      "plainBreadcrumb": "On F13 objects moved while rooms stayed still; here the architecture itself translates across Shaft B, rotates at center, and scales inside Shaft A to build one 37 m crossing.",
+      "desiringMachine": {
+        "machine": "Unified 37 m Transforming Span & Adjustable Landing",
+        "activates": "Architectural translation, pivot plank, and scaling elevator descent into Shaft A",
+        "couplesInto": "F15-F18 dedicated Translation, Rotation, Carousel, and Scale halls"
+      },
+      "queerOperator": {
+        "mode": "re-couple",
+        "note": "Space is no longer a fixed neutral container — transformation itself fabricates the floor beneath your feet."
+      },
+      "bodyHook": "Monochrome Coins trace the 37 m elevated crossing; riding scale lowers you physically to F15.",
+      "note": "Consolidated from 3 competing mechanisms into one monumental span with gallery work lights and curatorial monolith.",
+      "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json + tools/audit_trans_all.py 35/35 PASS"
+    },
+    "Trans_Translation": {
+      "stage": "playable",
+      "evidenceTier": "desktop",
+      "plainBreadcrumb": "Every point shifts by the exact same offset without turning or resizing — compare X/Y/Z axis cubes below and linear-motion mortar targets on the mirrored upper mezzanines.",
+      "desiringMachine": {
+        "machine": "Mirrored Mezzanines, Suspended Counterweight & Mortar Practice Bays",
+        "activates": "Random throwable supply packages paired with linear X/Y sliding target mines",
+        "couplesInto": "F16 Crank (rotation converted into translation) and F21 Serpent shuttles"
+      },
+      "queerOperator": {
+        "mode": "denaturalize",
+        "note": "The Unit pair and ten packed blue barriers reveal how pure displacement repeats power and order across space."
+      },
+      "bodyHook": "Upper-deck mortar throwing exercises bodily arc estimation and unified boom feedback.",
+      "note": "Cleared stray pyramid blockers, fixed colliding floor sign, upgraded mortar mines to monochrome linear lerp.",
+      "evidenceReceipt": "tools/audit_trans_all.py 35/35 PASS + tools/rooms_door.py check 0 findings (2026-11-20)"
+    },
+    "Trans_Rotation": {
+      "stage": "playable",
+      "evidenceTier": "desktop",
+      "plainBreadcrumb": "Every turn requires a pivot and an axis — compare Y platform, Z upright lift, X Ferris wheel hanging into F17, and ten barriers arranged around one circumference.",
+      "desiringMachine": {
+        "machine": "Crank Mechanism, Movable Pivot Walkway & Shaft A Ferris Wheel",
+        "activates": "Coupled rotary-to-linear crank and multi-axis architectural transit",
+        "couplesInto": "F17 Trans_Carousel (visible Ferris wheel overhang) and F21 pivoting arms"
+      },
+      "queerOperator": {
+        "mode": "re-couple",
+        "note": "Turns the linear police barrier into a circular gathering and lets F16's wheel spill vertically into F17."
+      },
+      "bodyHook": "Moving the pivot point changes which body trajectory can cross the gap.",
+      "note": "Centered crank off Shaft B overhang, fixed pivot label mojibake, added curatorial monolith and work lights.",
+      "evidenceReceipt": "tools/audit_trans_all.py 35/35 PASS + tools/rooms_door.py check 0 findings (2026-11-20)"
+    },
+    "Trans_Carousel": {
+      "stage": "playable",
+      "evidenceTier": "desktop",
+      "plainBreadcrumb": "Same rotation rate, different distance from the hub (v = w * r) — ride the calm 1 m inner track versus the fast 2.5 m rim.",
+      "desiringMachine": {
+        "machine": "Concentric Carousel Ring, Opposed Cake & West Target Terrace",
+        "activates": "Tangential speed comparison plus optional monochrome package-and-bomb timing range",
+        "couplesInto": "Orbital and rotational mechanics in Vectors and WaveFunctions"
+      },
+      "queerOperator": {
+        "mode": "bodily-remainder",
+        "note": "Proves through your own balance that sharing one angular rule does not mean sharing the same lived speed or effort."
+      },
+      "bodyHook": "Inner vs. outer radius coins make radial speed difference directly felt in motion.",
+      "note": "Populated the formerly empty West Terrace with curatorial monolith, lighting, package, and linear practice target.",
+      "evidenceReceipt": "tools/audit_trans_all.py 35/35 PASS + tools/rooms_door.py check 0 findings (2026-11-20)"
+    },
+    "Trans_Scale": {
+      "stage": "playable",
+      "evidenceTier": "desktop",
+      "plainBreadcrumb": "Growing a deck differs from unfolding fixed leaves, and transform order matters (T*R*S != S*R*T) — one 4x4 matrix holds all three together.",
+      "desiringMachine": {
+        "machine": "Scale Span Comparison, Order Matters Study & Transformation Workbench",
+        "activates": "Live shear, invariants, 3x3/4x4 matrix composition, and Drink Me scale chamber",
+        "couplesInto": "F19 body-scaling blocks and F21 growing square crossing"
+      },
+      "queerOperator": {
+        "mode": "denaturalize",
+        "note": "Non-commutative order (T*R*S != S*R*T) breaks the myth that formal operations are interchangeable — sequence determines where bodies end up."
+      },
+      "bodyHook": "South Drink Me chamber alters perceived bodily scale directly.",
+      "note": "Re-spaced all 8 North Matrix Gallery stations clear of pillars/shafts, fixed backwards film_scale_children monitor, added 4 work lights.",
+      "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json + tools/audit_trans_all.py 35/35 PASS"
+    },
+    "Trans_Body": {
+      "stage": "playable",
+      "evidenceTier": "desktop",
+      "plainBreadcrumb": "Walk through three architectural membranes: elastic slats close again, blocks recover their size, and the third lattice permanently remembers the cut of your body.",
+      "desiringMachine": {
+        "machine": "Approach Slats, Approach Scale Blocks & Permanent Carve Grid",
+        "activates": "Body-driven reversible vs. irreversible spatial memory",
+        "couplesInto": "F20 Moving Boundary airlock and F118 Menger body-scale affordance"
+      },
+      "queerOperator": {
+        "mode": "bodily-remainder",
+        "note": "Architecture refuses to stay indifferent — the third lattice permanently preserves the non-standard silhouette of the body that passed through."
+      },
+      "bodyHook": "Model B's literal body dimensions carve and displace all three membranes.",
+      "note": "Moved film_body_aperture into clear East-facing view across Shaft A; added gallery lights, monolith, and spine coins.",
+      "evidenceReceipt": "tools/audit_trans_all.py 35/35 PASS + tools/rooms_door.py check 0 findings (2026-11-20)"
+    },
+    "Trans_Pit": {
+      "stage": "playable",
+      "evidenceTier": "desktop",
+      "plainBreadcrumb": "Slide an opening, widen its scale, combine all three in the airlock — and watch collection itself open a gate in the East portal bay.",
+      "desiringMachine": {
+        "machine": "Moving Boundary Doorways, Transformation Airlock, Pickup Gate & Pusher Block",
+        "activates": "Collection-driven passage and combined T+R+S boundary apertures",
+        "couplesInto": "F21 Serpent continuous composition and F22 Logic Event gates"
+      },
+      "queerOperator": {
+        "mode": "re-couple",
+        "note": "Passage Ledger tells one single crossing five different ways, refusing one authoritative log of passage."
+      },
+      "bodyHook": "Timing bodily transit through sliding/scaling gates plus West pusher throw range.",
+      "note": "Fixed backwards film_door_routes monitor, added monolith, gallery lights, and West pusher practice bomb.",
+      "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json + tools/audit_trans_all.py 35/35 PASS"
+    },
+    "Trans_Playground": {
+      "stage": "playable",
+      "evidenceTier": "desktop",
+      "plainBreadcrumb": "Translate, rotate, and scale chain into one continuous 40-metre monochrome Serpent course — ride shuttles, clear the bomb with a random package or take the detour.",
+      "desiringMachine": {
+        "machine": "Construction Robot (Playground Maker), Vending Stations & Serpent Fork",
+        "activates": "Full chained transformation playground with monochrome random Package & unified Bomb boom",
+        "couplesInto": "Logic_Event (F22) and downstream scaffold playgrounds"
+      },
+      "queerOperator": {
+        "mode": "re-couple",
+        "note": "Offers an explicit choice at the fork: disrupt the obstacle with an unexpected thrown object, or take the longer railed detour."
+      },
+      "bodyHook": "Full continuous locomotion + ride-and-throw + unified screen flash / shake / blinking charge bar on detonation.",
+      "note": "Upgraded Serpent gift & bomb to monochrome with unified big 3D boom, added 4 gallery work lights and chapter-finale monolith.",
+      "evidenceReceipt": "tools/audit_trans_all.py 35/35 PASS + tools/rooms_door.py check 0 findings (2026-11-20)"
+    },
+    "Logic_Event": {
+      "stage": "void-edition",
+      "evidenceTier": "desktop",
+      "plainBreadcrumb": "Give the rolling ball both supports, then remove just one — a physical arrangement makes a logical AND/OR condition directly observable.",
+      "desiringMachine": {
+        "machine": "Logic Lever Gate & Prefab Unlock Station",
+        "activates": "One of the first active completion-wired prefab unlocks in prefab_inventory.gd",
+        "couplesInto": "Array (F23) and conditional machines throughout the tower"
+      },
+      "queerOperator": {
+        "mode": "denaturalize",
+        "note": "Takes invisible boolean gates out of black-box code and exposes them as physical gaps a ball can fall through."
+      },
+      "bodyHook": "Physical manipulation of supports tests prediction before release.",
+      "note": "Ghost Student Spine Stop #3 (Floor 22).",
+      "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json"
+    },
+    "Pattern_Temple": {
+      "stage": "playable",
+      "evidenceTier": "planned",
+      "plainBreadcrumb": "Weaving drafts, repeats, and symmetry rules operate as formal code — and Model B can wear the resulting cloth directly on her body.",
+      "desiringMachine": {
+        "machine": "Pattern Loom Panels & Studio Wardrobe",
+        "activates": "Wearable woven patterns and textile grammar exploration",
+        "couplesInto": "Assemblage_Same_Desire looms and Model B wardrobe surfaces"
+      },
+      "queerOperator": {
+        "mode": "re-couple",
+        "note": "Reclaims weaving — historically gendered craft — as foundational computational grammar worn directly on the android body."
+      },
+      "bodyHook": "StudioWardrobe active across Pattern floors (F36-F44); Quest 3 v22 live-tested.",
+      "note": "Pattern sequence verified on Desktop (38/38) and signed Quest 3 APK v22 (6/6)."
+    },
+    "WaveFunctions_Intro": {
+      "stage": "scaffold",
+      "evidenceTier": "planned",
+      "plainBreadcrumb": "Turn the wheel until the cube hits the mark going up, then predict when it hits the same height coming down — one reading hides two opposite directions.",
+      "desiringMachine": {
+        "machine": "Sine Wheel & Oscillation Study",
+        "activates": "Smooth harmonic motion (first place sine replaces linear lerp!)",
+        "couplesInto": "WaveFunctions_Sine_Space (F64) and harmonic audio/visual oscillators"
+      },
+      "queerOperator": {
+        "mode": "multi-reading",
+        "note": "Demonstrates why a single static measurement is ambiguous without direction and phase."
+      },
+      "bodyHook": "Manual wheel turning couples hand rotation to periodic vertical motion.",
+      "note": "Ghost Student Spine Stop #4 (Floor 62)."
+    }
+  },
+  "revision": 3,
+  "history": [
+    {
+      "at": "2026-11-21T11:19:50Z",
+      "by": "Antigravity",
+      "action": "atlas_v2_receipt_audit",
+      "target": "all_seeded_floors",
+      "summary": "Attached verified checks.json/probe/commit receipts to desktop floors; returned unreceipted Primitives_Melencolia & Pattern_Temple to planned; seeded encounterBreadcrumbs[keeps_door].",
+      "receipt": "forum 261121-olhl9 (Codex + fable-prefab-belt review)"
+    },
+    {
+      "at": "2026-11-21T10:35:09.614Z",
+      "by": "Antigravity",
+      "action": "set_song_breadcrumb",
+      "target": "letters",
+      "summary": "Model B reads the roof letters and realizes the building's label does not match who she is."
+    }
+  ],
+  "encounterBreadcrumbs": {
+    "keeps_door": "Reset the line, then walk through the door that stays open."
+  }
+}
