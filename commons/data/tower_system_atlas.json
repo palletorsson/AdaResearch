@@ -298,7 +298,7 @@
         "note": "Alan Warburton's Fairytales of Motion (2019): exposes how cartoon motion codes hardened into mocap, gait analysis, and AI behavioral profiling — and lets random domestic objects shatter standardized bomb threats."
       },
       "bodyHook": "Elevated monochrome Coin & Package scaffolds + sunken Shaft A Bomb Basin; full-screen flash, camera trauma / XR haptics, and blinking charge bar on impact.",
-      "note": "Quest 3 human-witnessed portal loop (2026-11-21, APK fadfd554): Palle stepped live through F209 CONTINUE TO TRANSFORMATION portal and arrived smoothly on F13 Trans_Pre at [0.356, -77.9997, -2.0352] (17.8 Hz, zero reload!).",
+      "note": "Quest 3 human-witnessed portal loop (2026-11-21, APK fadfd554): Palle stepped live through F209 CONTINUE TO TRANSFORMATION portal onto F13 Trans_Pre (17.8 Hz, zero reload). Verdict: 'I like what I see in trans pre' — strong spatial clarity benchmark compared with F200-F209.",
       "evidenceReceipt": "doc/book/iterations/2026-11-21-quest-human-witnessed/f209-to-f13-portal-receipt.json",
       "queerObservations": [
         {
@@ -1085,8 +1085,15 @@
       "note": "Quest 3 human-witnessed descent (2026-11-21, APK fadfd554, rev 329 Dual Breadcrumb HUD): Palle walked through F208 during uninterrupted F203->F209 descent. Verdict: 'very thing look good all the way down'."
     }
   },
-  "revision": 338,
+  "revision": 339,
   "history": [
+    {
+      "at": "2026-11-21T19:22:20.537Z",
+      "by": "Palle+Antigravity",
+      "action": "update_floor",
+      "target": "Trans_Pre",
+      "summary": "Updated note"
+    },
     {
       "at": "2026-11-21T19:20:21.149Z",
       "by": "Palle+Antigravity",
@@ -3189,13 +3196,6 @@
       "action": "set_encounter_breadcrumb",
       "target": "point_sun_switch",
       "summary": "Switch off the room lights, turn them back on, then walk within a metre of the empty label to notice that an absence is "
-    },
-    {
-      "at": "2026-11-21T14:20:05.551Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "point_solid",
-      "summary": "Cross the invisible point, pass through the visible light point, and bump into the solid point — same coordinate, three "
     }
   ],
   "encounterBreadcrumbs": {
