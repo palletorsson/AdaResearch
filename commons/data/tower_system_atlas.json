@@ -819,8 +819,8 @@
     },
     "Color_Paint": {
       "desiringMachine": {
-        "machine": "",
-        "activates": "",
+        "machine": "Four Graffiti Drones (unit_drone_graffiti: track, figure_eight, rosette, spirograph flying the 3-can graffiti_stick on a rotating hub) + Automated Ball Painting Demo + Four Moving Canvases (rotate/shake/scale/lift)",
+        "activates": "Persistent spatial pigment traces laid down by autonomous drones and hand spray cans across moving and floor canvases",
         "couplesInto": "F51 Change_Choreography (The Unit's bare 3-action chassis) + F65 WaveFunctions_Unit_Circle (same 3-can spray drone tracing a single sine swell) -> F69 WaveFunctions_John_Cage (adding a third harmonic) -> F70 WaveFunctions_AirMusic"
       },
       "plainBreadcrumb": "Watch the automated spray rack and four graffiti drones (track, figure-eight, rosette, spirograph) paint twisting three-stripe bands across the floor before testing the three-can graffiti stick and moving canvases yourself.",
@@ -889,8 +889,8 @@
     },
     "WaveFunctions_Unit_Circle": {
       "desiringMachine": {
-        "machine": "",
-        "activates": "",
+        "machine": "Sine Swell Graffiti Drone (unit_drone_graffiti, flight_pattern=sine, 14 m single swell) + Unit Circle Advanced (6 m traveling sine ceiling) + Electric Sine & Cosine Snakes + Oscillating Bridge",
+        "activates": "Unrolling circular angular speed (radians) into a horizontal sine/cosine path across ceiling, floor spray ribbon, electric discharges, and a walkable oscillating bridge",
         "couplesInto": "F34 Color_Paint (same 3-can spray drone painting twisting bands) -> F69 WaveFunctions_John_Cage (same drone adding a third harmonic weave) -> F70 WaveFunctions_AirMusic, plus F62 WaveFunctions_Intro and F66 WaveFunctions_3D_Wave_Propagation"
       },
       "plainBreadcrumb": "Follow a point turning round the unit circle as its height unrolls into a 6 m traveling sine ceiling, sine and cosine electric snakes, a 14 m sine-swell graffiti drone, and an oscillating bridge.",
@@ -1066,8 +1066,22 @@
       "note": "[2026-11-21 · Antigravity] Drift audit (2026-11-21): spine_83e5ba4835f83e5507 ('Change the Surround') sits at [0.75, 1.45, 1.25] facing the right salon plinth (Skin RGB) beside the left plinth (Nails RGB) — skin colour is the Albers simultaneous-contrast surround for the nails. Breadcrumb honestly names changing hand/skin colour."
     }
   },
-  "revision": 327,
+  "revision": 329,
   "history": [
+    {
+      "at": "2026-11-21T17:43:47.478Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "WaveFunctions_Unit_Circle",
+      "summary": "Updated desiringMachine.machine, desiringMachine.activates"
+    },
+    {
+      "at": "2026-11-21T17:43:47.327Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Color_Paint",
+      "summary": "Updated desiringMachine.machine, desiringMachine.activates"
+    },
     {
       "at": "2026-11-21T17:41:47.245Z",
       "by": "Antigravity",
@@ -3157,20 +3171,6 @@
       "target": "ML_Gradient_Landscape",
       "summary": "Updated stage, evidenceTier, evidenceReceipt, plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator",
       "receipt": "doc/book/iterations/2026-11-21-ml-three-errors/checks.json"
-    },
-    {
-      "at": "2026-11-21T13:47:40.871Z",
-      "by": "Antigravity",
-      "action": "add_queer_observation",
-      "target": "ML_Gradient_Landscape",
-      "summary": "[multi-reading] No loss function can tell whether an outlying point is a broken sensor or a body erased by the majority fit — squaring l"
-    },
-    {
-      "at": "2026-11-21T13:47:39.502Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_3b5bbaf63cf7d38ca2",
-      "summary": "Stand on one candidate line, compare Squared, Huber, and Wavy error bars, flip OUTLIER to watch one point pull them apar"
     }
   ],
   "encounterBreadcrumbs": {
