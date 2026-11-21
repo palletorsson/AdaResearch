@@ -788,10 +788,234 @@
         "mode": "bodily-remainder",
         "note": "Smoothness is never free truth — it is a negotiated triangle budget where your viewing distance and physical grip decide when facets stop mattering."
       }
+    },
+    "Tutorial_Tiling_Walls": {
+      "desiringMachine": {
+        "machine": "Construction Robot (construction_robot, job=array: six-legged prefab carrier across six addresses and two recipes) + Kit Composition Study (stairs) + Tiling Principles (walls) + Wall Exception",
+        "activates": "Automated assembly of catalogue prefabs by recipe order and standing floor-tiling rules upright into vertical walls",
+        "couplesInto": "F41 Symmetry_Seventeen (vertical wallpaper walls) and F209 Primitives_Prefab_Library (shared catalogue prefabs)"
+      },
+      "plainBreadcrumb": "Walk the aisle where floor tiling rules stand upright as walls, spot the single wall exception, and watch the six-legged Construction Robot assemble catalogue prefabs across six addresses and two recipes.",
+      "bodyHook": "Walk the central aisle between standing black-and-white pattern walls while watching the six-legged worker execute an assembly order one address at a time.",
+      "note": "Queue B machine coupling authored from live rooms.json + construction_robot.json + final.md (evidence remains planned).",
+      "queerOperator": {
+        "mode": "denaturalize",
+        "note": "Turning a floor pattern vertical changes it from ground you walk over into an architectural wall that confronts your body — and the single wall exception breaks uniform repetition."
+      }
+    },
+    "Color_Rainbow": {
+      "desiringMachine": {
+        "machine": "Catalyst Pedestal (catalyst_pedestal, 45 s lease wireframe crystal offer) + Edible Colour Mushrooms (rose/aqua 10 s world tint) + Rainbow Playground & Mushroom Baskets",
+        "activates": "Optional chromatic world transformation (Becoming Catalyst crystal + 10 s edible rose/aqua colour leases) paired with non-mandatory stepped and level celebration routes",
+        "couplesInto": "F34 Color_Paint (pigment and spray marks) and F35 Color_Walls (chromatic filter partitions)"
+      },
+      "plainBreadcrumb": "Claim the Becoming Catalyst crystal from the wireframe pedestal or eat a rose/aqua mushroom to tint the world for ten seconds, then cross the Rainbow Playground via either the candy steps or the level path.",
+      "bodyHook": "Claim the Becoming Catalyst crystal from the wireframe pedestal or eat a rose/aqua mushroom to tint the world for ten seconds; take either the candy steps or the level path through the arch.",
+      "note": "Queue B machine coupling authored from live rooms.json + hazards.json + final.md (evidence remains planned).",
+      "queerOperator": {
+        "mode": "bodily-remainder",
+        "note": "Neither the crystal in the wire cage nor the stairs are mandatory to enter the celebration — eating a rose or aqua mushroom temporarily tints the whole world through your own body rather than repainting objects."
+      }
+    },
+    "Color_Paint": {
+      "desiringMachine": {
+        "machine": "Four Graffiti Drones (unit_drone_graffiti: track, figure_eight, rosette, spirograph flying the 3-can graffiti_stick on a rotating hub) + Automated Ball Painting Demo + Four Moving Canvases (rotate/shake/scale/lift)",
+        "activates": "Persistent spatial pigment traces laid down by autonomous drones and hand spray cans across moving and floor canvases",
+        "couplesInto": "F51 Change_Choreography (The Unit's bare 3-action chassis coupled via rods/cords) and F65 WaveFunctions_Unit_Circle (unit_drone_graffiti repurposed on a sine swell route)"
+      },
+      "plainBreadcrumb": "Watch the automated spray rack and four graffiti drones (track, figure-eight, rosette, spirograph) paint twisting three-stripe bands across the floor before testing the three-can graffiti stick and moving canvases yourself.",
+      "bodyHook": "Wait and watch the automated spray can and four floor drones lay twisting three-stripe ribbons before taking a can or moving canvas yourself.",
+      "note": "Queue B machine coupling authored from live rooms.json + the_unit.json + final.md (evidence remains planned).",
+      "queerOperator": {
+        "mode": "re-couple",
+        "note": "Painting is already underway before your hand arrives — bolting Color Paint's three-can graffiti stick onto The Unit's rotating drone hub turns a three-verb robot into a twisting ribbon painter."
+      }
+    },
+    "Color_Walls": {
+      "desiringMachine": {
+        "machine": "Room to Gather (colour_assembly) + Color Constellation Office (24 overlapping translucent chromatic filters) + Porous Scaffold Nets (green, orange, cyan+magenta) + Subpixel Display & Gradient Interpolator",
+        "activates": "Viewpoint-dependent subtractive/additive colour mixing through overlapping translucent partitions and porous architectural screens",
+        "couplesInto": "F41 Symmetry_Seventeen (patterned surface walls) and F44 Cloth_Factory (woven porous textile screens)"
+      },
+      "plainBreadcrumb": "Step sideways across the staggered cyan and magenta filter sheets and wind-blown porous nets so parallax shifts the mixed colour, then inspect Room to Gather (colour_assembly) and the colour-space comparators.",
+      "bodyHook": "Step laterally across the staggered cyan and magenta sheets and wind-blown porous nets so your body's parallax mixes the colours.",
+      "note": "Queue B machine coupling authored from live rooms.json + reference_studies.json + final.md (evidence remains planned).",
+      "queerOperator": {
+        "mode": "multi-reading",
+        "note": "Nothing in the office moves when you step sideways, yet the colour between you and the far wall shifts from dark overlap into blue — and naming a deterministic partition Gathering cannot decide who gets to occupy or alter it."
+      }
+    },
+    "Symmetry_Seventeen": {
+      "desiringMachine": {
+        "machine": "Wall Pattern Gallery (wall_pattern_gallery: 15 m row of all 17 wallpaper-group shader cubes) + Wallpaper Cage (orders 1/2/3/4/6) + VR Tile Editor (P1/PM/PG) + Kaleidoscope",
+        "activates": "Interactive comparison of all 17 planar symmetry groups (reflection PM vs glide reflection PG) and crystallographic order limits",
+        "couplesInto": "F44 Cloth_Factory (patterned fabric shaders, jacquard tartan sett, and hand-woven twill/plain interlacements)"
+      },
+      "plainBreadcrumb": "Compare P1, PM (reflection), and PG (glide reflection) at the VR Tile Editor, walk the 15 m Wall Pattern Gallery covering all 17 wallpaper-group shaders, and inspect the crystallographic Wallpaper Cage (orders 1, 2, 3, 4, 6).",
+      "bodyHook": "Hold the P1 sample at the tilted VR Tile Editor and switch PM to PG to track where the corner lands, then walk the 15 m Wall Pattern Gallery or bite the pink quartz crystal.",
+      "note": "Queue B machine coupling authored from live rooms.json + wall_pattern_gallery registry + final.md (evidence remains planned).",
+      "queerOperator": {
+        "mode": "denaturalize",
+        "note": "Only rotational orders 1, 2, 3, 4, and 6 tile the Euclidean plane seamlessly — exposing symmetry as a tight geometric constraint where even a half-height glide shift (PM -> PG) produces a different group."
+      }
+    },
+    "Cloth_Factory": {
+      "desiringMachine": {
+        "machine": "Follow the Thread Hand Loom (thread_loom: shuttle, shed lift, PLAIN/TWILL, BEAT/PASS) + Jacquard Studio (trans_pride_tartan_sett) + Overhead Fabric-Bolt Conveyor + Garment Cutting Table + Twin Drag Catwalks & Super Drag Mirrors",
+        "activates": "Manual binary interlacement (warp/weft plain & twill structures) linked to jacquard tartan programming, fabric shaders, cutting patterns, and catwalk costume performance",
+        "couplesInto": "Model B's costume/wardrobe care layer and F106 CA_Introduction (binary row-by-row rules echoing jacquard/loom passes)"
+      },
+      "plainBreadcrumb": "Pass the shuttle through the lit opening on the Follow the Thread hand loom (PLAIN/TWILL + BEAT or PASS), trace the trans-pride tartan sett through Jacquard Studio and the overhead fabric-bolt line, and walk twin drag catwalks.",
+      "bodyHook": "Pass the loom shuttle through the lit shed and beat each row (or use PASS), cut and mirror garments at Super Drag Mirror, and walk Catwalks A and B.",
+      "note": "Queue B machine coupling + first floor plain breadcrumb authored from live rooms.json + thread_loom registry (evidence remains planned).",
+      "queerOperator": {
+        "mode": "re-couple",
+        "note": "From hand-passed loom shuttle to Jacquard punch-logic carrying the trans-pride tartan sett straight onto twin Haute Couture and Atelier Electric drag catwalks — computing's textile origin refuses to stay merely industrial."
+      }
+    },
+    "Change_Choreography": {
+      "desiringMachine": {
+        "machine": "Three Coupled Unit Assemblies (the_unit: pair-on-rod, pair-on-tendon-cord, and 3-drone triangle of rods) + 20-Rod Phase Array + Force Trial Conveyor",
+        "activates": "Emergent phase-locking (~73 deg between two identical 3-action back-drivable drones joined by a rod) and comparison of rigid push-pull rods versus pull-only tendon cords",
+        "couplesInto": "F34 Color_Paint & F65 WaveFunctions_Unit_Circle (The Unit chassis carrying spray nozzles) and F163 SwarmIntelligence_Boids_Algorithm (collective relations absent from any single unit's programme)"
+      },
+      "plainBreadcrumb": "Watch twenty turning phase rods alongside three coupled Unit drone assemblies (two on a 1 m rod, two on a pull-only tendon cord, and three in a triangle) to see a shared phase relation emerge that neither unit's programme contains.",
+      "bodyHook": "Compare the 20 turning phase rods with the three Unit assemblies — watch how swapping a rigid rod for a pull-only tendon cord alters what the paired drones can negotiate.",
+      "note": "Queue B machine coupling authored from live rooms.json + the_unit.json + final.md (evidence remains planned).",
+      "queerOperator": {
+        "mode": "re-couple",
+        "note": "Neither robot's programme contains a 73-degree phase angle — coupling two identical three-verb units by a 1 m rod or a pull-only cord generates a shared choreography neither individual planned."
+      }
+    },
+    "WaveFunctions_Unit_Circle": {
+      "desiringMachine": {
+        "machine": "Sine Swell Graffiti Drone (unit_drone_graffiti, flight_pattern=sine, 14 m single swell) + Unit Circle Advanced (6 m traveling sine ceiling) + Electric Sine & Cosine Snakes + Oscillating Bridge",
+        "activates": "Unrolling circular angular speed (radians) into a horizontal sine/cosine path across ceiling, floor spray ribbon, electric discharges, and a walkable oscillating bridge",
+        "couplesInto": "F62 WaveFunctions_Intro (earlier two-visit rise/fall harmonic experience) and F66 WaveFunctions_3D_Wave_Propagation (via maximal_stairs descent)"
+      },
+      "plainBreadcrumb": "Follow a point turning round the unit circle as its height unrolls into a 6 m traveling sine ceiling, sine and cosine electric snakes, a 14 m sine-swell graffiti drone, and an oscillating bridge.",
+      "bodyHook": "Follow the turning point on the circle against the projection rods and 6 m sine ceiling, cross the Simple Oscillating Bridge, and compare the sine and cosine snakes.",
+      "note": "Queue B machine coupling authored from live rooms.json + the_unit.json + final.md (evidence remains planned).",
+      "queerOperator": {
+        "mode": "multi-reading",
+        "note": "After two turns the projected graph stops growing while the point on the circle keeps turning — separating a finished trace from an ongoing periodic movement, while Color Paint's graffiti drone reappears as a sine-swell painter."
+      }
     }
   },
-  "revision": 76,
+  "revision": 92,
   "history": [
+    {
+      "at": "2026-11-21T14:32:51.526Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "WaveFunctions_Unit_Circle",
+      "summary": "Updated desiringMachine.machine, desiringMachine.activates, desiringMachine.couplesInto, plainBreadcrumb, bodyHook, note, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:32:51.226Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Change_Choreography",
+      "summary": "Updated desiringMachine.machine, desiringMachine.activates, desiringMachine.couplesInto, plainBreadcrumb, bodyHook, note, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:32:50.989Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Cloth_Factory",
+      "summary": "Updated desiringMachine.machine, desiringMachine.activates, desiringMachine.couplesInto, plainBreadcrumb, bodyHook, note, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:32:50.774Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Symmetry_Seventeen",
+      "summary": "Updated desiringMachine.machine, desiringMachine.activates, desiringMachine.couplesInto, plainBreadcrumb, bodyHook, note, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:32:50.626Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Color_Walls",
+      "summary": "Updated desiringMachine.machine, desiringMachine.activates, desiringMachine.couplesInto, plainBreadcrumb, bodyHook, note, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:32:50.475Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Color_Paint",
+      "summary": "Updated desiringMachine.machine, desiringMachine.activates, desiringMachine.couplesInto, plainBreadcrumb, bodyHook, note, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:32:50.319Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Color_Rainbow",
+      "summary": "Updated desiringMachine.machine, desiringMachine.activates, desiringMachine.couplesInto, plainBreadcrumb, bodyHook, note, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:32:50.166Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Tutorial_Tiling_Walls",
+      "summary": "Updated desiringMachine.machine, desiringMachine.activates, desiringMachine.couplesInto, plainBreadcrumb, bodyHook, note, queerOperator"
+    },
+    {
+      "at": "2026-11-21T14:31:53.216Z",
+      "by": "Codex",
+      "action": "update_floor",
+      "target": "WaveFunctions_Unit_Circle",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-21T14:31:52.448Z",
+      "by": "Codex",
+      "action": "update_floor",
+      "target": "Change_Choreography",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-21T14:31:50.086Z",
+      "by": "Codex",
+      "action": "update_floor",
+      "target": "Cloth_Factory",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-21T14:31:49.341Z",
+      "by": "Codex",
+      "action": "update_floor",
+      "target": "Symmetry_Seventeen",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-21T14:31:48.543Z",
+      "by": "Codex",
+      "action": "update_floor",
+      "target": "Color_Walls",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-21T14:31:47.637Z",
+      "by": "Codex",
+      "action": "update_floor",
+      "target": "Color_Paint",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-21T14:31:46.622Z",
+      "by": "Codex",
+      "action": "update_floor",
+      "target": "Color_Rainbow",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-21T14:31:45.908Z",
+      "by": "Codex",
+      "action": "update_floor",
+      "target": "Tutorial_Tiling_Walls",
+      "summary": "Updated desiringMachine"
+    },
     {
       "at": "2026-11-21T14:29:03.767Z",
       "by": "fable-prefab-belt",
