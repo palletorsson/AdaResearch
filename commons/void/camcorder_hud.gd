@@ -3,6 +3,8 @@ extends Control
 
 const FONT := preload("res://commons/font/JetBrainsMono-Medium.ttf")
 const INK := Color("f2f0d9")
+const PLAIN_INK := Color("b8e6c9")
+const PLAIN_DIVIDER := Color(0.72, 0.90, 0.79, 0.28)
 const RECORD := Color("f17474")
 const LOW := Color("ffc573")
 const EMPTY := Color("ff837b")
@@ -23,6 +25,8 @@ var battery_fill := 1.0
 var flow := ""
 ## The line Model B's inner voice is singing now (commons/void/inner_opera.gd sets it); empty when silent.
 var sung := ""
+## Optional easy-to-understand plain breadcrumb paired with `sung` (from commons/data/tower_system_atlas.json).
+var sung_plain := ""
 # What `configure` last set (commons/void/hud_config.gd hands it the game's hud_config.json, and a file sent to a
 # running game): the plane in a headset, the letters, the margins, where the sung line sits.
 var _cfg_width := XR_FRAME_WIDTH
@@ -141,9 +145,11 @@ func configure(config: Dictionary) -> Dictionary:
 	_refresh()
 	return used
 
-func set_sung(text: String) -> void:
-	if sung != text:
+func set_sung(text: String, plain: String = "") -> void:
+	var next_plain := "" if text.is_empty() else plain.strip_edges()
+	if sung != text or sung_plain != next_plain:
 		sung = text
+		sung_plain = next_plain
 		_refresh()
 
 func set_charge(value: float, difference: float = 0.0) -> void:
@@ -197,14 +203,33 @@ func _draw() -> void:
 		# in the headset the frame's bottom row is far down (36 degrees): the line is kept where it can be read without
 		# looking away from the room, about 18 degrees below the middle, and narrower
 		var share := _cfg_sung_width if _cfg_sung_width > 0.0 else (.62 if _desktop else .45)
-		line.width = minf((right - left) * share, FONT.get_string_size(sung, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x + 2.0)
+		var max_w := (right - left) * share
+		line.width = minf(max_w, FONT.get_string_size(sung, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x + 2.0)
 		line.add_string(sung, FONT, font_size)
 		var block := line.get_size()
+		var plain_line: TextParagraph = null
+		var plain_block := Vector2.ZERO
+		var gap := 0.0
+		if not sung_plain.is_empty():
+			var plain_size := maxi(10, font_size - 4)
+			plain_line = TextParagraph.new()
+			plain_line.alignment = HORIZONTAL_ALIGNMENT_CENTER
+			plain_line.width = minf(max_w, FONT.get_string_size(sung_plain, HORIZONTAL_ALIGNMENT_LEFT, -1, plain_size).x + 2.0)
+			plain_line.add_string(sung_plain, FONT, plain_size)
+			plain_block = plain_line.get_size()
+			gap = 9.0 * unit
+		var total_w := maxf(block.x, plain_block.x)
+		var total_h := block.y + gap + plain_block.y
 		var sung_at := _cfg_sung_at if _cfg_sung_at >= 0.0 else (0.0 if _desktop else .74)
 		var foot := caption_y - 22.0 * unit if sung_at <= 0.0 else size.y * sung_at
-		var at := Vector2((size.x - block.x) * .5, foot - block.y)
-		draw_rect(Rect2(at - Vector2(14.0, 6.0) * unit, block + Vector2(28.0, 12.0) * unit), PLATE)
-		line.draw(get_canvas_item(), at, INK)
+		var top_y := foot - total_h
+		var plate_x := (size.x - total_w) * .5
+		draw_rect(Rect2(Vector2(plate_x, top_y) - Vector2(14.0, 6.0) * unit, Vector2(total_w, total_h) + Vector2(28.0, 12.0) * unit), PLATE)
+		line.draw(get_canvas_item(), Vector2((size.x - block.x) * .5, top_y), INK)
+		if plain_line != null:
+			var div_y := top_y + block.y + 4.0 * unit
+			draw_line(Vector2(plate_x, div_y), Vector2(plate_x + total_w, div_y), PLAIN_DIVIDER, maxf(1.0, unit))
+			plain_line.draw(get_canvas_item(), Vector2((size.x - plain_block.x) * .5, top_y + block.y + gap), PLAIN_INK)
 	if _desktop:
 		var help_font := maxi(12, font_size - 4)
 		var help := "F1  CONTROLS"
@@ -272,22 +297,41 @@ func _draw_placed(font_size: int, unit: float) -> void:
 		caption.draw(get_canvas_item(), Vector2(at.x + 10.0 * unit, top + 21.0 * unit - caption.get_line_ascent()), INK)
 	e = _element("sung")
 	if bool(e.get("show", true)) and not sung.is_empty():
+		var max_w := maxf(40.0, float(e.get("width", .28)) * size.x - 20.0 * unit)
 		var line := TextParagraph.new()
 		line.alignment = HORIZONTAL_ALIGNMENT_CENTER
-		line.width = minf(maxf(40.0, float(e.get("width", .28)) * size.x - 20.0 * unit), FONT.get_string_size(sung, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x + 2.0)
+		line.width = minf(max_w, FONT.get_string_size(sung, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x + 2.0)
 		line.add_string(sung, FONT, font_size)
 		var block := line.get_size()
-		var at := _place(e, block.x + 20.0 * unit, Vector2(.5, .86))
+		var plain_line: TextParagraph = null
+		var plain_block := Vector2.ZERO
+		var gap := 0.0
+		if not sung_plain.is_empty():
+			var plain_size := maxi(10, font_size - 4)
+			plain_line = TextParagraph.new()
+			plain_line.alignment = HORIZONTAL_ALIGNMENT_CENTER
+			plain_line.width = minf(max_w, FONT.get_string_size(sung_plain, HORIZONTAL_ALIGNMENT_LEFT, -1, plain_size).x + 2.0)
+			plain_line.add_string(sung_plain, FONT, plain_size)
+			plain_block = plain_line.get_size()
+			gap = 8.0 * unit
+		var total_w := maxf(block.x, plain_block.x)
+		var total_h := block.y + gap + plain_block.y
+		var at := _place(e, total_w + 20.0 * unit, Vector2(.5, .86))
 		var top := at.y - row_height * .5
-		if line.get_line_count() <= 1:
+		if line.get_line_count() <= 1 and plain_line == null:
 			# one line: a plate like the others, on the same row
 			draw_rect(Rect2(at.x, top, block.x + 20.0 * unit, row_height), PLATE)
 			line.draw(get_canvas_item(), Vector2(at.x + 10.0 * unit, top + 21.0 * unit - line.get_line_ascent(0)), INK)
 		else:
-			# a long line wraps and grows upward from the row's foot
-			var plate_top := top + row_height - block.y - 12.0 * unit
-			draw_rect(Rect2(at.x, plate_top, block.x + 20.0 * unit, block.y + 12.0 * unit), PLATE)
-			line.draw(get_canvas_item(), Vector2(at.x + 10.0 * unit, plate_top + 6.0 * unit), INK)
+			# multi-line or paired poetic + plain grows upward cleanly from the row's foot
+			var plate_top := top + row_height - total_h - 12.0 * unit
+			draw_rect(Rect2(at.x, plate_top, total_w + 20.0 * unit, total_h + 12.0 * unit), PLATE)
+			var text_top := plate_top + 6.0 * unit
+			line.draw(get_canvas_item(), Vector2(at.x + 10.0 * unit + (total_w - block.x) * .5, text_top), INK)
+			if plain_line != null:
+				var div_y := text_top + block.y + 4.0 * unit
+				draw_line(Vector2(at.x + 10.0 * unit, div_y), Vector2(at.x + 10.0 * unit + total_w, div_y), PLAIN_DIVIDER, maxf(1.0, unit))
+				plain_line.draw(get_canvas_item(), Vector2(at.x + 10.0 * unit + (total_w - plain_block.x) * .5, text_top + block.y + gap), PLAIN_INK)
 
 func _draw_brackets(bounds: Rect2, length: float) -> void:
 	for sign_x in [1, -1]:

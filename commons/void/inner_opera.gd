@@ -27,6 +27,7 @@ const ATTENTION := "res://audio/runtime/InnerOperaAttention.gd"
 const VOICE := "res://commons/void/inner_voice_godot.gd"
 const ACCOMPANIMENT := "res://commons/void/inner_opera_score.gd"
 const BINDINGS := "res://commons/data/opera/tower_bindings.json"
+const ATLAS_PATH := "res://commons/data/tower_system_atlas.json"
 const TWO_VISITS_SONG := "spine_c2b6fc98a64a37b397"
 const OpeningTrail := preload("res://commons/void/opening_opera_trail.gd")
 const GROUP := "inner_opera_object"
@@ -53,6 +54,9 @@ var _since_ready := 0.0
 var _look_again := 0.0
 var _gaze_previous := ""
 var _gaze_report_in := 0.0
+var _atlas_loaded := false
+var _encounter_plain: Dictionary = {}
+var _song_plain: Dictionary = {}
 
 
 func _ready() -> void:
@@ -294,18 +298,48 @@ func _write_gaze_diagnostic(looking: String) -> void:
 	if file != null: file.store_string(JSON.stringify(report, "  "))
 
 
-# The line being sung is written on the viewfinder (the game's charge display), and taken off when it ends.
-func _show(text: String) -> bool:
+func _ensure_atlas_breadcrumbs() -> void:
+	if _atlas_loaded: return
+	_atlas_loaded = true
+	if not FileAccess.file_exists(ATLAS_PATH): return
+	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(ATLAS_PATH))
+	if not (parsed is Dictionary): return
+	var doc := parsed as Dictionary
+	var encs: Variant = doc.get("encounterBreadcrumbs")
+	if encs is Dictionary: _encounter_plain = encs as Dictionary
+	var songs: Variant = doc.get("songBreadcrumbs")
+	if songs is Dictionary: _song_plain = songs as Dictionary
+
+
+func _plain_for(encounter_id: String, object_id: String) -> String:
+	_ensure_atlas_breadcrumbs()
+	for key in [encounter_id, object_id]:
+		if key.is_empty(): continue
+		var v: Variant = _encounter_plain.get(key, "")
+		if v is String and not (v as String).strip_edges().is_empty():
+			return (v as String).strip_edges()
+	for key in [encounter_id, object_id]:
+		if key.is_empty(): continue
+		var v: Variant = _song_plain.get(key, "")
+		if v is String and not (v as String).strip_edges().is_empty():
+			return (v as String).strip_edges()
+	return ""
+
+
+# The line being sung is written on the viewfinder (the game's charge display), paired with its plain
+# breadcrumb from tower_system_atlas.json when available, and cleared when it ends.
+func _show(text: String, plain: String = "") -> bool:
 	var display: Variant = get_parent().get("charge_display") if get_parent() != null else null
 	if display is Object and is_instance_valid(display) and (display as Object).has_method("set_sung"):
-		(display as Object).call("set_sung", text)
+		(display as Object).call("set_sung", text, plain)
 		return true
 	return false
 
 
 func _on_started(object_id: String, text: String) -> void:
 	if music != null: music.call("set_singing", true)
-	heard.append({"object": object_id, "text": text, "sung": true, "on_display": _show(text)})
+	var plain := _plain_for(object_id, object_id)
+	heard.append({"object": object_id, "text": text, "sung": true, "on_display": _show(text, plain)})
 	print("[opera] SINGS for '%s': %s" % [object_id, text])
 
 
