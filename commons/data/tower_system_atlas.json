@@ -585,10 +585,59 @@
         "mode": "denaturalize",
         "note": "Exposes how defining a neighbourhood and wrapping edges (cell 31 -> cell 0) already decides what counts as 'nearby', while placing the mirrored Persian Rug beside Wolfram's rules."
       }
+    },
+    "Fractal_MengerSponge": {
+      "queerObservations": [
+        {
+          "id": "qobs_8adb404f",
+          "mode": "bodily-remainder",
+          "observation": "Self-similar fractal geometry promises the same square opening at every depth, yet Model B's physical body passes through L/3 and gets stopped by L/9 — exposing scale-invariance as a disembodied myth.",
+          "by": "Antigravity",
+          "at": "2026-11-21T12:43:55.323Z",
+          "encounterId": "spine_0bb13a478364ee1e66"
+        }
+      ],
+      "stage": "void-edition",
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "doc/book/iterations/2026-11-21-fractal-menger-body/checks.json",
+      "plainBreadcrumb": "Step the Menger sponge from 1 to 20 to 400 cubes inside the FlightBox, then compare the 1.77 m Level-1 corridor against the 0.59 m Level-2 copy — geometry repeats, yet your body fits only one.",
+      "bodyHook": "FlightBox enclosed flight tests Model B's physical 1.72 m height and 0.64 m width directly against fractal corridor scale.",
+      "note": "Ghost Student Spine Stop #6 (Floor 118) verified live: 8/8 PASS (1->20->400 cubes, live 5.30 m sponge, L1=1.77 m vs L2=0.59 m bodily passability contrast, GHOST overlay, live Dual Breadcrumb HUD) + wrote commons/maps/Fractal_MengerSponge/void.md.",
+      "desiringMachine": {
+        "machine": "MengerLesson Desk, FlightBox Enclosure, DLA Cluster & Catalyst Vent",
+        "activates": "Recursive 20/27 removal (1 -> 20 -> 400 cubes), non-colliding GHOST removal view, and enclosed 3D flight navigation",
+        "couplesInto": "Scale-dependent affordance and embodied observation down into Swarms (F163) and Situated Computation (F203)"
+      },
+      "queerOperator": {
+        "mode": "bodily-remainder",
+        "note": "Refuses disembodied self-similarity: the exact same square opening passes light at every depth yet admits Model B at L/3 (1.77 m) and stops her body at L/9 (0.59 m)."
+      }
     }
   },
-  "revision": 21,
+  "revision": 24,
   "history": [
+    {
+      "at": "2026-11-21T12:45:24.870Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Fractal_MengerSponge",
+      "summary": "Updated stage, evidenceTier, evidenceReceipt, plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator",
+      "receipt": "doc/book/iterations/2026-11-21-fractal-menger-body/checks.json"
+    },
+    {
+      "at": "2026-11-21T12:43:55.324Z",
+      "by": "Antigravity",
+      "action": "add_queer_observation",
+      "target": "Fractal_MengerSponge",
+      "summary": "[bodily-remainder] Self-similar fractal geometry promises the same square opening at every depth, yet Model B's physical body passes throug"
+    },
+    {
+      "at": "2026-11-21T12:43:55.298Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_0bb13a478364ee1e66",
+      "summary": "Step the Menger sponge from 1 to 20 to 400 cubes, then compare the large opening against a smaller copy — the shape repe"
+    },
     {
       "at": "2026-11-21T12:38:32.476Z",
       "by": "Antigravity",
@@ -745,6 +794,7 @@
     "spine_e2b84c6599e8519381": "Time your crossing around the linear-sweep bombs, or throw any random object from a package to detonate them from safety.",
     "spine_ac8c3e195da697fa74": "Open a monochrome gift package to drop a random ordinary object (brick, die, tin can, bowling pin) that can disrupt the pacing bombs.",
     "spine_c2b6fc98a64a37b397": "Turn the wheel until the cube crosses the pink mark going up, then keep turning until it crosses the same height going down.",
-    "spine_554ad276c59f013b7e": "Pick one cell and its two neighbours, predict its next state under Rule 90, press STEP to compare — then try Rule 30 on the same seed."
+    "spine_554ad276c59f013b7e": "Pick one cell and its two neighbours, predict its next state under Rule 90, press STEP to compare — then try Rule 30 on the same seed.",
+    "spine_0bb13a478364ee1e66": "Step the Menger sponge from 1 to 20 to 400 cubes, then compare the large opening against a smaller copy — the shape repeats, yet your body fits only one."
   }
 }
