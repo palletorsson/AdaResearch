@@ -1056,8 +1056,113 @@
       }
     }
   },
-  "revision": 105,
+  "revision": 120,
   "history": [
+    {
+      "at": "2026-11-21T14:50:30.332Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_9836e9bbf1e660c310",
+      "summary": "Walk up a wedge onto the court of concrete blocks and timber sheets. Nothing in it is new: the parts you know, put toget"
+    },
+    {
+      "at": "2026-11-21T14:50:30.103Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_d708ac8af1454151df",
+      "summary": "Lift the boards and blocks off the pallet one at a time, set them down another way, and let go to see whether it holds."
+    },
+    {
+      "at": "2026-11-21T14:50:29.862Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "chapter_12_durer_scene",
+      "summary": "Find the small skull on its block, where the engraving's seated figure would sit. The sphere, ladder, scales, hourglass "
+    },
+    {
+      "at": "2026-11-21T14:50:29.589Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "chapter_12_pyramidlong",
+      "summary": "Stand by a corner pyramid and look back at the tall pink one in the centre. Ask whether it leads the others or only rise"
+    },
+    {
+      "at": "2026-11-21T14:50:29.344Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "chapter_12_pyramid",
+      "summary": "Walk around the court of four pale blue pyramids and watch one pass in front of another. They stay still; your steps cha"
+    },
+    {
+      "at": "2026-11-21T14:50:29.085Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "chapter_11_achilles_tortoise",
+      "summary": "Press NEXT STEP and watch the space between the two figures. Each step halves the gap, and the marked end of the track s"
+    },
+    {
+      "at": "2026-11-21T14:50:28.841Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "chapter_11_combine_portals",
+      "summary": "From a distance, choose the first ring that looks round enough. Walk up to it and see whether its straight edges come ba"
+    },
+    {
+      "at": "2026-11-21T14:50:28.581Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "chapter_11_capsule",
+      "summary": "Look at the closed capsule by the door before you go on to the rings. It has no opening: nothing passes through it."
+    },
+    {
+      "at": "2026-11-21T14:50:28.296Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_ca7d08d7783aa1c12f",
+      "summary": "Push the O-shaped tyre, or grip it and let go. The letter swept round a circle rolls away as a wheel."
+    },
+    {
+      "at": "2026-11-21T14:50:28.037Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_90b5674844b8afd77a",
+      "summary": "Stand before the cyrtoid shell and read it as five rules in a row: a profile, the profile turned round its axis, pores o"
+    },
+    {
+      "at": "2026-11-21T14:50:27.648Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_170897327f7e0e4790",
+      "summary": "Take the timber chute from its plinth and read its tape, marble_chute = association(config(channel)). Tilt it: the two r"
+    },
+    {
+      "at": "2026-11-21T14:50:27.413Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "chapter_10_glyph_profile_gallery",
+      "summary": "Walk up to the tall O, the letter at body size, and look at its opening. The lower stroke is a sill you would have to st"
+    },
+    {
+      "at": "2026-11-21T14:50:27.045Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_17a6da16fabb4e75e9",
+      "summary": "Walk into the open pipe and slide down one storey to Profiles. A column you walked around has become one you pass throug"
+    },
+    {
+      "at": "2026-11-21T14:50:26.646Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_2f9c960fe8e3918f1e",
+      "summary": "Find the blue oil drum beside its floor tape, oil_drum = association(config(cylinder)). Lift it: the cylinder of this ha"
+    },
+    {
+      "at": "2026-11-21T14:50:26.348Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "chapter_09_resolution_colonnade_museum",
+      "summary": "Stand at the first five columns and follow one edge round each. The outline and height are the same; only the sides chan"
+    },
     {
       "at": "2026-11-21T14:44:52.816Z",
       "by": "Antigravity",
@@ -1846,6 +1951,21 @@
     "chapter_08_geometry_courtyard": "Lift one of the five solids from its block and count how many faces meet at a corner. Compare it with the next one.",
     "chapter_08_sphere_resolution_atlas": "Walk along the twelve small spheres. Across a row the rings increase; down a column the segments do. Follow one change while the other holds still.",
     "chapter_08_budget_of_smoothness": "Choose one of the four turning spheres for a far background and one to inspect close up. Then press SHOW / HIDE COUNTS and see whether the numbers change your choice.",
-    "chapter_08_form_in_hand": "Take the black point. While you hold it the form loses rings and segments and corners appear. Press the trigger to send out a copy as it is at that moment."
+    "chapter_08_form_in_hand": "Take the black point. While you hold it the form loses rings and segments and corners appear. Press the trigger to send out a copy as it is at that moment.",
+    "chapter_09_resolution_colonnade_museum": "Stand at the first five columns and follow one edge round each. The outline and height are the same; only the sides change: four, six, eight, twelve, sixteen.",
+    "spine_2f9c960fe8e3918f1e": "Find the blue oil drum beside its floor tape, oil_drum = association(config(cylinder)). Lift it: the cylinder of this hall, given a size and a material, is a thing you know.",
+    "spine_17a6da16fabb4e75e9": "Walk into the open pipe and slide down one storey to Profiles. A column you walked around has become one you pass through.",
+    "chapter_10_glyph_profile_gallery": "Walk up to the tall O, the letter at body size, and look at its opening. The lower stroke is a sill you would have to step over.",
+    "spine_170897327f7e0e4790": "Take the timber chute from its plinth and read its tape, marble_chute = association(config(channel)). Tilt it: the two raised edges of the C profile make a path a ball has to follow.",
+    "spine_90b5674844b8afd77a": "Stand before the cyrtoid shell and read it as five rules in a row: a profile, the profile turned round its axis, pores opened, feet and teeth at the lip, bristles.",
+    "spine_ca7d08d7783aa1c12f": "Push the O-shaped tyre, or grip it and let go. The letter swept round a circle rolls away as a wheel.",
+    "chapter_11_capsule": "Look at the closed capsule by the door before you go on to the rings. It has no opening: nothing passes through it.",
+    "chapter_11_combine_portals": "From a distance, choose the first ring that looks round enough. Walk up to it and see whether its straight edges come back. NEXT RING and PREVIOUS at the side turn one ring gold.",
+    "chapter_11_achilles_tortoise": "Press NEXT STEP and watch the space between the two figures. Each step halves the gap, and the marked end of the track stays out of reach.",
+    "chapter_12_pyramid": "Walk around the court of four pale blue pyramids and watch one pass in front of another. They stay still; your steps change how they stand together.",
+    "chapter_12_pyramidlong": "Stand by a corner pyramid and look back at the tall pink one in the centre. Ask whether it leads the others or only rises above them.",
+    "chapter_12_durer_scene": "Find the small skull on its block, where the engraving's seated figure would sit. The sphere, ladder, scales, hourglass and tools are still around it.",
+    "spine_d708ac8af1454151df": "Lift the boards and blocks off the pallet one at a time, set them down another way, and let go to see whether it holds.",
+    "spine_9836e9bbf1e660c310": "Walk up a wedge onto the court of concrete blocks and timber sheets. Nothing in it is new: the parts you know, put together as a place to stand."
   }
 }
