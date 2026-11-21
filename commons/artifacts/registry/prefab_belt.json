@@ -1,0 +1,22 @@
+{
+	"registry_info": {
+		"category": "inventory",
+		"description": "The prefab belt (Palle, 2026-11-21): one machine for the whole prefab timeline - a band with four trays between two housings, stepped with two keys or rolled with a lever.",
+		"created": "2026-11-21"
+	},
+	"artifacts": {
+		"prefab_belt": {
+			"lookup_name": "prefab_belt",
+			"name": "Prefab belt / four of the timeline at a time",
+			"description": "A conveyor band like an airport security band: two housings at its ends and four trays between them. The prefab timeline (commons/data/inventory/items.json, in the order of the floor that gives each item) runs through it; two keys step it one tray, a lever rolls it. A thing given on the floor the machine stands on shows itself and can be taken; an earlier thing also shows its association line - fire_extinguisher = association(config(cylinder)); a later thing is a closed box with the floor that opens it. config: include prefabs|all, floor, mini, title, start, formula_here.",
+			"category": "inventory",
+			"complexity": "beginner",
+			"scene": "res://commons/artifacts/prefab_belt/prefab_belt.tscn",
+			"map_ready": true,
+			"include_in_map_data": true,
+			"map_sequences": ["primitives", "transformation"],
+			"tags": ["inventory", "prefabs", "timeline", "belt", "vending", "void"],
+			"configure_before_ready": true
+		}
+	}
+}

@@ -14,6 +14,11 @@ var _restore_ability_source := false
 class MouseGrip extends Node3D:
 	# XRTools also supports non-controller grabbers (for example snap zones).
 	var picked_up_ranged := false
+	var hand: Node
+	## XR Tools asks a grabber to let go with drop_object (a lever handle pulled past its snap distance, a pickable
+	## that drops itself). Without it every such drop was a script error each frame and the handle stayed in the hand.
+	func drop_object() -> void:
+		if hand != null: hand._drop_held()
 
 func _ready() -> void:
 	distance = Rules.POINTER_DISTANCE
@@ -21,6 +26,7 @@ func _ready() -> void:
 	super()
 	grip = MouseGrip.new()
 	grip.name = "MouseGrip"
+	grip.hand = self
 	cam.add_child(grip)
 
 func _find_grabbable() -> Node3D:
