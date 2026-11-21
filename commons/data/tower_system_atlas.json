@@ -558,10 +558,59 @@
           "encounterId": "keeps_weight"
         }
       ]
+    },
+    "CA_Introduction": {
+      "queerObservations": [
+        {
+          "id": "qobs_76d70b7c",
+          "mode": "denaturalize",
+          "observation": "Rule 90 gives opposite outputs to 010 (0) and 100 (1) while wrapping cell 31 silently into cell 0 overhead — exposing how choosing a neighbourhood and boundary topology already decides what counts as 'nearby' before any pattern emerges.",
+          "by": "Antigravity",
+          "at": "2026-11-21T12:37:02.579Z",
+          "encounterId": "spine_554ad276c59f013b7e"
+        }
+      ],
+      "stage": "void-edition",
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "doc/book/iterations/2026-11-21-ca-predict-next-row/checks.json",
+      "plainBreadcrumb": "Pick a cell and its two neighbours, predict its next state under Rule 90, press STEP to watch Sierpinski emerge — then test Rule 30 on the exact same single seed.",
+      "bodyHook": "Walk inside the overhead circular history ring — enclosed by light while the cells consult only other cells.",
+      "note": "Ghost Student Spine Stop #5 (Floor 106) verified live: 8/8 PASS (Rule 90 010->0 vs 100->1, gen-10 Pascal mod-2, Rule 30 asymmetry, live Dual Breadcrumb HUD) + wrote commons/maps/CA_Introduction/void.md.",
+      "desiringMachine": {
+        "machine": "CA Rule Explorer, Overhead Wrap Ring, Persian Rug & Rule 110 Computer",
+        "activates": "8-bit local neighbourhood transition rules (Rule 90 Pascal mod-2, Rule 30 chaos, Rule 110 universal gliders, 2D mirrored textile cloth)",
+        "couplesInto": "Fractals (F118 Menger), Swarm Intelligence (F163 Boids), and distributed local-rule machines below"
+      },
+      "queerOperator": {
+        "mode": "denaturalize",
+        "note": "Exposes how defining a neighbourhood and wrapping edges (cell 31 -> cell 0) already decides what counts as 'nearby', while placing the mirrored Persian Rug beside Wolfram's rules."
+      }
     }
   },
-  "revision": 18,
+  "revision": 21,
   "history": [
+    {
+      "at": "2026-11-21T12:38:32.476Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "CA_Introduction",
+      "summary": "Updated stage, evidenceTier, evidenceReceipt, plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator",
+      "receipt": "doc/book/iterations/2026-11-21-ca-predict-next-row/checks.json"
+    },
+    {
+      "at": "2026-11-21T12:37:02.580Z",
+      "by": "Antigravity",
+      "action": "add_queer_observation",
+      "target": "CA_Introduction",
+      "summary": "[denaturalize] Rule 90 gives opposite outputs to 010 (0) and 100 (1) while wrapping cell 31 silently into cell 0 overhead — exposing ho"
+    },
+    {
+      "at": "2026-11-21T12:37:02.560Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_554ad276c59f013b7e",
+      "summary": "Pick one cell and its two neighbours, predict its next state under Rule 90, press STEP to compare — then try Rule 30 on "
+    },
     {
       "at": "2026-11-21T12:23:53.160Z",
       "by": "Antigravity",
@@ -695,6 +744,7 @@
     "keeps_supports": "Lower only the near cube and release the ball to watch it fall at the second gap, then lower both cubes so it reaches and tips the paddle.",
     "spine_e2b84c6599e8519381": "Time your crossing around the linear-sweep bombs, or throw any random object from a package to detonate them from safety.",
     "spine_ac8c3e195da697fa74": "Open a monochrome gift package to drop a random ordinary object (brick, die, tin can, bowling pin) that can disrupt the pacing bombs.",
-    "spine_c2b6fc98a64a37b397": "Turn the wheel until the cube crosses the pink mark going up, then keep turning until it crosses the same height going down."
+    "spine_c2b6fc98a64a37b397": "Turn the wheel until the cube crosses the pink mark going up, then keep turning until it crosses the same height going down.",
+    "spine_554ad276c59f013b7e": "Pick one cell and its two neighbours, predict its next state under Rule 90, press STEP to compare — then try Rule 30 on the same seed."
   }
 }
