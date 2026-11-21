@@ -639,10 +639,59 @@
         "mode": "denaturalize",
         "note": "Alignment is not consent and cohesion is not belonging: widening one perception radius dictates who each body must obey, while drone_comparison and the_unit strip away pastoral flocking metaphors."
       }
+    },
+    "ML_Gradient_Landscape": {
+      "queerObservations": [
+        {
+          "id": "qobs_a2001b22",
+          "mode": "multi-reading",
+          "observation": "No loss function can tell whether an outlying point is a broken sensor or a body erased by the majority fit — squaring lets one anomaly hijack the line, while dampening can silence evidence that mattered.",
+          "by": "Antigravity",
+          "at": "2026-11-21T13:47:40.871Z",
+          "encounterId": "spine_3b5bbaf63cf7d38ca2"
+        }
+      ],
+      "stage": "void-edition",
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "doc/book/iterations/2026-11-21-ml-three-errors/checks.json",
+      "plainBreadcrumb": "Stand on one candidate line in the floor plane, compare Squared, Huber, and Wavy error bars on the same five observations, flip OUTLIER (0.7->4.7) to watch one point pull them apart, then lengthen STEP (0.5->1.2) to watch downhill steps overshoot worse.",
+      "bodyHook": "Your feet are the model parameters (slope east, intercept north); stepping onto q=(0.0,-0.6) with OUTLIER=on and STEP=long turns Squared and Wavy arrow tips red WORSE right ahead of your feet.",
+      "note": "Ghost Student Spine Stop #8 verified live in Godot 4.6 (7/7 PASS): one-line-three-errors distinct losses (1.765/0.683/0.791), outlier pull (sq=3.200 vs huber=0.700; |grad| 2.263 vs 0.283), live Model B step overshoot at q=(0.0,-0.6) (6.045->1.831 short vs 6.386 WORSE long), companion ML artifacts, Dual Breadcrumb HUD, void.md authored.",
+      "desiringMachine": {
+        "machine": "Candidate-line parameter floor (one-line-three-errors) coupled to three simultaneous loss bars/arrows, OUTLIER & STEP dwell plates, Loss Function Comparator, Gradient Descent bowl/plateau, and PCA",
+        "activates": "SCORE vs FOLLOW separation (squared/huber/wavy loss comparison, outlier sensitivity, step-size overshoot)",
+        "couplesInto": "F203 SpeculativeComputation_Situated_Computation (four competing accounts of one event)"
+      },
+      "queerOperator": {
+        "mode": "multi-reading",
+        "note": "An outlier has no intrinsic mathematical meaning — loss rules only decide whether one anomalous observation hijacks the majority fit (Squared) or gets dampened away (Huber)."
+      }
     }
   },
-  "revision": 27,
+  "revision": 30,
   "history": [
+    {
+      "at": "2026-11-21T13:50:45.988Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "ML_Gradient_Landscape",
+      "summary": "Updated stage, evidenceTier, evidenceReceipt, plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator",
+      "receipt": "doc/book/iterations/2026-11-21-ml-three-errors/checks.json"
+    },
+    {
+      "at": "2026-11-21T13:47:40.871Z",
+      "by": "Antigravity",
+      "action": "add_queer_observation",
+      "target": "ML_Gradient_Landscape",
+      "summary": "[multi-reading] No loss function can tell whether an outlying point is a broken sensor or a body erased by the majority fit — squaring l"
+    },
+    {
+      "at": "2026-11-21T13:47:39.502Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_3b5bbaf63cf7d38ca2",
+      "summary": "Stand on one candidate line, compare Squared, Huber, and Wavy error bars, flip OUTLIER to watch one point pull them apar"
+    },
     {
       "at": "2026-11-21T13:29:37.878Z",
       "by": "Antigravity",
@@ -845,6 +894,7 @@
     "spine_c2b6fc98a64a37b397": "Turn the wheel until the cube crosses the pink mark going up, then keep turning until it crosses the same height going down.",
     "spine_554ad276c59f013b7e": "Pick one cell and its two neighbours, predict its next state under Rule 90, press STEP to compare — then try Rule 30 on the same seed.",
     "spine_0bb13a478364ee1e66": "Step the Menger sponge from 1 to 20 to 400 cubes, then compare the large opening against a smaller copy — the shape repeats, yet your body fits only one.",
-    "spine_5222bc1a1c40201257": "Pause the boids table and slide the black point left or right to widen the gold radius — bodies stay still, yet who enters the circle rewrites every steering arrow."
+    "spine_5222bc1a1c40201257": "Pause the boids table and slide the black point left or right to widen the gold radius — bodies stay still, yet who enters the circle rewrites every steering arrow.",
+    "spine_3b5bbaf63cf7d38ca2": "Stand on one candidate line, compare Squared, Huber, and Wavy error bars, flip OUTLIER to watch one point pull them apart, then test STEP=long overshoot."
   }
 }
