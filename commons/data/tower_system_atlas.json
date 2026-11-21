@@ -1056,8 +1056,85 @@
       }
     }
   },
-  "revision": 178,
+  "revision": 189,
   "history": [
+    {
+      "at": "2026-11-21T16:09:42.822Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_94790855aee49591be",
+      "summary": "At the bench, move one of the five sliders and watch the summed wave change shape. Press H1 ALONE to see the first voice"
+    },
+    {
+      "at": "2026-11-21T16:09:42.563Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_8ec586d90890cfb277",
+      "summary": "Move one frequency slider toward the other and watch the third row, their sum. As the two come close, it swells and fade"
+    },
+    {
+      "at": "2026-11-21T16:09:42.265Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_6647a3086c36f99d8f",
+      "summary": "Before stepping onto the spiral stair in the shaft, trace its treads with your eyes: each sits a little nearer to or far"
+    },
+    {
+      "at": "2026-11-21T16:09:42.017Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_8b9a2bbae673e81622",
+      "summary": "Strike a bar and listen until its tone has died away. Strike a longer bar, then the first one twice: each strike starts "
+    },
+    {
+      "at": "2026-11-21T16:09:41.774Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_8d59752502b2be935f",
+      "summary": "Stand still and listen: short sounds arrive by chance over a steady drone, and a shape lights when its sound plays. Wait"
+    },
+    {
+      "at": "2026-11-21T16:09:41.425Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_b4e3b54b7813019122",
+      "summary": "Pick one ridge on a spiral column and follow it upward with your eyes while the shaft turns. Then look down the colonnad"
+    },
+    {
+      "at": "2026-11-21T16:09:41.015Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_8728846037006a459a",
+      "summary": "Move the orange ball and press PLAY: one wave is changing another from inside. Press COMPARE to hear it against the base"
+    },
+    {
+      "at": "2026-11-21T16:09:40.781Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_1c41022ab4b87d1eb9",
+      "summary": "At the lattice, send one pulse with coupling on and watch it pass from neighbour to neighbour. Restart with coupling off"
+    },
+    {
+      "at": "2026-11-21T16:09:40.523Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_56e603b21a1a543c2d",
+      "summary": "Follow the point round the circle and watch its vertical rod. The graph beside it draws that height over time: the sine."
+    },
+    {
+      "at": "2026-11-21T16:09:40.245Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_8115d3427676daa6c6",
+      "summary": "Release the 32 spheres onto the sine tray and count how many leave by the outlet before the twelve seconds are up. Chang"
+    },
+    {
+      "at": "2026-11-21T16:09:40.000Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_96353ed141e9c4906b",
+      "summary": "Watch one pendulum leave marks behind it: the older a mark, the deeper it lies. Switch between FINE, COARSE and STROBE a"
+    },
     {
       "at": "2026-11-21T15:28:55.936Z",
       "by": "Antigravity",
@@ -2430,6 +2507,17 @@
     "spine_aa92239066dd22fb3b": "Watch the magenta cloth mesh settle in fixed 1/60 s Verlet steps from its two top corners, then compare how many solver corrections per frame leave different residual sag.",
     "spine_79160a9d3005321bff": "Walk beneath the six-metre curtain of balanced aluminium discs, read the moment nameplates on each wire, and compare balanced stillness here against the tensegrity triangle and plank-on-ball beside it.",
     "spine_1dfcc61e8261d9e2c2": "Watch the search cross the wrinkled blue-to-violet energy bench — notice an uphill step climb out of a shallow trough so a later drop can reach a deeper minimum.",
-    "spine_62eed8d8741a8b0f7b": "Stack the loose pieces, let go, and compare a fallen quiet heap against a taller standing stack on the height and stability display — both stop moving, yet the score distinguishes them."
+    "spine_62eed8d8741a8b0f7b": "Stack the loose pieces, let go, and compare a fallen quiet heap against a taller standing stack on the height and stability display — both stop moving, yet the score distinguishes them.",
+    "spine_96353ed141e9c4906b": "Watch one pendulum leave marks behind it: the older a mark, the deeper it lies. Switch between FINE, COARSE and STROBE and see how many marks the same swing leaves.",
+    "spine_8115d3427676daa6c6": "Release the 32 spheres onto the sine tray and count how many leave by the outlet before the twelve seconds are up. Change the relief or the sphere size and release again.",
+    "spine_56e603b21a1a543c2d": "Follow the point round the circle and watch its vertical rod. The graph beside it draws that height over time: the sine.",
+    "spine_1c41022ab4b87d1eb9": "At the lattice, send one pulse with coupling on and watch it pass from neighbour to neighbour. Restart with coupling off and compare.",
+    "spine_8728846037006a459a": "Move the orange ball and press PLAY: one wave is changing another from inside. Press COMPARE to hear it against the baseline you held.",
+    "spine_b4e3b54b7813019122": "Pick one ridge on a spiral column and follow it upward with your eyes while the shaft turns. Then look down the colonnade through the gaps between the columns.",
+    "spine_8d59752502b2be935f": "Stand still and listen: short sounds arrive by chance over a steady drone, and a shape lights when its sound plays. Wait for one to come again.",
+    "spine_8b9a2bbae673e81622": "Strike a bar and listen until its tone has died away. Strike a longer bar, then the first one twice: each strike starts that bar's tone again.",
+    "spine_6647a3086c36f99d8f": "Before stepping onto the spiral stair in the shaft, trace its treads with your eyes: each sits a little nearer to or farther from the centre than the last. Then try the first steps.",
+    "spine_8ec586d90890cfb277": "Move one frequency slider toward the other and watch the third row, their sum. As the two come close, it swells and fades slowly.",
+    "spine_94790855aee49591be": "At the bench, move one of the five sliders and watch the summed wave change shape. Press H1 ALONE to see the first voice by itself, then BASELINE to return."
   }
 }
