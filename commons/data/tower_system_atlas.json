@@ -1056,8 +1056,36 @@
       }
     }
   },
-  "revision": 157,
+  "revision": 161,
   "history": [
+    {
+      "at": "2026-11-21T15:24:07.282Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_24360f67fa7359b8f8",
+      "summary": "At the desk marked DRESS THE TEMPLE, choose a surface (the floor, a wall, the columns, the dome) and give it a pattern. "
+    },
+    {
+      "at": "2026-11-21T15:24:07.009Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_2c13e1489e1de9c206",
+      "summary": "At the tile editor, press the three buttons in turn: P1 translate, PM reflect, PG glide. The same mark is copied, then m"
+    },
+    {
+      "at": "2026-11-21T15:24:06.733Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_b9998f0a4fca51b435",
+      "summary": "At the tunnel, pick one line of tiles and follow it along the floor to the corner and up the wall. The line keeps its pl"
+    },
+    {
+      "at": "2026-11-21T15:24:06.514Z",
+      "by": "fable-prefab-belt",
+      "action": "set_encounter_breadcrumb",
+      "target": "spine_b9aa37ded01db2085a",
+      "summary": "At the Pattern Maker, find the one 4 x 4 source mark and the two panels beside it. Both repeat the same mark; compare ho"
+    },
     {
       "at": "2026-11-21T15:20:22.020Z",
       "by": "Antigravity",
@@ -2262,6 +2290,10 @@
     "spine_68623d8553620ecb9c": "At the console beside the 4 x 4 x 4 flight lab, step X +, Y +, and Z + to move the transparent selector marker through three dimensions and note that an address remains after its cube is taken.",
     "spine_794a21c6582dcafe49": "Walk across both halves of the paired tile floor — fishbone beside square — and compare what changes underfoot when the same motif is laid under two different tiling rules.",
     "spine_5175c9cafccc79dc9e": "Compare rotating only a tile's painted motif against rotating the physical wall panel itself — turning the solid slab changes both what you see and where your body can pass.",
-    "spine_ab35f6979d2ccb7bfd": "Toggle one step off on the step sequencer and listen as the read column sweeps past — leaving a rest silences that beat without removing its column from the clock."
+    "spine_ab35f6979d2ccb7bfd": "Toggle one step off on the step sequencer and listen as the read column sweeps past — leaving a rest silences that beat without removing its column from the clock.",
+    "spine_b9aa37ded01db2085a": "At the Pattern Maker, find the one 4 x 4 source mark and the two panels beside it. Both repeat the same mark; compare how each rule brings it back.",
+    "spine_b9998f0a4fca51b435": "At the tunnel, pick one line of tiles and follow it along the floor to the corner and up the wall. The line keeps its place in the array while the surface turns.",
+    "spine_2c13e1489e1de9c206": "At the tile editor, press the three buttons in turn: P1 translate, PM reflect, PG glide. The same mark is copied, then mirrored, then mirrored and shifted along.",
+    "spine_24360f67fa7359b8f8": "At the desk marked DRESS THE TEMPLE, choose a surface (the floor, a wall, the columns, the dome) and give it a pattern. Then send the same pattern to another surface and see it on a different body."
   }
 }
