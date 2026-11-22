@@ -5,6 +5,9 @@ extends SceneTree
 ##   row "contact-within" the two heads where they meet, at nine times the size, as a room with a door in each body:
 ##                        it stands under the ceiling, a body the size of a visitor walks in through one body and
 ##                        out through the other, and the same body sent at the wall is stopped by it
+##   row "contact-church" five hollow bodies of different sizes joined into one tall room on the north side slab
+##                        (row "side-slab-north"): the game keeps a visitor there, the sky is open over it, and a
+##                        body walks in at the portal, down the nave under the canopy, and out at the door
 ## Walks the visitor's camera towards each station of the row and reads what it does: far away the two stand apart,
 ## near they are as close as they come; the frame follows the distance; SKIN goes from two bodies to one body to
 ## one body with an opening, as its baked frames say; THROUGH slides one mesh into the other; INSIDE keeps the join
@@ -271,6 +274,76 @@ func run() -> void:
 	await _picture("12_looking_up_inside.png")
 	await _stand(_in(room, axis_b + 0.5, -0.4, 1.65), _in(room, axis_a, 0.0, 1.5), 0.3)
 	await _picture("13_from_the_second_body_back.png")
+	# ------------------------------------------------------------------ the church: five bodies as one tall room
+	var church_mount := game.building.content.exhibits.get("%d/contact-church" % index) as Node3D
+	var church := church_mount.get_node_or_null("Artifact") as Node3D if is_instance_valid(church_mount) else null
+	if not _check("the church stands beyond the north edge", church != null):
+		_done(); return
+	for i in 240: await physics_frame
+	var built: Dictionary = church.get("church")
+	var plan: Dictionary = built.get("row", {})
+	var nave := built.get("form") as MeshInstance3D
+	if not _check("the church has its form, its walls and its canopy", nave != null and nave.mesh != null and built.get("walls") != null and built.get("canopy_solid") != null and built.get("pair") != null):
+		_done(); return
+	var bays: Array = plan.bays
+	var portal_x := float(plan.portal_x)
+	var door_x := float(plan.door_x)
+	var door_z := float(plan.door_z)
+	var heights := bays.map(func(b): return float(b[2]))
+	result["church"] = {"long_m": plan.get("long_m"), "deep_m": plan.get("deep_m"), "tall_m": plan.get("tall_m"), "bays_x_radius_height": bays.map(func(b): return [b[0], b[1], b[2]]),
+		"rooms_x_height_width": plan.get("rooms_x_height_width"), "arches_x_height_width": plan.get("arches_x_height_width"), "triangles": _triangles(church)}
+	_check("five bodies of different sizes, the tallest over 15 m", bays.size() == 5 and float(heights.max()) > 15.0 and float(heights.min()) < float(heights.max()) - 3.0, {"heights_m": heights})
+	# the ground under it is a side slab the game accepts: a visitor in the nave is not sent back, and is on this floor
+	var in_nave := _in(church, 0.0, 2.6, 0.0)
+	var under_nave := space.intersect_ray(PhysicsRayQueryParameters3D.create(in_nave + Vector3.UP * 0.5, in_nave + Vector3.DOWN * 2.0, 1))
+	_check("the nave has a floor at the tower's own level", not under_nave.is_empty() and absf(float(under_nave.position.y) - floor_y) < 0.06, {"floor_under_m": snappedf(float(under_nave.position.y) - floor_y, 0.01) if not under_nave.is_empty() else -99.0})
+	var kept_there := bool(game.call("_exterior_walk_support", in_nave))
+	var on_floor := int(game.floor_stream.floor_at_position(in_nave + Vector3.UP)) if game.floor_stream != null else index
+	_check("a visitor in the nave is kept there and belongs to this floor", kept_there and on_floor == index, {"kept": kept_there, "floor": on_floor})
+	# the sky is open over it: nothing between the tallest tip and the air
+	var tip := _in(church, 0.0, 0.0, float(heights.max()) + 0.5)
+	_check("the sky is open over the tallest bay", space.intersect_ray(PhysicsRayQueryParameters3D.create(tip, tip + Vector3.UP * 30.0, 1)).is_empty())
+	# a body the size of a visitor: in at the portal, down the axis through every bay and under the canopy, out at the door
+	var pilgrim := CharacterBody3D.new()
+	var pilgrim_shape := CollisionShape3D.new()
+	var pilgrim_capsule := CapsuleShape3D.new()
+	pilgrim_capsule.radius = 0.3
+	pilgrim_capsule.height = 1.8
+	pilgrim_shape.shape = pilgrim_capsule
+	pilgrim.add_child(pilgrim_shape)
+	pilgrim.collision_layer = 0
+	pilgrim.collision_mask = 1
+	pilgrim.motion_mode = CharacterBody3D.MOTION_MODE_FLOATING
+	root.add_child(pilgrim)
+	pilgrim.global_position = _in(church, portal_x - 1.6, 0.0, 0.93)
+	var way := []
+	for bay: Array in bays:
+		var arrived := await _walk(pilgrim, _in(church, float(bay[0]), 0.0, 0.93), 14.0)
+		way.append(["bay at %.1f" % float(bay[0]), arrived])
+	way.append(["out at the door", await _walk(pilgrim, _in(church, door_x, door_z + 1.4, 0.93), 14.0)])
+	_check("a body 0.6 m wide and 1.8 m tall walks the nave: in at the portal, under the canopy, out at the door", way.all(func(l): return l[1]), {"way": way})
+	pilgrim.global_position = _in(church, 0.0, -7.5, 0.93)
+	var through_church_wall := await _walk(pilgrim, _in(church, 0.0, -2.5, 0.93), 8.0)
+	_check("the same body sent at the church's wall from outside is stopped by it", not through_church_wall, {"stopped_at_z_m": snappedf(church.to_local(pilgrim.global_position).z, 0.01)})
+	pilgrim.queue_free()
+	_check("with the church, the floor draws a number of triangles a headset can carry", drawn + _triangles(room) + _triangles(church) < 180000, {"triangles": drawn + _triangles(room) + _triangles(church), "church": _triangles(church)})
+	await _stand(_in(church, portal_x - 3.3, 3.6, 1.65), _in(church, portal_x + 2.0, 0.0, 3.2), 0.3)
+	await _picture("14_the_portal_from_the_slab.png")
+	await _stand(_in(church, portal_x - 0.6, 0.0, 1.65), _in(church, 13.0, 0.0, 2.2), 0.3)
+	await _picture("15_down_the_nave.png")
+	await _stand(_in(church, -9.0, 1.2, 1.65), _in(church, 0.0, 0.0, 3.4), 0.3)
+	await _picture("16_towards_the_canopy.png")
+	await _stand(_in(church, 0.0, 0.0, 1.6), _in(church, 0.35, 0.0, 16.0), 0.3)
+	await _picture("17_up_through_the_canopy.png")
+	await _stand(_in(church, -6.8, 0.0, 1.6), _in(church, -6.5, 0.0, 12.0), 0.3)
+	await _picture("18_up_inside_a_body.png")
+	await _stand(_in(church, 4.2, -1.6, 1.65), _in(church, 14.6, 0.0, 1.9), 0.3)
+	await _picture("19_the_pair_in_the_last_bay.png")
+	await _stand(_in(church, 11.2, 0.6, 1.65), _in(church, -13.0, 0.0, 3.0), 0.3)
+	await _picture("20_back_down_the_nave.png")
+	# from the air beyond the slab's north-west corner, near enough that the tower's haze does not take it
+	await _stand(_in(church, -25.0, -13.0, 8.0), _in(church, -2.0, 0.0, 7.5), 0.3)
+	await _picture("21_the_church_from_the_air.png")
 	_done()
 
 
@@ -281,8 +354,8 @@ func _in(room: Node3D, x: float, z: float, above: float) -> Vector3:
 
 
 ## Walk a body straight at a place, sliding along what it meets: true when it arrives.
-func _walk(walker: CharacterBody3D, to: Vector3) -> bool:
-	for i in 60 * 8:
+func _walk(walker: CharacterBody3D, to: Vector3, seconds := 8.0) -> bool:
+	for i in int(60.0 * seconds):
 		var left := to - walker.global_position
 		left.y = 0.0
 		if left.length() < 0.12: return true

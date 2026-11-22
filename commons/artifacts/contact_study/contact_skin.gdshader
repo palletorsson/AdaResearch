@@ -32,6 +32,7 @@ uniform float line_amount = 0.55;
 uniform float glow = 0.35;
 uniform float ring_count = 8.0;
 uniform float within_glow = 0.55;
+uniform float within_top = 0.5;     // how tall the room is, in the form's own metres: its light deepens towards the top
 
 varying float height;       // the point's height in the form's own metres
 
@@ -89,7 +90,7 @@ void fragment() {
 		// its own light falls off where the wall turns away from the eye and towards the top of the room, so a
 		// dome reads as a dome from inside it
 		float facing = clamp(dot(n, v), 0.0, 1.0);
-		float shade = mix(0.5, 1.0, facing) * mix(1.0, 0.62, smoothstep(0.12, 0.5, height));
+		float shade = mix(0.5, 1.0, facing) * mix(1.0, 0.62, smoothstep(0.24 * within_top, within_top, height));
 		ALBEDO = mix(flesh * ao, line_colour, line * 0.75);
 		ROUGHNESS = 0.55;
 		SPECULAR = 0.35;

@@ -468,7 +468,7 @@
 		{
 			"triangles_marched": 47112,
 			"triangles": 2944,
-			"bytes": 49602,
+			"bytes": 49438,
 			"saved": true,
 			"file": "field_00",
 			"x": -19.3,
@@ -481,7 +481,7 @@
 		{
 			"triangles_marched": 47128,
 			"triangles": 2944,
-			"bytes": 49665,
+			"bytes": 49681,
 			"saved": true,
 			"file": "field_01",
 			"x": -19.3,
@@ -494,7 +494,7 @@
 		{
 			"triangles_marched": 46884,
 			"triangles": 2930,
-			"bytes": 49464,
+			"bytes": 49473,
 			"saved": true,
 			"file": "field_02",
 			"x": -19.3,
@@ -507,7 +507,7 @@
 		{
 			"triangles_marched": 44040,
 			"triangles": 2752,
-			"bytes": 46762,
+			"bytes": 46686,
 			"saved": true,
 			"file": "field_03",
 			"x": -19.3,
@@ -520,7 +520,7 @@
 		{
 			"triangles_marched": 47112,
 			"triangles": 2944,
-			"bytes": 49633,
+			"bytes": 49455,
 			"saved": true,
 			"file": "field_04",
 			"x": -15.4,
@@ -533,7 +533,7 @@
 		{
 			"triangles_marched": 47128,
 			"triangles": 2944,
-			"bytes": 49623,
+			"bytes": 49704,
 			"saved": true,
 			"file": "field_05",
 			"x": -15.4,
@@ -546,7 +546,7 @@
 		{
 			"triangles_marched": 46492,
 			"triangles": 2904,
-			"bytes": 49099,
+			"bytes": 49107,
 			"saved": true,
 			"file": "field_06",
 			"x": -15.4,
@@ -559,7 +559,7 @@
 		{
 			"triangles_marched": 43540,
 			"triangles": 2720,
-			"bytes": 46564,
+			"bytes": 46596,
 			"saved": true,
 			"file": "field_07",
 			"x": -15.4,
@@ -572,7 +572,7 @@
 		{
 			"triangles_marched": 50668,
 			"triangles": 3166,
-			"bytes": 55473,
+			"bytes": 55432,
 			"saved": true,
 			"file": "field_08",
 			"x": 15.4,
@@ -585,7 +585,7 @@
 		{
 			"triangles_marched": 52712,
 			"triangles": 3294,
-			"bytes": 59147,
+			"bytes": 59138,
 			"saved": true,
 			"file": "field_09",
 			"x": 15.4,
@@ -624,7 +624,7 @@
 		{
 			"triangles_marched": 52128,
 			"triangles": 3258,
-			"bytes": 57782,
+			"bytes": 57810,
 			"saved": true,
 			"file": "field_12",
 			"x": 19.3,
@@ -637,7 +637,7 @@
 		{
 			"triangles_marched": 54942,
 			"triangles": 3432,
-			"bytes": 62342,
+			"bytes": 62347,
 			"saved": true,
 			"file": "field_13",
 			"x": 19.3,
@@ -676,7 +676,7 @@
 		{
 			"triangles_marched": 43588,
 			"triangles": 2724,
-			"bytes": 46934,
+			"bytes": 46976,
 			"saved": true,
 			"file": "field_16",
 			"x": -11.4,
@@ -689,7 +689,7 @@
 		{
 			"triangles_marched": 43508,
 			"triangles": 2718,
-			"bytes": 47451,
+			"bytes": 47472,
 			"saved": true,
 			"file": "field_17",
 			"x": -7.7,
@@ -1149,9 +1149,9 @@
 		]
 	},
 	"within": {
-		"triangles_marched": 173064,
-		"triangles": 21632,
-		"bytes": 373025,
+		"triangles_marched": 178876,
+		"triangles": 22358,
+		"bytes": 386565,
 		"saved": true,
 		"file": "within",
 		"size": 9.0,
@@ -1285,5 +1285,130 @@
 		"handles": 0.0,
 		"budget": 24000.0
 	},
-	"bytes": 4287415
+	"church": {
+		"triangles_marched": 674802,
+		"triangles": 21086,
+		"bytes": 376596,
+		"saved": true,
+		"file": "church",
+		"bays": [
+			[
+				-13.0,
+				4.0,
+				11.5,
+				"a"
+			],
+			[
+				-6.8,
+				4.4,
+				13.5,
+				"b"
+			],
+			[
+				0.0,
+				4.7,
+				17.5,
+				"a"
+			],
+			[
+				6.8,
+				4.4,
+				13.5,
+				"b"
+			],
+			[
+				13.0,
+				4.0,
+				11.5,
+				"a"
+			]
+		],
+		"reach": 2.0,
+		"wall": 0.3,
+		"portal": [
+			3.4,
+			5.0
+		],
+		"door": [
+			1.8,
+			2.8
+		],
+		"portal_x": -17.0,
+		"door_x": 13.0,
+		"door_z": 4.0,
+		"long_m": 33.6,
+		"deep_m": 9.4,
+		"tall_m": 17.2,
+		"rooms_x_height_width": [
+			[
+				-13.0,
+				11.2,
+				7.4
+			],
+			[
+				-6.8,
+				13.2,
+				8.2
+			],
+			[
+				0.0,
+				17.2,
+				8.8
+			],
+			[
+				6.8,
+				13.2,
+				8.2
+			],
+			[
+				13.0,
+				11.2,
+				7.4
+			]
+		],
+		"arches_x_height_width": [
+			[
+				-10.25,
+				4.9,
+				6.2
+			],
+			[
+				-3.75,
+				6.2,
+				6.7
+			],
+			[
+				3.75,
+				6.2,
+				6.7
+			],
+			[
+				10.25,
+				4.9,
+				6.2
+			]
+		],
+		"way_free_for_a_body": true,
+		"pieces": 1.0,
+		"handles": 9.0,
+		"budget": 36000.0
+	},
+	"baldachin": {
+		"triangles_marched": 88508,
+		"triangles": 5530,
+		"bytes": 96429,
+		"saved": true,
+		"file": "baldachin",
+		"size": 3.4,
+		"half": 0.45,
+		"lean": 16.0,
+		"reach": 0.1,
+		"pieces": 1.0,
+		"handles": 1.0,
+		"under_the_heads_m": 0.0,
+		"between_two_feet_m": 2.86,
+		"tall_m": 5.72,
+		"budget": 7000.0
+	},
+	"bytes": 4773754
 }

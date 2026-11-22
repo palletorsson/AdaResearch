@@ -80363,6 +80363,41 @@
       "walls": [],
       "artifacts": [
         {
+          "id": "side-slab-north",
+          "artifact": "void_slab_extension",
+          "station": "NW",
+          "position": [
+            0,
+            -9
+          ],
+          "height": 0,
+          "scale": 1,
+          "facing": 180,
+          "config": {
+            "length": 42,
+            "depth": 10,
+            "seed": 156,
+            "editor_label": "Side slab / ground for the church, open to the sky so the room can be tall (Palle 2026-11-22)"
+          }
+        },
+        {
+          "id": "contact-church",
+          "artifact": "contact_study",
+          "station": "NW",
+          "position": [
+            0,
+            -14
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "strategy": "church",
+            "size": 1.7,
+            "editor_label": "Contact church / five hollow bodies of different sizes joined into one tall room on the north side slab; a canopy of four under the tallest; size = the pair in the apse (Palle 2026-11-22)"
+          }
+        },
+        {
           "id": "contact-within",
           "artifact": "contact_study",
           "station": "SW",

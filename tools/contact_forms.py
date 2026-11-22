@@ -75,6 +75,20 @@ FLOOR_HOLES = [(-13.3, -3.3, -6.7, 3.3), (6.7, -3.3, 13.3, 3.3), (-4.6, -8.5, 4.
 # door is (wide, high). `cell` is the march's cell in the bodies' own metres: the wall needs three of them.
 WITHIN = {'size': 9.0, 'gap': -0.04, 'reach': 0.12, 'drop': 1.1, 'wall': 0.14, 'door': (1.3, 2.2), 'cell': 0.005, 'budget': 24000}
 
+# THE CHURCH: five bodies of the same family, drawn as rooms and of different sizes, in a row along a nave; where
+# two overlap the smooth union makes the arch between them. In the metres a visitor walks, the nave along x, the
+# tower to +z. A bay is (x, radius at the foot, height, 'a' pink or 'b' blue). `shape` draws the family as a room,
+# in parts of the height and of the radius: the foot stands straight up to `foot`, the waist is `waist` wide at
+# `waist_at`, the swelling `swell` at `swell_at`, the neck `neck` at `neck_at`; a rounded tip closes it, and an
+# oculus (`oculus` of the neck) opens the tip to the sky. `portal` is the way in on the nave's axis at its west end,
+# `door` the way back to the tower from the last bay; both (wide, high).
+CHURCH = {'bays': [(-13.0, 4.0, 11.5, 'a'), (-6.8, 4.4, 13.5, 'b'), (0.0, 4.7, 17.5, 'a'), (6.8, 4.4, 13.5, 'b'), (13.0, 4.0, 11.5, 'a')],
+          'shape': {'foot': 0.20, 'waist_at': 0.50, 'waist': 0.64, 'swell_at': 0.74, 'swell': 0.90, 'neck_at': 0.90, 'neck': 0.45},
+          'reach': 2.0, 'wall': 0.30, 'cell': 0.10, 'budget': 36000, 'portal': (3.4, 5.0), 'door': (1.8, 2.8), 'oculus': 0.5}
+# THE CANOPY under the biggest bay: four of the row's own bodies at the corners of a square (`half` its half side, in
+# the bodies' own metres), each leaning `lean` degrees towards the middle so that the four heads join over it.
+BALDACHIN = {'half': 0.45, 'lean': 16.0, 'reach': 0.10, 'size': 3.4, 'budget': 7000}
+
 
 def reach_at(x):
     t = (x - FIELD_X[0]) / (FIELD_X[1] - FIELD_X[0])
@@ -353,6 +367,99 @@ def within_form(a, x0):
             'pieces': pieces, 'handles': handles, 'triangles': int(len(faces)), 'budget': w['budget']}
 
 
+def hall_body(x, radius, height):
+    """A body of the family drawn as a room `height` tall over the floor: its flat bottom lies a metre under the
+    floor, so the room has no floor of its own."""
+    s = CHURCH['shape']
+    total = height + 1.0
+    turns = [(0.0, radius), (s['foot'] * total, radius), (s['waist_at'] * total, s['waist'] * radius),
+             (s['swell_at'] * total, s['swell'] * radius), (s['neck_at'] * total, s['neck'] * radius)]
+    return lathe(turns, total, (x, -1.0, 0.0))
+
+
+def church_form():
+    """THE CHURCH: the row of bodies as one room. The wall is the join's field between the skin and `wall` under
+    it, as in WITHIN; the floor it stands on cuts it; a portal on the axis at the west end, a door to the tower in
+    the last bay, an oculus in every tip. Written in the floor's own metres, the middle of the nave at the origin.
+    Vertex colour as in WITHIN: r = how much pink, g = 0 on the skin and 1 on the room's wall, b = band, a = AO."""
+    w = CHURCH
+    t, cell, reach, bays = w['wall'], w['cell'], w['reach'], w['bays']
+    made = [(hall_body(x, r, h), kind) for x, r, h, kind in bays]
+    join = iso.SU(reach, *[body for body, _ in made])
+    pink = iso.SU(reach, *[body for body, kind in made if kind == 'a'])
+    blue = iso.SU(reach, *[body for body, kind in made if kind == 'b'])
+    shell = iso.leaf(lambda p: (lambda f: np.maximum(f, -(f + t)))(join(p)[0]))
+    first, last = bays[0], bays[-1]
+    west = first[0] - first[1]
+    (pw, ph), (dw, dh) = w['portal'], w['door']
+    cuts = [iso.arch('x', pw, ph - pw / 2, first[1] + 0.6, c=(west - 0.3 + 0.5 * (first[1] + 0.6), 0.0, 0.0), bottom=-0.5),
+            iso.arch('z', dw, dh - dw / 2, last[1], c=(last[0], 0.0, 0.3 + 0.5 * last[1]), bottom=-0.5)]
+    cuts += [iso.capsule((x, 0.9 * h, 0.0), (x, h + 1.0, 0.0), w['oculus'] * w['shape']['neck'] * r) for x, r, h, _ in bays]
+    solid = iso.D(iso.I(shell, iso.half_space((0.0, -1.0, 0.0), 0.12)), *cuts, k=0.08)
+    widest, tallest = max(r for _, r, _, _ in bays), max(h for _, _, h, _ in bays)
+    lo = np.array([west - 0.53, -0.39, -widest - 0.53])
+    hi = np.array([last[0] + last[1] + 0.5, tallest + 0.3, widest + 0.5])
+    verts, normals, faces = march(solid, cell, lo, hi)
+    under = np.clip(-iso.evaluate(join, verts)[0] / t, 0.0, 1.0)
+    h, band = weights(pink, blue, verts, reach)
+    ao = iso.ambient_occlusion(solid, verts + normals * cell * 0.1, normals, floor=False, reach=1.2)
+    pieces, handles = genus(verts, faces)
+    # the walk down the nave: over its axis, how high the room is and how wide at the shoulder
+    line = []
+    for x in np.arange(west + 0.5, last[0] + last[1] - 0.4, 0.25):
+        up = np.arange(0.1, tallest + 0.5, 0.1)
+        free = iso.evaluate(join, np.stack([np.full(len(up), x), up, np.zeros(len(up))], axis=1))[0] < -t
+        zs = np.arange(-widest - 0.3, widest + 0.3, 0.05)
+        wide = iso.evaluate(join, np.stack([np.full(len(zs), x), np.full(len(zs), 1.6), zs], axis=1))[0] < -t
+        line.append((float(x), float(up[free.argmin()]) if free[0] and not free.all() else (tallest if free.all() else 0.0), float(wide.sum() * 0.05)))
+    rooms = [[x, round(min(line, key=lambda r: abs(r[0] - x))[1], 1), round(min(line, key=lambda r: abs(r[0] - x))[2], 1)] for x, _, _, _ in bays]
+    arches = []
+    for (xa, _, _, _), (xb, _, _, _) in zip(bays[:-1], bays[1:]):
+        low = min((r for r in line if xa < r[0] < xb), key=lambda r: r[1])
+        arches.append([round(low[0], 2), round(low[1], 1), round(low[2], 1)])
+    # is the way free for a body 0.6 m wide and 1.8 m tall: in at the portal, down the axis, out at the door?
+    hs = np.arange(0.05, 1.81, 0.05)
+    way = [np.stack(np.meshgrid(np.arange(west - 1.2, last[0] + 0.01, 0.1), hs, [-0.3, 0.0, 0.3], indexing='ij'), axis=-1).reshape(-1, 3),
+           np.stack(np.meshgrid([last[0] - 0.3, last[0], last[0] + 0.3], hs, np.arange(0.0, last[1] + 1.2, 0.1), indexing='ij'), axis=-1).reshape(-1, 3)]
+    way_free = bool(all((iso.evaluate(solid, part)[0] > 0).all() for part in way))
+    write_bin(OUT / 'church.bin', verts, normals, np.stack([h, under, band, ao], axis=1), faces)
+    return {'file': 'church', 'bays': [list(b) for b in bays], 'reach': reach, 'wall': t, 'portal': [pw, ph], 'door': [dw, dh],
+            'portal_x': round(west, 2), 'door_x': last[0], 'door_z': last[1],
+            'long_m': round(float(np.ptp(verts[:, 0])), 1), 'deep_m': round(float(np.ptp(verts[:, 2])), 1), 'tall_m': round(float(verts[:, 1].max()), 1),
+            'rooms_x_height_width': rooms, 'arches_x_height_width': arches, 'way_free_for_a_body': way_free,
+            'pieces': pieces, 'handles': handles, 'triangles': int(len(faces)), 'budget': w['budget']}
+
+
+def baldachin_form():
+    """THE CANOPY: four of the row's own bodies, two pink and two blue, at the corners of a square, each leaning
+    towards the middle; their heads join over it and leave a place to stand between the four. In the bodies' own
+    metres, the middle of the square at the origin; the game scales it by `size`."""
+    w = BALDACHIN
+    made = []
+    for i, (sx, sz) in enumerate([(1, 1), (-1, 1), (-1, -1), (1, -1)]):
+        turns, tip = (BODY_A, TIP_A) if i % 2 == 0 else (BODY_B, TIP_B)
+        leaning = lathe(turns, tip, (0.0, -0.03, 0.0), w['lean'])                    # it leans towards -x
+        made.append(iso.moved(leaning, t=(sx * w['half'], 0.0, sz * w['half']), yaw=float(np.degrees(np.arctan2(-sz, sx)))))
+    join = iso.SU(w['reach'], *made)
+    pink, blue = iso.SU(w['reach'], made[0], made[2]), iso.SU(w['reach'], made[1], made[3])
+    solid = iso.I(join, iso.half_space((0.0, -1.0, 0.0), 0.0))
+    reach_out = w['half'] + 0.34
+    lo, hi = np.array([-reach_out, -0.02, -reach_out]), np.array([reach_out, 1.84, reach_out])
+    verts, normals, faces = march(solid, H, lo, hi)
+    h, band = weights(pink, blue, verts, w['reach'])
+    ao = iso.ambient_occlusion(solid, verts + normals * H * 0.1, normals, floor=True, reach=0.5)
+    pieces, handles = genus(verts, faces)
+    up = np.arange(0.05, 1.8, 0.01)
+    over = iso.evaluate(join, np.stack([np.zeros(len(up)), up, np.zeros(len(up))], axis=1))[0] < 0
+    xs = np.arange(-w['half'], w['half'], 0.005)
+    between = iso.evaluate(join, np.stack([xs, np.full(len(xs), 1.0 / w['size']), np.full(len(xs), w['half'])], axis=1))[0] > 0
+    write_bin(OUT / 'baldachin.bin', verts, normals, np.stack([h, np.zeros(len(verts)), band, ao], axis=1), faces)
+    return {'file': 'baldachin', 'size': w['size'], 'half': w['half'], 'lean': w['lean'], 'reach': w['reach'], 'pieces': pieces, 'handles': handles,
+            'under_the_heads_m': round(float(up[over.argmax()] * w['size']) if over.any() else 0.0, 2),
+            'between_two_feet_m': round(float(between.sum() * 0.005 * w['size']), 2), 'tall_m': round(float(verts[:, 1].max() * w['size']), 2),
+            'triangles': int(len(faces)), 'budget': w['budget']}
+
+
 def write_bin(path, verts, normals, colours, faces):
     with open(path, 'wb') as fh:
         fh.write(b'ISO2')
@@ -383,8 +490,8 @@ def genus(verts, faces):
 
 
 def main():
-    """python tools/contact_forms.py [frames] [field] [lines] [within] - all four when none is named."""
-    parts = set(sys.argv[1:]) or {'frames', 'field', 'lines', 'within'}
+    """python tools/contact_forms.py [frames] [field] [lines] [within] [church] - all five when none is named."""
+    parts = set(sys.argv[1:]) or {'frames', 'field', 'lines', 'within', 'church'}
     OUT.mkdir(parents=True, exist_ok=True)
     a = body_a()
     x0 = contact_x(a)
@@ -475,6 +582,12 @@ def main():
         # the heads as a room
         manifest['within'] = within_form(a, x0)
         for key, value in manifest['within'].items(): print('  within', key, value)
+    if 'church' in parts:
+        # the row of bodies as one tall room, and the canopy that stands in it
+        manifest['baldachin'] = baldachin_form()
+        for key, value in manifest['baldachin'].items(): print('  baldachin', key, value)
+        manifest['church'] = church_form()
+        for key, value in manifest['church'].items(): print('  church', key, value)
     path.write_text(json.dumps(manifest, indent=1), encoding='utf-8')
     print('wrote', OUT)
 

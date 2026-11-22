@@ -11,18 +11,24 @@ extends SceneTree
 ## The meshes are derived: run both steps again after a change to a body or to the reach of the join.
 const SOURCE := "res://ada_run/contact_forms/"
 const TARGET := "res://commons/artifacts/contact_study/frames/"
+const SINGLES: Array[String] = ["within", "church", "baldachin"]
 
 
 func _initialize() -> void:
 	var manifest: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(SOURCE + "manifest.json"))
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(TARGET))
-	# --only=within: that one part again, the rest of the index kept as it is
-	if OS.get_cmdline_user_args().has("--only=within"):
+	# --only=within,church,baldachin: those single forms again, the rest of the index kept as it is
+	var only := PackedStringArray()
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--only="): only = arg.trim_prefix("--only=").split(",", false)
+	if not only.is_empty():
 		var kept: Variant = JSON.parse_string(FileAccess.get_file_as_string(TARGET + "index.json"))
-		if kept is Dictionary and manifest.has("within"):
-			kept["bytes"] = int(kept.get("bytes", 0)) - int((kept.get("within", {}) as Dictionary).get("bytes", 0))
-			kept["within"] = _within(manifest.within)
-			kept["bytes"] = int(kept.bytes) + int(kept.within.bytes)
+		if kept is Dictionary:
+			for key in only:
+				if not manifest.has(key) or not SINGLES.has(key): continue
+				kept["bytes"] = int(kept.get("bytes", 0)) - int((kept.get(key, {}) as Dictionary).get("bytes", 0))
+				kept[key] = _single(manifest[key])
+				kept["bytes"] = int(kept.bytes) + int(kept[key].bytes)
 			_write(kept)
 		quit()
 		return
@@ -61,16 +67,18 @@ func _initialize() -> void:
 	for key in ["inside", "lines", "field_rule", "states"]:
 		if manifest.has(key): index[key] = manifest[key]
 	# the heads as a room: one mesh, and what the tool measured of it
-	if manifest.has("within"):
-		index["within"] = _within(manifest.within)
-		total += int(index.within.bytes)
+	for key: String in SINGLES:
+		if not manifest.has(key): continue
+		index[key] = _single(manifest[key])
+		total += int(index[key].bytes)
 	index["bytes"] = total
 	_write(index)
 	print("[bake_frames] ", total, " bytes in all")
 	quit()
 
 
-func _within(row: Dictionary) -> Dictionary:
+## A form that is one mesh with what the tool measured of it: the room, the church, the canopy.
+func _single(row: Dictionary) -> Dictionary:
 	var made := _bake(str(row.file), int(row.get("budget", 0)))
 	for key: String in row:
 		if not made.has(key): made[key] = row[key]

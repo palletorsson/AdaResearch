@@ -29,6 +29,14 @@ extends Node3D
 ## 14 cm under it, the floor cuts it level, and there is a door in each body. One walks in through one body,
 ## through the doorway where the two are one, and out through the other.
 ##
+## Then: "can you make a big church room with different size forms forming a sub space like the st peter
+## cathedral. Like we are inside a Bernini sculpture." A storey is 5.64 m high, so a tall room stands on a side
+## slab, where the sky is open. CHURCH: five bodies of the same family, drawn as rooms and of different sizes
+## (11.5 to 17.5 m tall), in a row along a nave; where two overlap the smooth union is the arch between them. Each
+## bay is the inside of one body - a foot, a waist overhead, a swelling above it, a tip with an oculus. Under the
+## tallest stands a canopy: four of the row's own bodies, leaning in until their heads join in a ring. In the last
+## bay the pair itself stands at the size it has in the row: the room around it is its own inside.
+##
 ## The forms are baked: tools/contact_forms.py marches the distance fields, bake_frames.gd makes frames/*.res.
 ## Nothing is computed while the game runs; a frame is a mesh, and the visitor's distance chooses the frame.
 
@@ -47,7 +55,7 @@ const FINISH := {"through": 0, "cut": 1, "cubes": 2, "skin": 3, "inside": 4}
 const PLINTH := 0.14
 
 ## Which construction stands here: the five in a row, one of them, the field of versions, or the room.
-@export_enum("all", "through", "cut", "cubes", "skin", "inside", "field", "within") var strategy: String = "all"
+@export_enum("all", "through", "cut", "cubes", "skin", "inside", "field", "within", "church") var strategy: String = "all"
 ## The bodies' scale: 1 is a body of 1.78 m.
 @export var size := 1.0
 ## Metres between two stations of the row.
@@ -67,6 +75,7 @@ var index := {}
 var stations: Array[Dictionary] = []        # the ones that move
 var versions: Array[Dictionary] = []        # the field: each stands still
 var within := {}                            # the room: its bake row, its form, its walls
+var church := {}                            # the church: its bake row, its form, its walls, the canopy, the pair
 var _loading: Array[Dictionary] = []
 
 
@@ -81,6 +90,7 @@ func apply_grid_config(config: Dictionary) -> void:
 		stations.clear()
 		versions.clear()
 		within.clear()
+		church.clear()
 		_loading.clear()
 		_build()
 
@@ -105,6 +115,9 @@ func _build() -> void:
 		return
 	if strategy == "within":
 		_within()
+		return
+	if strategy == "church":
+		_church()
 		return
 	var names: Array[String] = ORDER if strategy == "all" else [strategy]
 	for i in names.size():
@@ -358,11 +371,7 @@ func _within() -> void:
 	form.scale = Vector3.ONE * size
 	add_child(form)
 	within = {"row": row, "form": form}
-	if ResourceLoader.load_threaded_request(path) == OK:
-		_loading.append({"path": path, "form": form, "then": _walls})
-	else:
-		form.mesh = load(path) as Mesh
-		_walls(form.mesh)
+	_arrives(path, form, _solid.bind(size, within, "walls", Vector3.ZERO))
 	if not plaques: return
 	var times := float(row.get("size", size))
 	var wall_cm := int(round(float(row.get("wall", 0.14)) * 100.0))
@@ -374,23 +383,92 @@ func _within() -> void:
 	]
 
 
-## The room's wall as something a body cannot pass, from either side: its own triangles at the size it stands.
-func _walls(mesh: Mesh) -> void:
-	if mesh == null or within.is_empty(): return
+## A baked form arrives over the next frames, so a floor that streams in does not stall on it; `then` gets the mesh.
+func _arrives(path: String, form: MeshInstance3D, then: Callable) -> void:
+	if ResourceLoader.load_threaded_request(path) == OK:
+		_loading.append({"path": path, "form": form, "then": then})
+	else:
+		form.mesh = load(path) as Mesh
+		then.call(form.mesh)
+
+
+## A form as something a body cannot pass, from either side: its own triangles at the size and place it stands.
+## `record[key]` gets the body, so a probe can ask for it.
+func _solid(mesh: Mesh, scale_by: float, record: Dictionary, key: String, at: Vector3) -> void:
+	if mesh == null or record.is_empty(): return
 	var faces := mesh.get_faces()
-	for i in faces.size(): faces[i] *= size
+	for i in faces.size(): faces[i] *= scale_by
 	var walls := ConcavePolygonShape3D.new()
 	walls.backface_collision = true
 	walls.set_faces(faces)
 	var shape := CollisionShape3D.new()
 	shape.shape = walls
 	var solid := StaticBody3D.new()
-	solid.name = "Walls"
+	solid.name = key.capitalize().replace(" ", "")
+	solid.position = at
 	solid.collision_layer = 1
 	solid.collision_mask = 0
 	solid.add_child(shape)
 	add_child(solid)
-	within["walls"] = solid
+	record[key] = solid
+
+
+# ------------------------------------------------------------------------------------------------ the church
+
+## Five bodies as one tall room. This node stands at the middle of the nave, on the side slab; the nave runs along
+## x, the portal is at its -x end on the axis, the door back to the tower in the last bay's +z wall. `size` is the
+## size of the pair that stands in the last bay (the row's own size says: the same two).
+func _church() -> void:
+	var row: Dictionary = index.get("church", {})
+	var path := FRAMES + str(row.get("file", "church")) + ".res"
+	if row.is_empty() or not ResourceLoader.exists(path):
+		push_warning("contact_study: no baked church (run tools/contact_forms.py church, then bake_frames.gd)")
+		return
+	var form := MeshInstance3D.new()
+	form.name = "Form"
+	var wall := _material(5)
+	wall.set_shader_parameter("within_top", float(row.get("tall_m", 17.0)))
+	form.material_override = wall
+	add_child(form)
+	church = {"row": row, "form": form}
+	_arrives(path, form, _solid.bind(1.0, church, "walls", Vector3.ZERO))
+	var bays: Array = row.get("bays", [])
+	var tallest: Array = bays[0]
+	for bay: Array in bays:
+		if float(bay[2]) > float(tallest[2]): tallest = bay
+	# the canopy: four of the row's own bodies under the tallest bay
+	var canopy_row: Dictionary = index.get("baldachin", {})
+	var canopy_path := FRAMES + str(canopy_row.get("file", "baldachin")) + ".res"
+	if not canopy_row.is_empty() and ResourceLoader.exists(canopy_path):
+		var times := float(canopy_row.get("size", 3.4))
+		var canopy := MeshInstance3D.new()
+		canopy.name = "Canopy"
+		canopy.material_override = _material(3)
+		canopy.position = Vector3(float(tallest[0]), 0, 0)
+		canopy.scale = Vector3.ONE * times
+		add_child(canopy)
+		church["canopy"] = canopy
+		_arrives(canopy_path, canopy, _solid.bind(times, church, "canopy_solid", canopy.position))
+	# the pair itself in the last bay, as it stands in the row when the visitor is near: the same two
+	var last: Array = bays.back()
+	var skin_rows: Array = index.frames.get("skin", [])
+	if not skin_rows.is_empty():
+		var pair := _stand("Pair", Vector3(float(last[0]) + 1.9, 0, 0))
+		(pair.root as Node3D).rotation.y = -PI / 2.0
+		var joined := MeshInstance3D.new()
+		joined.name = "Form"
+		# the frame where the two skins just touch: plainly two, plainly one
+		var touching: Dictionary = skin_rows[0]
+		for skin_row: Dictionary in skin_rows:
+			if absf(float(skin_row.gap)) < absf(float(touching.gap)): touching = skin_row
+		joined.mesh = _mesh(str(touching.file))
+		joined.material_override = _material(3)
+		(pair.bodies as Node3D).add_child(joined)
+		if pair.has("plaque"): (pair.plaque as Label3D).text = "THE SAME TWO\nat the size of the row\nthis room is their inside"
+		church["pair"] = pair.root
+	if not plaques: return
+	church["plaques"] = [_plate(Vector3(float(row.get("portal_x", -17.0)) - 1.7, 0, 2.9), -PI / 2.0,
+		"07 / CHURCH\n%d bodies of different sizes, joined\nthe tallest %d m; four smaller under it" % [bays.size(), int(round(float(tallest[2])))])]
 
 
 ## A low plate beside a door, leaning back, read by someone who stands in front of that door.
