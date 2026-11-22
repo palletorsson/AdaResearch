@@ -22,6 +22,10 @@ place on the floor it stands on. The place gives the version, as on the colour f
 DISTANCE (gap) along it. The tool also finds where on that floor two bodies become one and where the first
 opening appears, as lines to be drawn on the ground.
 
+and ("can we go inside these forms?") WITHIN: at their own size nobody fits inside, so the place where the two
+heads meet is made again at a size a visitor walks into - a hollow wall under the skin, cut level by the floor, a
+door in each body: in through one, across the join, out through the other.
+
 The bodies are solids of revolution drawn from one outline family (a foot, a neck, two swellings, a rounded tip);
 B leans towards A so the heads meet first. A frame is one position of B: `gap` metres between the two skins where
 they are closest (negative: overlapping).
@@ -29,8 +33,8 @@ they are closest (negative: overlapping).
 Vertex colour is DATA for the shader: r = how much of body A a point is (the smooth union's mixing weight), g = a
 face the cut made, b = the join's band (1 at the middle of a neck), a = ambient occlusion read from the field.
 
-    python tools/contact_forms.py [frames] [field] [lines]
-                                  march them -> ada_run/contact_forms/*.bin + manifest.json (all three when none is named)
+    python tools/contact_forms.py [frames] [field] [lines] [within]
+                                  march them -> ada_run/contact_forms/*.bin + manifest.json (all four when none is named)
     godot --headless --path . --xr-mode off --script res://commons/artifacts/contact_study/bake_frames.gd
 """
 import json
@@ -65,6 +69,11 @@ FIELD_GAP = (0.22, -0.10)           # gap at the south row and at the north row
 FIELD_PLACES = ([(x, z) for x in (-19.3, -15.4, 15.4, 19.3) for z in (5.0, 1.8, -1.8, -5.4)]
                 + [(x, -5.4) for x in (-11.4, -7.7, 7.7, 11.4)])
 FLOOR_HOLES = [(-13.3, -3.3, -6.7, 3.3), (6.7, -3.3, 13.3, 3.3), (-4.6, -8.5, 4.6, -0.6)]   # x0, z0, x1, z1: shafts, the body
+
+# WITHIN: the two heads where they meet, hollow, at `size` times the bodies' own size. Everything else here is in
+# the metres a visitor walks: the floor lies `drop` under the middle of the join, the wall is `wall` thick, a
+# door is (wide, high). `cell` is the march's cell in the bodies' own metres: the wall needs three of them.
+WITHIN = {'size': 9.0, 'gap': -0.04, 'reach': 0.12, 'drop': 1.1, 'wall': 0.14, 'door': (1.3, 2.2), 'cell': 0.005, 'budget': 24000}
 
 
 def reach_at(x):
@@ -121,8 +130,12 @@ def lathe(turns, tip, base=(0.0, 0.0, 0.0), lean=0.0):
             a, b = poly[i], poly[(i + 1) % n]
             ex, ey = b[0] - a[0], b[1] - a[1]
             wx, wy = rho - a[0], y - a[1]
-            t = np.clip((wx * ex + wy * ey) / max(ex * ex + ey * ey, 1e-12), 0.0, 1.0)
-            best = np.minimum(best, (wx - ex * t) ** 2 + (wy - ey * t) ** 2)
+            # the edge back down the axis only closes the outline: it is not skin, and counting it made every
+            # depth inside a body a distance to its own axis (found 22 Nov, when a room was made from a level
+            # under the skin and a column stood on each axis). The skin itself was never affected.
+            if a[0] > 1e-9 or b[0] > 1e-9:
+                t = np.clip((wx * ex + wy * ey) / max(ex * ex + ey * ey, 1e-12), 0.0, 1.0)
+                best = np.minimum(best, (wx - ex * t) ** 2 + (wy - ey * t) ** 2)
             # crossing number, a ray towards +radius
             cross = ((a[1] <= y) != (b[1] <= y)) & (rho < a[0] + ex * (y - a[1]) / (ey if abs(ey) > 1e-12 else 1e-12))
             inside ^= cross
@@ -271,6 +284,75 @@ def edges_of(xs, zs, inside):
     return stretches
 
 
+def within_form(a, x0):
+    """WITHIN: the place where the two heads meet, as a room. The wall is the join's own field between the skin
+    and `wall` under it, so the room's inner face is a level of the same distance: the form, a little under its
+    skin. The floor cuts it level; a door is an arch taken out of each body on the line through both axes, so
+    one looks from door to door through the join. Written in the bodies' own metres with the floor at y = 0 and
+    the middle of the two at x = 0; the game scales it by `size`.
+    Vertex colour: r = how much of A, g = 0 on the skin and 1 on the inner wall, b = the join's band, a = AO."""
+    w = WITHIN
+    s, t, cell = w['size'], w['wall'] / w['size'], w['cell']
+    b = body_b(x0 + w['gap'])
+    join = iso.SU(w['reach'], a, b)
+    c, sn = np.cos(np.radians(LEAN)), np.sin(np.radians(LEAN))
+    ya, along = BODY_A[6][0], BODY_B[6][0]                  # the upper swelling of each, along its own axis
+    y0 = 0.5 * (ya + (-0.03 + c * along)) - w['drop'] / s   # the floor, in the bodies' own metres
+    xa = A_AT
+    xb = x0 + w['gap'] - sn * (y0 + 0.03) / c               # B's axis where the floor cuts it
+    shell = iso.leaf(lambda p: (lambda f: np.maximum(f, -(f + t)))(join(p)[0]))
+    # the outermost wall at door height, to the west of A and to the east of B
+    door_w, door_h = w['door'][0] / s, w['door'][1] / s
+    xs = np.arange(xa - 0.36, xb + 0.36, 0.001)
+    heights = y0 + np.arange(0.05, w['door'][1], 0.1) / s
+    grid = np.stack(np.meshgrid(xs, heights, [-door_w / 2, 0.0, door_w / 2], indexing='ij'), axis=-1).reshape(-1, 3)
+    solid_there = (iso.evaluate(join, grid)[0] < 0).reshape(len(xs), -1).any(axis=1)
+    west, east = float(xs[solid_there.argmax()]), float(xs[len(xs) - 1 - solid_there[::-1].argmax()])
+    spring = door_h - door_w / 2
+    doors = [iso.arch('x', door_w, spring, xa - west + 0.02, c=(0.5 * (west - 0.02 + xa), y0, 0.0), bottom=-0.05),
+             iso.arch('x', door_w, spring, east - xb + 0.02, c=(0.5 * (east + 0.02 + xb), y0, 0.0), bottom=-0.05)]
+    # the wall goes a little way into the slab (`sunk`): cut exactly at the floor, on the march's own lattice, its
+    # foot came out as a sawtooth; now the slab itself draws the line where wall meets floor
+    sunk = 0.012
+    solid = iso.D(iso.I(shell, iso.half_space((0.0, -1.0, 0.0), -(y0 - sunk))), *doors, k=0.006)
+    lo = np.array([west - 0.03, y0 - sunk - 2.5 * cell, -0.27])
+    hi = np.array([east + 0.03, TIP_A + 0.03, 0.27])
+    verts, normals, faces = march(solid, cell, lo, hi)
+    under = np.clip(-iso.evaluate(join, verts)[0] / t, 0.0, 1.0)
+    h, band = weights(a, b, verts, w['reach'])
+    ao = iso.ambient_occlusion(solid, verts + normals * cell * 0.1, normals, floor=False, reach=0.12)
+    pieces, handles = genus(verts, faces)
+
+    # what a visitor meets on the way from door to door: the room's height over the line, and its width at the shoulder
+    def room(x, z, height):
+        return iso.evaluate(join, np.array([[x, y0 + height / s, z]]))[0][0] < -t
+    line = []
+    for x in np.linspace(xa, xb, 21):
+        up = np.arange(0.05, 5.0, 0.05)
+        free = iso.evaluate(join, np.stack([np.full(len(up), x), y0 + up / s, np.zeros(len(up))], axis=1))[0] < -t
+        headroom = float(up[free.argmin()]) if not free.all() else 5.0
+        zs = np.arange(-0.27, 0.27, 0.002)
+        wide = iso.evaluate(join, np.stack([np.full(len(zs), x), np.full(len(zs), y0 + 1.5 / s), zs], axis=1))[0] < -t
+        line.append((round(float((x - 0.5 * (west + east)) * s), 2), round(headroom, 2), round(float(wide.sum() * 0.002 * s), 2)))
+    # is that line free for a body 0.6 m wide and 1.8 m tall, from outside one door to outside the other? Only the
+    # sign is asked: after a cut the field is a bound on the distance, no longer the distance.
+    walk_x = np.arange(west - 0.6 / s, east + 0.6 / s, 0.05 / s)
+    walk_h = y0 + np.arange(0.05, 1.81, 0.05) / s
+    walk = np.stack(np.meshgrid(walk_x, walk_h, [-0.3 / s, 0.0, 0.3 / s], indexing='ij'), axis=-1).reshape(-1, 3)
+    line_free = bool((iso.evaluate(solid, walk)[0] > 0).all())
+
+    centre = 0.5 * (west + east)
+    verts = verts - np.array([centre, y0, 0.0])
+    write_bin(OUT / 'within.bin', verts, normals, np.stack([h, under, band, ao], axis=1), faces)
+    return {'file': 'within', 'size': s, 'gap': w['gap'], 'reach': w['reach'], 'wall': w['wall'], 'drop': w['drop'], 'door': list(w['door']),
+            'floor_y': round(float(y0), 4), 'west_door_x': round((west - centre) * s, 2), 'east_door_x': round((east - centre) * s, 2),
+            'axis_a_x': round((xa - centre) * s, 2), 'axis_b_x': round((xb - centre) * s, 2),
+            'long_m': round(float(np.ptp(verts[:, 0]) * s), 2), 'deep_m': round(float(np.ptp(verts[:, 2]) * s), 2), 'tall_m': round(float(verts[:, 1].max() * s), 2),
+            'line_x_headroom_width': line, 'narrowest_headroom_m': min(r[1] for r in line), 'narrowest_width_m': min(r[2] for r in line),
+            'line_free_for_a_body': line_free,
+            'pieces': pieces, 'handles': handles, 'triangles': int(len(faces)), 'budget': w['budget']}
+
+
 def write_bin(path, verts, normals, colours, faces):
     with open(path, 'wb') as fh:
         fh.write(b'ISO2')
@@ -301,8 +383,8 @@ def genus(verts, faces):
 
 
 def main():
-    """python tools/contact_forms.py [frames] [field] [lines] - all three when none is named."""
-    parts = set(sys.argv[1:]) or {'frames', 'field', 'lines'}
+    """python tools/contact_forms.py [frames] [field] [lines] [within] - all four when none is named."""
+    parts = set(sys.argv[1:]) or {'frames', 'field', 'lines', 'within'}
     OUT.mkdir(parents=True, exist_ok=True)
     a = body_a()
     x0 = contact_x(a)
@@ -389,6 +471,10 @@ def main():
                               'rows': [''.join('2' if pieces[i, j] >= 2 else ('o' if openings[i, j] >= 1 else '1') for i in range(len(xs))) for j in range(len(zs))]}
         print('lines', {key: [len(run) for run in runs] for key, runs in manifest['lines'].items()})
         for row in manifest['states']['rows']: print('  ', row)
+    if 'within' in parts:
+        # the heads as a room
+        manifest['within'] = within_form(a, x0)
+        for key, value in manifest['within'].items(): print('  within', key, value)
     path.write_text(json.dumps(manifest, indent=1), encoding='utf-8')
     print('wrote', OUT)
 

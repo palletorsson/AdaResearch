@@ -2,6 +2,9 @@ extends SceneTree
 ## ISO_ImplicitModeling, floor 156: CONTACT (commons/artifacts/contact_study).
 ##   row "contact"        two bodies that come together as the visitor comes near, made five ways
 ##   row "contact-field"  a version at every place the floor has room for; reach across, distance along
+##   row "contact-within" the two heads where they meet, at nine times the size, as a room with a door in each body:
+##                        it stands under the ceiling, a body the size of a visitor walks in through one body and
+##                        out through the other, and the same body sent at the wall is stopped by it
 ## Walks the visitor's camera towards each station of the row and reads what it does: far away the two stand apart,
 ## near they are as close as they come; the frame follows the distance; SKIN goes from two bodies to one body to
 ## one body with an opening, as its baked frames say; THROUGH slides one mesh into the other; INSIDE keeps the join
@@ -208,4 +211,82 @@ func run() -> void:
 	# from above the south-east wing, clear of the corner column, over the east versions to the row and the north band
 	await _stand(_at(17.4, 7.0, 4.1), _at(-2.0, -2.2, 0.6), 3.0)
 	await _picture("8_the_floor_from_a_corner.png")
+	# ------------------------------------------------------------------ within: the two heads as a room
+	var room_mount := game.building.content.exhibits.get("%d/contact-within" % index) as Node3D
+	var room := room_mount.get_node_or_null("Artifact") as Node3D if is_instance_valid(room_mount) else null
+	if not _check("the room stands on the floor", room != null):
+		_done(); return
+	for i in 180: await physics_frame
+	var made: Dictionary = room.get("within")
+	var row: Dictionary = made.get("row", {})
+	var form := made.get("form") as MeshInstance3D
+	if not _check("the room has its form and its walls", form != null and form.mesh != null and made.get("walls") != null):
+		_done(); return
+	var times: float = room.get("size")
+	var west := float(row.west_door_x)
+	var east := float(row.east_door_x)
+	var axis_a := float(row.axis_a_x)
+	var axis_b := float(row.axis_b_x)
+	var tall := form.mesh.get_aabb().end.y * times
+	var beside := _in(room, west - 2.0, 0.0, 0.5)
+	var above := space.intersect_ray(PhysicsRayQueryParameters3D.create(beside, beside + Vector3.UP * 9.0, 1))
+	var clear_height := (float(above.position.y) - floor_y) if not above.is_empty() else 0.0
+	result["room"] = {"size": times, "tall_m": snappedf(tall, 0.01), "ceiling_m": snappedf(clear_height, 0.01), "long_m": row.get("long_m"), "deep_m": row.get("deep_m"),
+		"doorway_headroom_m": row.get("narrowest_headroom_m"), "doorway_width_m": row.get("narrowest_width_m"), "triangles": _triangles(room)}
+	_check("the room stands under the ceiling", clear_height > 0.0 and tall < clear_height - 0.1, {"tall_m": snappedf(tall, 0.01), "ceiling_m": snappedf(clear_height, 0.01)})
+	_check("from the middle of one body the middle of the other is seen through the doorway",
+		space.intersect_ray(PhysicsRayQueryParameters3D.create(_in(room, axis_a, 0.0, 1.5), _in(room, axis_b, 0.0, 1.5), 1)).is_empty())
+	# a body the size of a visitor walks it: in at A's door, through the doorway, out at B's door
+	var walker := CharacterBody3D.new()
+	var capsule := CapsuleShape3D.new()
+	capsule.radius = 0.3
+	capsule.height = 1.8
+	var walker_shape := CollisionShape3D.new()
+	walker_shape.shape = capsule
+	walker.add_child(walker_shape)
+	walker.collision_layer = 0
+	walker.collision_mask = 1
+	walker.motion_mode = CharacterBody3D.MOTION_MODE_FLOATING
+	root.add_child(walker)
+	var legs := []
+	walker.global_position = _in(room, west - 1.4, 0.0, 0.93)
+	for stop: Array in [["into A", axis_a], ["the doorway", 0.5 * (axis_a + axis_b)], ["into B", axis_b], ["out of B's door", east + 1.4]]:
+		var reached := await _walk(walker, _in(room, float(stop[1]), 0.0, 0.93))
+		legs.append([stop[0], reached, snappedf(room.to_local(walker.global_position).x, 0.01)])
+	_check("a body 0.6 m wide and 1.8 m tall walks in through one body and out through the other", legs.all(func(l): return l[1]), {"legs": legs})
+	# and the wall is a wall: the same body, sent at the long side, stays outside
+	walker.global_position = _in(room, axis_a, 3.2, 0.93)
+	var through_wall := await _walk(walker, _in(room, axis_a, 0.0, 0.93))
+	var stopped_at := room.to_local(walker.global_position).z
+	_check("the same body sent at the wall is stopped by it", not through_wall and stopped_at > 1.2, {"stopped_at_z_m": snappedf(stopped_at, 0.01)})
+	walker.queue_free()
+	_check("with the room, the floor still draws a number of triangles a headset can carry", drawn + _triangles(room) < 160000, {"triangles": drawn + _triangles(room), "room": _triangles(room)})
+	await _stand(_in(room, west - 3.2, 3.6, 2.3), _in(room, 0.4, 0.0, 2.0), 0.3)
+	await _picture("9_the_room_from_outside.png")
+	await _stand(_in(room, west - 2.4, 0.0, 1.65), _in(room, east, 0.0, 1.3), 0.3)
+	await _picture("10_at_the_first_door.png")
+	await _stand(_in(room, axis_a - 0.6, 0.5, 1.65), _in(room, axis_b, 0.0, 1.35), 0.3)
+	await _picture("11_inside_the_first_body.png")
+	await _stand(_in(room, axis_a, 0.0, 1.5), _in(room, axis_a + 0.25, 0.0, 4.4), 0.3)
+	await _picture("12_looking_up_inside.png")
+	await _stand(_in(room, axis_b + 0.5, -0.4, 1.65), _in(room, axis_a, 0.0, 1.5), 0.3)
+	await _picture("13_from_the_second_body_back.png")
 	_done()
+
+
+## A point of the room, in the room's own metres (x from A's door to B's, z south), at a height above the floor.
+func _in(room: Node3D, x: float, z: float, above: float) -> Vector3:
+	var p := room.to_global(Vector3(x, 0, z))
+	return Vector3(p.x, floor_y + above, p.z)
+
+
+## Walk a body straight at a place, sliding along what it meets: true when it arrives.
+func _walk(walker: CharacterBody3D, to: Vector3) -> bool:
+	for i in 60 * 8:
+		var left := to - walker.global_position
+		left.y = 0.0
+		if left.length() < 0.12: return true
+		walker.velocity = left.normalized() * 1.4
+		walker.move_and_slide()
+		await physics_frame
+	return false

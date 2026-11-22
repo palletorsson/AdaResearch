@@ -16,6 +16,16 @@ const TARGET := "res://commons/artifacts/contact_study/frames/"
 func _initialize() -> void:
 	var manifest: Dictionary = JSON.parse_string(FileAccess.get_file_as_string(SOURCE + "manifest.json"))
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(TARGET))
+	# --only=within: that one part again, the rest of the index kept as it is
+	if OS.get_cmdline_user_args().has("--only=within"):
+		var kept: Variant = JSON.parse_string(FileAccess.get_file_as_string(TARGET + "index.json"))
+		if kept is Dictionary and manifest.has("within"):
+			kept["bytes"] = int(kept.get("bytes", 0)) - int((kept.get("within", {}) as Dictionary).get("bytes", 0))
+			kept["within"] = _within(manifest.within)
+			kept["bytes"] = int(kept.bytes) + int(kept.within.bytes)
+			_write(kept)
+		quit()
+		return
 	var index := {"k": manifest.k, "cell": manifest.cell, "lean_degrees": manifest.lean_degrees, "a_at": manifest.a_at,
 		"b_at_contact": manifest.b_at_contact, "parts": {}, "frames": {}}
 	var total := 0
@@ -50,12 +60,28 @@ func _initialize() -> void:
 		index["field"] = places
 	for key in ["inside", "lines", "field_rule", "states"]:
 		if manifest.has(key): index[key] = manifest[key]
+	# the heads as a room: one mesh, and what the tool measured of it
+	if manifest.has("within"):
+		index["within"] = _within(manifest.within)
+		total += int(index.within.bytes)
 	index["bytes"] = total
+	_write(index)
+	print("[bake_frames] ", total, " bytes in all")
+	quit()
+
+
+func _within(row: Dictionary) -> Dictionary:
+	var made := _bake(str(row.file), int(row.get("budget", 0)))
+	for key: String in row:
+		if not made.has(key): made[key] = row[key]
+	print("[bake_frames] ", row.file, " ", JSON.stringify({"triangles": made.triangles, "bytes": made.bytes}))
+	return made
+
+
+func _write(index: Dictionary) -> void:
 	var file := FileAccess.open(TARGET + "index.json", FileAccess.WRITE)
 	file.store_string(JSON.stringify(index, "\t", false))
 	file.close()
-	print("[bake_frames] ", total, " bytes in all")
-	quit()
 
 
 func _bake(name: String, budget: int) -> Dictionary:

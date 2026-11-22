@@ -3,7 +3,8 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_sc
 // CONTACT (commons/artifacts/contact_study): one meeting of two bodies in four finishes.
 // The vertex colour is DATA written by tools/contact_forms.py, never a colour:
 //   r  how much of body A this point is (1 on A alone, 0 on B alone; between, the smooth union's mixing weight)
-//   g  1 on a face a boolean cut made; for INSIDE, how deep under the skin a point of the cut lies
+//   g  1 on a face a boolean cut made; for INSIDE, how deep under the skin a point of the cut lies; for WITHIN,
+//      0 on the skin and 1 on the room's wall
 //   b  the join's band: 1 at the middle of a neck between the two, 0 away from it
 //   a  ambient occlusion read from the distance field
 // finish 0 CLAY   two raw meshes: every triangle flat, as a viewport shows them before anything is decided
@@ -13,7 +14,7 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_sc
 //                 angle of view; the lines are the levels of the mixing weight, so they crowd where the two meet
 // finish 4 INSIDE the skin as in 3; on a face another form cut (g = depth under the skin there, 0 on the skin)
 //                 the field in rings
-
+// finish 5 WITHIN the skin as in 3 outside; the wall of the room inside it (g = 1 there) lit by itself
 uniform int finish = 3;
 uniform vec3 colour_a : source_color = vec3(1.0, 0.31, 0.55);
 uniform vec3 colour_b : source_color = vec3(0.23, 0.36, 1.0);
@@ -30,6 +31,13 @@ uniform float line_count = 9.0;
 uniform float line_amount = 0.55;
 uniform float glow = 0.35;
 uniform float ring_count = 8.0;
+uniform float within_glow = 0.55;
+
+varying float height;       // the point's height in the form's own metres
+
+void vertex() {
+	height = VERTEX.y;
+}
 
 void fragment() {
 	float weight = clamp(COLOR.r, 0.0, 1.0);
@@ -68,6 +76,24 @@ void fragment() {
 		ROUGHNESS = 0.55;
 		SPECULAR = 0.3;
 		EMISSION = flesh * 0.10 + line_colour * ring * 0.12;
+	} else if (finish == 5 && cut > 0.5) {
+		// WITHIN, the wall seen from the room: the form a little under its own skin. It lights itself, since
+		// no lamp reaches into a body; the lines are the levels of the mixing weight, as on the skin outside,
+		// so they crowd in the doorway where the two bodies are one.
+		vec3 flesh = mix(colour_b, colour_a, smoothstep(0.0, 1.0, weight));
+		flesh = mix(flesh, join_colour, band * join_amount);
+		float level = weight * line_count;
+		float width = max(fwidth(level), 0.0001);
+		float line = 1.0 - smoothstep(0.7, 1.5, abs(fract(level - 0.5) - 0.5) / width);
+		line *= step(0.015, weight) * step(weight, 0.985);
+		// its own light falls off where the wall turns away from the eye and towards the top of the room, so a
+		// dome reads as a dome from inside it
+		float facing = clamp(dot(n, v), 0.0, 1.0);
+		float shade = mix(0.5, 1.0, facing) * mix(1.0, 0.62, smoothstep(0.12, 0.5, height));
+		ALBEDO = mix(flesh * ao, line_colour, line * 0.75);
+		ROUGHNESS = 0.55;
+		SPECULAR = 0.35;
+		EMISSION = flesh * within_glow * ao * shade + line_colour * line * 0.15;
 	} else {
 		float mixed = smoothstep(0.0, 1.0, weight);
 		vec3 base = mix(colour_b, colour_a, mixed);

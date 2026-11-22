@@ -80363,6 +80363,23 @@
       "walls": [],
       "artifacts": [
         {
+          "id": "contact-within",
+          "artifact": "contact_study",
+          "station": "SW",
+          "position": [
+            0,
+            0.6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "strategy": "within",
+            "size": 9,
+            "editor_label": "Contact within / the two heads at nine times the size, hollow: in through one body, out through the other; the size is the one it was baked for (Palle 2026-11-22)"
+          }
+        },
+        {
           "id": "contact-field",
           "artifact": "contact_study",
           "station": "SW",

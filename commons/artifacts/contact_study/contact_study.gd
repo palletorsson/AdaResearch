@@ -3,7 +3,7 @@
 # @identity
 # essence: two standing bodies that approach each other as the visitor approaches them; the same meeting made as two meshes passing through each other, as a boolean cut, as a lattice of cells, as one skin, and as that skin kept inside another form; and, as a FIELD, one version for every place on the floor
 # desire: the learner feels that how two forms meet is a decision of construction - and that there is a construction in which nearness itself has a shape
-# critical_parameter: strategy - which construction makes the meeting (through / cut / cubes / skin / inside), or field; under it the reach of the join (k) and the distance between the two
+# critical_parameter: strategy - which construction makes the meeting (through / cut / cubes / skin / inside), or field, or within (the two heads as a room one walks through); under it the reach of the join (k) and the distance between the two
 # triggers: the visitor's distance from a station moves its bodies; in the field nothing moves - the walk is the approach, and the place is the version
 # emerges: in SKIN a neck grows between the two before they touch; first one join, then a second with an opening left between. In the FIELD a line runs across the ground: on one side every pair is two bodies, on the other one
 # relationships: answers [[implicit_surface_modeling]] on the same floor, whose join "nothing meets"; the bodies come from the outline family of the black columns ([[resolution_totem]], alien); position as parameter is the colour floor's rule ([[pillarcolorcollection]]: hue across, saturation along) - here reach across, distance along
@@ -24,6 +24,11 @@ extends Node3D
 ## gives the version - reach across the floor, distance along it - with the lines on the ground where two bodies
 ## become one and where the first opening appears.
 ##
+## Then: "good can we go inside these forms?" At their own size nobody fits inside. So WITHIN: the place where the
+## two heads meet, made again at nine times the size as a room - the wall is the same field between the skin and
+## 14 cm under it, the floor cuts it level, and there is a door in each body. One walks in through one body,
+## through the doorway where the two are one, and out through the other.
+##
 ## The forms are baked: tools/contact_forms.py marches the distance fields, bake_frames.gd makes frames/*.res.
 ## Nothing is computed while the game runs; a frame is a mesh, and the visitor's distance chooses the frame.
 
@@ -41,8 +46,8 @@ const WORDS := {
 const FINISH := {"through": 0, "cut": 1, "cubes": 2, "skin": 3, "inside": 4}
 const PLINTH := 0.14
 
-## Which construction stands here: the five in a row, one of them, or the field of versions.
-@export_enum("all", "through", "cut", "cubes", "skin", "inside", "field") var strategy: String = "all"
+## Which construction stands here: the five in a row, one of them, the field of versions, or the room.
+@export_enum("all", "through", "cut", "cubes", "skin", "inside", "field", "within") var strategy: String = "all"
 ## The bodies' scale: 1 is a body of 1.78 m.
 @export var size := 1.0
 ## Metres between two stations of the row.
@@ -61,6 +66,7 @@ const PLINTH := 0.14
 var index := {}
 var stations: Array[Dictionary] = []        # the ones that move
 var versions: Array[Dictionary] = []        # the field: each stands still
+var within := {}                            # the room: its bake row, its form, its walls
 var _loading: Array[Dictionary] = []
 
 
@@ -74,6 +80,7 @@ func apply_grid_config(config: Dictionary) -> void:
 		for child in get_children(): child.queue_free()
 		stations.clear()
 		versions.clear()
+		within.clear()
 		_loading.clear()
 		_build()
 
@@ -95,6 +102,9 @@ func _build() -> void:
 	index = parsed
 	if strategy == "field":
 		_field()
+		return
+	if strategy == "within":
+		_within()
 		return
 	var names: Array[String] = ORDER if strategy == "all" else [strategy]
 	for i in names.size():
@@ -331,6 +341,83 @@ func _ground_line(title: String, stretches: Array, colour: Color, north: String,
 	add_child(line)
 
 
+# ------------------------------------------------------------------------------------------------ within
+
+## The two heads where they meet, as a room. This node stands at the middle of the two, on the floor; A's door is
+## at -x and B's at +x, and the line through both doors runs through the doorway where the two are one. `size`
+## should be the size the room was baked for: the wall's thickness and the doors were measured at it.
+func _within() -> void:
+	var row: Dictionary = index.get("within", {})
+	var path := FRAMES + str(row.get("file", "within")) + ".res"
+	if row.is_empty() or not ResourceLoader.exists(path):
+		push_warning("contact_study: no baked room (run tools/contact_forms.py within, then bake_frames.gd)")
+		return
+	var form := MeshInstance3D.new()
+	form.name = "Form"
+	form.material_override = _material(5)
+	form.scale = Vector3.ONE * size
+	add_child(form)
+	within = {"row": row, "form": form}
+	if ResourceLoader.load_threaded_request(path) == OK:
+		_loading.append({"path": path, "form": form, "then": _walls})
+	else:
+		form.mesh = load(path) as Mesh
+		_walls(form.mesh)
+	if not plaques: return
+	var times := float(row.get("size", size))
+	var wall_cm := int(round(float(row.get("wall", 0.14)) * 100.0))
+	within["plaques"] = [
+		_plate(Vector3(float(row.get("west_door_x", -3.2)) * size / times - 0.75, 0, 1.45), -PI / 2.0,
+			"06 / WITHIN\nthe two heads, %d times the size\nin through one body, out through the other" % int(round(times))),
+		_plate(Vector3(float(row.get("east_door_x", 3.2)) * size / times + 0.75, 0, 1.45), PI / 2.0,
+			"06 / WITHIN\nthe wall is the form, %d cm under its skin\nthe doorway inside is where the two are one" % wall_cm),
+	]
+
+
+## The room's wall as something a body cannot pass, from either side: its own triangles at the size it stands.
+func _walls(mesh: Mesh) -> void:
+	if mesh == null or within.is_empty(): return
+	var faces := mesh.get_faces()
+	for i in faces.size(): faces[i] *= size
+	var walls := ConcavePolygonShape3D.new()
+	walls.backface_collision = true
+	walls.set_faces(faces)
+	var shape := CollisionShape3D.new()
+	shape.shape = walls
+	var solid := StaticBody3D.new()
+	solid.name = "Walls"
+	solid.collision_layer = 1
+	solid.collision_mask = 0
+	solid.add_child(shape)
+	add_child(solid)
+	within["walls"] = solid
+
+
+## A low plate beside a door, leaning back, read by someone who stands in front of that door.
+func _plate(at: Vector3, yaw: float, text: String) -> Label3D:
+	var holder := Node3D.new()
+	holder.name = "Plate"
+	holder.position = at
+	holder.rotation.y = yaw
+	holder.scale = Vector3.ONE * 1.7
+	add_child(holder)
+	Kit.block(holder, Vector3(1.0, PLINTH, 0.46), Vector3(0, PLINTH * 0.5, 0), Color("15161a"), true)
+	var lean := -PI / 3.0
+	var plate := Kit.block(holder, Vector3(0.96, 0.30, 0.02), Vector3(0, PLINTH + 0.085, 0.11), Color("1b1c21"), false)
+	plate.rotation.x = lean
+	var words := Label3D.new()
+	words.name = "Plaque"
+	words.position = plate.position + Vector3(0, 0.011, 0.006)
+	words.rotation.x = lean
+	words.font_size = 30
+	words.pixel_size = 0.00118
+	words.outline_size = 0
+	words.modulate = Color("f2ece2")
+	words.text = text
+	holder.add_child(words)
+	return words
+
+
 # ------------------------------------------------------------------------------------------------ each frame
 
 func _process(delta: float) -> void:
@@ -339,7 +426,9 @@ func _process(delta: float) -> void:
 		var status := ResourceLoader.load_threaded_get_status(str(wait.path))
 		if status == ResourceLoader.THREAD_LOAD_IN_PROGRESS: continue
 		if status == ResourceLoader.THREAD_LOAD_LOADED and is_instance_valid(wait.form):
-			(wait.form as MeshInstance3D).mesh = ResourceLoader.load_threaded_get(str(wait.path)) as Mesh
+			var loaded := ResourceLoader.load_threaded_get(str(wait.path)) as Mesh
+			(wait.form as MeshInstance3D).mesh = loaded
+			if wait.has("then"): (wait.then as Callable).call(loaded)
 		_loading.remove_at(i)
 	if stations.is_empty():
 		if _loading.is_empty(): set_process(false)
