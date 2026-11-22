@@ -1,0 +1,13 @@
+{
+  "artifacts": {
+    "contact_study": {
+      "lookup_name": "contact_study",
+      "name": "Contact / two bodies, four ways to meet",
+      "scene": "res://commons/artifacts/contact_study/contact_study.tscn",
+      "category": "isosurfaces",
+      "map_ready": false,
+      "configure_before_ready": true,
+      "description": "Two standing bodies come together as the visitor comes near, made four ways: THROUGH (two meshes pass through each other), CUT (a boolean difference), CUBES (the join in 5 cm cells), SKIN (a smooth union: a neck grows between the two before they touch, then a second join leaves an opening). Baked frames; the visitor's distance chooses the frame. strategy = all | through | cut | cubes | skin."
+    }
+  }
+}

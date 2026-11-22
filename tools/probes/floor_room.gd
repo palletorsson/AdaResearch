@@ -2,7 +2,8 @@ extends SceneTree
 ## Where is there room on the floor the game starts on? A one-metre map of the slab: a cell is taken when a
 ## body stands in it (a box query, 0.2 to 1.8 m above the floor) or when something drawn stands in it (the
 ## bounds of every mesh and of every MultiMesh instance between 0.15 and 5.5 m; plates wider than 60 m2 are the
-## floor and ceiling and are left out). Prints the map and the widest free strips, and takes pictures from the
+## floor and ceiling and are left out), and is a hole (o) where no floor lies under it: a shaft opening looks like
+## free room to a box at walking height. Prints the map and the widest free strips, and takes pictures from the
 ## arrival and from two corners. With --row=<id> it also reports that row's own footprint and what it touches.
 ##
 ##   python tools/run_floor_probe.py <Map> floor_room.gd floor_room.json <folder> --no-opening --opera-quiet [--row=<id>]
@@ -111,8 +112,11 @@ func run() -> void:
 					if box.position.x < centre.x + 0.5 and box.end.x > centre.x - 0.5 and box.position.z < centre.z + 0.5 and box.end.z > centre.z - 0.5:
 						seen = true
 						break
-			line += "#" if solid else ("+" if seen else ".")
-			if not solid and not seen: free[Vector2i(x, z)] = true
+			# no floor under the cell: a shaft opening, or beyond the slab. A box at walking height does not see that.
+			var under := PhysicsRayQueryParameters3D.create(Vector3(centre.x, floor_y + 0.6, centre.z), Vector3(centre.x, floor_y - 0.6, centre.z), 1)
+			var hole := space.intersect_ray(under).is_empty()
+			line += "o" if hole else ("#" if solid else ("+" if seen else "."))
+			if not solid and not seen and not hole: free[Vector2i(x, z)] = true
 		lines.append(line)
 	result["map_x_%d_to_%d_rows_z_%d_to_%d" % [X0, X1, Z0, Z1]] = lines
 	# the widest free strips, three metres deep
