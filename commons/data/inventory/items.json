@@ -756,6 +756,36 @@
         {"key": "touch_depth", "label": "Touch", "range": [0.01, 0.06, 0.005], "unit": " m"},
         {"key": "press_depth", "label": "Press through", "range": [0, 0.2, 0.02], "unit": " m"}
       ]
+    },
+    {
+      "id": "face_triangle",
+      "name": "Triangle face (one a trigger, into a frame)",
+      "token": "face_block_triangle",
+      "prefab": "",
+      "tool": "face",
+      "collect": true,
+      "instance": false,
+      "unlock": "primitives",
+      "floor": 5,
+      "mount": "hand",
+      "size": [0.32, 0.28, 0.02],
+      "defaults": {},
+      "knobs": []
+    },
+    {
+      "id": "face_square",
+      "name": "Square face (one a trigger, into a frame)",
+      "token": "face_block_square",
+      "prefab": "",
+      "tool": "face",
+      "collect": true,
+      "instance": false,
+      "unlock": "primitives",
+      "floor": 7,
+      "mount": "hand",
+      "size": [0.32, 0.32, 0.02],
+      "defaults": {},
+      "knobs": []
     }
   ]
 }

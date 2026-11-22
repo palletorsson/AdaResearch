@@ -1,35 +1,43 @@
 extends Node3D
-## A building table where faces go into a fixed frame, one for each trigger.
+## A building station where faces go into fixed frames, one for each trigger.
 ##
 ## Palle, 22 November 2026: "Instead of grabbing a building [block] we choose one building block using the hand
 ## principle, with just one trigger add to a template. Instead of free form we have the template ... when we
-## fill all the walls another diamond falls down on the table and ... if we hold it we see the world in wireframe.
-## For the cube case ... two different templates. One is the association principle. Each time we couple a cube
-## another random cube association object is created. We can remove the button interface."
+## fill all the walls another diamond falls down ... and if we hold it we see the world in wireframe. For the
+## cube case ... two different templates. One is the association principle. Each time we couple a cube another
+## random cube association object is created. We can remove the button interface."
+## Later the same day: "if we pick the triangle or rect., add it as selected to the arm wrist clock. Remove the
+## table and put the triangle or rect. in the virtual box hanging in the air. Then under the templates a separate
+## plinth like at 0.5 m. Add more triangle templates?"
 ##
 ## face_assembly.gd builds this instead of its loose faces and buttons when its config says build = "template".
-##  - THE BLOCK is the one face in the glass case. Nothing is carried: the hand points.
-##  - A FRAME is the wire outline of a closed form standing over the table. It is one pointer target (a body on
-##    the pointables layer with pointer_event, as a push button is), so the VR pointer's trigger and the desktop
-##    click both reach it. The wall nearest the pointer's ray shows a gold face; the trigger puts a face there.
-##  - A FILLED frame drops its reward on the table and empties, so it can be filled again.
-##      triangle table: the diamond, eight faces  -> a diamond; held, the world is drawn in wireframe
-##      square table:   the cube, six faces       -> a cube
-##                      the cube, six faces       -> a random cube association from commons/modular/terms.json,
-##                                                   as a table model no larger than 24 cm
-## The second and third readings are mine (Palle answered "yes" to them): his note names the association frame
-## and says there are two; the other one is taken to be the plain cube.
+##  - THE BLOCK hangs in a glass box in the air. Point at the box and pull the trigger: the face is the hand's
+##    selected item (items.json face_triangle / face_square, a hand tool like the trace pen), on the belt and
+##    shown on the wrist clock. Nothing is carried.
+##  - A FRAME is the wire outline of a closed form, in the air over its own plinth. It is one pointer target (a
+##    body on the pointables layer with pointer_event, as a push button is), so the VR pointer's trigger and the
+##    desktop click both reach it. With the face in the hand, the wall nearest the pointer's ray shows a gold
+##    face and the trigger puts a face there. With something else in the hand the frame asks for a face.
+##  - A FILLED frame becomes its solid, which falls onto the plinth below, half a metre high; the frame empties.
+##      triangle station: tetrahedron 4 faces, diamond 8, icosahedron 20 -> that solid.
+##                        The diamond, held, draws the world in wireframe.
+##      square station:   cube 6 faces -> a cube; cube 6 faces -> a random cube association from
+##                        commons/modular/terms.json, as a model no larger than 24 cm.
+## Mine, where Palle's notes leave room: which triangle forms (his "more?" answered with the tetrahedron and the
+## icosahedron), that the second cube frame is the plain cube, and that only the diamond undresses the room.
 const Kit = preload("res://commons/artifacts/primitive_encounters/geometry.gd")
 const Piece = preload("res://commons/artifacts/primitive_encounters/piece.gd")
-const Timber = preload("res://commons/artifacts/primitive_encounters/timber_finish.gd")
 const Threshold = preload("res://commons/artifacts/wireframe_threshold/wireframe_threshold.gd")
 const Composite = preload("res://commons/modular/composite.tscn")
 const TERMS := "res://commons/modular/terms.json"
-const TOP := 0.90            # the table top, where a reward lands
+const PLINTH_TOP := 0.5      # where a reward lands
+const PLINTH_SIDE := 0.44
 const POINTABLE := 1 << 20   # player_rules.gd POINTER_MASK: what a pointer's ray can press
 const INK := Color("292530")
-const KEPT_REWARDS := 8
-const HAND_SIZE := 0.24      # the largest side of an association on the table
+const KEPT_REWARDS := 9
+const HAND_SIZE := 0.24      # the largest side of an association on its plinth
+const REWARD_SCALE := 0.575  # a triangle solid beside its frame (the diamond's 13 cm tip on a 22.6 cm frame)
+const ITEMS := {3: "face_triangle", 4: "face_square"}
 
 ## One frame's whole volume, for the pointer. The frame decides which wall is meant.
 class Reach extends StaticBody3D:
@@ -38,11 +46,19 @@ class Reach extends StaticBody3D:
 	func pointer_event(event: XRToolsPointerEvent) -> void:
 		build.pointed(index, event)
 
+## The hanging box, for the pointer: a press takes the face into the hand.
+class Stock extends StaticBody3D:
+	var build: Node
+	func pointer_event(event: XRToolsPointerEvent) -> void:
+		if event.event_type == XRToolsPointerEvent.Type.PRESSED: build.take()
+
 var table: Node3D
 var frames: Array[Dictionary] = []
 var rewards: Array[Node3D] = []
 var ghost: MeshInstance3D
-var stock_at := Vector3(1.05, TOP + 0.13, 0.30)
+var box_at := Vector3(0.95, 1.2, 0.38)
+var box_label: Label3D
+var _taken := false
 var _holding := {}
 var _undressed := false
 var _last_term := ""
@@ -52,13 +68,16 @@ var _chance := RandomNumberGenerator.new()
 func setup(owner_table: Node3D) -> void:
 	table = owner_table
 	_chance.randomize()
-	_build_table()
 	if table.sides == 3:
-		# where the started form stood: the opera's frame for this row aims here
-		_add_frame("DIAMOND", "diamond", Vector3(-0.72, 1.32, 0.38), _octahedron())
+		# the diamond stands where the started form stood: the opera's frame for this row aims there
+		_add_frame("TETRAHEDRON", "tetrahedron", Vector3(-1.30, 1.32, 0.38), _triangle_solid(_tetrahedron()), Color("f2b56b"))
+		_add_frame("DIAMOND", "diamond", Vector3(-0.62, 1.32, 0.38), _triangle_solid(_octahedron()), Color("bd85e5"))
+		_add_frame("ICOSAHEDRON", "icosahedron", Vector3(0.12, 1.32, 0.38), _triangle_solid(_icosahedron()), Color("7fd6a8"))
 	else:
-		_add_frame("CUBE", "cube", Vector3(-0.72, 1.22, 0.38), _cube())
-		_add_frame("ASSOCIATION(CUBE)", "association", Vector3(0.0, 1.22, 0.38), _cube())
+		box_at.x = 0.85
+		_add_frame("CUBE", "cube", Vector3(-0.72, 1.22, 0.38), _cube(), Color("8ed6e8"))
+		_add_frame("ASSOCIATION(CUBE)", "association", Vector3(0.0, 1.22, 0.38), _cube(), Color.WHITE)
+	_build_box()
 	ghost = MeshInstance3D.new()
 	ghost.name = "NextFace"
 	ghost.mesh = table._panel_mesh
@@ -71,41 +90,111 @@ func setup(owner_table: Node3D) -> void:
 	add_child(ghost)
 
 
-func _build_table() -> void:
-	var size := Vector3(2.9, 0.06, 0.95)
-	var top := Kit.box(self, "TableTop", Vector3(0, TOP - size.y * 0.5, 0.375), size, Color.WHITE)
-	top.mesh = Timber.mesh(size)
-	top.material_override = Timber.material()
-	for x in [-1.36, 1.36]:
-		for z in [-0.03, 0.78]:
-			Kit.box(self, "Leg", Vector3(x, (TOP - size.y) * 0.5, z), Vector3(0.07, TOP - size.y, 0.07), Color("514653"))
-	# the block: one face in a glass case, on the table
+## The block: one face in a glass box that hangs in the air, with nothing under it.
+func _build_box() -> void:
 	var glass := Kit.material(Color(0.66, 0.85, 0.92, 0.24))
 	glass.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	glass.cull_mode = BaseMaterial3D.CULL_DISABLED
-	for pane in [[Vector3(-0.26, 0, 0), Vector3(0.012, 0.26, 0.42)], [Vector3(0.26, 0, 0), Vector3(0.012, 0.26, 0.42)],
-			[Vector3(0, 0.13, 0), Vector3(0.53, 0.012, 0.42)], [Vector3(0, 0, -0.21), Vector3(0.53, 0.26, 0.012)]]:
-		var sheet := Kit.box(self, "CaseGlass", stock_at + pane[0], pane[1], Color.WHITE, false)
+	for pane in [[Vector3(-0.26, 0, 0), Vector3(0.012, 0.32, 0.42)], [Vector3(0.26, 0, 0), Vector3(0.012, 0.32, 0.42)],
+			[Vector3(0, 0.16, 0), Vector3(0.53, 0.012, 0.42)], [Vector3(0, -0.16, 0), Vector3(0.53, 0.012, 0.42)],
+			[Vector3(0, 0, -0.21), Vector3(0.53, 0.32, 0.012)]]:
+		var sheet := Kit.box(self, "BoxGlass", box_at + pane[0], pane[1], Color.WHITE, false)
 		sheet.material_override = glass
 		sheet.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	var block := MeshInstance3D.new()
 	block.name = "Block"
 	block.mesh = table._panel_mesh
 	block.material_override = table._face_materials[0]
-	block.position = stock_at + Vector3(0, -0.06, 0)
-	block.rotation = Vector3(deg_to_rad(-18), 0, 0)
+	block.position = box_at
+	block.rotation = Vector3(deg_to_rad(-62), 0, 0)
 	add_child(block)
-	var words := Kit.label(self, "POINT AT A FRAME.  ONE TRIGGER ADDS ONE FACE.", Vector3(0.1, TOP + 0.003, 0.80), 15)
-	words.rotation.x = -PI / 2
+	var body := Stock.new()
+	body.name = "TakeAFace"
+	body.build = self
+	body.collision_layer = POINTABLE
+	body.collision_mask = 0
+	body.position = box_at
+	var volume := BoxShape3D.new()
+	volume.size = Vector3(0.53, 0.32, 0.42)
+	var shape := CollisionShape3D.new()
+	shape.shape = volume
+	body.add_child(shape)
+	add_child(body)
+	box_label = Kit.label(self, "TAKE A FACE", box_at + Vector3(0, 0.215, 0.20), 23)
 
 
-func _octahedron() -> Dictionary:
+func item_id() -> String:
+	return str(ITEMS.get(int(table.sides), ""))
+
+
+func _hand() -> Node:
+	return get_tree().get_first_node_in_group("inventory_hands") if is_inside_tree() else null
+
+
+## The face becomes the hand's selected item: collected on the belt, shown on the wrist clock.
+func take() -> void:
+	_taken = true
+	var hand := _hand()
+	if hand != null and hand.has_method("collect"): hand.collect(item_id())
+	box_label.text = "A FACE IS IN YOUR HAND"
+	for i in frames.size(): _count(i)
+
+
+## True when a frame may take a face: the face is what the hand holds. Where the game has no hand that knows
+## the item (a bench, an older item list on a device), taking it from the box is enough.
+func in_hand() -> bool:
+	var hand := _hand()
+	if hand == null or not hand.has_method("name_of") or not _hand_knows(hand): return _taken
+	return str(hand.get("current")) == item_id()
+
+
+func _hand_knows(hand: Node) -> bool:
+	if not hand.has_method("available"): return false
+	for row: Dictionary in hand.available():
+		if str(row.get("id", "")) == item_id(): return true
+	return false
+
+
+func _tetrahedron() -> PackedVector3Array:
+	var s: float = table.EDGE / (2.0 * sqrt(2.0))
+	# turned so that one face lies level underneath
+	var points := PackedVector3Array([Vector3(1, 1, 1) * s, Vector3(1, -1, -1) * s, Vector3(-1, 1, -1) * s, Vector3(-1, -1, 1) * s])
+	var tip := points[0].normalized()
+	var turn := Basis(Quaternion(tip, Vector3.UP)) if not tip.is_equal_approx(Vector3.UP) else Basis.IDENTITY
+	for i in points.size(): points[i] = turn * points[i]
+	return points
+
+
+func _octahedron() -> PackedVector3Array:
 	var r: float = table.EDGE / sqrt(2.0)
+	return PackedVector3Array([Vector3.UP * r, Vector3.DOWN * r, Vector3.RIGHT * r, Vector3.BACK * r, Vector3.LEFT * r, Vector3.FORWARD * r])
+
+
+func _icosahedron() -> PackedVector3Array:
+	var s: float = table.EDGE * 0.5
+	var phi := (1.0 + sqrt(5.0)) * 0.5
+	var points := PackedVector3Array()
+	for a in [-1.0, 1.0]:
+		for b in [-phi, phi]:
+			points.append(Vector3(0, a, b) * s)
+			points.append(Vector3(a, b, 0) * s)
+			points.append(Vector3(b, 0, a) * s)
+	return points
+
+
+## Every three corners that are one edge apart from each other are a face.
+func _triangle_solid(points: PackedVector3Array) -> Dictionary:
+	var edge: float = table.EDGE
 	var faces := []
-	for i in 4:
-		faces.append([0, 2 + i, 2 + (i + 1) % 4])
-		faces.append([1, 2 + (i + 1) % 4, 2 + i])
-	return {"points": PackedVector3Array([Vector3.UP * r, Vector3.DOWN * r, Vector3.RIGHT * r, Vector3.BACK * r, Vector3.LEFT * r, Vector3.FORWARD * r]), "faces": faces}
+	for a in points.size():
+		for b in range(a + 1, points.size()):
+			if absf(points[a].distance_to(points[b]) - edge) > 0.002: continue
+			for c in range(b + 1, points.size()):
+				if absf(points[a].distance_to(points[c]) - edge) > 0.002 or absf(points[b].distance_to(points[c]) - edge) > 0.002: continue
+				# the winding the kit's solids use: the cross product points inward
+				var inward := (points[b] - points[a]).cross(points[c] - points[a]).dot(points[a] + points[b] + points[c]) < 0.0
+				faces.append([a, b, c] if inward else [a, c, b])
+	return {"points": points, "faces": faces}
 
 
 func _cube() -> Dictionary:
@@ -128,19 +217,17 @@ func _wall(points: PackedVector3Array, face: Array) -> Transform3D:
 	return Transform3D(Basis(x, z.cross(x).normalized(), z), centre / float(face.size()))
 
 
-func _add_frame(title: String, reward: String, centre: Vector3, solid: Dictionary) -> void:
+func _add_frame(title: String, reward: String, centre: Vector3, solid: Dictionary, colour: Color) -> void:
 	var points: PackedVector3Array = solid.points
+	var index := frames.size()
 	var root := Node3D.new()
-	root.name = "Frame%d" % frames.size()
+	root.name = "Frame%d" % index
 	root.position = centre
 	add_child(root)
 	var walls: Array[Transform3D] = []
 	var seen := {}
 	var reach := 0.0
-	var lowest := 0.0
-	for point in points:
-		reach = maxf(reach, point.length())
-		lowest = minf(lowest, point.y)
+	for point in points: reach = maxf(reach, point.length())
 	var wire := Kit.material(INK)
 	wire.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	for face: Array in solid.faces:
@@ -161,13 +248,10 @@ func _add_frame(title: String, reward: String, centre: Vector3, solid: Dictionar
 			bar.position = (points[a] + points[b]) * 0.5
 			bar.quaternion = Quaternion(Vector3.UP, (points[b] - points[a]).normalized())
 			root.add_child(bar)
-	var stem := centre.y + lowest - TOP
-	if stem > 0.01:
-		Kit.box(root, "Stem", Vector3(0, lowest - stem * 0.5, 0), Vector3(0.018, stem, 0.018), INK, false)
 	var body := Reach.new()
 	body.name = "Reach"
 	body.build = self
-	body.index = frames.size()
+	body.index = index
 	body.collision_layer = POINTABLE
 	body.collision_mask = 0
 	var ball := SphereShape3D.new()
@@ -176,18 +260,28 @@ func _add_frame(title: String, reward: String, centre: Vector3, solid: Dictionar
 	shape.shape = ball
 	body.add_child(shape)
 	root.add_child(body)
-	var label := Kit.label(self, "", Vector3(centre.x, TOP + 0.003, 0.70), 17)
-	label.rotation.x = -PI / 2
+	# its own plinth, with a low rim so that what falls on it stays
+	var plinth := Node3D.new()
+	plinth.name = "Plinth%d" % index
+	plinth.position = Vector3(centre.x, 0, centre.z)
+	add_child(plinth)
+	Kit.box(plinth, "Block", Vector3(0, PLINTH_TOP * 0.5, 0), Vector3(PLINTH_SIDE, PLINTH_TOP, PLINTH_SIDE), Color("eee6db"))
+	var half := PLINTH_SIDE * 0.5 - 0.008
+	for side in [[Vector3(0, 0, half), Vector3(PLINTH_SIDE, 0.035, 0.016)], [Vector3(0, 0, -half), Vector3(PLINTH_SIDE, 0.035, 0.016)],
+			[Vector3(half, 0, 0), Vector3(0.016, 0.035, PLINTH_SIDE)], [Vector3(-half, 0, 0), Vector3(0.016, 0.035, PLINTH_SIDE)]]:
+		Kit.box(plinth, "Rim", Vector3(0, PLINTH_TOP + 0.0175, 0) + side[0], side[1], Color("d9cfc2"))
+	var label := Kit.label(plinth, "", Vector3(0, PLINTH_TOP - 0.10, PLINTH_SIDE * 0.5 + 0.003), 20)
 	var filled: Array = []
 	filled.resize(walls.size())
-	frames.append({"root": root, "walls": walls, "filled": filled, "reward": reward, "title": title, "label": label, "busy": false, "centre": centre, "made": 0, "last": ""})
-	_count(frames.size() - 1)
+	frames.append({"root": root, "walls": walls, "filled": filled, "reward": reward, "title": title, "label": label, "busy": false,
+		"centre": centre, "made": 0, "last": "", "points": points, "faces": solid.faces, "colour": colour, "plinth": plinth})
+	_count(index)
 
 
 func _count(index: int) -> void:
 	var frame: Dictionary = frames[index]
 	var filled: Array = frame.filled
-	var words := "%s  %d / %d" % [frame.title, filled.size() - filled.count(null), filled.size()]
+	var words := "%s\n%d / %d" % [frame.title, filled.size() - filled.count(null), filled.size()]
 	if str(frame.last) != "": words += "\n= %s" % str(frame.last).to_upper().replace("_", " ")
 	(frame.label as Label3D).text = words
 
@@ -195,7 +289,7 @@ func _count(index: int) -> void:
 ## The pointer's ray picks the empty wall it passes closest to; a nearer wall wins a tie.
 func _aim(index: int, event: XRToolsPointerEvent) -> int:
 	var frame: Dictionary = frames[index]
-	if frame.busy:
+	if frame.busy or not in_hand():
 		ghost.hide()
 		return -1
 	var root: Node3D = frame.root
@@ -227,11 +321,14 @@ func pointed(index: int, event: XRToolsPointerEvent) -> void:
 		XRToolsPointerEvent.Type.ENTERED, XRToolsPointerEvent.Type.MOVED:
 			_aim(index, event)
 		XRToolsPointerEvent.Type.PRESSED:
+			if not in_hand():
+				(frames[index].label as Label3D).text = "%s\nTAKE A FACE\nFROM THE BOX" % str(frames[index].title)
+				return
 			var wall := _aim(index, event)
 			if wall >= 0: add_face(index, wall)
 
 
-## One face from the case into one wall. True when it went in.
+## One face into one wall. True when it went in.
 func add_face(index: int, wall: int) -> bool:
 	var frame: Dictionary = frames[index]
 	var filled: Array = frame.filled
@@ -242,7 +339,7 @@ func add_face(index: int, wall: int) -> bool:
 	face.mesh = table._panel_mesh
 	face.material_override = table._face_materials[wall % 2]
 	root.add_child(face)
-	face.global_transform = global_transform * Transform3D(Basis.IDENTITY, stock_at)
+	face.global_transform = global_transform * Transform3D(Basis.IDENTITY, box_at)
 	create_tween().tween_property(face, "transform", frame.walls[wall] as Transform3D, 0.22).set_trans(Tween.TRANS_SINE)
 	filled[wall] = face
 	ghost.hide()
@@ -255,15 +352,14 @@ func add_face(index: int, wall: int) -> bool:
 
 func _complete(index: int) -> void:
 	var frame: Dictionary = frames[index]
-	var centre: Vector3 = frame.centre
-	# three landing places in front of the frame, taken in turn, so a reward does not fall on the one before
-	var at := Vector3(centre.x + [0.0, -0.22, 0.22][int(frame.made) % 3], TOP + 0.5, 0.64)
+	# the solid appears where the frame is and falls onto the plinth below
+	var at: Vector3 = frame.centre
 	var reward: Node3D
 	if frame.reward == "association":
 		reward = _association(at)
 		frame.last = _last_term
 	else:
-		reward = _solid(str(frame.reward), at)
+		reward = _solid(frame, at)
 		if frame.reward == "diamond":
 			reward.picked_up.connect(func(_who): _hold(reward, true))
 			reward.dropped.connect(func(_who): _hold(reward, false))
@@ -286,32 +382,28 @@ func _complete(index: int) -> void:
 	_count(index)
 
 
-## The closed form as one solid that falls: the diamond (two pyramids base to base) or the cube.
-func _solid(kind: String, at: Vector3) -> Node3D:
-	var reward := _falling("Diamond" if kind == "diamond" else "Cube", at)
+## The closed form as one solid that falls: the frame's own form, smaller, or the cube.
+func _solid(frame: Dictionary, at: Vector3) -> Node3D:
+	var reward := _falling(str(frame.reward).capitalize(), at)
 	var shape := CollisionShape3D.new()
-	if kind == "diamond":
-		const TIP := 0.13
-		var points := PackedVector3Array([Vector3.UP * TIP, Vector3.DOWN * TIP, Vector3.RIGHT * TIP, Vector3.BACK * TIP, Vector3.LEFT * TIP, Vector3.FORWARD * TIP])
-		var triangles := []
-		for i in 4:
-			triangles.append([0, 2 + i, 2 + (i + 1) % 4])
-			triangles.append([1, 2 + (i + 1) % 4, 2 + i])
-		Kit.solid(reward, "Diamond", points, triangles, Color("bd85e5"), false)
+	if frame.reward == "cube":
+		var box := BoxShape3D.new()
+		box.size = Vector3.ONE * 0.20
+		Kit.box(reward, "Cube", Vector3.ZERO, box.size, frame.colour, false)
+		shape.shape = box
+	else:
+		var points := PackedVector3Array()
+		for point: Vector3 in frame.points: points.append(point * REWARD_SCALE)
+		Kit.solid(reward, "Solid", points, frame.faces, frame.colour, false)
 		var hull := ConvexPolygonShape3D.new()
 		hull.points = points
 		shape.shape = hull
-	else:
-		var box := BoxShape3D.new()
-		box.size = Vector3.ONE * 0.20
-		Kit.box(reward, "Cube", Vector3.ZERO, box.size, Color("8ed6e8"), false)
-		shape.shape = box
 	reward.add_child(shape)
 	table.add_child(reward, true)
 	return reward
 
 
-## A thing the hand can take, that falls and lies on the table until then.
+## A thing the hand can take, that falls and lies on the plinth until then.
 func _falling(title: String, at: Vector3) -> Node3D:
 	var body := Piece.new()
 	body.name = title
@@ -354,7 +446,7 @@ func _association(at: Vector3) -> Node3D:
 	for inner in thing.find_children("*", "CollisionObject3D", true, false):
 		(inner as CollisionObject3D).collision_layer = 0
 		(inner as CollisionObject3D).collision_mask = 0
-	# A table model: a thing larger than the hand is made at the size of the other rewards (a die stays a die).
+	# A model for the plinth: a thing larger than the hand is made at the size of the other rewards (a die stays a die).
 	var bounds: AABB = table.mesh_bounds(thing, body)
 	var largest := maxf(bounds.size.x, maxf(bounds.size.y, bounds.size.z)) if bounds.has_surface() else 0.0
 	if largest > HAND_SIZE:

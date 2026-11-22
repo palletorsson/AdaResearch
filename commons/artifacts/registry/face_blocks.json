@@ -1,0 +1,20 @@
+{
+  "artifacts": {
+    "face_block_triangle": {
+      "lookup_name": "face_block_triangle",
+      "name": "Triangle face / the building block in the hand",
+      "scene": "res://commons/artifacts/face_assembly/face_block_triangle.tscn",
+      "category": "primitives",
+      "map_ready": false,
+      "description": "One 32 cm triangle face. Taken from the hanging box at a building table it is the hand's selected item (the wrist clock shows it); a frame on the table takes one face for each trigger. Not placed in maps."
+    },
+    "face_block_square": {
+      "lookup_name": "face_block_square",
+      "name": "Square face / the building block in the hand",
+      "scene": "res://commons/artifacts/face_assembly/face_block_square.tscn",
+      "category": "primitives",
+      "map_ready": false,
+      "description": "One 32 cm square face. Taken from the hanging box at a building table it is the hand's selected item (the wrist clock shows it); a frame on the table takes one face for each trigger. Not placed in maps."
+    }
+  }
+}
