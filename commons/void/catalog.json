@@ -84175,6 +84175,21 @@
         13
       ],
       "description": "A physical route between adjacent tower floors. Configure kind, drop, destination, and hole_z."
+    },
+    "worker_assemblage": {
+      "lookup_name": "worker_assemblage",
+      "scene": "res://commons/artifacts/worker_assemblage/worker_assemblage.tscn",
+      "label": "Worker Form & Dream-Body Assemblage",
+      "description": "Stages the humanoid Playground Worker alongside curated Endless Museum DreamBodies sculptures in solo, dyad, trio, assemblage, or workbench_arc formations. Enforces monochrome before Color (F28) and unlocks full colour + palette sync from Color onward.",
+      "uses_building_capabilities": true,
+      "configure_before_ready": true,
+      "group": true,
+      "footprint": [
+        2.1,
+        2.3,
+        1.6
+      ],
+      "category": "worker_assemblage"
     }
   },
   "props": {

@@ -1,0 +1,43 @@
+{
+  "registry_info": {
+    "category": "worker_assemblage",
+    "description": "Endless Museum Dream-Body sculptural formations and Bauhaus worker assemblages for the Void Tower and around Playground Workbenches.",
+    "created": "2026-11-22"
+  },
+  "artifacts": {
+    "worker_assemblage": {
+      "lookup_name": "worker_assemblage",
+      "scene": "res://commons/artifacts/worker_assemblage/worker_assemblage.tscn",
+      "class_name": "WorkerAssemblage",
+      "name": "Worker Form & Dream-Body Assemblage",
+      "description": "Stages the humanoid Playground Worker (WorkerBeing) alongside curated Endless Museum DreamBodies sculptures in solo, dyad, trio, hybrid assemblage, or workbench_arc formations. Enforces monochrome architectural finish before Color (F28) and unlocks full sculptural colour + palette harmony on Color floors and F209, with flush interactive FORM / AXIS / MODE controls.",
+      "category": "worker_assemblage",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "uses_building_capabilities": true,
+      "configure_before_ready": true,
+      "footprint": [
+        2,
+        2,
+        1
+      ],
+      "default_params": {
+        "formation": "dyad",
+        "stage": "auto",
+        "monochrome": "auto",
+        "interactive": true
+      },
+      "tags": [
+        "worker",
+        "assemblage",
+        "dream_bodies",
+        "sculpture",
+        "endless_museum",
+        "bauhaus",
+        "playground",
+        "void"
+      ]
+    }
+  }
+}

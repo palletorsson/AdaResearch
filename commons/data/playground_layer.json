@@ -1,0 +1,358 @@
+{
+  "schema": "ada.playground-layer/1",
+  "title": "The General Intellect Playground Layer",
+  "thesis": "A cumulative vertical layer running through all 26 sequences (F0-F209) of the Void Tower. Each sequence opens a new concrete possibility on the unified Bauhaus Studio Workstation and inside the 20m x 14m VR playground — progressing from base production (point, line, triangle, quad, package, coin, bomb) through motion, arrays, colour, pattern, force, wave, chance, noise, emergence, soft/implicit/boolean form, and finally into a thinking mind map for paradoxes, edges, crisis, and collective negotiation.",
+  "arcs": [
+    {
+      "id": "production",
+      "title": "I · Production & Association",
+      "floors": [0, 12],
+      "summary": "Base Bauhaus spatial grammar (point -> line -> triangle -> solid -> quad) plus association() pickups: Package (F7 health + battery power-up), Bomb (F8 proximity blast), and Power Coin."
+    },
+    {
+      "id": "motion",
+      "title": "II · Motion, Agency & Logic",
+      "floors": [13, 22],
+      "summary": "Static elements begin to move (translate, rotate, scale) and Package, Power Coin, and Proximity Bomb become directly placeable inside the Playground Studio."
+    },
+    {
+      "id": "arrays_color",
+      "title": "III · Arrays & Colour",
+      "floors": [23, 36],
+      "summary": "1D, 2D, and 3D array stamping unlocks structural repetition; Colour releases the 6-Palette Chooser and surface spray-painting coats."
+    },
+    {
+      "id": "pattern_force_wave",
+      "title": "IV · Pattern, Force & Wave",
+      "floors": [37, 73],
+      "summary": "Procedural panel patterns (checker, diamond, stripe, 17-symmetry), Force Jump Forward & Sound Jump Pads, tension spans, and Big Pipe Systems."
+    },
+    {
+      "id": "chance_noise",
+      "title": "V · Randomness, Noise & Shaders",
+      "floors": [74, 105],
+      "summary": "One-click Random Walk playground generation, hard-to-walk spiky Randomness basin surfaces, configurable walkable smooth Noise surfaces, and reactive shader skins."
+    },
+    {
+      "id": "emergence",
+      "title": "VI · Automata, Fractals, L-Systems & ProcGen",
+      "floors": [106, 135],
+      "summary": "Neighbour-cell CA block control, recursive Menger Sponge playgrounds, L-system plant props fitted to the grid, and grammar-evolved procedural playgrounds."
+    },
+    {
+      "id": "soft_implicit_boolean",
+      "title": "VII · Softbodies, Isosurfaces & Booleans",
+      "floors": [136, 160],
+      "summary": "Deformable softbody canopies/pads, 4x4x4 isosurface cutouts (tunnel, crossing, dome, spiral ramp), and carved walkable boolean spaces."
+    },
+    {
+      "id": "mindmap_consciousness",
+      "title": "VIII · Cities, Paradoxes, Crisis & Consciousness",
+      "floors": [161, 209],
+      "summary": "The playground transforms into a spatial mind map for thinking through swarm trails, graph topologies, error landscapes, paradoxes, edges, crisis, and collective negotiation."
+    }
+  ],
+  "sequences": [
+    {
+      "id": "primitives",
+      "arc": "production",
+      "floors": [0, 12],
+      "unlock_floor": 1,
+      "capability": "Base Bauhaus grid grammar (point, 1m/2m rod, triangle, wedge, pyramid, quad) + association() Package (F7 health+battery power-up), Power Coin, and Proximity Bomb (F8).",
+      "studio_unlocks": ["point", "rod_short", "rod", "panel", "wedge", "pyramid", "quad", "erase"],
+      "tower_milestones": [
+        {"floor": 1, "map": "Point_One", "milestone": "Studio Workstation Tier 0 (Points) + Monochrome Asawa Wire worker arc"},
+        {"floor": 3, "map": "Point_Lines", "milestone": "Studio Workstation Tier 1 (1m & 2m Rods)"},
+        {"floor": 5, "map": "Point_Triangle_Context", "milestone": "Studio Workstation Tier 2 (Triangles)"},
+        {"floor": 6, "map": "Primitives_Polythedra", "milestone": "Studio Workstation Tier 2+ (Wedge & Pyramid solids)"},
+        {"floor": 7, "map": "Point_Animatedcube", "milestone": "Studio Workstation Tier 3 (Quads) + Monochrome Package (walk over -> +25% Health & Battery Power Up)"},
+        {"floor": 8, "map": "Primitives_Ignorance", "milestone": "Introduce Monochrome Proximity Bomb (detonates when approached)"}
+      ],
+      "status": "live",
+      "sources": [
+        "commons/artifacts/scaffold_workstation/bauhaus_kit.gd",
+        "commons/artifacts/scaffold_workstation/studio_workstation.gd",
+        "commons/void/gift_cube.gd",
+        "commons/void/coin_pickup.gd",
+        "commons/hazards/electrical_mine/electrical_mine.gd"
+      ]
+    },
+    {
+      "id": "transformation",
+      "arc": "motion",
+      "floors": [13, 21],
+      "unlock_floor": 13,
+      "capability": "Kinetic motion + placeable Package (drops Health & Battery Power Up), Power Coin (+Battery & score), and Proximity Bomb in the Playground Studio.",
+      "studio_unlocks": ["package", "coin", "bomb"],
+      "status": "live",
+      "sources": [
+        "commons/void/gift_cube.gd",
+        "commons/void/coin_pickup.gd",
+        "commons/hazards/electrical_mine/electrical_mine.gd",
+        "commons/artifacts/scaffold_workstation/studio_workstation.gd"
+      ]
+    },
+    {
+      "id": "logic",
+      "arc": "motion",
+      "floors": [22, 22],
+      "unlock_floor": 22,
+      "capability": "Support & event gates (AND / OR / NOT physical triggers linking placed packages, switches, and pathways).",
+      "studio_unlocks": ["logic_gate"],
+      "status": "blueprint_coupled",
+      "sources": ["commons/artifacts/pallet_assemblage/pallet_assemblage.tscn"]
+    },
+    {
+      "id": "array_tutorial",
+      "arc": "arrays_color",
+      "floors": [23, 27],
+      "unlock_floor": 23,
+      "capability": "1D, 2D, and 3D Array stamping on the Studio Console (repeat any selected block along X, XZ, or XYZ in one trigger pull).",
+      "studio_unlocks": ["array_1d", "array_2d", "array_3d"],
+      "status": "live",
+      "sources": ["commons/artifacts/scaffold_workstation/studio_workstation.gd"]
+    },
+    {
+      "id": "color",
+      "arc": "arrays_color",
+      "floors": [28, 36],
+      "unlock_floor": 28,
+      "capability": "6-Palette Chooser (MONO, BAUHAUS, QUEER, ALBERS, MONDRIAN, MEMPHIS) synced to companion sculptures + surface spray-painting.",
+      "studio_unlocks": ["palette_chooser", "spray_paint"],
+      "status": "live",
+      "sources": [
+        "commons/artifacts/scaffold_workstation/bauhaus_kit.gd",
+        "commons/artifacts/scaffold_workstation/studio_workstation.gd",
+        "commons/void/ada_look.gd"
+      ]
+    },
+    {
+      "id": "tiling",
+      "arc": "pattern_force_wave",
+      "floors": [37, 44],
+      "unlock_floor": 37,
+      "capability": "Procedural panel patterns (PLAIN, CHECKER, DIAMOND, STRIPE) painted cleanly onto playground panels and quads.",
+      "studio_unlocks": ["panel_pattern"],
+      "status": "live",
+      "sources": [
+        "commons/artifacts/scaffold_workstation/bauhaus_kit.gd",
+        "commons/artifacts/pattern_tile_puzzle/"
+      ]
+    },
+    {
+      "id": "forces",
+      "arc": "pattern_force_wave",
+      "floors": [45, 55],
+      "unlock_floor": 45,
+      "capability": "Jump Forward Pads (force_pad) and Sound Jump Pads placeable directly onto the playground grid.",
+      "studio_unlocks": ["jump_pad", "sound_jump_pad"],
+      "status": "live",
+      "sources": ["commons/artifacts/force_pad/force_pad.tscn"]
+    },
+    {
+      "id": "formfinding",
+      "arc": "pattern_force_wave",
+      "floors": [56, 61],
+      "unlock_floor": 56,
+      "capability": "Tension arches, catenary bridges, and equilibrium spans connecting elevated quads.",
+      "studio_unlocks": ["catenary_span"],
+      "status": "blueprint_coupled",
+      "sources": ["commons/void/formfinding_screen_local.gd"]
+    },
+    {
+      "id": "wavefunctions",
+      "arc": "pattern_force_wave",
+      "floors": [62, 73],
+      "unlock_floor": 62,
+      "capability": "Big Pipe Systems (BigPipeSystem) and walkable harmonic sine bridges integrated into the playground.",
+      "studio_unlocks": ["big_pipe", "sine_bridge"],
+      "status": "blueprint_coupled",
+      "sources": [
+        "algorithms/wavefunctions/big_pipe_system/BigPipeSystem.tscn",
+        "algorithms/wavefunctions/unit_circle/walkable_sine_bridge.tscn"
+      ]
+    },
+    {
+      "id": "randomness",
+      "arc": "chance_noise",
+      "floors": [74, 88],
+      "unlock_floor": 74,
+      "capability": "Random playground generation, Random Walk path generator, and hard-to-walk spiky Randomness obstacle surface in the basin construction.",
+      "studio_unlocks": ["random_walk_gen", "basin_spikes"],
+      "status": "live",
+      "sources": [
+        "commons/context/walkgrids/RandomSpace.gd",
+        "commons/artifacts/scaffold_workstation/playground_layer.gd"
+      ]
+    },
+    {
+      "id": "noise",
+      "arc": "chance_noise",
+      "floors": [89, 99],
+      "unlock_floor": 89,
+      "capability": "Configurable walkable smooth Noise surface (simplex/perlin/cellular, octaves, amplitude, frequency, seed) inside the basin construction.",
+      "studio_unlocks": ["basin_noise"],
+      "status": "live",
+      "sources": [
+        "commons/context/walkgrids/NoiseSpace.gd",
+        "commons/artifacts/scaffold_workstation/playground_layer.gd"
+      ]
+    },
+    {
+      "id": "shaders",
+      "arc": "chance_noise",
+      "floors": [100, 105],
+      "unlock_floor": 100,
+      "capability": "Reactive architectural shader skins (contour lines, reaction-diffusion patina, height fields) on playground surfaces.",
+      "studio_unlocks": ["shader_skin"],
+      "status": "blueprint_coupled",
+      "sources": ["commons/context/walkgrids/noise_walk_skin.gdshader"]
+    },
+    {
+      "id": "cellularautomata",
+      "arc": "emergence",
+      "floors": [106, 113],
+      "unlock_floor": 106,
+      "capability": "Neighbouring-cell CA control: placed blocks step through neighbour rules (birth/survival/toggle) across the playground grid.",
+      "studio_unlocks": ["ca_step"],
+      "status": "blueprint_coupled",
+      "sources": ["commons/context/walkgrids/CellularAutomataSpace.gd"]
+    },
+    {
+      "id": "fractals",
+      "arc": "emergence",
+      "floors": [114, 120],
+      "unlock_floor": 114,
+      "capability": "Recursive Menger Sponge playgrounds and self-similar carved climbing towers.",
+      "studio_unlocks": ["menger_block"],
+      "status": "blueprint_coupled",
+      "sources": ["algorithms/fractals/mengersponge/menger_sponge.tscn"]
+    },
+    {
+      "id": "lsystems",
+      "arc": "emergence",
+      "floors": [121, 128],
+      "unlock_floor": 121,
+      "capability": "L-System botanical plant props scaled and grounded cleanly to fit the playground grid.",
+      "studio_unlocks": ["lsystem_plant"],
+      "status": "blueprint_coupled",
+      "sources": ["commons/context/walkgrids/LSystemSpace.gd"]
+    },
+    {
+      "id": "proceduralgeneration",
+      "arc": "emergence",
+      "floors": [129, 135],
+      "unlock_floor": 129,
+      "capability": "Grammar-driven procedural playground synthesis combining constraints, rhythms, and evolutionary scoring.",
+      "studio_unlocks": ["procgen_course"],
+      "status": "blueprint_coupled",
+      "sources": ["commons/modular/grid_playground.gd"]
+    },
+    {
+      "id": "softbodies",
+      "arc": "soft_implicit_boolean",
+      "floors": [136, 144],
+      "unlock_floor": 136,
+      "capability": "Softbody add-ons (elastic landings, cloth sails, hanging straps, deformable cushions) mounted onto the Bauhaus frame.",
+      "studio_unlocks": ["softbody_canopy"],
+      "status": "blueprint_coupled",
+      "sources": ["algorithms/physicssimulation/clothsimulation/cloth_ease_study.gd"]
+    },
+    {
+      "id": "isosurfaces",
+      "arc": "soft_implicit_boolean",
+      "floors": [145, 157],
+      "unlock_floor": 145,
+      "capability": "Isosurface 4x4x4 cutout modules (tunnel, crossing, dome, spiral_ramp, gutter_ramp, basin) fitting directly onto the playground grid.",
+      "studio_unlocks": ["iso_cutout"],
+      "status": "live",
+      "sources": ["commons/artifacts/iso_prefabs/iso_prefab.tscn"]
+    },
+    {
+      "id": "boolean_surfaces",
+      "arc": "soft_implicit_boolean",
+      "floors": [158, 160],
+      "unlock_floor": 158,
+      "capability": "Walkable Boolean spaces (difference tunnels, smooth-union stiles, intersection casts, carved passes).",
+      "studio_unlocks": ["boolean_space"],
+      "status": "live",
+      "sources": [
+        "commons/artifacts/iso_prefabs/iso_prefab.gd",
+        "commons/artifacts/radial_inside/rhizome_inside.tscn"
+      ]
+    },
+    {
+      "id": "swarmintelligence",
+      "arc": "mindmap_consciousness",
+      "floors": [161, 167],
+      "unlock_floor": 161,
+      "capability": "Mind-map pheromone trails & collective worker routing across playground nodes.",
+      "studio_unlocks": ["swarm_trails"],
+      "status": "blueprint_coupled",
+      "sources": ["commons/context/walkgrids/FlowFieldSpace.gd"]
+    },
+    {
+      "id": "graphtheory",
+      "arc": "mindmap_consciousness",
+      "floors": [168, 175],
+      "unlock_floor": 168,
+      "capability": "Graph-edge thinking: shortest path, spanning trees, bottlenecks, and cycle rank rendered directly onto the playground topology.",
+      "studio_unlocks": ["graph_overlay"],
+      "status": "blueprint_coupled",
+      "sources": ["algorithms/graphtheory/pathfinding3d/pathfinding3d.tscn"]
+    },
+    {
+      "id": "machinelearning",
+      "arc": "mindmap_consciousness",
+      "floors": [176, 183],
+      "unlock_floor": 176,
+      "capability": "Objective landscapes & loss-surface negotiation where choices reshape the walkable terrain.",
+      "studio_unlocks": ["loss_basin"],
+      "status": "blueprint_coupled",
+      "sources": ["commons/artifacts/basin_field/basin_field.gd"]
+    },
+    {
+      "id": "foundationscrisis",
+      "arc": "mindmap_consciousness",
+      "floors": [184, 191],
+      "unlock_floor": 184,
+      "capability": "Paradox & edge nodes: undecidable gates, self-referential loops, and impossible edges staged as navigable thought spaces.",
+      "studio_unlocks": ["paradox_gate"],
+      "status": "blueprint_coupled",
+      "sources": ["commons/context/walkgrids/KnowledgeTerrainSpace.gd"]
+    },
+    {
+      "id": "qfeplaboratory",
+      "arc": "mindmap_consciousness",
+      "floors": [192, 199],
+      "unlock_floor": 192,
+      "capability": "Queer Free-Energy negotiation: precision, surprise, and care trade-offs mapped across the playground.",
+      "studio_unlocks": ["qfep_field"],
+      "status": "blueprint_coupled",
+      "sources": ["commons/context/walkgrids/KnowledgeTerrainSpace.gd"]
+    },
+    {
+      "id": "postfoundationscrisis",
+      "arc": "mindmap_consciousness",
+      "floors": [200, 207],
+      "unlock_floor": 200,
+      "capability": "Situated witness & bias reflection: multiple observer stations comparing what each framing reveals or hides on the playground.",
+      "studio_unlocks": ["witness_stations"],
+      "status": "blueprint_coupled",
+      "sources": ["commons/artifacts/worker_assemblage/worker_assemblage.gd"]
+    },
+    {
+      "id": "playground_research",
+      "arc": "mindmap_consciousness",
+      "floors": [208, 209],
+      "unlock_floor": 208,
+      "capability": "Full General Intellect Synthesis Atelier: every unlocked studio tool, object, array, palette, pattern, jump pad, random walk, spike/noise basin, and 4x4x4 isosurface cutout combined in one sandbox.",
+      "studio_unlocks": ["all_unlocked"],
+      "status": "live",
+      "sources": [
+        "commons/artifacts/scaffold_workstation/studio_workstation.gd",
+        "commons/artifacts/worker_assemblage/worker_assemblage.gd"
+      ]
+    }
+  ]
+}

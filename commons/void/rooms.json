@@ -380,7 +380,9 @@
             },
             "space_from": "scaffold_workstation_points",
             "tier": 0,
-            "space": true,
+            "prefabs_enabled": false,
+            "studio": true,
+            "palette": "bauhaus",
             "chamber_height": 5.4,
             "space_floor": 1
           },
@@ -1938,16 +1940,18 @@
             },
             "space_from": "scaffold_workstation_lines",
             "tier": 1,
-            "space": true,
+            "prefabs_enabled": false,
+            "studio": true,
+            "palette": "bauhaus",
             "chamber_height": 5.4,
             "space_floor": 3
           },
-          "facing": 0,
+          "facing": 180,
           "height": 0,
           "id": "scaffold-workstation",
           "position": [
             -10,
-            4.25
+            -4.25
           ],
           "scale": 1,
           "station": "SW"
@@ -2209,7 +2213,7 @@
           "facing": 0,
           "scale": 1,
           "config": {
-            "editor_label": "Rod stock / 4 \u00d7 8 and four perspective studies",
+            "editor_label": "Rod stock / 4 × 8 and four perspective studies",
             "exterior_walk": true
           }
         }
@@ -3787,7 +3791,9 @@
             },
             "space_from": "scaffold_workstation_surfaces",
             "tier": 2,
-            "space": true,
+            "prefabs_enabled": false,
+            "studio": true,
+            "palette": "bauhaus",
             "chamber_height": 5.4,
             "space_floor": 5
           },
@@ -4994,7 +5000,9 @@
             },
             "space_from": "scaffold_workstation_solids",
             "tier": 2,
-            "space": true,
+            "prefabs_enabled": true,
+            "studio": true,
+            "palette": "bauhaus",
             "chamber_height": 5.4,
             "space_floor": 6
           },
@@ -7255,6 +7263,64 @@
             "editor_label": "Salvage stack / lamp",
             "lean": -6
           }
+        },
+        {
+          "artifact": "scaffold_workstation_display",
+          "config": {
+            "parts": {
+              "Output": {
+                "position": [
+                  0,
+                  0,
+                  -4.25
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            },
+            "space_from": "scaffold_workstation_quads",
+            "tier": 3,
+            "prefabs_enabled": true,
+            "studio": true,
+            "palette": "bauhaus",
+            "chamber_height": 5.4,
+            "space_floor": 7
+          },
+          "facing": 180,
+          "height": 0,
+          "id": "scaffold-workstation",
+          "position": [
+            -10,
+            -4.25
+          ],
+          "scale": 1,
+          "station": "SW"
+        },
+        {
+          "id": "animatedcube-health-package",
+          "artifact": "void_gift_cube",
+          "station": "NW",
+          "position": [
+            -5.5,
+            -4.25
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "gift": "health_powerup",
+            "health_boost": 25,
+            "drop_powerup": true,
+            "instant_powerup": true,
+            "motion": "still",
+            "monochrome": true,
+            "support": false,
+            "tower_services": false,
+            "editor_label": "Package / Health + Battery Power Up (walk over)"
+          }
         }
       ],
       "impact_cells": [],
@@ -8262,6 +8328,33 @@
             "shape": "kite",
             "colour": "white",
             "editor_label": "Primitive light / white kite on the north column at x 20"
+          }
+        },
+        {
+          "id": "ignorance-proximity-bomb",
+          "artifact": "electrical_mine_rolling",
+          "station": "SW",
+          "position": [
+            -3.2,
+            2.2
+          ],
+          "height": 0,
+          "facing": 0,
+          "scale": 1,
+          "config": {
+            "behavior": "static",
+            "monochrome": true,
+            "dna": "061",
+            "accent": "f2f2ef",
+            "show_sweep": true,
+            "proximity_radius": 1.85,
+            "shock_radius": 3.2,
+            "battery_damage": 25,
+            "fuse_seconds": 0.45,
+            "rearm_seconds": 6.0,
+            "support": false,
+            "tower_services": false,
+            "editor_label": "Bomb / Proximity blast introduced on Primitives_Ignorance"
           }
         }
       ],
@@ -11392,7 +11485,7 @@
           "scale": 1,
           "config": {
             "support": false,
-            "editor_label": "01 / STILL \u00b7 Position, direction and size stay fixed.",
+            "editor_label": "01 / STILL · Position, direction and size stay fixed.",
             "demonstration": true,
             "dna": "061",
             "accent": "65dff8",
@@ -11429,7 +11522,7 @@
           "scale": 1,
           "config": {
             "support": false,
-            "editor_label": "02 / TRANSLATE \u00b7 Shift in X along the floor.",
+            "editor_label": "02 / TRANSLATE · Shift in X along the floor.",
             "demonstration": true,
             "dna": "061",
             "accent": "65dff8",
@@ -11471,7 +11564,7 @@
           "scale": 1,
           "config": {
             "support": false,
-            "editor_label": "03 / ROTATE \u00b7 Turn in place about the vertical axis.",
+            "editor_label": "03 / ROTATE · Turn in place about the vertical axis.",
             "demonstration": true,
             "dna": "061",
             "accent": "65dff8",
@@ -11509,7 +11602,7 @@
           "scale": 1,
           "config": {
             "support": false,
-            "editor_label": "04 / SCALE \u00b7 Grow and shrink about the same centre.",
+            "editor_label": "04 / SCALE · Grow and shrink about the same centre.",
             "demonstration": true,
             "dna": "061",
             "accent": "65dff8",
@@ -11547,7 +11640,7 @@
           "scale": 1,
           "config": {
             "support": false,
-            "editor_label": "05 / COMBINE \u00b7 Follow X then Z, turning and growing.",
+            "editor_label": "05 / COMBINE · Follow X then Z, turning and growing.",
             "demonstration": true,
             "dna": "061",
             "accent": "65dff8",
@@ -30328,6 +30421,33 @@
             "text": "CIRCUIT COMPLETE / SHAFT B TO INTRODUCTION",
             "mount": "floor"
           }
+        },
+        {
+          "id": "worker-assemblage-trans-pre",
+          "artifact": "worker_assemblage",
+          "station": "SW",
+          "position": [
+            -17.2,
+            5.2
+          ],
+          "height": 0.0,
+          "facing": 40.0,
+          "scale": 1.0,
+          "config": {
+            "formation": "assemblage",
+            "stage": "transformation",
+            "figure": "panel_robot",
+            "secondary_figure": "stijl_robot",
+            "opts": {
+              "panelling": "shed",
+              "assembly": "twinned"
+            },
+            "monochrome": "auto",
+            "interactive": true,
+            "tower_services": false,
+            "title": "TRANSFORMATION ASSEMBLAGE",
+            "editor_label": "Worker Assemblage / Trans Pre monochrome formation"
+          }
         }
       ],
       "props": [
@@ -32750,7 +32870,7 @@
             "pause_seconds": 2.4,
             "motion": "automatic",
             "staging": "route",
-            "editor_label": "C \u00c3\u00a2\u00e2\u20ac\u00a0\u00e2\u20ac\u2122 A \u00c3\u00a2\u00e2\u20ac\u00a0\u00e2\u20ac\u2122 B / raised pivot route",
+            "editor_label": "C Ã¢â€ â€™ A Ã¢â€ â€™ B / raised pivot route",
             "prefab_id": "pivot_variant_0f0eabb9294c465d"
           }
         },
@@ -46951,6 +47071,29 @@
           "height": 0,
           "facing": 0,
           "scale": 1
+        },
+        {
+          "id": "worker-assemblage-trans-body",
+          "artifact": "worker_assemblage",
+          "station": "SE",
+          "position": [
+            10.0,
+            5.2
+          ],
+          "height": 0.0,
+          "facing": 215.0,
+          "scale": 1.0,
+          "config": {
+            "formation": "trio",
+            "stage": "transformation",
+            "figure": "hadid_shell",
+            "secondary_figure": "pierced_screen",
+            "monochrome": "auto",
+            "interactive": true,
+            "tower_services": false,
+            "title": "THE BODY · WORKER TRIO",
+            "editor_label": "Worker Assemblage / Trans Body monochrome trio"
+          }
         }
       ],
       "props": [],
@@ -47027,7 +47170,7 @@
           "facing": 0,
           "scale": 1,
           "config": {
-            "editor_label": "01\u201302 / Slide the opening, then change its width"
+            "editor_label": "01–02 / Slide the opening, then change its width"
           }
         },
         {
@@ -47098,7 +47241,7 @@
           ]
         },
         {
-          "label": "SHAFT B / EAST \u2192",
+          "label": "SHAFT B / EAST →",
           "position": [
             3.75,
             -8.42
@@ -47638,7 +47781,7 @@
           "scale": 1,
           "facing": 0,
           "config": {
-            "editor_label": "AND / OR / return \u2014 two hand levers and a feedback linkage"
+            "editor_label": "AND / OR / return — two hand levers and a feedback linkage"
           }
         },
         {
@@ -49964,6 +50107,30 @@
             "max_width": 1.5,
             "tower_services": false
           }
+        },
+        {
+          "id": "worker-assemblage-color-arrival",
+          "artifact": "worker_assemblage",
+          "station": "SW",
+          "position": [
+            -9.5,
+            5.2
+          ],
+          "height": 0.0,
+          "facing": 155.0,
+          "scale": 1.0,
+          "config": {
+            "formation": "dyad",
+            "stage": "color",
+            "figure": "stijl_robot",
+            "secondary_figure": "masked_dancer",
+            "palette": "bauhaus",
+            "monochrome": "auto",
+            "interactive": true,
+            "tower_services": false,
+            "title": "COLOUR FORMATION · STIJL WORKER",
+            "editor_label": "Worker Assemblage / Color arrival dyad"
+          }
         }
       ],
       "props": [],
@@ -50972,6 +51139,42 @@
             "editor_label": "Fishbone + square / palette",
             "mode": "palette"
           }
+        },
+        {
+          "artifact": "scaffold_workstation_display",
+          "config": {
+            "parts": {
+              "Output": {
+                "position": [
+                  0,
+                  0,
+                  -4.25
+                ],
+                "rotation": [
+                  0,
+                  0,
+                  0
+                ]
+              }
+            },
+            "space_from": "scaffold_workstation_quads",
+            "tier": 3,
+            "prefabs_enabled": true,
+            "studio": true,
+            "palette": "bauhaus",
+            "color_palette": "bauhaus",
+            "chamber_height": 5.4,
+            "space_floor": 33
+          },
+          "facing": 180,
+          "height": 0,
+          "id": "scaffold-workstation",
+          "position": [
+            10,
+            -4.25
+          ],
+          "scale": 1,
+          "station": "NE"
         }
       ],
       "props": [],
@@ -57609,7 +57812,7 @@
               "label": "Veil twist",
               "low": -27,
               "high": 52,
-              "unit": "\u00b0"
+              "unit": "°"
             }
           }
         },
@@ -58199,7 +58402,7 @@
           "config": {
             "variant": "bench",
             "start_revealed": false,
-            "editor_label": "Hall Bench \u00b7 Mesh Morph"
+            "editor_label": "Hall Bench · Mesh Morph"
           }
         },
         {
@@ -58216,7 +58419,7 @@
           "config": {
             "variant": "stool",
             "start_revealed": false,
-            "editor_label": "Workshop Stool \u00b7 Mesh Morph"
+            "editor_label": "Workshop Stool · Mesh Morph"
           }
         },
         {
@@ -58233,7 +58436,7 @@
           "config": {
             "variant": "side_table",
             "start_revealed": false,
-            "editor_label": "Side Table \u00b7 Mesh Morph"
+            "editor_label": "Side Table · Mesh Morph"
           }
         },
         {
@@ -58250,7 +58453,7 @@
           "config": {
             "variant": "cabinet",
             "start_revealed": false,
-            "editor_label": "Hall Cabinet \u00b7 Bifold Doors"
+            "editor_label": "Hall Cabinet · Bifold Doors"
           }
         },
         {
@@ -64962,7 +65165,7 @@
           "height": 0,
           "scale": 1,
           "config": {
-            "editor_label": "Pyramid drop / 5 \u00d7 5 inverted blockers"
+            "editor_label": "Pyramid drop / 5 × 5 inverted blockers"
           }
         }
       ],
@@ -70709,7 +70912,7 @@
                       "content": "shader",
                       "shader": "res://algorithms/shaders/book_of_shaders/drag_extravaganza.gdshader",
                       "params": {},
-                      "title": "05  \u2605 DRAG EXTRAVAGANZA \u2605"
+                      "title": "05  ★ DRAG EXTRAVAGANZA ★"
                     }
                   ],
                   "label": true
@@ -90074,8 +90277,12 @@
           "scale": 1,
           "config": {
             "tier": 3,
+            "prefabs_enabled": true,
             "persist": false,
-            "palette": "white"
+            "studio": true,
+            "palette": "bauhaus",
+            "chamber_height": 5.4,
+            "space_floor": 209
           }
         },
         {
@@ -90108,6 +90315,30 @@
           "config": {
             "destination": "Primitives_Melencolia",
             "caption": "BACK TO MELENCOLIA"
+          }
+        },
+        {
+          "id": "worker-assemblage-atelier",
+          "artifact": "worker_assemblage",
+          "station": "SE",
+          "position": [
+            2.8,
+            0.6
+          ],
+          "height": 0.0,
+          "facing": 65.0,
+          "scale": 1.0,
+          "config": {
+            "formation": "assemblage",
+            "stage": "color",
+            "figure": "stijl_robot",
+            "secondary_figure": "asawa_wire",
+            "palette": "bauhaus",
+            "monochrome": "auto",
+            "interactive": true,
+            "tower_services": false,
+            "title": "ATELIER ASSEMBLAGE · CORD TO SLAB",
+            "editor_label": "Worker Assemblage / F209 Atelier monument"
           }
         }
       ],

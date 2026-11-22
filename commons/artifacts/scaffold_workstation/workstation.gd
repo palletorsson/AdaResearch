@@ -10,6 +10,7 @@ const ButtonScene=preload("res://commons/interactables/push_button.tscn")
 const Finishes=preload("res://commons/modular/construction_materials.gd")
 const PartsArc=preload("parts_arc.gd")
 const Fitted=preload("fitted_geometry.gd")
+const Bauhaus=preload("bauhaus_kit.gd")
 const SCALE:=Model.HAND_STEP
 const WORLD_UNIT:=Model.WORLD_STEP
 ## THE LATTICE STEP PER STATION (Palle, 2026-10-31: at Point One "the 6-ball neck to neck", then from Point Lines "a
@@ -68,6 +69,7 @@ var brush_target:=""
 
 func _ready() -> void:
 	tier=int(get_meta("config_tier",tier));persist=bool(get_meta("config_persist",persist))
+	prefabs_enabled=bool(get_meta("config_prefabs_enabled",prefabs_enabled))
 	workshop_look=str(get_meta("config_palette",workshop_look))
 	material_phase=Finishes.phase_for(self)
 	# Export/test projects never read or write the visitor's construction.
@@ -263,8 +265,11 @@ static func vertices(half:int,unit:float)->PackedVector3Array:return Geometry.ve
 ## slim fitted parts and white-with-edges finish the playground draws with that palette (points, rods, quads fitted;
 ## the cell solids and triangles keep their kit geometry, whitened), so the bench, the glass box and the floor agree.
 func fitted_kind(r:Dictionary)->bool:return workshop_look==Fitted.PALETTE_WHITE and str(r.get("kind","")) in ["point","rod","rod_short","quad"]
-func shape_for(r:Dictionary,unit:float)->Shape3D:return Fitted.shape_for(r,unit) if fitted_kind(r) else Geometry.shape_for(r,unit)
+func shape_for(r:Dictionary,unit:float)->Shape3D:
+	if workshop_look==Bauhaus.PALETTE_BAUHAUS:return Bauhaus.shape_for(r,unit)
+	return Fitted.shape_for(r,unit) if fitted_kind(r) else Geometry.shape_for(r,unit)
 func visual(r:Dictionary,unit:float,phase:String="monochrome")->MeshInstance3D:
+	if workshop_look==Bauhaus.PALETTE_BAUHAUS:return Bauhaus.visual(r,unit,phase)
 	if workshop_look!=Fitted.PALETTE_WHITE:return Geometry.visual(r,unit,phase)
 	return Fitted.white(Fitted.visual(r,unit,phase) if fitted_kind(r) else Geometry.visual(r,unit,phase))
 

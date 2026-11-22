@@ -1,15 +1,18 @@
 extends "workstation.gd"
 ## Playground proportions at quarter scale; visitors enter at quarter body size.
 const Visit=preload("model_visit.gd")
+const StudioScript=preload("studio_workstation.gd")
 const CHAMBER:=6.6
 const CLEAR:=6.4
 # Six-metre storeys leave 5.64m below the next slab. The tall edition uses 6.6m.
 @export_range(3.0,6.6,.1) var chamber_height:=5.4
 @export_range(.1,1.0,.05) var model_scale:=.25
 @export_range(.1,1.0,.05) var visitor_scale:=.25
+@export var studio:=false
 const START_POSITION:=Vector3(0,.025,2.5)
 const START_CLEARANCE:=AABB(Vector3(-.45,.02,2.05),Vector3(.9,1.0,.9))
 var visit:Node3D
+var studio_ctrl:Node3D
 var fitted_offset:=Vector3.ZERO
 var test_ball:RigidBody3D
 var test_active:=false
@@ -20,6 +23,7 @@ var walk_builder:Node3D
 var place_controls:Node3D
 
 func _ready()->void:
+	chamber_height=clampf(float(get_meta("config_chamber_height",chamber_height)),3.0,CHAMBER)
 	super._ready()
 	output.position=Vector3(0,0,-4.25)
 	clear_children(output.get_node("Bay"))
@@ -41,9 +45,14 @@ func _ready()->void:
 		place_controls=load("res://commons/artifacts/scaffold_workstation/place_controls.gd").new()
 		place_controls.name="PlaceParameters";controls.add_child(place_controls);place_controls.configure(self)
 	remember_parts();redraw()
-	if bool(get_meta("config_space",space)):_enter_space()
+	if bool(get_meta("config_studio",studio)) and not bool(get_meta("config_space",space)):
+		studio=true
+		studio_ctrl=StudioScript.new();studio_ctrl.name="StudioWorkstation";add_child(studio_ctrl);studio_ctrl.configure(self)
+	elif bool(get_meta("config_space",space)):_enter_space()
 
 func output_unit()->float:return WORLD_UNIT*model_scale
+
+func lattice()->float:return 1.0 if studio or space else super.lattice()
 
 func visitor_start_pose()->Transform3D:
 	return output.get_node("Bay/VisitorStart").global_transform
@@ -102,7 +111,8 @@ func start_test()->void:
 	var mesh:=MeshInstance3D.new();var ball:=SphereMesh.new();ball.radius=.12*model_scale;ball.height=.24*model_scale;ball.radial_segments=20;ball.rings=10
 	mesh.mesh=ball;mesh.material_override=Kit.material(Color("e3e6e0"));test_ball.add_child(mesh)
 	test_ball.continuous_cd=true;test_ball.gravity_scale=model_scale
-	output.add_child(test_ball);test_ball.position=Vector3(0,(chamber_height-.35)*model_scale,0)
+	output.add_child(test_ball)
+	test_ball.position=Vector3(0,1.45,fitted_offset.z) if studio else Vector3(0,(chamber_height-.35)*model_scale,0)
 	test_active=true;test_passed=false;test_time=0;steady_time=0;feedback.text="TEST / falling under gravity…"
 
 func _physics_process(delta:float)->void:
@@ -287,12 +297,14 @@ func _update_inside()->void:
 ## The wand asks each frame: is the hand this editor's? While the player stands inside the box with nothing in the
 ## hand - a thing chosen on the hand menu is the hand's to place, as anywhere.
 func space_active(hand:Node,aim:Node3D)->bool:
+	if studio_ctrl!=null:return studio_ctrl.studio_active(hand,aim)
 	if not (space and _interactive and aim!=null and player_inside):return false
 	if hand==null:return true
 	var holding=hand.get("current")
 	return holding==null or str(holding)==""
 
 func space_hide()->void:
+	if studio_ctrl!=null:studio_ctrl.studio_hide();return
 	space_hover={}
 	if space_ghost!=null:clear_children(space_ghost)
 	if space_ray!=null:space_ray.visible=false
@@ -436,6 +448,7 @@ func _face_piece(p:Vector3,plane:Array,span:float,x:float,y:float)->Array:
 ## What the trigger would do now, shown before the pull: the ghost of the piece it makes, or the placed piece the
 ## grip would take away, in red.
 func space_update(aim:Node3D,_hand:Node=null)->void:
+	if studio_ctrl!=null:studio_ctrl.studio_update(aim,_hand);return
 	clear_children(space_ghost)
 	space_hover=_space_hover(aim)
 	var colour:=Color(1,1,1,.35);var target:Vector3=output.to_local(aim.global_position-aim.global_basis.z*SPACE_REACH)
@@ -468,6 +481,7 @@ func _draw_ray(from:Vector3,to:Vector3,colour:Color)->void:
 
 ## The trigger: makes the piece under the aim. Returns placed or refused.
 func space_press(aim:Node3D,hand:Node=null)->String:
+	if studio_ctrl!=null:return studio_ctrl.studio_press(aim,hand)
 	space_update(aim,hand)
 	space_notice=""
 	if space_hover.has("remove"):space_notice="that one stands: the grip takes it away";return "refused"
@@ -484,6 +498,7 @@ func space_press(aim:Node3D,hand:Node=null)->String:
 ## The grip: takes away the placed piece under the aim. False when there is none, so the grip stays the hand's
 ## (a thing placed from the hand menu is taken back by the hand).
 func space_grip()->bool:
+	if studio_ctrl!=null:return studio_ctrl.studio_grip()
 	if not player_inside or not space_hover.has("remove"):return false
 	var i:int=space_hover.remove
 	var kind:String=str(model.records[i].kind)
@@ -515,6 +530,7 @@ func _guide_state()->void:
 	if space_guide.text!=now:space_guide.text=now
 
 func redraw()->void:
+	if studio_ctrl!=null:studio_ctrl.redraw_all();return
 	super.redraw()
 	if space and space_sockets!=null:_redraw_space();_refresh_space_sockets()
 
@@ -563,9 +579,10 @@ func _save_space_build()->void:
 	if f:f.store_string(JSON.stringify({"version":1,"floor":space_floor,"records":model.records},"	"))
 
 func share()->void:
+	if studio_ctrl!=null:studio_ctrl.save_studio_build();return
 	if space:_save_space_build();return   # this floor's build only: no shared blueprint, no other station told
 	super.share()
 
 func receive(records:Array,sender:Node)->void:
-	if space:return   # another station's build is not this floor's
+	if studio_ctrl!=null or space:return   # another station's build is not this floor's
 	super.receive(records,sender)

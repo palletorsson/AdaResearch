@@ -1,0 +1,89 @@
+{
+  "artifacts": {
+    "electrical_mine_rolling": {
+      "lookup_name": "electrical_mine_rolling",
+      "name": "Rolling electrical mine",
+      "scene": "res://commons/hazards/electrical_mine/rolling.tscn",
+      "description": "A rolling charge with a recessed luminous seam and extruded teeth made with Mesh Grammar. Proximity or a thrown-object impact detonates the charge.",
+      "qfep_connection": "A local face rule changes the shell while a shared spherical collider keeps its rolling behavior consistent.",
+      "category": "hazards",
+      "dev_category": "hazards",
+      "configure_before_ready": true,
+      "parameters": {},
+      "tags": [
+        "mine",
+        "physics",
+        "shock",
+        "mesh_grammar"
+      ],
+      "footprint": [
+        2.6,
+        3.2,
+        2.6
+      ]
+    },
+    "electrical_mine_floor": {
+      "lookup_name": "electrical_mine_floor",
+      "name": "Floor electrical mine",
+      "scene": "res://commons/hazards/electrical_mine/floor.tscn",
+      "description": "Mesh Grammar charge: proximity or thrown-object impact detonates and drains Model B battery.",
+      "category": "hazards",
+      "dev_category": "hazards",
+      "configure_before_ready": true,
+      "parameters": {},
+      "tags": [
+        "mine",
+        "physics",
+        "shock",
+        "mesh_grammar"
+      ],
+      "footprint": [
+        2.6,
+        3.2,
+        2.6
+      ]
+    },
+    "electrical_mine_hanging": {
+      "lookup_name": "electrical_mine_hanging",
+      "name": "Hanging electrical mine",
+      "scene": "res://commons/hazards/electrical_mine/hanging.tscn",
+      "description": "Mesh Grammar charge: proximity or thrown-object impact detonates and drains Model B battery.",
+      "category": "hazards",
+      "dev_category": "hazards",
+      "configure_before_ready": true,
+      "parameters": {},
+      "tags": [
+        "mine",
+        "physics",
+        "shock",
+        "mesh_grammar"
+      ],
+      "footprint": [
+        2.6,
+        3.2,
+        2.6
+      ]
+    },
+    "electrical_mine_tentacle": {
+      "lookup_name": "electrical_mine_tentacle",
+      "name": "Tentacle electrical mine",
+      "scene": "res://commons/hazards/electrical_mine/tentacle.tscn",
+      "description": "Mesh Grammar charge: proximity or thrown-object impact detonates and drains Model B battery.",
+      "category": "hazards",
+      "dev_category": "hazards",
+      "configure_before_ready": true,
+      "parameters": {},
+      "tags": [
+        "mine",
+        "physics",
+        "shock",
+        "mesh_grammar"
+      ],
+      "footprint": [
+        2.6,
+        3.2,
+        2.6
+      ]
+    }
+  }
+}

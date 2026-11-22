@@ -8,6 +8,9 @@ const LIMIT := 3
 const WORLD_STEP := 2.0
 const HAND_STEP := .2
 var records: Array[Dictionary] = []
+var domain_min := Vector3(-1, -1, -1)
+var domain_max := Vector3(2, 2, 2)
+var free_ground_points := false
 
 static func vec(a: Array) -> Vector3:return Vector3(float(a[0]),float(a[1]),float(a[2]))
 static func arr(v: Vector3) -> Array:
@@ -16,6 +19,7 @@ static func arr(v: Vector3) -> Array:
 	return result
 static func key(v: Vector3) -> String:return "%.1f,%.1f,%.1f"%[v.x,v.y,v.z]
 static func inside(v: Vector3) -> bool:return v.x>=-1 and v.y>=-1 and v.z>=-1 and v.x<=2 and v.y<=2 and v.z<=2
+func in_domain(v: Vector3) -> bool:return v.x>=domain_min.x-.001 and v.y>=domain_min.y-.001 and v.z>=domain_min.z-.001 and v.x<=domain_max.x+.001 and v.y<=domain_max.y+.001 and v.z<=domain_max.z+.001
 
 func points() -> Dictionary:
 	var result := {key(Vector3.ZERO):Vector3.ZERO}
@@ -83,7 +87,7 @@ func line_records(a:Vector3,b:Vector3,nodes:Dictionary,pending:Array)->Array[Dic
 	var dir:Vector3=(b-a)/float(n)
 	for i in range(1,n+1):
 		var s:Vector3=a+dir*i
-		if not inside(s):return []
+		if not in_domain(s):return []
 		var planned:bool=pending.any(func(r):return r.kind=="point" and vec(r.at)==s)
 		if not nodes.has(key(s)) and not planned:out.append({"kind":"point","at":arr(s)})
 	for i in n:
@@ -98,7 +102,7 @@ func line_records(a:Vector3,b:Vector3,nodes:Dictionary,pending:Array)->Array[Dic
 func face_records(candidate:Dictionary)->Array[Dictionary]:
 	var face:=as_face(candidate);var span:float=float(face.span);var p:Vector3=vec(face.at)
 	var u:Vector3=Vector3(AXES[face.plane[0]])*span;var v:Vector3=Vector3(AXES[face.plane[1]])*span
-	if not inside(p) or not inside(p+u+v):return []
+	if not in_domain(p) or not in_domain(p+u+v):return []
 	if face_occupied(face.at,face.plane,-1,span):return []
 	var out:Array[Dictionary]=[];var nodes:=points()
 	for side in [[p,p+u],[p,p+v],[p+u,p+u+v],[p+v,p+u+v]]:
@@ -169,10 +173,10 @@ static func prefab_envelope(r:Dictionary)->AABB:
 	return AABB(Vector3(-.25,0,-.25),Vector3(.5,.5,.5))
 
 func prefab_fits(candidate:Dictionary)->bool:
-	if candidate.is_empty() or not inside(vec(candidate.at)):return false
+	if candidate.is_empty() or not in_domain(vec(candidate.at)):return false
 	# Completed solids occupy a 2 x 1 x 2 m envelope (a cell pyramid 1 x 1 x 1 m, a cell wedge 1 x 1 x 2 m), in quarter turns.
 	var bounds:AABB=prefab_box(candidate)
-	if not inside(bounds.position) or not inside(bounds.end):return false
+	if not in_domain(bounds.position) or not in_domain(bounds.end):return false
 	for r in records:
 		if is_prefab(r.kind):
 			var other:AABB=prefab_box(r)
@@ -201,7 +205,7 @@ func candidates(kind:String,tier:int) -> Array[Dictionary]:
 				for sign_value in [-1,1]:
 					for step in [.5,1.0]:
 						var q:Vector3=p+Vector3(axis)*sign_value*step
-						if inside(q) and not nodes.has(key(q)) and not seen.has(key(q)):
+						if in_domain(q) and not nodes.has(key(q)) and not seen.has(key(q)):
 							result.append({"kind":"point","at":arr(q)});seen[key(q)]=true
 		elif kind in ["rod","rod_short"]:
 			for axis in AXES:
@@ -216,14 +220,14 @@ func candidates(kind:String,tier:int) -> Array[Dictionary]:
 				for sign_value in [-1,1]:
 					var q:Vector3=p+Vector3(axis)*sign_value*float(MACRO_UNITS[kind])
 					var c:Dictionary={"kind":kind,"at":arr(p),"end":arr(q)}
-					if inside(q) and not macro_records(c).is_empty() and c not in result:result.append(c)
+					if in_domain(q) and not macro_records(c).is_empty() and c not in result:result.append(c)
 		elif kind=="diag":
 			# THE DIAGONAL (2026-11-06): across a square's face, either way, a whole or a half step
 			for plane in [[0,1],[0,2],[1,2]]:
 				for span in [.5,1.0]:
 					var u:Vector3=Vector3(AXES[plane[0]])*span;var v:Vector3=Vector3(AXES[plane[1]])*span
 					for q:Vector3 in [p+u+v,p+u-v]:
-						if nodes.has(key(q)) and inside(q) and not diag_exists(p,q) and not seen.has(key(p)+">"+key(q)) and not seen.has(key(q)+">"+key(p)):
+						if nodes.has(key(q)) and in_domain(q) and not diag_exists(p,q) and not seen.has(key(p)+">"+key(q)) and not seen.has(key(q)+">"+key(p)):
 							result.append({"kind":"diag","at":arr(p),"end":arr(q)});seen[key(p)+">"+key(q)]=true
 		elif kind in ["panel","quad"]:
 			for plane in [[0,1],[0,2],[1,2]]:
@@ -240,22 +244,76 @@ func candidates(kind:String,tier:int) -> Array[Dictionary]:
 						result.append(r)
 	return result
 
+func _clone_empty():
+	var other=get_script().new()
+	other.domain_min=domain_min;other.domain_max=domain_max;other.free_ground_points=free_ground_points
+	return other
+
+func _can_add_atomic(clean:Dictionary,tier:int)->bool:
+	var kind:String=str(clean.get("kind",""))
+	if required_tier(kind)>tier:return false
+	var nodes:=points()
+	if kind=="point":
+		var p:Vector3=vec(clean.at)
+		if not in_domain(p) or nodes.has(key(p)):return false
+		if free_ground_points and is_equal_approx(p.y,0.0):return true
+		for axis in AXES:
+			for sign_value in [-1,1]:
+				for s in [.5,1.0]:
+					if nodes.has(key(p+Vector3(axis)*sign_value*s)):return true
+		return false
+	if kind in ["rod","rod_short"]:
+		var a:Vector3=vec(clean.at);var b:Vector3=vec(clean.end)
+		if not nodes.has(key(a)) or not nodes.has(key(b)):return false
+		var want:float=.5 if kind=="rod_short" else 1.0
+		var diff:Vector3=b-a
+		var aligned:=false
+		for axis in AXES:
+			if diff.is_equal_approx(Vector3(axis)*want) or diff.is_equal_approx(-Vector3(axis)*want):aligned=true;break
+		return aligned and not rod_overlaps(a,b)
+	if kind=="diag":
+		var a:Vector3=vec(clean.at);var b:Vector3=vec(clean.end)
+		if not nodes.has(key(a)) or not nodes.has(key(b)) or not in_domain(a) or not in_domain(b) or diag_exists(a,b):return false
+		var d:Vector3=(b-a).abs()
+		for span in [.5,1.0]:
+			var eq_x:=is_equal_approx(d.x,span);var eq_y:=is_equal_approx(d.y,span);var eq_z:=is_equal_approx(d.z,span)
+			if (eq_x and eq_y and is_zero_approx(d.z)) or (eq_x and eq_z and is_zero_approx(d.y)) or (eq_y and eq_z and is_zero_approx(d.x)):return true
+		return false
+	if kind in ["panel","quad"]:
+		var p:Vector3=vec(clean.at);var plane:Array=clean.plane;var span:float=float(clean.get("span",1.0))
+		if not (plane in [[0,1],[0,2],[1,2]]) or span not in [.5,1.0,2.0]:return false
+		var u:Vector3=Vector3(AXES[plane[0]])*span;var v:Vector3=Vector3(AXES[plane[1]])*span
+		if not in_domain(p) or not in_domain(p+u+v):return false
+		var half:int=-1 if kind=="quad" else int(clean.get("half",-1))
+		if face_occupied(clean.at,plane,half,span):return false
+		var sq:bool=edge(p,p+u) and edge(p,p+v) and edge(p+u,p+u+v) and edge(p+v,p+u+v)
+		return sq if kind=="quad" else (sq or triangle_edges(p,u,v,half))
+	return false
+
 func add(candidate: Dictionary,tier: int) -> bool:
-	if is_prefab(str(candidate.get("kind",""))):
+	var kind:String=str(candidate.get("kind",""))
+	if is_prefab(kind):
 		var clean:=canonical(candidate)
 		if tier<2 or not prefab_fits(clean):return false
 		records.append(clean);return true
-	if candidate not in candidates(str(candidate.get("kind","")),tier):return false
-	if is_macro(str(candidate.kind)):
+	if is_macro(kind):
+		if candidate not in candidates(kind,tier):return false
 		for r in macro_records(candidate):records.append(r)
-		if is_macro_face(str(candidate.kind)):
+		if is_macro_face(kind):
 			# the joint under the plate's middle goes, when nothing holds on to it: one plate, no ball beneath it
 			var face:=as_face(candidate);var s:float=float(face.span)
 			var centre:Vector3=vec(face.at)+(Vector3(AXES[face.plane[0]])+Vector3(AXES[face.plane[1]]))*s*.5
 			for i in range(records.size()-1,-1,-1):
 				if records[i].kind=="point" and vec(records[i].at)==centre and point_free(centre):records.remove_at(i)
 		return true
-	records.append(candidate.duplicate(true));return true
+	var clean:=canonical(candidate)
+	if clean.is_empty() or not _can_add_atomic(clean,tier):return false
+	if kind in ["rod","rod_short"]:
+		# Keep canonical ascending order along the axis so saved records match candidates() deterministically.
+		var a:Vector3=vec(clean.at);var b:Vector3=vec(clean.end)
+		if (b-a).x<0 or (b-a).y<0 or (b-a).z<0:
+			var tmp=clean.at;clean.at=clean.end;clean.end=tmp
+	records.append(clean);return true
 
 func restore(raw: Array) -> bool:
 	var before:=records.duplicate(true);records.clear()
@@ -272,7 +330,7 @@ func revision(index:int,replacement:Dictionary={}) -> Dictionary:
 	if replacement==records[index]:return {"ok":true,"records":records.duplicate(true)}
 	var pending:Array=records.duplicate(true);pending.remove_at(index)
 	if not replacement.is_empty():pending.insert(index,replacement.duplicate(true))
-	var rebuilt=get_script().new()
+	var rebuilt=_clone_empty()
 	while not pending.is_empty():
 		var progressed:=false
 		for i in range(pending.size()-1,-1,-1):
@@ -282,7 +340,7 @@ func revision(index:int,replacement:Dictionary={}) -> Dictionary:
 
 func edit_candidates(index:int,tier:int) -> Array[Dictionary]:
 	if index<0 or index>=records.size():return []
-	var other=get_script().new();other.records=records.duplicate(true)
+	var other=_clone_empty();other.records=records.duplicate(true)
 	var kind:String=other.records[index].kind;other.records.remove_at(index)
 	return other.candidates(kind,tier)
 
@@ -373,7 +431,7 @@ static func fit_record(record:Dictionary,all:Array)->Dictionary:
 			if face.kind not in ["panel","quad"] or face.plane!=[0,2]:continue
 			var local:Vector3=p-vec(face.at);var span:float=float(face.get("span",1))
 			if absf(local.y)>.001 or local.x<0 or local.z<0 or local.x>span or local.z>span:continue
-			if face.kind=="quad" or (face.half==0 and local.z<=local.x) or (face.half==1 and local.z>=local.x):supported=true
+			if face.kind=="quad" or (face.half==0 and local.z<=local.x) or (face.half==1 and local.z>=local.x) or (face.half==2 and local.x+local.z<=span) or (face.half==3 and local.x+local.z>=span):supported=true
 		seated=seated and supported
 	if seated:r._seated=true
 	return r
