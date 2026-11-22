@@ -10,6 +10,9 @@ const X_POSITIONS: Array[float] = [-10.0, -6.0, -2.0, 2.0, 6.0]
 const PLINTH_WIDTH := 1.86
 const PLINTH_HEIGHT := 0.22
 var columns: Array[Node3D] = []
+## Passed to every column this makes (resolution_totem.gd). The defaults are the museum's.
+var outline_family := 0
+var finish := "authored"
 
 
 func _ready() -> void:
@@ -44,6 +47,8 @@ func _column(node_name: String, at: Vector3, sides: int, rings: int,
     column.profile_kind = kind
     column.column_height = metres
     column.width_factor = width
+    column.outline_family = outline_family
+    column.finish = finish
     column.collisions = true
     column.position = at + Vector3.UP * PLINTH_HEIGHT
     add_child(column)

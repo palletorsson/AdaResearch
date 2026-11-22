@@ -8,7 +8,12 @@ extends Node3D
 @export_range(1.0, 6.0, 0.05) var column_height: float = 4.67
 @export_range(0.5, 1.05, 0.01) var width_factor: float = 1.0
 @export var collisions := true
+## Which family of outlines profile_kind picks from. Classical is the five authored profiles.
+@export_enum("Classical", "Alien") var outline_family: int = 0
+## "black": every section in one black finish, so the body reads as its outline.
+@export_enum("authored", "black") var finish: String = "authored"
 const PROFILE_NAMES: Array[String] = ["Vessel", "Reed", "Bell", "Spindle", "Cairn"]
+const ALIEN_NAMES: Array[String] = ["Plug", "Taper", "Beads", "Ripple", "Twin"]
 var column_mesh := ArrayMesh.new()
 var surface := MeshInstance3D.new()
 var body: StaticBody3D
@@ -20,6 +25,9 @@ func _ready() -> void:
     var rose := _material(Color("b47d73"),0.67,0.08)
     var bronze := _material(Color("af8854"),0.34,0.65)
     var charcoal := _material(Color("27272d"),0.58,0.12)
+    if finish == "black":
+        var black := _material(Color("0c0c0e"),0.30,0.0)
+        chalk = black;rose = black;bronze = black;charcoal = black
     # Relative height, start radius, end radius, bulge, material.
     # Each recipe has five curved sections and four straight collars. Keeping
     # this topology shared makes the two sampling budgets comparable.
@@ -74,6 +82,62 @@ func _ready() -> void:
         [0.96,0.22,0.15,0.29,chalk],
         [0.20,0.24,0.24,0.0,bronze],
     ]]
+    # ALIEN (Palle, 22 November 2026: "imagine them as alien butt plug dildo outline, no offence, it is just a
+    # form"). The same nine sections - four straight collars, five curved - so the sampling comparisons still
+    # compare. Heights are written in metres of a 5.42 m body; each recipe sums to 5.42. Every one keeps a flared
+    # foot, a slender neck through walking height and its swelling above the head, and ends in a rounded tip.
+    var alien := [[
+        [0.12,0.86,0.86,0.0,bronze],
+        [0.45,0.86,0.20,-0.10,chalk],
+        [1.45,0.20,0.22,0.02,chalk],
+        [0.08,0.28,0.28,0.0,charcoal],
+        [1.25,0.24,0.52,0.40,chalk],
+        [0.08,0.54,0.54,0.0,rose],
+        [1.15,0.52,0.30,0.16,chalk],
+        [0.78,0.30,0.08,0.12,chalk],
+        [0.06,0.08,0.08,0.0,bronze],
+    ], [
+        [0.12,0.80,0.80,0.0,bronze],
+        [0.40,0.80,0.30,-0.12,chalk],
+        [1.80,0.30,0.34,0.05,chalk],
+        [0.08,0.40,0.40,0.0,charcoal],
+        [1.45,0.34,0.32,0.07,chalk],
+        [0.08,0.24,0.24,0.0,rose],
+        [0.55,0.38,0.44,0.08,chalk],
+        [0.88,0.44,0.08,0.16,chalk],
+        [0.06,0.08,0.08,0.0,bronze],
+    ], [
+        [0.12,0.84,0.84,0.0,bronze],
+        [0.36,0.84,0.16,-0.08,chalk],
+        [1.15,0.16,0.16,0.26,chalk],
+        [0.10,0.18,0.18,0.0,charcoal],
+        [1.10,0.16,0.16,0.36,chalk],
+        [0.10,0.18,0.18,0.0,rose],
+        [1.05,0.16,0.16,0.46,chalk],
+        [1.38,0.16,0.08,0.56,chalk],
+        [0.06,0.08,0.08,0.0,bronze],
+    ], [
+        [0.14,0.78,0.78,0.0,bronze],
+        [0.42,0.70,0.34,-0.06,chalk],
+        [1.20,0.34,0.40,0.10,chalk],
+        [0.12,0.60,0.60,0.0,charcoal],
+        [1.15,0.40,0.44,0.12,chalk],
+        [0.12,0.62,0.62,0.0,rose],
+        [1.10,0.42,0.42,0.14,chalk],
+        [1.11,0.42,0.10,0.22,chalk],
+        [0.06,0.10,0.10,0.0,bronze],
+    ], [
+        [0.12,0.86,0.86,0.0,bronze],
+        [0.40,0.86,0.22,-0.10,chalk],
+        [1.50,0.22,0.24,0.02,chalk],
+        [0.08,0.30,0.30,0.0,charcoal],
+        [1.20,0.24,0.26,0.44,chalk],
+        [0.08,0.30,0.30,0.0,rose],
+        [0.50,0.22,0.22,-0.03,chalk],
+        [1.48,0.24,0.12,0.50,chalk],
+        [0.06,0.12,0.12,0.0,bronze],
+    ]]
+    if outline_family == 1: profiles = alien
     var sections: Array = profiles[clampi(profile_kind,0,profiles.size()-1)]
     var recipe_height := 0.0
     for section in sections:
@@ -93,8 +157,12 @@ func _ready() -> void:
     set_meta("radial_segments",radial_segments)
     set_meta("profile_rings",profile_rings)
     set_meta("triangle_count",triangle_count)
-    set_meta("profile",PROFILE_NAMES[clampi(profile_kind,0,PROFILE_NAMES.size()-1)])
+    set_meta("profile",names(outline_family)[clampi(profile_kind,0,PROFILE_NAMES.size()-1)])
     set_meta("height_metres",height)
+
+## The names of a family's five outlines, in profile_kind order.
+static func names(family: int) -> Array[String]:
+    return ALIEN_NAMES if family == 1 else PROFILE_NAMES
 
 func _material(colour: Color, roughness: float, metal: float) -> StandardMaterial3D:
     var result := StandardMaterial3D.new()
