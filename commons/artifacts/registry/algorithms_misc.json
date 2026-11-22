@@ -3203,14 +3203,15 @@
     },
     "fibonacci_sequences": {
       "dna": {
-        "axes": {
+        "was_axes": {
           "evidence": [
             "result",
             "trace",
             "longhand",
             "axiom"
           ]
-        }
+        },
+        "note": "Retired 2026-11-22 (breath, forum 261122-jdldu). evidence was declared 2026-08-02 against algorithms/stringalgorithms/recursiveemergence/fibonacci_sequences/FibonacciSequences.gd, the inactive copy. This token's scene runs algorithms/fractals/fibonacci_sequences/FibonacciSequences.gd, which has no export for it, so the axis never reached a placement or a sweep. Port it onto the live script and move it back under axes."
       },
       "category": "unknown",
       "complexity": "advanced",
