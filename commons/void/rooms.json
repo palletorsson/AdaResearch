@@ -80363,11 +80363,28 @@
       "walls": [],
       "artifacts": [
         {
+          "id": "contact-field",
+          "artifact": "contact_study",
+          "station": "SW",
+          "position": [
+            0,
+            0
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "strategy": "field",
+            "size": 1.5,
+            "editor_label": "Contact field / a version at every place: reach across, distance along; keep at the floor's origin (Palle 2026-11-22)"
+          }
+        },
+        {
           "id": "contact",
           "artifact": "contact_study",
           "station": "SW",
           "position": [
-            -7.7,
+            0,
             4.6
           ],
           "facing": 0,
@@ -80375,9 +80392,11 @@
           "scale": 1,
           "config": {
             "strategy": "all",
-            "mirror": true,
-            "spacing": 3.0,
-            "editor_label": "Contact / two bodies come together as you come near, made four ways: through, cut, cubes, skin (Palle 2026-11-22)"
+            "size": 1.7,
+            "spacing": 4.8,
+            "far": 5.8,
+            "near": 2.3,
+            "editor_label": "Contact / two bodies come together as you come near, made five ways: through, cut, cubes, skin, inside (Palle 2026-11-22)"
           }
         },
         {

@@ -304,7 +304,849 @@
 				"gap": -0.24,
 				"file": "cut_07"
 			}
+		],
+		"inside": [
+			{
+				"triangles_marched": 28300,
+				"triangles": 3536,
+				"bytes": 59888,
+				"saved": true,
+				"gap": 0.3,
+				"file": "inside_00",
+				"centre": [
+					0.1777,
+					1.16,
+					0.0
+				]
+			},
+			{
+				"triangles_marched": 29296,
+				"triangles": 3662,
+				"bytes": 62183,
+				"saved": true,
+				"gap": 0.24,
+				"file": "inside_01",
+				"centre": [
+					0.1477,
+					1.16,
+					0.0
+				]
+			},
+			{
+				"triangles_marched": 30156,
+				"triangles": 3768,
+				"bytes": 64284,
+				"saved": true,
+				"gap": 0.19,
+				"file": "inside_02",
+				"centre": [
+					0.1227,
+					1.16,
+					0.0
+				]
+			},
+			{
+				"triangles_marched": 31012,
+				"triangles": 3876,
+				"bytes": 66329,
+				"saved": true,
+				"gap": 0.15,
+				"file": "inside_03",
+				"centre": [
+					0.1027,
+					1.16,
+					0.0
+				]
+			},
+			{
+				"triangles_marched": 31956,
+				"triangles": 3994,
+				"bytes": 68748,
+				"saved": true,
+				"gap": 0.11,
+				"file": "inside_04",
+				"centre": [
+					0.0827,
+					1.16,
+					0.0
+				]
+			},
+			{
+				"triangles_marched": 31836,
+				"triangles": 3978,
+				"bytes": 68750,
+				"saved": true,
+				"gap": 0.07,
+				"file": "inside_05",
+				"centre": [
+					0.0627,
+					1.16,
+					0.0
+				]
+			},
+			{
+				"triangles_marched": 31760,
+				"triangles": 3970,
+				"bytes": 69039,
+				"saved": true,
+				"gap": 0.03,
+				"file": "inside_06",
+				"centre": [
+					0.0427,
+					1.16,
+					0.0
+				]
+			},
+			{
+				"triangles_marched": 31688,
+				"triangles": 3960,
+				"bytes": 69140,
+				"saved": true,
+				"gap": 0.0,
+				"file": "inside_07",
+				"centre": [
+					0.0277,
+					1.16,
+					0.0
+				]
+			},
+			{
+				"triangles_marched": 31244,
+				"triangles": 3904,
+				"bytes": 68425,
+				"saved": true,
+				"gap": -0.03,
+				"file": "inside_08",
+				"centre": [
+					0.0127,
+					1.16,
+					0.0
+				]
+			},
+			{
+				"triangles_marched": 30648,
+				"triangles": 3830,
+				"bytes": 67252,
+				"saved": true,
+				"gap": -0.06,
+				"file": "inside_09",
+				"centre": [
+					-0.0023,
+					1.16,
+					0.0
+				]
+			},
+			{
+				"triangles_marched": 29700,
+				"triangles": 3712,
+				"bytes": 65615,
+				"saved": true,
+				"gap": -0.09,
+				"file": "inside_10",
+				"centre": [
+					-0.0173,
+					1.16,
+					0.0
+				]
+			},
+			{
+				"triangles_marched": 28824,
+				"triangles": 3602,
+				"bytes": 63665,
+				"saved": true,
+				"gap": -0.12,
+				"file": "inside_11",
+				"centre": [
+					-0.0323,
+					1.16,
+					0.0
+				]
+			}
 		]
 	},
-	"bytes": 2054256
+	"field": [
+		{
+			"triangles_marched": 47112,
+			"triangles": 2944,
+			"bytes": 49602,
+			"saved": true,
+			"file": "field_00",
+			"x": -19.3,
+			"z": 5.0,
+			"reach": 0.04,
+			"gap": 0.22,
+			"pieces": 2,
+			"handles": 0
+		},
+		{
+			"triangles_marched": 47128,
+			"triangles": 2944,
+			"bytes": 49665,
+			"saved": true,
+			"file": "field_01",
+			"x": -19.3,
+			"z": 1.8,
+			"reach": 0.04,
+			"gap": 0.122,
+			"pieces": 2,
+			"handles": 0
+		},
+		{
+			"triangles_marched": 46884,
+			"triangles": 2930,
+			"bytes": 49464,
+			"saved": true,
+			"file": "field_02",
+			"x": -19.3,
+			"z": -1.8,
+			"reach": 0.04,
+			"gap": 0.011,
+			"pieces": 1,
+			"handles": 0
+		},
+		{
+			"triangles_marched": 44040,
+			"triangles": 2752,
+			"bytes": 46762,
+			"saved": true,
+			"file": "field_03",
+			"x": -19.3,
+			"z": -5.4,
+			"reach": 0.04,
+			"gap": -0.1,
+			"pieces": 1,
+			"handles": 1
+		},
+		{
+			"triangles_marched": 47112,
+			"triangles": 2944,
+			"bytes": 49633,
+			"saved": true,
+			"file": "field_04",
+			"x": -15.4,
+			"z": 5.0,
+			"reach": 0.093,
+			"gap": 0.22,
+			"pieces": 2,
+			"handles": 0
+		},
+		{
+			"triangles_marched": 47128,
+			"triangles": 2944,
+			"bytes": 49623,
+			"saved": true,
+			"file": "field_05",
+			"x": -15.4,
+			"z": 1.8,
+			"reach": 0.093,
+			"gap": 0.122,
+			"pieces": 2,
+			"handles": 0
+		},
+		{
+			"triangles_marched": 46492,
+			"triangles": 2904,
+			"bytes": 49099,
+			"saved": true,
+			"file": "field_06",
+			"x": -15.4,
+			"z": -1.8,
+			"reach": 0.093,
+			"gap": 0.011,
+			"pieces": 1,
+			"handles": 0
+		},
+		{
+			"triangles_marched": 43540,
+			"triangles": 2720,
+			"bytes": 46564,
+			"saved": true,
+			"file": "field_07",
+			"x": -15.4,
+			"z": -5.4,
+			"reach": 0.093,
+			"gap": -0.1,
+			"pieces": 1,
+			"handles": 1
+		},
+		{
+			"triangles_marched": 50668,
+			"triangles": 3166,
+			"bytes": 55473,
+			"saved": true,
+			"file": "field_08",
+			"x": 15.4,
+			"z": 5.0,
+			"reach": 0.507,
+			"gap": 0.22,
+			"pieces": 1,
+			"handles": 0
+		},
+		{
+			"triangles_marched": 52712,
+			"triangles": 3294,
+			"bytes": 59147,
+			"saved": true,
+			"file": "field_09",
+			"x": 15.4,
+			"z": 1.8,
+			"reach": 0.507,
+			"gap": 0.122,
+			"pieces": 1,
+			"handles": 2
+		},
+		{
+			"triangles_marched": 51216,
+			"triangles": 3200,
+			"bytes": 58650,
+			"saved": true,
+			"file": "field_10",
+			"x": 15.4,
+			"z": -1.8,
+			"reach": 0.507,
+			"gap": 0.011,
+			"pieces": 1,
+			"handles": 2
+		},
+		{
+			"triangles_marched": 51108,
+			"triangles": 3194,
+			"bytes": 58330,
+			"saved": true,
+			"file": "field_11",
+			"x": 15.4,
+			"z": -5.4,
+			"reach": 0.507,
+			"gap": -0.1,
+			"pieces": 1,
+			"handles": 2
+		},
+		{
+			"triangles_marched": 52128,
+			"triangles": 3258,
+			"bytes": 57782,
+			"saved": true,
+			"file": "field_12",
+			"x": 19.3,
+			"z": 5.0,
+			"reach": 0.56,
+			"gap": 0.22,
+			"pieces": 1,
+			"handles": 0
+		},
+		{
+			"triangles_marched": 54942,
+			"triangles": 3432,
+			"bytes": 62342,
+			"saved": true,
+			"file": "field_13",
+			"x": 19.3,
+			"z": 1.8,
+			"reach": 0.56,
+			"gap": 0.122,
+			"pieces": 1,
+			"handles": 2
+		},
+		{
+			"triangles_marched": 53266,
+			"triangles": 3328,
+			"bytes": 60722,
+			"saved": true,
+			"file": "field_14",
+			"x": 19.3,
+			"z": -1.8,
+			"reach": 0.56,
+			"gap": 0.011,
+			"pieces": 1,
+			"handles": 2
+		},
+		{
+			"triangles_marched": 53324,
+			"triangles": 3332,
+			"bytes": 61144,
+			"saved": true,
+			"file": "field_15",
+			"x": 19.3,
+			"z": -5.4,
+			"reach": 0.56,
+			"gap": -0.1,
+			"pieces": 1,
+			"handles": 2
+		},
+		{
+			"triangles_marched": 43588,
+			"triangles": 2724,
+			"bytes": 46934,
+			"saved": true,
+			"file": "field_16",
+			"x": -11.4,
+			"z": -5.4,
+			"reach": 0.146,
+			"gap": -0.1,
+			"pieces": 1,
+			"handles": 2
+		},
+		{
+			"triangles_marched": 43508,
+			"triangles": 2718,
+			"bytes": 47451,
+			"saved": true,
+			"file": "field_17",
+			"x": -7.7,
+			"z": -5.4,
+			"reach": 0.196,
+			"gap": -0.1,
+			"pieces": 1,
+			"handles": 2
+		},
+		{
+			"triangles_marched": 46474,
+			"triangles": 2904,
+			"bytes": 52909,
+			"saved": true,
+			"file": "field_18",
+			"x": 7.7,
+			"z": -5.4,
+			"reach": 0.404,
+			"gap": -0.1,
+			"pieces": 1,
+			"handles": 2
+		},
+		{
+			"triangles_marched": 48456,
+			"triangles": 3028,
+			"bytes": 55816,
+			"saved": true,
+			"file": "field_19",
+			"x": 11.4,
+			"z": -5.4,
+			"reach": 0.454,
+			"gap": -0.1,
+			"pieces": 1,
+			"handles": 2
+		}
+	],
+	"inside": {
+		"kind": "diamond",
+		"radius": 0.86,
+		"centre_y": 1.16
+	},
+	"lines": {
+		"one_body": [
+			[
+				[
+					-21.0,
+					-1.12
+				],
+				[
+					-19.5,
+					-1.12
+				],
+				[
+					-18.0,
+					-1.12
+				],
+				[
+					-17.25,
+					-0.75
+				],
+				[
+					-16.5,
+					-0.38
+				],
+				[
+					-15.0,
+					-0.38
+				],
+				[
+					-13.5,
+					-0.38
+				]
+			],
+			[
+				[
+					-6.0,
+					1.88
+				],
+				[
+					-4.5,
+					1.88
+				],
+				[
+					-3.75,
+					2.25
+				],
+				[
+					-3.0,
+					2.62
+				],
+				[
+					-1.5,
+					2.62
+				],
+				[
+					0.0,
+					2.62
+				],
+				[
+					0.75,
+					3.0
+				],
+				[
+					1.5,
+					3.38
+				],
+				[
+					3.0,
+					3.38
+				],
+				[
+					3.75,
+					3.75
+				],
+				[
+					4.5,
+					4.12
+				],
+				[
+					6.0,
+					4.12
+				],
+				[
+					6.75,
+					4.5
+				],
+				[
+					7.5,
+					4.88
+				],
+				[
+					9.0,
+					4.88
+				],
+				[
+					9.75,
+					5.25
+				],
+				[
+					10.5,
+					5.62
+				],
+				[
+					12.0,
+					5.62
+				],
+				[
+					12.75,
+					6.0
+				],
+				[
+					13.5,
+					6.38
+				],
+				[
+					15.0,
+					6.38
+				],
+				[
+					16.5,
+					6.38
+				],
+				[
+					17.25,
+					6.75
+				],
+				[
+					18.0,
+					7.12
+				],
+				[
+					19.5,
+					7.12
+				],
+				[
+					21.0,
+					7.12
+				]
+			]
+		],
+		"an_opening": [
+			[
+				[
+					-21.0,
+					-4.88
+				],
+				[
+					-19.5,
+					-4.88
+				],
+				[
+					-18.75,
+					-4.5
+				],
+				[
+					-18.0,
+					-4.12
+				],
+				[
+					-16.5,
+					-4.12
+				],
+				[
+					-15.0,
+					-4.12
+				],
+				[
+					-14.25,
+					-3.75
+				],
+				[
+					-13.5,
+					-3.38
+				],
+				[
+					-12.0,
+					-3.38
+				]
+			],
+			[
+				[
+					0.0,
+					-0.38
+				],
+				[
+					1.5,
+					-0.38
+				],
+				[
+					2.25,
+					0.0
+				],
+				[
+					3.0,
+					0.38
+				],
+				[
+					4.5,
+					0.38
+				],
+				[
+					5.25,
+					0.75
+				],
+				[
+					6.0,
+					1.12
+				]
+			],
+			[
+				[
+					13.5,
+					2.62
+				],
+				[
+					15.0,
+					2.62
+				],
+				[
+					15.75,
+					3.0
+				],
+				[
+					16.5,
+					3.38
+				],
+				[
+					18.0,
+					3.38
+				],
+				[
+					18.75,
+					3.75
+				],
+				[
+					19.5,
+					4.12
+				],
+				[
+					21.0,
+					4.12
+				]
+			],
+			[
+				[
+					-21.0,
+					-1.12
+				],
+				[
+					-19.5,
+					-1.12
+				],
+				[
+					-18.75,
+					-1.5
+				],
+				[
+					-19.5,
+					-1.88
+				],
+				[
+					-21.0,
+					-1.88
+				]
+			],
+			[
+				[
+					21.0,
+					-5.62
+				],
+				[
+					19.5,
+					-5.62
+				],
+				[
+					18.0,
+					-5.62
+				],
+				[
+					17.25,
+					-6.0
+				],
+				[
+					16.5,
+					-6.38
+				],
+				[
+					15.0,
+					-6.38
+				],
+				[
+					14.25,
+					-6.75
+				],
+				[
+					13.5,
+					-7.12
+				],
+				[
+					12.0,
+					-7.12
+				],
+				[
+					11.25,
+					-7.5
+				],
+				[
+					10.5,
+					-7.88
+				],
+				[
+					9.0,
+					-7.88
+				]
+			]
+		]
+	},
+	"field_rule": {
+		"x": [
+			-19.3,
+			19.3
+		],
+		"reach": [
+			0.04,
+			0.56
+		],
+		"z": [
+			5.0,
+			-5.4
+		],
+		"gap": [
+			0.22,
+			-0.1
+		]
+	},
+	"states": {
+		"x": [
+			-21.0,
+			-19.5,
+			-18.0,
+			-16.5,
+			-15.0,
+			-13.5,
+			-12.0,
+			-10.5,
+			-9.0,
+			-7.5,
+			-6.0,
+			-4.5,
+			-3.0,
+			-1.5,
+			0.0,
+			1.5,
+			3.0,
+			4.5,
+			6.0,
+			7.5,
+			9.0,
+			10.5,
+			12.0,
+			13.5,
+			15.0,
+			16.5,
+			18.0,
+			19.5,
+			21.0
+		],
+		"z": [
+			-8.25,
+			-7.5,
+			-6.75,
+			-6.0,
+			-5.25,
+			-4.5,
+			-3.75,
+			-3.0,
+			-2.25,
+			-1.5,
+			-0.75,
+			0.0,
+			0.75,
+			1.5,
+			2.25,
+			3.0,
+			3.75,
+			4.5,
+			5.25,
+			6.0,
+			6.75,
+			7.5,
+			8.25
+		],
+		"rows": [
+			"oooooooooooooooooooo111111111",
+			"oooooooooooooooooooooo1111111",
+			"oooooooooooooooooooooooo11111",
+			"oooooooooooooooooooooooooo111",
+			"ooooooooooooooooooooooooooooo",
+			"11ooooooooooooooooooooooooooo",
+			"11111oooooooooooooooooooooooo",
+			"1111111oooooooooooooooooooooo",
+			"111111111oooooooooooooooooooo",
+			"oo1111111111ooooooooooooooooo",
+			"22211111111111ooooooooooooooo",
+			"2222221111111111ooooooooooooo",
+			"222222221111111111ooooooooooo",
+			"222222222211111111111oooooooo",
+			"22222222222211111111111oooooo",
+			"2222222222222221111111111oooo",
+			"222222222222222221111111111oo",
+			"22222222222222222221111111111",
+			"22222222222222222222211111111",
+			"22222222222222222222222111111",
+			"22222222222222222222222222111",
+			"22222222222222222222222222222",
+			"22222222222222222222222222222"
+		]
+	},
+	"bytes": 3914686
 }

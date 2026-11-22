@@ -3,7 +3,7 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_sc
 // CONTACT (commons/artifacts/contact_study): one meeting of two bodies in four finishes.
 // The vertex colour is DATA written by tools/contact_forms.py, never a colour:
 //   r  how much of body A this point is (1 on A alone, 0 on B alone; between, the smooth union's mixing weight)
-//   g  1 on a face a boolean cut made
+//   g  1 on a face a boolean cut made; for INSIDE, how deep under the skin a point of the cut lies
 //   b  the join's band: 1 at the middle of a neck between the two, 0 away from it
 //   a  ambient occlusion read from the distance field
 // finish 0 CLAY   two raw meshes: every triangle flat, as a viewport shows them before anything is decided
@@ -11,6 +11,8 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_sc
 // finish 2 CUBES  a cell is the colour of what it is mostly made of
 // finish 3 SKIN   the two bodies' colours run into each other through the join; a thin film turns with the
 //                 angle of view; the lines are the levels of the mixing weight, so they crowd where the two meet
+// finish 4 INSIDE the skin as in 3; on a face another form cut (g = depth under the skin there, 0 on the skin)
+//                 the field in rings
 
 uniform int finish = 3;
 uniform vec3 colour_a : source_color = vec3(1.0, 0.31, 0.55);
@@ -27,6 +29,7 @@ uniform float film_shift = 0.08;
 uniform float line_count = 9.0;
 uniform float line_amount = 0.55;
 uniform float glow = 0.35;
+uniform float ring_count = 8.0;
 
 void fragment() {
 	float weight = clamp(COLOR.r, 0.0, 1.0);
@@ -53,6 +56,18 @@ void fragment() {
 		ALBEDO = mix(base, join_colour, band * join_amount);
 		ROUGHNESS = 0.72;
 		SPECULAR = 0.35;
+	} else if (finish == 4 && cut > 0.02) {
+		// INSIDE, on a face the containing form cut: the field itself. g is how deep under the skin the point
+		// lies, and every ring is one level of that depth - two sets of rings deep in, one set near the skin.
+		vec3 flesh = mix(colour_b, colour_a, smoothstep(0.0, 1.0, weight));
+		flesh = mix(flesh, join_colour, band * join_amount);
+		float level = cut * ring_count;
+		float width = max(fwidth(level), 0.0001);
+		float ring = 1.0 - smoothstep(0.8, 1.8, abs(fract(level - 0.5) - 0.5) / width);
+		ALBEDO = mix(mix(flesh, vec3(0.03, 0.03, 0.04), 0.35 + 0.4 * cut), line_colour, ring * 0.85);
+		ROUGHNESS = 0.55;
+		SPECULAR = 0.3;
+		EMISSION = flesh * 0.10 + line_colour * ring * 0.12;
 	} else {
 		float mixed = smoothstep(0.0, 1.0, weight);
 		vec3 base = mix(colour_b, colour_a, mixed);

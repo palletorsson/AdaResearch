@@ -32,10 +32,24 @@ func _initialize() -> void:
 			made["file"] = row.file
 			for key in ["pieces", "handles"]:
 				if row.has(key): made[key] = int(row[key])
+			if row.has("centre"): made["centre"] = row.centre
 			rows.append(made)
 			total += int(made.bytes)
 			print("[bake_frames] ", row.file, " ", JSON.stringify(made))
 		index.frames[strategy] = rows
+	# the field: one version for a place on its floor; and what the bake found out about that floor
+	if manifest.has("field"):
+		var places := []
+		for row: Dictionary in manifest.field:
+			var made := _bake(str(row.file), int(row.get("budget", 0)))
+			for key in ["file", "x", "z", "reach", "gap"]: made[key] = row[key]
+			for key in ["pieces", "handles"]: made[key] = int(row[key])
+			places.append(made)
+			total += int(made.bytes)
+			print("[bake_frames] ", row.file, " ", JSON.stringify(made))
+		index["field"] = places
+	for key in ["inside", "lines", "field_rule", "states"]:
+		if manifest.has(key): index[key] = manifest[key]
 	index["bytes"] = total
 	var file := FileAccess.open(TARGET + "index.json", FileAccess.WRITE)
 	file.store_string(JSON.stringify(index, "\t", false))
