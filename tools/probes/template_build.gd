@@ -10,7 +10,7 @@ extends SceneTree
 ## letting go dresses it again; the association frame makes cube associations from terms.json, two in a row
 ## different; and a table without the config key is the old free-form table.
 ##
-##   python tools/run_floor_probe.py <Map> template_build.gd template_build.json <folder> --no-opening --opera-quiet --row=<row id>
+##   python tools/run_floor_probe.py <Map> template_build.gd template_build.json <folder> --no-opening --opera-quiet --row=<row id> [--xr]
 
 const POINTER_MASK := (1 << 18) | (1 << 20) | (1 << 22)
 
@@ -74,8 +74,11 @@ func run() -> void:
 	DirAccess.make_dir_recursive_absolute(folder)
 	load("res://commons/void/room_source.gd").use_main_tower = true
 	game = load("res://commons/void/void.tscn").instantiate()
+	# --xr: the game's VR branch on synthetic trackers, to catch a script error only the headset's path would meet
+	if OS.get_cmdline_user_args().has("--xr"): game.force_xr = true
 	root.add_child(game); current_scene = game
-	game.body.scripted_input = true; game.body.set_process_unhandled_input(false)
+	if game.body.get("scripted_input") != null:
+		game.body.scripted_input = true; game.body.set_process_unhandled_input(false)
 	game.scene_loaded(); game.scene_visible()
 	result = {"floor": int(game.checkpoint), "row": row, "frames": [], "checks": [], "passed": false}
 	for i in 900: await physics_frame
