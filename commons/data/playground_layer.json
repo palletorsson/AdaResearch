@@ -7,7 +7,7 @@
       "id": "production",
       "title": "I · Production & Association",
       "floors": [0, 12],
-      "summary": "Base Bauhaus spatial grammar (point -> line -> triangle -> solid -> quad) plus association() pickups: Package (F7 health + battery power-up), Bomb (F8 proximity blast), and Power Coin."
+      "summary": "Base Bauhaus spatial grammar (point -> line -> triangle -> solid -> quad), Template Building Stations (a12b12302: hanging glass box equips face_triangle/face_square onto wrist clock + 0.5m plinths; F5 Tetrahedron 4 / Diamond 8 -> Wireframe / Icosahedron 20; F7 Cube 6 & random association(cube) from terms.json), plus association() pickups: Package (F7 health + battery power-up), Bomb (F8 proximity blast), and Power Coin."
     },
     {
       "id": "motion",
@@ -58,20 +58,23 @@
       "arc": "production",
       "floors": [0, 12],
       "unlock_floor": 1,
-      "capability": "Base Bauhaus grid grammar (point, 1m/2m rod, triangle, wedge, pyramid, quad) + association() Package (F7 health+battery power-up), Power Coin, and Proximity Bomb (F8).",
-      "studio_unlocks": ["point", "rod_short", "rod", "panel", "wedge", "pyramid", "quad", "erase"],
+      "capability": "Base Bauhaus grid grammar (point, 1m/2m rod, triangle, wedge, pyramid, quad), Template Building Stations (a12b12302: hanging glass box equips face_triangle/face_square onto hand & wrist clock over 0.5m plinths; F5 Tetrahedron 4 / Diamond 8 Wireframe / Icosahedron 20; F7 Cube 6 & association(cube) from terms.json), plus Package (F7 health+battery power-up), Power Coin, and Proximity Bomb (F8).",
+      "studio_unlocks": ["point", "rod_short", "rod", "panel", "wedge", "pyramid", "quad", "face_triangle", "face_square", "tetrahedron_template", "diamond_wireframe", "icosahedron_template", "cube_template", "cube_association", "erase"],
       "tower_milestones": [
         {"floor": 1, "map": "Point_One", "milestone": "Studio Workstation Tier 0 (Points) + Monochrome Asawa Wire worker arc"},
         {"floor": 3, "map": "Point_Lines", "milestone": "Studio Workstation Tier 1 (1m & 2m Rods)"},
-        {"floor": 5, "map": "Point_Triangle_Context", "milestone": "Studio Workstation Tier 2 (Triangles)"},
+        {"floor": 5, "map": "Point_Triangle_Context", "milestone": "Studio Workstation Tier 2 (Triangles) + Template Building Station (a12b12302 / e45839e06: hanging box -> wrist-clock face_triangle over 0.5m plinths; Tetra 4, Diamond 8 -> Wireframe, Icosa 20; desktop + --xr verified)"},
         {"floor": 6, "map": "Primitives_Polythedra", "milestone": "Studio Workstation Tier 2+ (Wedge & Pyramid solids)"},
-        {"floor": 7, "map": "Point_Animatedcube", "milestone": "Studio Workstation Tier 3 (Quads) + Monochrome Package (walk over -> +25% Health & Battery Power Up)"},
+        {"floor": 7, "map": "Point_Animatedcube", "milestone": "Studio Workstation Tier 3 (Quads) + Template Cube & association(cube) Station (a12b12302 / e45839e06: hanging box -> wrist-clock face_square over 0.5m plinths; Cube 6 + random <=24cm terms.json model; desktop + --xr verified) + Monochrome Health+Battery Package (+25% charge)"},
         {"floor": 8, "map": "Primitives_Ignorance", "milestone": "Introduce Monochrome Proximity Bomb (detonates when approached)"}
       ],
       "status": "live",
       "sources": [
         "commons/artifacts/scaffold_workstation/bauhaus_kit.gd",
         "commons/artifacts/scaffold_workstation/studio_workstation.gd",
+        "commons/artifacts/face_assembly/face_assembly.gd",
+        "commons/artifacts/face_assembly/template_build.gd",
+        "commons/artifacts/face_assembly/face_block.gd",
         "commons/void/gift_cube.gd",
         "commons/void/coin_pickup.gd",
         "commons/hazards/electrical_mine/electrical_mine.gd"

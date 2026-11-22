@@ -211,7 +211,7 @@ def main() -> None:
     ap = argparse.ArgumentParser(description="Agent CLI for the Ada Research Void Tower System Atlas (v2).")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
-    p_brief = sub.add_parser("brief", help="Compact 3-Orders x 9-Layers system overview")
+    p_brief = sub.add_parser("brief", help="Compact 3-Orders x 10-Layers system overview")
     p_brief.add_argument("--md", action="store_true")
 
     p_floor = sub.add_parser("floor", help="Inspect one floor by number (3, 7, 13) or map name (Point_Lines)")
@@ -246,6 +246,10 @@ def main() -> None:
     p_q.add_argument("--seq", "--sequence", dest="seq", default="")
     p_q.add_argument("--limit", type=int, default=60)
     p_q.add_argument("--md", action="store_true")
+
+    p_pg = sub.add_parser("playground", help="List L9 General Intellect Playground Layer (8 arcs, 26 sequences, Studio Workstations, Template Tables, Worker Assemblages)")
+    p_pg.add_argument("--seq", "--sequence", dest="seq", default="")
+    p_pg.add_argument("--md", action="store_true")
 
     def add_write_flags(parser):
         parser.add_argument("--as", dest="actor", required=True, help="Agent/author name (e.g. Codex, fable-prefab-belt, Antigravity, Palle)")
@@ -342,6 +346,12 @@ def main() -> None:
         return
     if args.cmd == "queer":
         _print_result({"view": "queer", "sequence": args.seq, "limit": str(args.limit), "format": fmt}, lambda: {"offline": True, "floors": _load_store().get("floors", {})})
+        return
+    if args.cmd == "playground":
+        def _offline_pg():
+            pg_path = ROOT / "commons/data/playground_layer.json"
+            return json.loads(pg_path.read_text(encoding="utf-8")) if pg_path.exists() else {"offline": True, "error": "playground_layer.json not found"}
+        _print_result({"view": "playground", "sequence": args.seq, "format": fmt}, _offline_pg)
         return
 
     # --- WRITE ACTIONS (all validated + revision-checked + real diff preview) ---

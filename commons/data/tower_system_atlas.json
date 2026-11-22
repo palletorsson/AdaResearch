@@ -184,6 +184,25 @@
         "tools/void_export_sync.py"
       ],
       "page": "/workflow-layers"
+    },
+    {
+      "index": 9,
+      "id": "playground",
+      "short": "Playground",
+      "title": "General Intellect Playground & Studio Layer",
+      "group": "essential",
+      "color": "#ea580c",
+      "question": "Which cumulative Bauhaus studio tool, template building table, worker assemblage, or 26-sequence playground capability wakes up here?",
+      "description": "Cumulative vertical playground layer across all 26 sequences (F0-F209): unified Bauhaus Studio Workstations (1:16 tabletop -> 1:4 glass box -> 1:1 VR Visor), Template Building Stations (a12b12302 / e45839e06: hanging glass box equips face_triangle/face_square onto wrist clock over 0.5m plinths; F5 Tetrahedron 4 / Diamond 8 Wireframe / Icosahedron 20; F7 Cube 6 & association(cube) from terms.json), Worker & Dream-Body Assemblages, and progressive studio unlocks through kinetic pickups, arrays, palettes, patterns, jump pads, random-walk/spiky & smooth noise basins, 4x4x4 isosurface cutouts, and mind-map negotiation.",
+      "files": [
+        "commons/data/playground_layer.json",
+        "commons/artifacts/scaffold_workstation/playground_layer.gd",
+        "commons/artifacts/scaffold_workstation/studio_workstation.gd",
+        "commons/artifacts/face_assembly/template_build.gd",
+        "commons/artifacts/face_assembly/face_block.gd",
+        "commons/artifacts/worker_assemblage/"
+      ],
+      "page": "/tower-atlas"
     }
   ],
   "songBreadcrumbs": {
@@ -560,7 +579,7 @@
       ],
       "plainBreadcrumb": "Close three edges into a triangle, join two triangles along a shared diagonal into a wooden square, and step onto it to feel a flat diagram carry your body weight.",
       "bodyHook": "Step onto the wooden square so it bears your weight, then step off and notice the load-bearing relation immediately ends.",
-      "note": "Authored F5 machine coupling, queer operator, and body hook (preserving existing desktop receipt from what-the-world-keeps).",
+      "note": "Authored F5 machine coupling, queer operator, and body hook (preserving existing desktop receipt from what-the-world-keeps).\n[2026-11-22 · Antigravity] Integrated L9 Playground Layer: Studio Workstation Tier 2 + Template Building Table (e45839e06 / 723e29e48: 8 triangle faces -> Diamond drops on table; held, world renders in Wireframe via wireframe_threshold counter; desktop + --xr PASS).",
       "desiringMachine": {
         "machine": "Triangle Assembly Table + Scaffold Workstation (triangles) + Vending Machine",
         "activates": "Diagonal brace, wooden_board = association(config(quad)), warning_triangle = association(config(triangle)), and pink_triangle_sign",
@@ -569,7 +588,9 @@
       "queerOperator": {
         "mode": "bodily-remainder",
         "note": "A triangle stops being weightless geometry the moment two faces share a diagonal and carry your body — support exists only while weight stays on the plank."
-      }
+      },
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "commit a12b12302 / e45839e06 / 723e29e48 (tools/probes/template_build.gd desktop + --xr PASS) & doc/book/iterations/2026-11-22-bauhaus-studio-workstation/"
     },
     "CA_Introduction": {
       "queerObservations": [
@@ -764,7 +785,7 @@
     "Point_Animatedcube": {
       "plainBreadcrumb": "Unfold a cube net, step the Prefab Belt to the things this floor gives, and build full 2x2 m square faces at the Square Assembly Table to turn one CubeBody class into crates, pallets, dominoes, dice, and salvaged furniture.",
       "bodyHook": "Take two copies of one box from the library shelf and carry them to the worktable — copies stay inert until your hands stage a relation between them. The belt puts a thing into the inventory; nothing is carried off it.",
-      "note": "Authored F7 machine coupling (joining live prefab_belt[registry] + 17 items.json entries), queer operator, and body hook (evidence remains planned pending desktop probe).\n[2026-11-22 · Antigravity] Added monochrome Health + Battery Power Up Package (animatedcube-health-package at [-5.5, -4.25]) per the General Intellect Playground Layer: walking over it grants +25% Health & Battery charge and drops a collectible HealthCross (verified 12/12 PASS in doc/book/iterations/2026-11-22-general-intellect-playground-layer/report.json).",
+      "note": "Authored F7 machine coupling (joining live prefab_belt[registry] + 17 items.json entries), queer operator, and body hook (evidence remains planned pending desktop probe).\n[2026-11-22 · Antigravity] Added monochrome Health + Battery Power Up Package (animatedcube-health-package at [-5.5, -4.25]) per the General Intellect Playground Layer: walking over it grants +25% Health & Battery charge and drops a collectible HealthCross (verified 12/12 PASS in doc/book/iterations/2026-11-22-general-intellect-playground-layer/report.json).\n[2026-11-22 · Antigravity] Integrated L9 Playground Layer: Template Cube & association(cube) Table (e45839e06 / 723e29e48: two 6-face frames dropping plain cube + random <=24cm terms.json model; desktop + --xr PASS) alongside Studio Workstation Tier 3 & Monochrome Health+Battery Package (+25% charge, 12/12 PASS).",
       "desiringMachine": {
         "machine": "Prefab Belt (prefab_belt) + Square Assembly Table + Vending Machine",
         "activates": "17 cube-derived inventory items (7 on prefab_belt: wooden_block, domino_tile, cinder_block, eu_pallet, brick, wooden_box, dice, plus crates & salvaged furniture)",
@@ -773,7 +794,9 @@
       "queerOperator": {
         "mode": "re-couple",
         "note": "One reusable CubeBody class forks across the Prefab Belt into domestic furniture, shipping pallets, games (dice/dominoes), and masonry — industrial standardization waiting to be re-coupled into an unscripted relation."
-      }
+      },
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "commit a12b12302 / e45839e06 / 723e29e48 (tools/probes/template_build.gd desktop + --xr PASS) & doc/book/iterations/2026-11-22-general-intellect-playground-layer/report.json (12/12 PASS)"
     },
     "Primitives_Ignorance": {
       "plainBreadcrumb": "Walk the five-primitive courtyard, compare sphere latitude/longitude resolution on the smoothness atlas against frame budget, and shape Form in Hand to feel how grip alters procedural mesh generation.",
@@ -787,7 +810,9 @@
       "queerOperator": {
         "mode": "bodily-remainder",
         "note": "Smoothness is never free truth — it is a negotiated triangle budget where your viewing distance and physical grip decide when facets stop mattering."
-      }
+      },
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "doc/book/iterations/2026-11-22-general-intellect-playground-layer/report.json (12/12 PASS)"
     },
     "Tutorial_Tiling_Walls": {
       "desiringMachine": {
@@ -1085,14 +1110,24 @@
       "note": "Quest 3 human-witnessed descent (2026-11-21, APK fadfd554, rev 329 Dual Breadcrumb HUD): Palle walked through F208 during uninterrupted F203->F209 descent. Verdict: 'very thing look good all the way down'."
     },
     "Color_Grid_Pallet": {
-      "note": "[2026-11-22 · Antigravity] Added Color-tier Bauhaus Studio Workstation (scaffold-workstation on Shaft B NE, [10, -4.25]) with 6 curated Color-sequence palette swatches (MONO, BAUHAUS, QUEER, ALBERS, MONDRIAN, MEMPHIS) live-repainting both the 1:16 drafting grid and 1:4 glass-box playground + coloured Unit 02 (WorkerBeing). Verified 5/5 including strict pre-Color monochrome lock on F7 (doc/book/iterations/2026-11-22-bauhaus-studio-workstation/color_palette_report.json)."
+      "note": "[2026-11-22 · Antigravity] Added Color-tier Bauhaus Studio Workstation (scaffold-workstation on Shaft B NE, [10, -4.25]) with 6 curated Color-sequence palette swatches (MONO, BAUHAUS, QUEER, ALBERS, MONDRIAN, MEMPHIS) live-repainting both the 1:16 drafting grid and 1:4 glass-box playground + coloured Unit 02 (WorkerBeing). Verified 5/5 including strict pre-Color monochrome lock on F7 (doc/book/iterations/2026-11-22-bauhaus-studio-workstation/color_palette_report.json).",
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "doc/book/iterations/2026-11-22-general-intellect-playground-layer/report.json (12/12 PASS)"
     },
     "Color_Context_Placed": {
       "note": "[2026-11-22 · Antigravity] Installed full-colour worker_assemblage dyad (WorkerBeing + stijl_robot) at [-9.5, 5.2] celebrating Colour arrival on F28 via tools/place_worker_assemblages.py (14/14 PASS in doc/book/iterations/2026-11-22-worker-assemblage/report.json)."
     }
   },
-  "revision": 348,
+  "revision": 349,
   "history": [
+    {
+      "at": "2026-11-22T11:31:41Z",
+      "by": "Antigravity",
+      "action": "integrate_layer",
+      "target": "L9:playground",
+      "summary": "Integrated L9 General Intellect Playground & Studio Layer (26 sequences x 8 arcs from playground_layer.json + e45839e06/723e29e48 Template Mode Building Tables on F5 & F7 + Studio Workstations + Worker Assemblages) into Void Tower System Atlas (3 Orders x 10 Layers).",
+      "receipt": "commit e45839e06 / 723e29e48 + doc/book/iterations/2026-11-22-general-intellect-playground-layer/report.json"
+    },
     {
       "at": "2026-11-22T11:10:05Z",
       "by": "Antigravity",
@@ -3194,13 +3229,6 @@
       "by": "Antigravity",
       "action": "update_floor",
       "target": "Point_Triangle_Context",
-      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:20:07.381Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "Point_One",
       "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
     }
   ],
