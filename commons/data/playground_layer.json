@@ -167,9 +167,9 @@
       "arc": "pattern_force_wave",
       "floors": [62, 73],
       "unlock_floor": 62,
-      "capability": "Big Pipe Systems (BigPipeSystem) and walkable harmonic sine bridges integrated into the playground.",
+      "capability": "Big Pipe Systems (modular MultiMesh-batched 2m octagonal walkable pipe tunnels) and harmonic sine spans integrated into the playground.",
       "studio_unlocks": ["big_pipe", "sine_bridge"],
-      "status": "blueprint_coupled",
+      "status": "live",
       "sources": [
         "algorithms/wavefunctions/big_pipe_system/BigPipeSystem.tscn",
         "algorithms/wavefunctions/unit_circle/walkable_sine_bridge.tscn"
@@ -216,30 +216,39 @@
       "arc": "emergence",
       "floors": [106, 113],
       "unlock_floor": 106,
-      "capability": "Neighbouring-cell CA control: placed blocks step through neighbour rules (birth/survival/toggle) across the playground grid.",
+      "capability": "Neighbouring-cell CA control: live Conway B3/S23 step across the 10x7 playground bays evolving elevated Bauhaus framed quads in O(1) MultiMesh draw calls.",
       "studio_unlocks": ["ca_step"],
-      "status": "blueprint_coupled",
-      "sources": ["commons/context/walkgrids/CellularAutomataSpace.gd"]
+      "status": "live",
+      "sources": [
+        "commons/context/walkgrids/CellularAutomataSpace.gd",
+        "commons/artifacts/scaffold_workstation/playground_layer.gd"
+      ]
     },
     {
       "id": "fractals",
       "arc": "emergence",
       "floors": [114, 120],
       "unlock_floor": 114,
-      "capability": "Recursive Menger Sponge playgrounds and self-similar carved climbing towers.",
+      "capability": "Recursive Menger Sponge playgrounds (walkable 3x3 carved Bauhaus pavilion + 400-cube Level-2 MultiMesh Menger monument in 1 draw call).",
       "studio_unlocks": ["menger_block"],
-      "status": "blueprint_coupled",
-      "sources": ["algorithms/fractals/mengersponge/menger_sponge.tscn"]
+      "status": "live",
+      "sources": [
+        "algorithms/fractals/mengersponge/menger_sponge.tscn",
+        "commons/artifacts/scaffold_workstation/playground_layer.gd"
+      ]
     },
     {
       "id": "lsystems",
       "arc": "emergence",
       "floors": [121, 128],
       "unlock_floor": 121,
-      "capability": "L-System botanical plant props scaled and grounded cleanly to fit the playground grid.",
+      "capability": "L-System botanical plant props (4 procedural branching species) scaled and grounded to the grid, batched in 2 shared MultiMesh draw calls.",
       "studio_unlocks": ["lsystem_plant"],
-      "status": "blueprint_coupled",
-      "sources": ["commons/context/walkgrids/LSystemSpace.gd"]
+      "status": "live",
+      "sources": [
+        "commons/context/walkgrids/LSystemSpace.gd",
+        "commons/artifacts/scaffold_workstation/playground_layer.gd"
+      ]
     },
     {
       "id": "proceduralgeneration",

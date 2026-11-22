@@ -166,9 +166,12 @@ func _test_bauhaus_kit_and_console() -> void:
 	# Single trigger stamps the elevated 2x2m Bauhaus quad + legs + perimeter rods!
 	var stamp_quad: String = ws.space_press(aim, null)
 	var after_quad: int = ws.model.records.size()
-	var built_bodies: int = ws.output.get_node("Structure").get_child_count()
-	check("2D Single trigger stamps elevated 2x2m Bauhaus quad atomically (%d -> %d records, %d live 1:4 bodies)" % [empty_count, after_quad, built_bodies],
-		ghost_ok and stamp_quad == "placed" and after_quad > empty_count and built_bodies >= after_quad)
+	var perf: Dictionary = st.get_vr_perf_stats()
+	var col_cnt: int = int(perf.get("structure_colliders", 0))
+	var phys_bodies: int = int(perf.get("structure_physics_bodies", 0))
+	var glass_dcs: int = int(perf.get("glass_draw_calls", 999))
+	check("2D Single trigger stamps elevated 2x2m Bauhaus quad atomically (%d -> %d records, %d colliders in %d compound body, %d draw calls)" % [empty_count, after_quad, col_cnt, phys_bodies, glass_dcs],
+		ghost_ok and stamp_quad == "placed" and after_quad > empty_count and col_cnt >= after_quad and phys_bodies == 1 and glass_dcs <= 12)
 
 	# Switch back to LEVEL 0M, select WEDGE tile with 1 trigger, stamp ramp cleanly!
 	st.cycle_level(); st.cycle_level()  # 1M -> 2M -> 0M
@@ -188,6 +191,47 @@ func _test_bauhaus_kit_and_console() -> void:
 	ws.undo(); ws.redraw()
 	check("2F UNDO cleanly reverses the last stamped template (%d -> %d records)" % [after_wedge, ws.model.records.size()],
 		ws.model.records.size() == after_quad)
+
+	# 2G: Upward +Y point stacking when aiming at an existing point (both pad repeat-click & direct 3D point aim, up to 6 m ceiling)!
+	var pt_tile_pos: Vector3 = (st.tile_nodes["point"].root as Node3D).global_position
+	aim.global_position = pt_tile_pos + Vector3(0, 0.55, 0.55)
+	aim.look_at(pt_tile_pos, Vector3.UP)
+	ws.space_press(aim, null)
+	var col_base := Vector3(1.5, 0.0, 1.0)
+	var col_pad: Vector3 = st.mini_root.to_global(col_base * st.MINI_UNIT)
+	aim.global_position = col_pad + Vector3(0, 0.72, 0.72)
+	aim.look_at(col_pad, Vector3.UP)
+	var r0: String = ws.space_press(aim, null)   # y = 0.0 (0 m)
+	var r1: String = ws.space_press(aim, null)   # y = 0.5 (1 m) via same pad spot
+	# Now aim directly at the elevated 3D point at y = 0.5 -> should preview & place y = 1.0 (2 m) with stack_from!
+	var elevated_pt: Vector3 = st.mini_root.to_global(Vector3(1.5, 0.5, 1.0) * st.MINI_UNIT)
+	aim.global_position = elevated_pt + Vector3(0, 0.45, 0.65)
+	aim.look_at(elevated_pt, Vector3.UP)
+	ws.space_update(aim, null)
+	var has_stack_cue: bool = st.hover_state.has("stack_from") and is_equal_approx(float(st.hover_state.get("stamp_y", -1.0)), 1.0) and st.mini_ghost.get_node_or_null("UpwardGuideStem") != null
+
+	# Capture close-up showing the +Y stacked column + amber upward ghost + vertical guide stem!
+	cam.fov = 48.0
+	cam.global_position = Vector3(0.45, 1.65, 0.92)
+	cam.look_at(st.mini_root.to_global(Vector3(1.5, 0.7, 1.0) * st.MINI_UNIT), Vector3.UP)
+	await frames(6)
+	await RenderingServer.frame_post_draw
+	root.get_texture().get_image().save_png(out.path_join("02b-point-stack-upward-y.png"))
+
+	var r2: String = ws.space_press(aim, null)   # y = 1.0 (2 m)
+	# Keep stacking all the way to DOMAIN_MAX.y (3.0 = 6 m), then verify ceiling stops cleanly!
+	var r3: String = ws.space_press(aim, null)   # 1.5
+	var r4: String = ws.space_press(aim, null)   # 2.0
+	var r5: String = ws.space_press(aim, null)   # 2.5
+	var r6: String = ws.space_press(aim, null)   # 3.0 (6 m ceiling)
+	var r7: String = ws.space_press(aim, null)   # full -> "" (refused cleanly)
+	var pts_map: Dictionary = ws.model.points()
+	var stacked_all := true
+	for sy in [0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0]:
+		if not pts_map.has(Model.key(Vector3(1.5, sy, 1.0))):
+			stacked_all = false
+	check("2G Point tool stacks upwards along +Y on existing points (0m..6m, stem cue=%s, ceiling stop='%s')" % [str(has_stack_cue), r7],
+		r0 == "placed" and r1 == "placed" and r2 == "placed" and r3 == "placed" and r4 == "placed" and r5 == "placed" and r6 == "placed" and r7 == "" and has_stack_cue and stacked_all)
 
 	bench_root.free()
 	await frames(4)

@@ -743,7 +743,7 @@
       "evidenceReceipt": "doc/book/iterations/2026-11-21-quest-human-witnessed/f203-to-f209-descent-receipt.json",
       "plainBreadcrumb": "Pick a reusable part from the 8 open prefab shelves (88 items) or 5 full-size stock rails (53 parts), compose two testable arrangements at the Tier-3 Scaffold Workstation, and carry your collected part back into the tower through a transfer threshold.",
       "bodyHook": "Take a full-size part (rod) directly off the rail into your hand so it detaches into live gravity while equipping your bracelet, then press TransferKey on the threshold jamb to carry it to another floor.",
-      "note": "Quest 3 human-witnessed descent (2026-11-21, APK fadfd554, rev 329 Dual Breadcrumb HUD): Palle reached F209 Primitives_Prefab_Library live at [6.53, -1276.0, 0.36] (17.9 Hz, pose_age 0.01s). Verdict: 'very thing look good all the way down'.\n[2026-11-22 · Antigravity] Upgraded F209 construction-stock (scaffold_workstation_quads) and F1/F3/F5/F6/F7 workstations to unified Bauhaus Studio Workstation (bauhaus_kit.gd + studio_workstation.gd): Trans_Pre-aligned monochrome-to-colour kit, flat near-edge hand-principle template strip replacing PartsArc, 20m x 14m grid mirrored live at 1:4 in the 6.6m glass box (1:1 via VR Visor), and evolving humanoid Unit 02 (WorkerBeing) beside the console. Verified 15/15 (doc/book/iterations/2026-11-22-bauhaus-studio-workstation/report.json).\n[2026-11-22 · Antigravity] Added reusable Worker Form & Endless Museum Dream-Body Assemblage system (commons/artifacts/worker_assemblage/): staged atelier assemblage monument at [2.8, 0.6] (asawa_wire + stijl_robot + WorkerBeing in open Bauhaus measuring cage) plus integrated interactive workbench_arc (FORM / AXIS / MODE plinth synced with Color Palette Chooser) beside all 7 Studio Workbenches. Verified 14/14 PASS in doc/book/iterations/2026-11-22-worker-assemblage/report.json.\n[2026-11-22 · Antigravity] Shipped the 26-sequence General Intellect Playground Layer (commons/data/playground_layer.json + playground_layer.gd) integrated into studio_workstation.gd: rear SequenceLayerStrip unlocks Package/Coin/Bomb (F13+), 1D/2D/3D Arrays (F23+), Palettes (F28+), Panel Patterns (F37+), Jump Pads (F45+), Random Walk + Spiky Basin (F74+), Configurable Smooth Noise Basin (F89+), and 4x4x4 Isosurface Cutouts (F145+). Verified 12/12 PASS + 1:1 VR Visor view.",
+      "note": "Quest 3 human-witnessed descent (2026-11-21, APK fadfd554, rev 329 Dual Breadcrumb HUD): Palle reached F209 Primitives_Prefab_Library live at [6.53, -1276.0, 0.36] (17.9 Hz, pose_age 0.01s). Verdict: 'very thing look good all the way down'.\n[2026-11-22 · Antigravity] Upgraded F209 construction-stock (scaffold_workstation_quads) and F1/F3/F5/F6/F7 workstations to unified Bauhaus Studio Workstation (bauhaus_kit.gd + studio_workstation.gd): Trans_Pre-aligned monochrome-to-colour kit, flat near-edge hand-principle template strip replacing PartsArc, 20m x 14m grid mirrored live at 1:4 in the 6.6m glass box (1:1 via VR Visor), and evolving humanoid Unit 02 (WorkerBeing) beside the console. Verified 15/15 (doc/book/iterations/2026-11-22-bauhaus-studio-workstation/report.json).\n[2026-11-22 · Antigravity] Added reusable Worker Form & Endless Museum Dream-Body Assemblage system (commons/artifacts/worker_assemblage/): staged atelier assemblage monument at [2.8, 0.6] (asawa_wire + stijl_robot + WorkerBeing in open Bauhaus measuring cage) plus integrated interactive workbench_arc (FORM / AXIS / MODE plinth synced with Color Palette Chooser) beside all 7 Studio Workbenches. Verified 14/14 PASS in doc/book/iterations/2026-11-22-worker-assemblage/report.json.\n[2026-11-22 · Antigravity] Shipped the 26-sequence General Intellect Playground Layer (commons/data/playground_layer.json + playground_layer.gd) integrated into studio_workstation.gd: rear SequenceLayerStrip unlocks Package/Coin/Bomb (F13+), 1D/2D/3D Arrays (F23+), Palettes (F28+), Panel Patterns (F37+), Jump Pads (F45+), Random Walk + Spiky Basin (F74+), Configurable Smooth Noise Basin (F89+), and 4x4x4 Isosurface Cutouts (F145+). Verified 12/12 PASS + 1:1 VR Visor view.\n[2026-11-22 · Antigravity] VR MultiMesh Studio Workstation upgrade (bauhaus_kit.gd + studio_workstation.gd + playground_layer.gd + sound_jump_pad.gd): baked multi-surface ArrayMeshes + MultiMeshInstance3D batching (726 instances in 19 draw calls), single compound StaticBody3D physics, zero-alloc 90 Hz hover memoization, +Y upward point stacking, 2-row terraced rear rack with SPRAY/SND PAD/BIG PIPE/NOISE CFG/CA STEP/MENGER/PLANT, and 11 new sequence workstations installed across F19/F24/F39/F55/F64/F81/F98/F108/F118/F122/F145 (18 total live across tower).",
       "desiringMachine": {
         "machine": "8 glassless prefab_library_shelf banks (88 live items.json entries) + 5 full-size hanging_stock rails (53 removable physical parts & self-returning tools) + Tier-3 scaffold_workstation_quads + 2 void_floor_transfer portals (Trans_Pre F13, Primitives_Melencolia F12)",
         "activates": "Detaching reusable primitives into live physics while collecting them into inventory_hands, keeping tools anchored for the next visitor, and looping carried parts back into earlier tower sequences",
@@ -1118,8 +1118,15 @@
       "note": "[2026-11-22 · Antigravity] Installed full-colour worker_assemblage dyad (WorkerBeing + stijl_robot) at [-9.5, 5.2] celebrating Colour arrival on F28 via tools/place_worker_assemblages.py (14/14 PASS in doc/book/iterations/2026-11-22-worker-assemblage/report.json)."
     }
   },
-  "revision": 349,
+  "revision": 350,
   "history": [
+    {
+      "at": "2026-11-22T12:36:15.944Z",
+      "by": "Antigravity",
+      "action": "append_note",
+      "target": "Primitives_Prefab_Library",
+      "summary": "VR MultiMesh Studio Workstation upgrade (bauhaus_kit.gd + studio_workstation.gd + playground_layer.gd + sound_jump_pad.gd): baked multi-surf"
+    },
     {
       "at": "2026-11-22T11:31:41Z",
       "by": "Antigravity",
@@ -3222,13 +3229,6 @@
       "by": "Antigravity",
       "action": "update_floor",
       "target": "Primitives_Polythedra",
-      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:20:07.599Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "Point_Triangle_Context",
       "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
     }
   ],

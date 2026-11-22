@@ -58,6 +58,45 @@ const PALETTES := {
 }
 
 static var _mats: Dictionary = {}
+static var _paint_mats: Dictionary = {}
+static var _ghost_mats: Dictionary = {}
+static var _baked_meshes: Dictionary = {}
+static var _shape_cache: Dictionary = {}
+static var _unit_box_mesh: BoxMesh = null
+
+
+static func unit_box() -> BoxMesh:
+	if _unit_box_mesh == null:
+		_unit_box_mesh = BoxMesh.new()
+		_unit_box_mesh.size = Vector3.ONE
+	return _unit_box_mesh
+
+
+static func paint_mat(hex_str: String) -> StandardMaterial3D:
+	var key := hex_str.to_lower()
+	if _paint_mats.has(key):
+		return _paint_mats[key] as StandardMaterial3D
+	var m := StandardMaterial3D.new()
+	m.albedo_color = Color(key)
+	m.roughness = 0.44
+	m.metallic = 0.05
+	_paint_mats[key] = m
+	return m
+
+
+static func ghost_mat(colour: Color, emission_energy: float = 0.55) -> StandardMaterial3D:
+	var key := "%s|%.2f" % [colour.to_html(true), emission_energy]
+	if _ghost_mats.has(key):
+		return _ghost_mats[key] as StandardMaterial3D
+	var gm := StandardMaterial3D.new()
+	gm.albedo_color = colour
+	gm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_DEPTH_PRE_PASS
+	gm.roughness = 0.32
+	gm.emission_enabled = true
+	gm.emission = Color(colour.r, colour.g, colour.b, 1.0)
+	gm.emission_energy_multiplier = emission_energy
+	_ghost_mats[key] = gm
+	return gm
 
 
 static func resolve_palette(phase_or_name: String) -> String:
@@ -135,60 +174,244 @@ static func mat(role: String, phase: String = "monochrome") -> StandardMaterial3
 
 static func shape_for(raw: Dictionary, unit: float) -> Shape3D:
 	var r: Dictionary = Model.as_face(raw)
-	if r.kind == "point":
+	var kind: String = str(r.get("kind", ""))
+	var skey := _shape_cache_key(r, unit)
+	if _shape_cache.has(skey):
+		return _shape_cache[skey] as Shape3D
+	var shp: Shape3D
+	if kind == "point":
 		if r.get("_seated", false):
 			var seated := BoxShape3D.new()
 			seated.size = Vector3(.12, .08, .12) * unit
-			return seated
-		var b := BoxShape3D.new()
-		b.size = Vector3(.12, .12, .12) * unit
-		return b
-	return Legacy.shape_for(raw, unit)
+			shp = seated
+		else:
+			var b := BoxShape3D.new()
+			b.size = Vector3(.12, .12, .12) * unit
+			shp = b
+	else:
+		shp = Legacy.shape_for(raw, unit)
+	_shape_cache[skey] = shp
+	return shp
 
 
-static func visual(raw: Dictionary, unit: float, phase: String = "monochrome") -> MeshInstance3D:
+static func _shape_cache_key(r: Dictionary, unit: float) -> String:
+	var kind: String = str(r.get("kind", ""))
+	var umm: int = int(roundf(unit * 1000.0))
+	if kind == "point":
+		return "pt|%d|%d" % [1 if r.get("_seated", false) else 0, umm]
+	if kind in ["rod", "rod_short"]:
+		return "%s|%d" % [kind, umm]
+	if kind == "diag":
+		var lmm: int = int(roundf(Model.vec(r.at).distance_to(Model.vec(r.end)) * unit * 1000.0))
+		return "diag|%d|%d" % [lmm, umm]
+	if kind == "quad":
+		return "quad|%d|%d" % [int(roundf(float(r.get("span", 1.0)) * 100.0)), umm]
+	if kind == "panel":
+		return "panel|%d|%d|%d" % [int(r.get("half", 0)), int(roundf(float(r.get("span", 1.0)) * 100.0)), umm]
+	if kind in ["wedge", "pyramid"]:
+		return "%s|%d|%d" % [kind, int(roundf(Model.prefab_span(r) * 100.0)), umm]
+	return "%s|%s|%d" % [kind, str(r.get("span", 1.0)), umm]
+
+
+## Returns a single cached multi-surface ArrayMesh for any Bauhaus primitive (1 Mesh instead of 4-7 child nodes!).
+static func baked_mesh(raw: Dictionary, unit: float, phase: String = "monochrome", panel_mat_override: Material = null, quad_mat_override: Material = null) -> ArrayMesh:
 	var r: Dictionary = Model.as_face(raw)
-	var kind: String = str(r.kind)
+	var kind: String = str(r.get("kind", ""))
+	var pid: String = resolve_palette(phase)
+	var paint_hex: String = str(r.get("paint", "")).to_lower()
+	var custom_mat: Material = null
+	var custom_tag := ""
+	if not paint_hex.is_empty():
+		custom_mat = paint_mat(paint_hex)
+		custom_tag = "paint:" + paint_hex
+	elif kind == "quad" and quad_mat_override != null:
+		custom_mat = quad_mat_override
+		custom_tag = "qmat:" + str(quad_mat_override.get_instance_id())
+	elif kind == "panel" and panel_mat_override != null:
+		custom_mat = panel_mat_override
+		custom_tag = "pmat:" + str(panel_mat_override.get_instance_id())
+
+	var gkey := _mesh_geom_key(r, unit)
+	var full_key := "%s|%s|%s" % [gkey, pid, custom_tag]
+	if _baked_meshes.has(full_key):
+		return _baked_meshes[full_key] as ArrayMesh
+
+	var mesh: ArrayMesh = null
+	if kind == "point":
+		mesh = _bake_point(r, unit, pid, custom_mat)
+	elif kind in ["rod", "rod_short"]:
+		mesh = _bake_rod(kind, unit, pid, custom_mat)
+	elif kind == "diag":
+		mesh = _bake_diag(r, unit, pid, custom_mat)
+	elif Model.is_macro(kind):
+		mesh = _bake_macro_rod(kind, unit, pid, custom_mat)
+	elif kind == "quad":
+		mesh = _bake_quad(float(r.get("span", 1.0)), unit, pid, custom_mat)
+	elif kind == "panel":
+		mesh = _bake_panel(int(r.get("half", 0)), float(r.get("span", 1.0)), unit, pid, custom_mat)
+	elif kind == "wedge":
+		mesh = _bake_wedge(Model.prefab_span(r), unit, pid, custom_mat)
+	elif kind == "pyramid":
+		mesh = _bake_pyramid(Model.prefab_span(r), unit, pid, custom_mat)
+	if mesh != null:
+		_baked_meshes[full_key] = mesh
+	return mesh
+
+
+static func _mesh_geom_key(r: Dictionary, unit: float) -> String:
+	var kind: String = str(r.get("kind", ""))
+	var umm: int = int(roundf(unit * 1000.0))
+	if kind == "point":
+		return "pt_%d_%d" % [1 if r.get("_seated", false) else 0, umm]
+	if kind in ["rod", "rod_short"]:
+		return "%s_%d" % [kind, umm]
+	if kind == "diag":
+		var lmm: int = int(roundf(Model.vec(r.at).distance_to(Model.vec(r.end)) * unit * 1000.0))
+		return "diag_%d_%d" % [lmm, umm]
+	if Model.is_macro(kind):
+		return "%s_%d" % [kind, umm]
+	if kind == "quad":
+		return "quad_%d_%d" % [int(roundf(float(r.get("span", 1.0)) * 100.0)), umm]
+	if kind == "panel":
+		return "panel_%d_%d_%d" % [int(r.get("half", 0)), int(roundf(float(r.get("span", 1.0)) * 100.0)), umm]
+	if kind in ["wedge", "pyramid"]:
+		return "%s_%d_%d" % [kind, int(roundf(Model.prefab_span(r) * 100.0)), umm]
+	return "%s_%d" % [kind, umm]
+
+
+static func visual(raw: Dictionary, unit: float, phase: String = "monochrome", panel_mat_override: Material = null, quad_mat_override: Material = null) -> MeshInstance3D:
+	var r: Dictionary = Model.as_face(raw)
+	var kind: String = str(r.get("kind", ""))
+	var baked := baked_mesh(r, unit, phase, panel_mat_override, quad_mat_override)
+	if baked == null:
+		return Legacy.visual(raw, unit, phase)
 	var root := MeshInstance3D.new()
 	root.name = "Bauhaus_" + kind
-
-	if kind == "point":
-		_build_point(root, r, unit, phase)
-	elif kind in ["rod", "rod_short"]:
-		_build_rod(root, kind, unit, phase)
-	elif kind == "diag":
-		_build_diag(root, r, unit, phase)
-	elif Model.is_macro(kind):
-		_build_macro_rod(root, kind, unit, phase)
-	elif kind == "quad":
-		_build_quad(root, float(r.get("span", 1.0)), unit, phase)
-	elif kind == "panel":
-		_build_panel(root, int(r.get("half", 0)), float(r.get("span", 1.0)), unit, phase)
-	elif kind == "wedge":
-		_build_wedge(root, Model.prefab_span(r), unit, phase)
-	elif kind == "pyramid":
-		_build_pyramid(root, Model.prefab_span(r), unit, phase)
-	else:
-		root.free()
-		return Legacy.visual(raw, unit, phase)
+	root.mesh = baked
 	return root
 
 
-static func _build_point(root: MeshInstance3D, r: Dictionary, unit: float, phase: String) -> void:
+## VR-optimized MultiMesh batcher: renders ANY number of Bauhaus records into O(1) MultiMeshInstance3D draw calls!
+## Returns {multimeshes: int, instances: int, draw_calls: int}.
+static func populate_multimesh_batch(
+	parent: Node3D,
+	records: Array[Dictionary],
+	unit: float,
+	phase: String = "monochrome",
+	offset: Vector3 = Vector3.ZERO,
+	cast_shadows: bool = true,
+	panel_mat_override: Material = null,
+	quad_mat_override: Material = null,
+	material_override_all: Material = null
+) -> Dictionary:
+	var buckets: Dictionary = {}       # bucket_key -> {mesh: ArrayMesh, transforms: Array[Transform3D]}
+	var fallback_count := 0
+	var total_instances := 0
+
+	for raw in records:
+		var r: Dictionary = Model.as_face(raw)
+		var mesh := baked_mesh(r, unit, phase, panel_mat_override, quad_mat_override)
+		var pose := Model.pose(r)
+		pose.origin = pose.origin * unit + offset
+		if mesh == null:
+			var fb := Legacy.visual(raw, unit, phase)
+			fb.transform = pose
+			if material_override_all != null:
+				fb.material_override = material_override_all
+			if not cast_shadows:
+				fb.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+			parent.add_child(fb)
+			fallback_count += 1
+			total_instances += 1
+			continue
+		var bkey: int = mesh.get_instance_id()
+		if not buckets.has(bkey):
+			buckets[bkey] = {"mesh": mesh, "kind": str(r.get("kind", "part")), "transforms": [] as Array[Transform3D]}
+		(buckets[bkey].transforms as Array[Transform3D]).append(pose)
+		total_instances += 1
+
+	var mm_count := 0
+	var draw_calls := fallback_count
+	for bkey in buckets:
+		var entry: Dictionary = buckets[bkey]
+		var mesh: ArrayMesh = entry.mesh
+		var xforms: Array[Transform3D] = entry.transforms
+		var mm := MultiMesh.new()
+		mm.transform_format = MultiMesh.TRANSFORM_3D
+		mm.mesh = mesh
+		mm.instance_count = xforms.size()
+		for i in xforms.size():
+			mm.set_instance_transform(i, xforms[i])
+		var mmi := MultiMeshInstance3D.new()
+		mmi.name = "MM_%s_%d" % [str(entry.kind), mm_count]
+		mmi.multimesh = mm
+		if material_override_all != null:
+			mmi.material_override = material_override_all
+		if not cast_shadows:
+			mmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		parent.add_child(mmi)
+		mm_count += 1
+		draw_calls += 1 if material_override_all != null else mesh.get_surface_count()
+
+	return {"multimeshes": mm_count, "instances": total_instances, "draw_calls": draw_calls}
+
+
+## Batch arbitrary architectural boxes (grid bars, steel frames, stems, canopies) into 1 single MultiMeshInstance3D!
+static func add_box_multimesh(
+	parent: Node3D,
+	node_name: String,
+	transforms: Array[Transform3D],
+	material: Material,
+	cast_shadows: bool = false
+) -> MultiMeshInstance3D:
+	if transforms.is_empty():
+		return null
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.mesh = unit_box()
+	mm.instance_count = transforms.size()
+	for i in transforms.size():
+		mm.set_instance_transform(i, transforms[i])
+	var mmi := MultiMeshInstance3D.new()
+	mmi.name = node_name
+	mmi.multimesh = mm
+	mmi.material_override = material
+	if not cast_shadows:
+		mmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	parent.add_child(mmi)
+	return mmi
+
+
+static func _append_box(st: SurfaceTool, at: Vector3, size: Vector3, basis_rot: Basis = Basis.IDENTITY) -> void:
+	var bm := BoxMesh.new()
+	bm.size = size
+	st.append_from(bm, 0, Transform3D(basis_rot, at))
+
+
+static func _commit_surfaces(entries: Array) -> ArrayMesh:
+	var mesh := ArrayMesh.new()
+	var s_idx := 0
+	for item in entries:
+		var st: SurfaceTool = item[0]
+		var material: Material = item[1]
+		st.commit(mesh)
+		mesh.surface_set_material(s_idx, material)
+		s_idx += 1
+	return mesh
+
+
+static func _bake_point(r: Dictionary, unit: float, phase: String, custom_mat: Material) -> ArrayMesh:
 	var seated: bool = bool(r.get("_seated", false))
-	var box := BoxMesh.new()
+	var st0 := SurfaceTool.new()
+	st0.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var st1 := SurfaceTool.new()
+	st1.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var primary: Material = custom_mat if custom_mat != null else mat("joint", phase)
 	if seated:
-		# Flush under a walkable surface: extends down from y=0 so a walker never snags.
-		box.size = Vector3(.115, .078, .115) * unit
-		root.mesh = box
-		root.material_override = mat("joint", phase)
-		var cap := _child_box(root, "SeatedCap", Vector3(0, -.039, 0) * unit, Vector3(.128, .016, .128) * unit, mat("slate", phase))
-		cap.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-		return
-	box.size = Vector3(.115, .115, .115) * unit
-	root.mesh = box
-	root.material_override = mat("joint", phase)
-	# Six architectural axial socket collars make the orthogonal grid rule visibly legible.
+		_append_box(st0, Vector3.ZERO, Vector3(.115, .078, .115) * unit)
+		_append_box(st1, Vector3(0, -.039, 0) * unit, Vector3(.128, .016, .128) * unit)
+		return _commit_surfaces([[st0, primary], [st1, mat("slate", phase)]])
+	_append_box(st0, Vector3.ZERO, Vector3(.115, .115, .115) * unit)
 	for axis: Vector3i in Model.AXES:
 		for dir in [-1, 1]:
 			var s := Vector3(.052, .052, .052) * unit
@@ -198,78 +421,89 @@ static func _build_point(root: MeshInstance3D, r: Dictionary, unit: float, phase
 				s.y = .014 * unit
 			else:
 				s.z = .014 * unit
-			_child_box(root, "Socket", Vector3(axis) * float(dir) * .061 * unit, s, mat("slate", phase))
+			_append_box(st1, Vector3(axis) * float(dir) * .061 * unit, s)
+	return _commit_surfaces([[st0, primary], [st1, mat("slate", phase)]])
 
 
-static func _build_rod(root: MeshInstance3D, kind: String, unit: float, phase: String) -> void:
+static func _bake_rod(kind: String, unit: float, phase: String, custom_mat: Material) -> ArrayMesh:
 	var length: float = (.5 if kind == "rod_short" else 1.0) * unit
 	var thickness: float = .068 * unit
-	var beam := BoxMesh.new()
-	beam.size = Vector3(thickness, length, thickness)
-	root.mesh = beam
-	root.material_override = mat("rod", phase)
-	# Subtle end-collars anchor the bar visually into its two corner joints.
+	var st0 := SurfaceTool.new()
+	st0.begin(Mesh.PRIMITIVE_TRIANGLES)
+	_append_box(st0, Vector3.ZERO, Vector3(thickness, length, thickness))
+	var st1 := SurfaceTool.new()
+	st1.begin(Mesh.PRIMITIVE_TRIANGLES)
 	var collar_s := Vector3(.082 * unit, .024 * unit, .082 * unit)
 	for side in [-1.0, 1.0]:
-		_child_box(root, "EndCollar", Vector3(0, side * (length * 0.5 - .055 * unit), 0), collar_s, mat("slate", phase))
+		_append_box(st1, Vector3(0, side * (length * 0.5 - .055 * unit), 0), collar_s)
+	var primary: Material = custom_mat if custom_mat != null else mat("rod", phase)
+	return _commit_surfaces([[st0, primary], [st1, mat("slate", phase)]])
 
 
-static func _build_diag(root: MeshInstance3D, r: Dictionary, unit: float, phase: String) -> void:
+static func _bake_diag(r: Dictionary, unit: float, phase: String, custom_mat: Material) -> ArrayMesh:
 	var length: float = Model.vec(r.at).distance_to(Model.vec(r.end)) * unit
 	var thickness: float = .048 * unit
-	var brace := BoxMesh.new()
-	brace.size = Vector3(thickness, length, thickness)
-	root.mesh = brace
-	root.material_override = mat("diag", phase)
+	var st0 := SurfaceTool.new()
+	st0.begin(Mesh.PRIMITIVE_TRIANGLES)
+	_append_box(st0, Vector3.ZERO, Vector3(thickness, length, thickness))
+	var primary: Material = custom_mat if custom_mat != null else mat("diag", phase)
+	return _commit_surfaces([[st0, primary]])
 
 
-static func _build_macro_rod(root: MeshInstance3D, kind: String, unit: float, phase: String) -> void:
+static func _bake_macro_rod(kind: String, unit: float, phase: String, custom_mat: Material) -> ArrayMesh:
 	var length: float = float(Model.MACRO_UNITS[kind])
 	var n: int = int(roundf(length * 2.0))
+	var st0 := SurfaceTool.new()
+	st0.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var st1 := SurfaceTool.new()
+	st1.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for i in n:
-		_child_box(root, "Seg", Vector3(0, (-length * 0.5 + 0.25 + i * 0.5) * unit, 0),
-			Vector3(.068, .5, .068) * unit, mat("rod", phase))
+		_append_box(st0, Vector3(0, (-length * 0.5 + 0.25 + i * 0.5) * unit, 0), Vector3(.068, .5, .068) * unit)
 		if i < n - 1:
-			_child_box(root, "Node", Vector3(0, (-length * 0.5 + 0.5 + i * 0.5) * unit, 0),
-				Vector3(.115, .115, .115) * unit, mat("joint", phase))
+			_append_box(st1, Vector3(0, (-length * 0.5 + 0.5 + i * 0.5) * unit, 0), Vector3(.115, .115, .115) * unit)
+	var primary: Material = custom_mat if custom_mat != null else mat("rod", phase)
+	if n > 1:
+		return _commit_surfaces([[st0, primary], [st1, mat("joint", phase)]])
+	return _commit_surfaces([[st0, primary]])
 
 
-static func _build_quad(root: MeshInstance3D, span: float, unit: float, phase: String) -> void:
-	# Walkable top sits at local y = +0.018*unit (exact grid height in Model.pose).
+static func _bake_quad(span: float, unit: float, phase: String, custom_mat: Material) -> ArrayMesh:
 	var w: float = span * unit
 	var thick: float = .036 * unit
-	var slab := BoxMesh.new()
-	slab.size = Vector3(w, thick, w)
-	root.mesh = slab
-	root.material_override = mat("quad", phase)
+	var st0 := SurfaceTool.new()
+	st0.begin(Mesh.PRIMITIVE_TRIANGLES)
+	_append_box(st0, Vector3.ZERO, Vector3(w, thick, w))
 
-	# Crisp matte-black perimeter trim flush with the walkable deck top (Trans_Pre signature).
 	var trim_w: float = maxf(.028 * unit, 0.003)
 	var trim_h: float = maxf(.007 * unit, 0.0012)
 	var top_y: float = thick * 0.5 + trim_h * 0.32
 	var half: float = w * 0.5 - trim_w * 0.5
-	var trim_mat := mat("trim", phase)
-	_child_box(root, "TrimN", Vector3(0, top_y, -half), Vector3(w, trim_h, trim_w), trim_mat)
-	_child_box(root, "TrimS", Vector3(0, top_y, half), Vector3(w, trim_h, trim_w), trim_mat)
-	_child_box(root, "TrimW", Vector3(-half, top_y, 0), Vector3(trim_w, trim_h, w), trim_mat)
-	_child_box(root, "TrimE", Vector3(half, top_y, 0), Vector3(trim_w, trim_h, w), trim_mat)
-
-	# Clean dark architectural fascia rim around the underside edge.
+	var st1 := SurfaceTool.new()
+	st1.begin(Mesh.PRIMITIVE_TRIANGLES)
+	_append_box(st1, Vector3(0, top_y, -half), Vector3(w, trim_h, trim_w))
+	_append_box(st1, Vector3(0, top_y, half), Vector3(w, trim_h, trim_w))
+	_append_box(st1, Vector3(-half, top_y, 0), Vector3(trim_w, trim_h, w))
+	_append_box(st1, Vector3(half, top_y, 0), Vector3(trim_w, trim_h, w))
 	var fascia_h: float = .010 * unit
 	var bot_y: float = -thick * 0.5 + fascia_h * 0.5
-	_child_box(root, "FasciaN", Vector3(0, bot_y, -half), Vector3(w + .002, fascia_h, trim_w * 0.8), mat("slate", phase))
-	_child_box(root, "FasciaS", Vector3(0, bot_y, half), Vector3(w + .002, fascia_h, trim_w * 0.8), mat("slate", phase))
+	_append_box(st1, Vector3(0, bot_y, -half), Vector3(w + .002, fascia_h, trim_w * 0.8))
+	_append_box(st1, Vector3(0, bot_y, half), Vector3(w + .002, fascia_h, trim_w * 0.8))
+
+	var primary: Material = custom_mat if custom_mat != null else mat("quad", phase)
+	return _commit_surfaces([[st0, primary], [st1, mat("trim", phase)]])
 
 
-static func _build_panel(root: MeshInstance3D, half: int, span: float, unit: float, phase: String) -> void:
+static func _bake_panel(half: int, span: float, unit: float, phase: String, custom_mat: Material) -> ArrayMesh:
 	var verts := Legacy.vertices(half, unit, span)
-	root.mesh = Kit.mesh(verts, [[0, 2, 1], [3, 4, 5], [0, 1, 4, 3], [1, 2, 5, 4], [2, 0, 3, 5]])
-	root.material_override = mat("panel", phase)
+	var tri_mesh: ArrayMesh = Kit.mesh(verts, [[0, 2, 1], [3, 4, 5], [0, 1, 4, 3], [1, 2, 5, 4], [2, 0, 3, 5]])
+	var st0 := SurfaceTool.new()
+	st0.begin(Mesh.PRIMITIVE_TRIANGLES)
+	st0.append_from(tri_mesh, 0, Transform3D.IDENTITY)
 
-	# Three physical matte-black edge trims hugging the triangle top perimeter (including diagonal).
 	var trim_w: float = maxf(.026 * unit, 0.0028)
 	var trim_h: float = maxf(.007 * unit, 0.0012)
-	var trim_mat := mat("trim", phase)
+	var st1 := SurfaceTool.new()
+	st1.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for i in 3:
 		var a: Vector3 = verts[i + 3]
 		var b: Vector3 = verts[(i + 1) % 3 + 3]
@@ -277,19 +511,20 @@ static func _build_panel(root: MeshInstance3D, half: int, span: float, unit: flo
 		if edge_len < 0.0001:
 			continue
 		var mid: Vector3 = (a + b) * 0.5 + Vector3(0, trim_h * 0.32, 0)
-		var bar := _child_box(root, "TriTrim%d" % i, mid, Vector3(trim_w, trim_h, edge_len), trim_mat)
 		var dir: Vector3 = (b - a).normalized()
-		bar.quaternion = Quaternion(Vector3.BACK, dir)
+		_append_box(st1, mid, Vector3(trim_w, trim_h, edge_len), Basis(Quaternion(Vector3.BACK, dir)))
+
+	var primary: Material = custom_mat if custom_mat != null else mat("panel", phase)
+	return _commit_surfaces([[st0, primary], [st1, mat("trim", phase)]])
 
 
-static func _build_wedge(root: MeshInstance3D, span: float, unit: float, phase: String) -> void:
+static func _bake_wedge(span: float, unit: float, phase: String, custom_mat: Material) -> ArrayMesh:
 	var verts := Legacy.prefab_vertices("wedge", unit, span)
-	root.mesh = Kit.mesh(verts, Kit.wedge_faces())
-	root.material_override = mat("wedge", phase)
+	var w_mesh: ArrayMesh = Kit.mesh(verts, Kit.wedge_faces())
+	var st0 := SurfaceTool.new()
+	st0.begin(Mesh.PRIMITIVE_TRIANGLES)
+	st0.append_from(w_mesh, 0, Transform3D.IDENTITY)
 
-	# Crisp matte-black cheek trim rails hugging both sloped sides (matching Trans_Pre _ramp_x).
-	# Kit.wedge vertices: 0=(-hw,0,-hd), 1=(hw,0,-hd), 2=(hw,0,hd), 3=(-hw,0,hd), 4=(hw,h,hd), 5=(-hw,h,hd)
-	# Wait: check exact low/high Z from verts directly so trim always hugs the true slope!
 	var min_x := INF; var max_x := -INF; var min_z := INF; var max_z := -INF; var max_y := 0.0
 	for v in verts:
 		min_x = minf(min_x, v.x); max_x = maxf(max_x, v.x)
@@ -300,50 +535,41 @@ static func _build_wedge(root: MeshInstance3D, span: float, unit: float, phase: 
 	var pitch_x: float = -atan2(max_y, run_z)
 	var rail_w: float = maxf(.028 * unit, 0.003)
 	var rail_h: float = maxf(.014 * unit, 0.002)
-	var trim_mat := mat("trim", phase)
 	var mid_z: float = (min_z + max_z) * 0.5
 	var mid_y: float = max_y * 0.5 + rail_h * 0.35
+	var slope_basis := Basis(Vector3.RIGHT, pitch_x)
+	var st1 := SurfaceTool.new()
+	st1.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for sx in [min_x + rail_w * 0.5, max_x - rail_w * 0.5]:
-		var rail := _child_box(root, "RampTrim", Vector3(sx, mid_y, mid_z), Vector3(rail_w, rail_h, slope_len), trim_mat)
-		rail.rotation.x = pitch_x
-	# High-end landing bar + low-end nose bar
-	_child_box(root, "HighTrim", Vector3((min_x + max_x) * 0.5, max_y + rail_h * 0.25, max_z - rail_w * 0.5),
-		Vector3(max_x - min_x, rail_h * 0.6, rail_w), trim_mat)
+		_append_box(st1, Vector3(sx, mid_y, mid_z), Vector3(rail_w, rail_h, slope_len), slope_basis)
+	_append_box(st1, Vector3((min_x + max_x) * 0.5, max_y + rail_h * 0.25, max_z - rail_w * 0.5),
+		Vector3(max_x - min_x, rail_h * 0.6, rail_w))
+
+	var primary: Material = custom_mat if custom_mat != null else mat("wedge", phase)
+	return _commit_surfaces([[st0, primary], [st1, mat("trim", phase)]])
 
 
-static func _build_pyramid(root: MeshInstance3D, span: float, unit: float, phase: String) -> void:
+static func _bake_pyramid(span: float, unit: float, phase: String, custom_mat: Material) -> ArrayMesh:
 	var verts := Legacy.prefab_vertices("pyramid", unit, span)
-	root.mesh = Kit.mesh(verts, [[0, 3, 2, 1], [0, 1, 4], [1, 2, 4], [2, 3, 4], [3, 0, 4]])
-	root.material_override = mat("pyramid", phase)
+	var p_mesh: ArrayMesh = Kit.mesh(verts, [[0, 3, 2, 1], [0, 1, 4], [1, 2, 4], [2, 3, 4], [3, 0, 4]])
+	var st0 := SurfaceTool.new()
+	st0.begin(Mesh.PRIMITIVE_TRIANGLES)
+	st0.append_from(p_mesh, 0, Transform3D.IDENTITY)
 	var width: float = absf(verts[1].x - verts[0].x)
 	var collar_h: float = maxf(.022 * unit, 0.003)
-	_child_box(root, "BasePlinth", Vector3(0, collar_h * 0.5, 0), Vector3(width + .012 * unit, collar_h, width + .012 * unit), mat("trim", phase))
+	var st1 := SurfaceTool.new()
+	st1.begin(Mesh.PRIMITIVE_TRIANGLES)
+	_append_box(st1, Vector3(0, collar_h * 0.5, 0), Vector3(width + .012 * unit, collar_h, width + .012 * unit))
+	var primary: Material = custom_mat if custom_mat != null else mat("pyramid", phase)
+	return _commit_surfaces([[st0, primary], [st1, mat("trim", phase)]])
 
 
-static func _child_box(parent: Node3D, node_name: String, at: Vector3, size: Vector3, material: Material) -> MeshInstance3D:
-	var mi := MeshInstance3D.new()
-	mi.name = node_name
-	var bm := BoxMesh.new()
-	bm.size = size
-	mi.mesh = bm
-	mi.material_override = material
-	mi.position = at
-	parent.add_child(mi)
-	return mi
-
-
-## Applies a crisp Bauhaus ghost tint (amber/white for placement preview, coral-red for removal).
+## Applies a cached Bauhaus ghost tint (amber/white for placement preview, coral-red for removal) with zero per-frame allocs!
 static func apply_ghost(node: Node, colour: Color, emission_energy: float = 0.55) -> void:
-	if node is MeshInstance3D:
-		var gm := StandardMaterial3D.new()
-		gm.albedo_color = colour
-		gm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_DEPTH_PRE_PASS
-		gm.roughness = 0.32
-		gm.emission_enabled = true
-		gm.emission = Color(colour.r, colour.g, colour.b, 1.0)
-		gm.emission_energy_multiplier = emission_energy
-		node.material_override = gm
-		node.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	var gm := ghost_mat(colour, emission_energy)
+	if node is GeometryInstance3D:
+		(node as GeometryInstance3D).material_override = gm
+		(node as GeometryInstance3D).cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	for child in node.get_children():
 		apply_ghost(child, colour, emission_energy)
 

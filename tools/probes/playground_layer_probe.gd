@@ -177,8 +177,8 @@ func _run() -> void:
 	var f33_root: Node3D = content.roots[33]
 	var ws33_ctrl: Node3D = f33_root.get_node("scaffold-workstation/Artifact").get("studio_ctrl") as Node3D
 	var st33: Dictionary = ws33_ctrl.call("get_layer_state")
-	_check("5A F033 unlocks Objects + Arrays + Palettes (tiles=%d), locks Random/Noise/Iso" % int(st33.layer_tile_count),
-		int(st33.layer_tile_count) == 4 and bool(st33.capabilities.arrays) and not bool(st33.capabilities.random_walk))
+	_check("5A F033 unlocks Objects + Arrays + Spray + Palettes (tiles=%d), locks Random/Noise/Iso" % int(st33.layer_tile_count),
+		int(st33.layer_tile_count) == 5 and bool(st33.capabilities.arrays) and not bool(st33.capabilities.random_walk))
 
 	# ── Test 6: F209 Full General Intellect Playground Atelier ──
 	game.place_player(game.spawn_for(209))
@@ -189,8 +189,8 @@ func _run() -> void:
 	var ws209: Node3D = ws209_mount.get_node("Artifact")
 	var st209: Node3D = ws209.get("studio_ctrl") as Node3D
 	var ls0: Dictionary = st209.call("get_layer_state")
-	_check("6A F209 Full Atelier exposes all 9 Sequence Layer tiles (tiles=%d)" % int(ls0.layer_tile_count),
-		int(ls0.layer_tile_count) == 9)
+	_check("6A F209 Full Atelier exposes all 16 Sequence Layer tiles across 2 terraced rows (tiles=%d)" % int(ls0.layer_tile_count),
+		int(ls0.layer_tile_count) == 16)
 
 	# Close-up of the upgraded F209 console showing Near Template Strip + Far Palette Strip + Rear Sequence Layer Strip!
 	await _shot(cam, ws209_mount.to_global(Vector3(-0.22, 1.98, 1.48)), ws209_mount.to_global(Vector3(-0.18, 1.02, -0.25)), "03-f209-layer-console-closeup.png")
