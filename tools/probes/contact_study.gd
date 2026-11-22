@@ -205,6 +205,7 @@ func run() -> void:
 	await _picture("6_the_line_on_the_ground.png")
 	await _stand(_at(-4.6, -3.6, 1.65), _at(-9.5, -5.4, 1.4), 0.3)
 	await _picture("7_north_versions.png")
-	await _stand(_at(20.9, 8.0, 2.7), _at(0.0, 0.0, 1.0), 3.0)
+	# from above the south-east wing, clear of the corner column, over the east versions to the row and the north band
+	await _stand(_at(17.4, 7.0, 4.1), _at(-2.0, -2.2, 0.6), 3.0)
 	await _picture("8_the_floor_from_a_corner.png")
 	_done()
