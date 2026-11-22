@@ -5,6 +5,7 @@ const Kit = preload("res://commons/artifacts/primitive_encounters/geometry.gd")
 const Piece = preload("res://commons/artifacts/primitive_encounters/piece.gd")
 const Timber = preload("res://commons/artifacts/primitive_encounters/timber_finish.gd")
 const ButtonScene = preload("res://commons/interactables/push_button.tscn")
+const TemplateBuild = preload("res://commons/artifacts/face_assembly/template_build.gd")
 const ANGLES: Array[float] = [0,15,30,45,60,70.528779366,90,109.471220634,120,150]
 const EDGE := .32
 const HALF_THICKNESS := .009
@@ -35,15 +36,25 @@ var _panel_shape: ConvexPolygonShape3D
 var _rim_mesh: CylinderMesh
 var _face_materials: Array[StandardMaterial3D] = []
 var _rim_material: StandardMaterial3D
+## "template" (config build): fixed frames filled by the pointer, one face a trigger, no loose faces and no
+## buttons - template_build.gd. Anything else is the free-form table below, unchanged.
+var build := "free"
+var template: Node3D
 
 func _ready() -> void:
 	already_started = bool(get_meta("config_already_started",already_started))
 	fold_degrees = float(get_meta("config_fold_degrees",fold_degrees))
+	build = str(get_meta("config_build",build))
 	if sides==4:
 		polygon = PackedVector3Array([Vector3(-EDGE/2,0,-EDGE/2),Vector3(EDGE/2,0,-EDGE/2),Vector3(EDGE/2,0,EDGE/2),Vector3(-EDGE/2,0,EDGE/2)])
 	else:
 		var altitude := EDGE*sqrt(3.0)/2
 		polygon = PackedVector3Array([Vector3(-EDGE/2,0,-altitude/3),Vector3(EDGE/2,0,-altitude/3),Vector3(0,0,altitude*2/3)])
+	if build == "template":
+		make_panel_meshes()
+		template = TemplateBuild.new();template.name = "TemplateBuild";add_child(template);template.setup(self)
+		remember_parts();set_process(false)
+		return
 	make_support()
 	make_pieces()
 	if already_started:seed_assembly()
@@ -63,7 +74,7 @@ func make_support() -> void:
 	for x in [-1.35,1.35]:
 		for z in [-.58,.58]:Kit.box(support,"Leg",Vector3(x,.38,z),Vector3(.08,.76,.08),Color("514653"))
 
-func make_pieces() -> void:
+func make_panel_meshes() -> void:
 	var vertices := PackedVector3Array()
 	for y in [-HALF_THICKNESS,HALF_THICKNESS]:
 		for v in polygon:vertices.append(v+Vector3.UP*y)
@@ -76,6 +87,9 @@ func make_pieces() -> void:
 	_face_materials = [Kit.material(Color("d78ba7")),Kit.material(Color("d3c5db"))]
 	_rim_material = Kit.material(Color("574755"))
 	_rim_mesh = CylinderMesh.new();_rim_mesh.top_radius = .002;_rim_mesh.bottom_radius = .002;_rim_mesh.height = EDGE;_rim_mesh.radial_segments = 6
+
+func make_pieces() -> void:
+	make_panel_meshes()
 	for i in 12:
 		make_panel(i,Vector3(-1.15+(i%6)*.46,.845+floorf(i/6.0)*.026,.43))
 
@@ -300,6 +314,7 @@ func remember_parts() -> void:
 		if child in pieces:homes[str(child.name)] = child.transform
 
 func apply_grid_config(config: Dictionary) -> void:
+	if not is_node_ready() and config.has("build"):build = str(config.build)
 	if config.has("fold_degrees"):set_fold(float(config.fold_degrees))
 	if config.has("only_parts"):
 		_stock_enabled = false
