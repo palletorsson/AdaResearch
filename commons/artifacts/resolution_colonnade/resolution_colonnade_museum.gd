@@ -13,6 +13,10 @@ var columns: Array[Node3D] = []
 ## Passed to every column this makes (resolution_totem.gd). The defaults are the museum's.
 var outline_family := 0
 var finish := "authored"
+var gradient_low := Color("0a0a0a")
+var gradient_high := Color("f21876")
+var gradient_lit := true
+var gradient_start := 0.0
 
 
 func _ready() -> void:
@@ -49,6 +53,10 @@ func _column(node_name: String, at: Vector3, sides: int, rings: int,
     column.width_factor = width
     column.outline_family = outline_family
     column.finish = finish
+    column.gradient_low = gradient_low
+    column.gradient_high = gradient_high
+    column.gradient_lit = gradient_lit
+    column.gradient_start = gradient_start
     column.collisions = true
     column.position = at + Vector3.UP * PLINTH_HEIGHT
     add_child(column)

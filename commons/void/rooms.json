@@ -50631,6 +50631,11 @@
     },
     {
       "map": "Color_Rainbow",
+      "solid_slab": true,
+      "enclosed_shafts": [
+        "A",
+        "B"
+      ],
       "title": "Every Body / Rainbow Playground",
       "origin": false,
       "walls": [],
@@ -50989,10 +50994,30 @@
     },
     {
       "map": "Color_Pillar",
+      "solid_slab": true,
+      "enclosed_shafts": [
+        "A",
+        "B"
+      ],
       "title": "Color Pillar / original museum artifacts",
       "origin": false,
       "walls": [],
       "artifacts": [
+        {
+          "id": "gradient-colonnade",
+          "artifact": "gradient_colonnade",
+          "station": "NE",
+          "position": [
+            -10,
+            0
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Gradient colonnade / the five classical outlines from the columns floor, in the field's empty lane, coloured by their position (Palle 2026-11-22)"
+          }
+        },
         {
           "id": "f1_visual_color_mixing_9_7",
           "artifact": "visual_color_mixing",
@@ -51018,6 +51043,7 @@
           "height": 0,
           "scale": 1,
           "config": {
+            "closed_shafts": true,
             "layout": "spatial_gradient",
             "plinth": "0",
             "void_gallery": true,

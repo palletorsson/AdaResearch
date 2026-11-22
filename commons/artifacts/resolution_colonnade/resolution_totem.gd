@@ -11,7 +11,14 @@ extends Node3D
 ## Which family of outlines profile_kind picks from. Classical is the five authored profiles.
 @export_enum("Classical", "Alien") var outline_family: int = 0
 ## "black": every section in one black finish, so the body reads as its outline.
-@export_enum("authored", "black") var finish: String = "authored"
+## "gradient": one body coloured by height, gradient_low at the foot to gradient_high at the top.
+@export_enum("authored", "black", "gradient") var finish: String = "authored"
+@export var gradient_low := Color("0a0a0a")
+@export var gradient_high := Color("f21876")
+## false: the gradient is drawn as it is, without the room's light (a colour rule, as on the pillar colour floor).
+@export var gradient_lit := true
+## Metres above the column's foot where the gradient begins; below it the body is gradient_low.
+@export var gradient_start := 0.0
 const PROFILE_NAMES: Array[String] = ["Vessel", "Reed", "Bell", "Spindle", "Cairn"]
 const ALIEN_NAMES: Array[String] = ["Plug", "Taper", "Beads", "Ripple", "Twin"]
 var column_mesh := ArrayMesh.new()
@@ -28,6 +35,13 @@ func _ready() -> void:
     if finish == "black":
         var black := _material(Color("0c0c0e"),0.30,0.0)
         chalk = black;rose = black;bronze = black;charcoal = black
+    elif finish == "gradient":
+        # white under the vertex colours _section writes: the colour is the height
+        var blend := _material(Color.WHITE,0.62,0.0)
+        blend.vertex_color_use_as_albedo = true
+        blend.vertex_color_is_srgb = true   # the colours are written as seen, not as linear light
+        if not gradient_lit: blend.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+        chalk = blend;rose = blend;bronze = blend;charcoal = blend
     # Relative height, start radius, end radius, bulge, material.
     # Each recipe has five curved sections and four straight collars. Keeping
     # this topology shared makes the two sampling budgets comparable.
@@ -200,6 +214,12 @@ func _section(h: float, start: float, finish: float, bulge: float, material: Mat
     arrays.resize(Mesh.ARRAY_MAX)
     arrays[Mesh.ARRAY_VERTEX] = vertices
     arrays[Mesh.ARRAY_NORMAL] = normals
+    # self.finish: this function's own "finish" is the section's end radius
+    if self.finish == "gradient":
+        var colours := PackedColorArray()
+        for vertex in vertices:
+            colours.append(gradient_low.lerp(gradient_high,clampf((vertex.y-gradient_start)/maxf(column_height-gradient_start,0.01),0.0,1.0)))
+        arrays[Mesh.ARRAY_COLOR] = colours
     column_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays)
     column_mesh.surface_set_material(column_mesh.get_surface_count()-1,material)
     height += h
