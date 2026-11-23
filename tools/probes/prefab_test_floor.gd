@@ -4,7 +4,9 @@ extends SceneTree
 ##                                         steps over the tape (and only the one stepped into)
 ##   rows prefab-belt-west / -east         the prefab belt beside each area
 ##   row  white-block                      wall slabs with no colliders: a body walks in under the pagoda, through the
-##                                         block and out of its far side
+##                                         block and out of its far side; prefabs hidden in the slabs (its `hidden`),
+##                                         none solid, none reaching out (tools/probes/white_block_glitch.gd measures
+##                                         the ways against each other)
 ##   row  menu-board                       six sticker notes and four badge notes on the in-game menu
 ##   rows example-* / example-*-plinth     fourteen prefabs on plinths round the grounds: picked up, the item is in the
 ##                                         hand, and the black can stays black, the text tape keeps its text
@@ -153,7 +155,17 @@ func run() -> void:
 	await _picture("4_the_belt_of_area_a.png")
 	# ------------------------------------------------------------------ the white block
 	var side: float = block.get("side")
-	_check("the block holds its crowd of primitives", int(block.get("shape_count")) >= 60 and (block.get("shapes") as Array).size() == 7, {"primitives": block.get("shape_count"), "kinds": (block.get("shapes") as Array).size()})
+	for i in 600:
+		if bool(block.get("built")): break
+		await process_frame
+	var way := str(block.get("hidden"))
+	if way == "primitives":
+		_check("the block holds its crowd of primitives", int(block.get("shape_count")) >= 60 and (block.get("shapes") as Array).size() == 7, {"primitives": block.get("shape_count"), "kinds": (block.get("shapes") as Array).size()})
+	else:
+		var hid := {}
+		for row: Dictionary in block.get("plan"): hid[str(row.id)] = true
+		result["hidden"] = {"way": way, "prefabs": (block.get("things") as Array).size(), "lattice_meshes": (block.get("grids") as Array).size(), "kinds": hid.keys()}
+		_check("the block hides the catalogue's prefabs in its slabs, all of them made", bool(block.get("built")) and (block.get("things") as Array).size() >= 12 and hid.size() >= 8, result.hidden)
 	_check("the block's middle is inside it and the arrival is not", bool(block.call("holds", block.global_position + Vector3.UP)) and not bool(block.call("holds", arrival)))
 	var walker := CharacterBody3D.new()
 	var capsule := CapsuleShape3D.new()
@@ -177,14 +189,20 @@ func run() -> void:
 	walker.global_position = Vector3(here.x, floor_y + 0.93, here.z) + block.global_basis.x * (side * 0.5 + 1.2)
 	_check("the same body walks in through a side wall as well", await _walk(walker, Vector3(here.x, floor_y + 0.93, here.z) + block.global_basis.x * (side * 0.5 - 2.0), 8.0))
 	walker.queue_free()
-	# every primitive is inside: its place plus half its diagonal reaches no wall and not the roof
+	# everything inside stays inside: a primitive's place plus half its diagonal, a prefab's meshes, the lattice's cells
 	var furthest := -99.0
-	for many: MultiMeshInstance3D in block.get("shapes"):
+	var tall := float(block.get("height"))
+	for many: MultiMeshInstance3D in (block.get("shapes") as Array) + (block.get("grids") as Array):
+		var to_block := block.global_transform.affine_inverse() * many.global_transform
+		var reach_mesh := many.multimesh.mesh.get_aabb() if many.multimesh.mesh != null else AABB()
 		for i in many.multimesh.instance_count:
-			var t := many.multimesh.get_instance_transform(i)
-			var reach := Vector3(t.basis.x.length(), t.basis.y.length(), t.basis.z.length()).length() * 0.5
-			furthest = maxf(furthest, maxf(maxf(absf(t.origin.x), absf(t.origin.z)) + reach - side * 0.5, t.origin.y + reach - float(block.get("height"))))
-	_check("no primitive reaches out of the block", furthest <= 0.0, {"furthest_outside_m": snappedf(furthest, 0.01)})
+			var t := to_block * many.multimesh.get_instance_transform(i)
+			var box: AABB = t * reach_mesh
+			furthest = maxf(furthest, maxf(maxf(maxf(-box.position.x, box.end.x), maxf(-box.position.z, box.end.z)) - side * 0.5, maxf(box.end.y - tall, -box.position.y)))
+	for thing: Node3D in block.get("things"):
+		var box: AABB = block.call("_local_box", thing)
+		furthest = maxf(furthest, maxf(maxf(maxf(-box.position.x, box.end.x), maxf(-box.position.z, box.end.z)) - side * 0.5, maxf(box.end.y - tall, -box.position.y)))
+	_check("nothing hidden in the block reaches out of it", furthest <= 0.02, {"furthest_outside_m": snappedf(furthest, 0.01)})
 	# the block is full: along the walk from the south face to the north face, at eye height, nearly every point
 	# is inside a slab, and the eye crosses a slab's face every few centimetres
 	var slabs := (block.get("walls") as MultiMeshInstance3D).multimesh
@@ -207,8 +225,11 @@ func run() -> void:
 		was = held
 	result["block"] = {"slabs": int(block.get("slab_count")), "segments": slabs.instance_count, "share_of_the_walk_inside_a_slab": snappedf(float(in_slab) / samples, 0.001), "faces_crossed": crossings}
 	_check("the block is full of slabs: no open room on the way through", int(block.get("slab_count")) >= 40 and float(in_slab) / samples > 0.9 and crossings >= 80, result.block)
-	var bodies := block.find_children("*", "CollisionObject3D", true, false).size()
-	_check("the block has no collider of any kind", bodies == 0, {"collision_objects": bodies})
+	# a hidden prefab may carry a body of its own: it is made inert (no layer, no mask, every shape off)
+	var bodies := block.find_children("*", "CollisionObject3D", true, false)
+	var solid := bodies.filter(func(b): return (b as CollisionObject3D).collision_layer != 0 or (b as CollisionObject3D).collision_mask != 0 \
+		or b.find_children("*", "CollisionShape3D", true, false).any(func(c): return not (c as CollisionShape3D).disabled))
+	_check("the block has no collider of any kind", solid.is_empty(), {"collision_objects": bodies.size(), "solid": solid.map(func(b): return str(b.get_path()).get_slice("Artifact/", 1))})
 	var top := floor_y + float(block.get("height"))
 	var over := space.intersect_ray(PhysicsRayQueryParameters3D.create(Vector3(here.x + 6.5, floor_y + 0.5, here.z), Vector3(here.x + 6.5, floor_y + 9.0, here.z), 1))
 	_check("the block and its pagoda stand under the ceiling", not over.is_empty() and top < float(over.position.y) - 0.05, {"block_top_m": snappedf(top - floor_y, 0.01), "ceiling_m": snappedf(float(over.position.y) - floor_y, 0.01) if not over.is_empty() else -1.0})
