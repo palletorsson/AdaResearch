@@ -90913,7 +90913,7 @@
             "height": 5.4,
             "count": 72,
             "seed": 12,
-            "editor_label": "White block / wall slabs with no colliders, coloured primitives inside, a pagoda at the south face shows the way in (Palle 2026-11-22)"
+            "editor_label": "White block / wall slabs face to face with no colliders, coloured primitives in them, a pagoda at the south face shows the way in (Palle 2026-11-22)"
           }
         },
         {
@@ -91016,6 +91016,764 @@
           "config": {
             "destination": "Primitives_Portals",
             "caption": "BACK TO PORTALS"
+          }
+        },
+        {
+          "id": "example-tape",
+          "artifact": "tape_roll_printed",
+          "station": "NW",
+          "position": [
+            -19.9,
+            -8.3
+          ],
+          "facing": 0,
+          "height": 1.0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Example / tape, on its plinth: pick it up and it is in the hand",
+            "kind": "printed",
+            "print": "note",
+            "note": "PREFAB TEST",
+            "unlimited": true
+          }
+        },
+        {
+          "id": "example-tape-plinth",
+          "artifact": "association_plinth",
+          "station": "NW",
+          "position": [
+            -19.9,
+            -8.3
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "item": "tape",
+            "holds": "example-tape",
+            "top": 1.0,
+            "size": [
+              0.5,
+              0.5
+            ],
+            "editor_label": "Association plinth / tape",
+            "knobs": {
+              "kind": "printed",
+              "print": "note",
+              "note": "PREFAB TEST"
+            },
+            "label": "TEXT TAPE"
+          }
+        },
+        {
+          "id": "example-cone",
+          "artifact": "mod_plastic_cone",
+          "station": "NW",
+          "position": [
+            -17.2,
+            -8.3
+          ],
+          "facing": 0,
+          "height": 0.45,
+          "scale": 1,
+          "config": {
+            "editor_label": "Example / cone, on its plinth: pick it up and it is in the hand",
+            "term": "plastic_cone",
+            "support": false
+          }
+        },
+        {
+          "id": "example-cone-plinth",
+          "artifact": "association_plinth",
+          "station": "NW",
+          "position": [
+            -17.2,
+            -8.3
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "item": "cone",
+            "holds": "example-cone",
+            "top": 0.45,
+            "size": [
+              0.56,
+              0.56
+            ],
+            "editor_label": "Association plinth / cone"
+          }
+        },
+        {
+          "id": "example-tyre",
+          "artifact": "mod_tyre",
+          "station": "NW",
+          "position": [
+            -15.85,
+            -8.3
+          ],
+          "facing": 0,
+          "height": 1.0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Example / tyre, on its plinth: pick it up and it is in the hand",
+            "term": "tyre",
+            "support": false
+          }
+        },
+        {
+          "id": "example-tyre-plinth",
+          "artifact": "association_plinth",
+          "station": "NW",
+          "position": [
+            -15.85,
+            -8.3
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "item": "tyre",
+            "holds": "example-tyre",
+            "top": 1.0,
+            "size": [
+              0.84,
+              0.84
+            ],
+            "editor_label": "Association plinth / tyre",
+            "label": "TORUS / TYRE"
+          }
+        },
+        {
+          "id": "example-woodenbox",
+          "artifact": "mod_wooden_box",
+          "station": "NW",
+          "position": [
+            -14.5,
+            -8.3
+          ],
+          "facing": 0,
+          "height": 0.75,
+          "scale": 1,
+          "config": {
+            "editor_label": "Example / woodenbox, on its plinth: pick it up and it is in the hand",
+            "term": "wooden_box",
+            "support": false
+          }
+        },
+        {
+          "id": "example-woodenbox-plinth",
+          "artifact": "association_plinth",
+          "station": "NW",
+          "position": [
+            -14.5,
+            -8.3
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "item": "woodenbox",
+            "holds": "example-woodenbox",
+            "top": 0.75,
+            "size": [
+              0.66,
+              0.66
+            ],
+            "editor_label": "Association plinth / woodenbox"
+          }
+        },
+        {
+          "id": "example-rubberball",
+          "artifact": "mod_rubber_ball",
+          "station": "NW",
+          "position": [
+            -19.9,
+            8.3
+          ],
+          "facing": 180,
+          "height": 0.8,
+          "scale": 1,
+          "config": {
+            "editor_label": "Example / rubberball, on its plinth: pick it up and it is in the hand",
+            "term": "rubber_ball",
+            "support": false
+          }
+        },
+        {
+          "id": "example-rubberball-plinth",
+          "artifact": "association_plinth",
+          "station": "NW",
+          "position": [
+            -19.9,
+            8.3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "item": "rubberball",
+            "holds": "example-rubberball",
+            "top": 0.8,
+            "size": [
+              0.6,
+              0.6
+            ],
+            "editor_label": "Association plinth / rubberball"
+          }
+        },
+        {
+          "id": "example-beachball",
+          "artifact": "mod_beach_ball",
+          "station": "NW",
+          "position": [
+            -14.5,
+            8.3
+          ],
+          "facing": 180,
+          "height": 0.75,
+          "scale": 1,
+          "config": {
+            "editor_label": "Example / beachball, on its plinth: pick it up and it is in the hand",
+            "display_pickup": "existing",
+            "term": "beach_ball",
+            "support": false
+          }
+        },
+        {
+          "id": "example-beachball-plinth",
+          "artifact": "association_plinth",
+          "station": "NW",
+          "position": [
+            -14.5,
+            8.3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "item": "beachball",
+            "holds": "example-beachball",
+            "top": 0.75,
+            "size": [
+              0.76,
+              0.76
+            ],
+            "editor_label": "Association plinth / beachball"
+          }
+        },
+        {
+          "id": "example-oildrum",
+          "artifact": "mod_oil_drum",
+          "station": "NW",
+          "position": [
+            14.5,
+            -8.3
+          ],
+          "facing": 0,
+          "height": 0.45,
+          "scale": 1,
+          "config": {
+            "editor_label": "Example / oildrum, on its plinth: pick it up and it is in the hand",
+            "term": "oil_drum",
+            "support": false
+          }
+        },
+        {
+          "id": "example-oildrum-plinth",
+          "artifact": "association_plinth",
+          "station": "NW",
+          "position": [
+            14.5,
+            -8.3
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "item": "oildrum",
+            "holds": "example-oildrum",
+            "top": 0.45,
+            "size": [
+              0.74,
+              0.74
+            ],
+            "editor_label": "Association plinth / oildrum"
+          }
+        },
+        {
+          "id": "example-gem",
+          "artifact": "mod_gem",
+          "station": "NW",
+          "position": [
+            15.85,
+            -8.3
+          ],
+          "facing": 0,
+          "height": 0.75,
+          "scale": 1,
+          "config": {
+            "editor_label": "Example / gem, on its plinth: pick it up and it is in the hand",
+            "term": "gem",
+            "support": false
+          }
+        },
+        {
+          "id": "example-gem-plinth",
+          "artifact": "association_plinth",
+          "station": "NW",
+          "position": [
+            15.85,
+            -8.3
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "item": "gem",
+            "holds": "example-gem",
+            "top": 0.75,
+            "size": [
+              0.36,
+              0.36
+            ],
+            "editor_label": "Association plinth / gem"
+          }
+        },
+        {
+          "id": "example-dice",
+          "artifact": "mod_dice",
+          "station": "NW",
+          "position": [
+            17.2,
+            -8.3
+          ],
+          "facing": 0,
+          "height": 1.0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Example / dice, on its plinth: pick it up and it is in the hand",
+            "term": "dice",
+            "support": false
+          }
+        },
+        {
+          "id": "example-dice-plinth",
+          "artifact": "association_plinth",
+          "station": "NW",
+          "position": [
+            17.2,
+            -8.3
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "item": "dice",
+            "holds": "example-dice",
+            "top": 1.0,
+            "size": [
+              0.36,
+              0.36
+            ],
+            "editor_label": "Association plinth / dice"
+          }
+        },
+        {
+          "id": "example-cardboard",
+          "artifact": "mod_cardboard_box",
+          "station": "NW",
+          "position": [
+            18.55,
+            -8.3
+          ],
+          "facing": 0,
+          "height": 0.75,
+          "scale": 1,
+          "config": {
+            "editor_label": "Example / cardboard, on its plinth: pick it up and it is in the hand",
+            "term": "cardboard_box",
+            "support": false
+          }
+        },
+        {
+          "id": "example-cardboard-plinth",
+          "artifact": "association_plinth",
+          "station": "NW",
+          "position": [
+            18.55,
+            -8.3
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "item": "cardboard",
+            "holds": "example-cardboard",
+            "top": 0.75,
+            "size": [
+              0.66,
+              0.66
+            ],
+            "editor_label": "Association plinth / cardboard"
+          }
+        },
+        {
+          "id": "example-bowlingpin",
+          "artifact": "mod_bowling_pin",
+          "station": "NW",
+          "position": [
+            19.9,
+            -8.3
+          ],
+          "facing": 0,
+          "height": 0.75,
+          "scale": 1,
+          "config": {
+            "editor_label": "Example / bowlingpin, on its plinth: pick it up and it is in the hand",
+            "term": "bowling_pin",
+            "support": false
+          }
+        },
+        {
+          "id": "example-bowlingpin-plinth",
+          "artifact": "association_plinth",
+          "station": "NW",
+          "position": [
+            19.9,
+            -8.3
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "item": "bowlingpin",
+            "holds": "example-bowlingpin",
+            "top": 0.75,
+            "size": [
+              0.36,
+              0.36
+            ],
+            "editor_label": "Association plinth / bowlingpin"
+          }
+        },
+        {
+          "id": "example-stickers",
+          "artifact": "sticker_pad",
+          "station": "NW",
+          "position": [
+            14.5,
+            8.3
+          ],
+          "facing": 180,
+          "height": 1.0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Example / stickers, on its plinth: pick it up and it is in the hand",
+            "sheet": "starter"
+          }
+        },
+        {
+          "id": "example-stickers-plinth",
+          "artifact": "association_plinth",
+          "station": "NW",
+          "position": [
+            14.5,
+            8.3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "item": "stickers",
+            "holds": "example-stickers",
+            "top": 1.0,
+            "size": [
+              0.36,
+              0.3
+            ],
+            "editor_label": "Association plinth / stickers"
+          }
+        },
+        {
+          "id": "example-graffiti",
+          "artifact": "sticker_pen",
+          "station": "NW",
+          "position": [
+            19.9,
+            8.3
+          ],
+          "facing": 180,
+          "height": 1.0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Example / graffiti, on its plinth: pick it up and it is in the hand",
+            "pen": "marker",
+            "colour": "#16191e"
+          }
+        },
+        {
+          "id": "example-graffiti-plinth",
+          "artifact": "association_plinth",
+          "station": "NW",
+          "position": [
+            19.9,
+            8.3
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "item": "graffiti",
+            "holds": "example-graffiti",
+            "top": 1.0,
+            "size": [
+              0.36,
+              0.3
+            ],
+            "editor_label": "Association plinth / graffiti"
+          }
+        },
+        {
+          "id": "police-line-north-west",
+          "artifact": "do_not_cross_barrier",
+          "station": "NW",
+          "position": [
+            -4.5,
+            -8.55
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Police line / a blue barricade at the edge; there are gaps between them on purpose (Palle 2026-11-23)",
+            "form": "sawhorse",
+            "span_m": 3.2,
+            "height_m": 1.1,
+            "solid": true,
+            "legend_text": "POLICE LINE DO NOT CROSS"
+          }
+        },
+        {
+          "id": "police-line-north",
+          "artifact": "do_not_cross_barrier",
+          "station": "NW",
+          "position": [
+            0.0,
+            -8.55
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Police line / a blue barricade at the edge; there are gaps between them on purpose (Palle 2026-11-23)",
+            "form": "sawhorse",
+            "span_m": 3.2,
+            "height_m": 1.1,
+            "solid": true,
+            "legend_text": "POLICE LINE DO NOT CROSS"
+          }
+        },
+        {
+          "id": "police-line-north-east",
+          "artifact": "do_not_cross_barrier",
+          "station": "NW",
+          "position": [
+            4.5,
+            -8.55
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Police line / a blue barricade at the edge; there are gaps between them on purpose (Palle 2026-11-23)",
+            "form": "sawhorse",
+            "span_m": 3.2,
+            "height_m": 1.1,
+            "solid": true,
+            "legend_text": "POLICE LINE DO NOT CROSS"
+          }
+        },
+        {
+          "id": "police-line-south-arrival",
+          "artifact": "do_not_cross_barrier",
+          "station": "NW",
+          "position": [
+            -0.4,
+            8.7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Police line / a blue barricade at the edge; there are gaps between them on purpose (Palle 2026-11-23)",
+            "form": "sawhorse",
+            "span_m": 3.2,
+            "height_m": 1.1,
+            "solid": true,
+            "legend_text": "POLICE LINE DO NOT CROSS"
+          }
+        },
+        {
+          "id": "police-line-south-doors",
+          "artifact": "do_not_cross_barrier",
+          "station": "NW",
+          "position": [
+            4.1,
+            8.7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Police line / a blue barricade at the edge; there are gaps between them on purpose (Palle 2026-11-23)",
+            "form": "sawhorse",
+            "span_m": 3.2,
+            "height_m": 1.1,
+            "solid": true,
+            "legend_text": "POLICE LINE DO NOT CROSS"
+          }
+        },
+        {
+          "id": "police-line-shaft-a",
+          "artifact": "do_not_cross_barrier",
+          "station": "NW",
+          "position": [
+            -6.6,
+            0.0
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Police line / a blue barricade at the edge; there are gaps between them on purpose (Palle 2026-11-23)",
+            "form": "sawhorse",
+            "span_m": 3.2,
+            "height_m": 1.1,
+            "solid": true,
+            "legend_text": "POLICE LINE DO NOT CROSS"
+          }
+        },
+        {
+          "id": "police-line-shaft-b",
+          "artifact": "do_not_cross_barrier",
+          "station": "NW",
+          "position": [
+            6.6,
+            0.0
+          ],
+          "facing": 270,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Police line / a blue barricade at the edge; there are gaps between them on purpose (Palle 2026-11-23)",
+            "form": "sawhorse",
+            "span_m": 3.2,
+            "height_m": 1.1,
+            "solid": true,
+            "legend_text": "POLICE LINE DO NOT CROSS"
+          }
+        },
+        {
+          "id": "edge-wall-north-west",
+          "artifact": "edge_wall",
+          "station": "NW",
+          "position": [
+            -7.3,
+            -8.82
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "length": 1.5,
+            "height": 1.1,
+            "editor_label": "Edge wall / a short white parapet: solid, and it ends (Palle 2026-11-23)"
+          }
+        },
+        {
+          "id": "edge-wall-north-east",
+          "artifact": "edge_wall",
+          "station": "NW",
+          "position": [
+            7.3,
+            -8.82
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "length": 1.5,
+            "height": 1.1,
+            "editor_label": "Edge wall / a short white parapet: solid, and it ends (Palle 2026-11-23)"
+          }
+        },
+        {
+          "id": "edge-wall-south-west",
+          "artifact": "edge_wall",
+          "station": "NW",
+          "position": [
+            -4.2,
+            8.85
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "length": 2.2,
+            "height": 1.1,
+            "editor_label": "Edge wall / a short white parapet: solid, and it ends (Palle 2026-11-23)"
+          }
+        },
+        {
+          "id": "edge-wall-south-east",
+          "artifact": "edge_wall",
+          "station": "NW",
+          "position": [
+            6.9,
+            8.85
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "length": 1.6,
+            "height": 1.1,
+            "editor_label": "Edge wall / a short white parapet: solid, and it ends (Palle 2026-11-23)"
+          }
+        },
+        {
+          "id": "edge-wall-shaft-a-north",
+          "artifact": "edge_wall",
+          "station": "NW",
+          "position": [
+            -6.82,
+            -2.5
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "length": 0.9,
+            "height": 1.1,
+            "editor_label": "Edge wall / a short white parapet: solid, and it ends (Palle 2026-11-23)"
+          }
+        },
+        {
+          "id": "edge-wall-shaft-b-south",
+          "artifact": "edge_wall",
+          "station": "NW",
+          "position": [
+            6.82,
+            2.5
+          ],
+          "facing": 90,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "length": 0.9,
+            "height": 1.1,
+            "editor_label": "Edge wall / a short white parapet: solid, and it ends (Palle 2026-11-23)"
           }
         }
       ],

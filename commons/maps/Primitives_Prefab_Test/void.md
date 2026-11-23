@@ -34,6 +34,18 @@ Seeing a wall and being stopped by it are two things. Only one of them was built
 
 Two doors stand to the right of the arrival: **ON TO MELENCOLIA** and **BACK TO PORTALS**. The door that leads here stands on the Portals floor, near its south-west corner.
 
+## 6. Things on plinths
+
+Fourteen prefabs stand on plinths round the two grounds. North of area A: a text tape, a black spray can, a cone, a tyre (the torus), a wooden box. Beside its belt: a rubber ball and a beach ball. North of area B: an oil drum, a gem, a dice, a cardboard box, a bowling pin. Beside its belt: a sticker pad and a graffiti pen.
+
+Pick one up and it is in the hand; the example goes back on its plinth. The black can stays black in the hand, and the tape keeps its text, PREFAB TEST.
+
+## 7. The edges
+
+Round the block the edges are marked, not closed. Blue police barricades, **POLICE LINE DO NOT CROSS**, stand along the north edge, behind the arrival, and on the side of each shaft that faces the block. A few short white walls stand between them. Each stops a body. There are gaps between them wide enough to walk through, on purpose: safer is not safe.
+
+A fall is not free any more. One floor down, the tower's own way, costs nothing. A body that falls past a floor is set down on the floor it missed, and its charge pays for it. Under this last floor nothing is left to catch a fall, and that costs the same.
+
 ---
 
-*Checked by `tools/probes/prefab_test_floor.gd`: 25 checks, among them that stepping over the tape clears that area's pile and not the other, that a body 0.6 m wide and 1.8 m tall walks in under the pagoda and out of the far wall, that 95 % of that walk is inside a slab, and the round trip Portals, Prefab Test, Melencolia through the three doors.*
+*Checked by `tools/probes/prefab_test_floor.gd`: 31 checks, among them that stepping over the tape clears that area's pile and not the other, that a body 0.6 m wide and 1.8 m tall walks in under the pagoda and out of the far wall, that 95 % of that walk is inside a slab, that a barricade stops a body and a gap lets it through, and the round trip Portals, Prefab Test, Melencolia through the three doors. The fall rule has its own probe, `tools/probes/fall_past_a_floor.gd`.*

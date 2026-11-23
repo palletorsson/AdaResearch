@@ -6,7 +6,9 @@ extends Node3D
 ## shown as a miniature over it, and the example goes back on its plinth - it stays here for the next look. The
 ## inventory then places, moves and takes back copies of it without holding anything (inventory_wand.gd).
 ##   config: item (the inventory item id), holds (the example's artifact id on this floor), top (m, the cap's top),
-##           size ([x, z] m, the cap), label (the line on the front; the item's name by default)
+##           size ([x, z] m, the cap), label (the line on the front; the item's name by default),
+##           knobs ({key: value}: settings the collected item takes with it - a black spray can stays black, a tape
+##           keeps its note; set on every hand that collects, after the item itself; 2026-11-23)
 
 const Items = preload("res://commons/player/inventory_items.gd")
 const BODY := Color("e8e4da")
@@ -18,6 +20,7 @@ const INK := Color("1d1d1f")
 @export var top := 1.0
 @export var size := Vector2(0.4, 0.4)
 @export var label := ""
+@export var knobs := {}
 
 var example: Node3D = null        # the example's body (the composite's grabbable)
 var home := Transform3D()         # where the example stands on the cap
@@ -31,11 +34,12 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("top"): top = float(config.top)
 	if config.has("size") and config.size is Array and (config.size as Array).size() >= 2: size = Vector2(float(config.size[0]), float(config.size[1]))
 	if config.has("label"): label = str(config.label)
+	if config.has("knobs") and config.knobs is Dictionary: knobs = config.knobs
 	if is_inside_tree() and _words != null: _build()   # a config that arrives after _ready rebuilds (the Void's default order)
 
 func _ready() -> void:
 	var cfg := {}
-	for key in ["item", "holds", "top", "size", "label"]:
+	for key in ["item", "holds", "top", "size", "label", "knobs"]:
 		if has_meta("config_" + key): cfg[key] = get_meta("config_" + key)
 	apply_grid_config(cfg)
 	_build()
@@ -49,12 +53,25 @@ func _ready() -> void:
 	if mount == null:
 		push_warning("ASSOCIATION_PLINTH: no example '%s' to hold" % holds);return
 	_seat(mount)
+	_dress(mount)
 	example = _find_example()
 	# a term made without a grabbable part (the brick, the pallet, the skateboard: static bodies of the kit) cannot be
 	# picked up: an invisible pickable shell fitted round it is what the hand takes - the example itself stays put
 	if example == null: example = _shell(mount)
 	home = example.global_transform
 	if example.has_signal("picked_up"): example.picked_up.connect(_on_picked_up)
+
+## A handed-over setting that shows on the example itself. A spray can paints its body when it is made, before a
+## floor's config reaches it: the body takes the pigment the plinth hands over (2026-11-23).
+func _dress(mount: Node3D) -> void:
+	if not knobs.has("pigment"): return
+	var body := mount.find_child("MeshInstance3D", true, false) as MeshInstance3D
+	if body == null: return
+	var paint: Material = body.material_override
+	if paint == null: paint = body.get_surface_override_material(0)
+	if paint == null and body.mesh != null: paint = body.mesh.surface_get_material(0)
+	if paint is StandardMaterial3D:
+		(paint as StandardMaterial3D).albedo_color = Color.from_string(str(knobs.pigment), (paint as StandardMaterial3D).albedo_color)
 
 func _build() -> void:
 	for c in get_children(): remove_child(c);c.queue_free()
@@ -131,6 +148,8 @@ func _on_picked_up(_what: Variant = null) -> void:
 	var fresh := Items.collect(item)
 	for h in get_tree().get_nodes_in_group("inventory_hands"):
 		if h.has_method("collect"): h.collect(item)
+		if h.has_method("set_knob_for"):
+			for key in knobs: h.set_knob_for(item, str(key), knobs[key])
 	_glow = 1.0
 	if _words: _words.text = _text(true)
 	var game := get_tree().get_first_node_in_group("void_game")

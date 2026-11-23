@@ -37,6 +37,10 @@ const Jump := preload("jump.gd")
 const Ground := preload("res://addons/godot-xr-tools/overrides/ground_physics_settings.gd")
 const Route := preload("res://commons/hazards/biome_ladder/route.gd")
 const HARD_LANDING_SPEED := 9.8
+## A FALL PAST A FLOOR (Palle, 2026-11-23): how far under a floor's level a falling body has missed that floor, and
+## what the miss costs of the charge. Three metres is deeper than any basin or pool a floor carries.
+const FALL_MISS_DEPTH := 3.0
+const MISSED_FLOOR_DAMAGE := 15.0
 const FALL_DAMAGE := 0.0 # Falls and jumps are free; legacy callers read this value.
 const FLOOR_TOLERANCE := 0.35
 const DEATH_RED := Color(0.12, 0.003, 0.009)
@@ -393,7 +397,7 @@ func _build_feedback() -> void:
 		var help := Label.new()
 		help.position = Vector2(20, 18)
 		help.text = "THE VOID\nWASD: move   Mouse: look   Space: jump   Right click: grab / release\nLeft click: use / drag   Smoke: left click pull pin, then throw   C + click: catalyst\nI: prefab board   Tab: choose a prefab   F: place (hold F on it: move)   Q / E: turn   X: take back
-R: last floor   T: roof   M: menu   Esc: release mouse\nCHARGE: movement drains the battery. Falls and landings are safe. Outside the tower: return to the last floor."
+R: last floor   T: roof   M: menu   Esc: release mouse\nCHARGE: movement drains the battery. One floor down is safe. A fall past a floor costs charge. Outside the tower: return to the last floor."
 		if trial_session != null:
 			var label := str(Architecture.Content.Source.definition(trial_id).get("label", trial_id)).to_upper()
 			help.text = help.text.replace("THE VOID", "VOID TRIAL / " + label).replace("R: last floor   T: roof", "R / T: reset the encounter")
@@ -473,15 +477,19 @@ func _physics_process(delta: float) -> void:
 	balcony_depth = maxf(balcony_depth, Architecture.CliffLandings.extent(building.spec))
 	var outside := absf(feet.x) > float(building.spec.width) / 2.0 + 3.0 or absf(feet.z) > float(building.spec.depth) / 2.0 + balcony_depth + 3.0
 	if feet.y < float(building.spec.levels.back()) - 5.0 or (outside and not _exterior_walk_support(feet)):
-		# A missed route returns the visitor without injury, death or pain audio.
+		# A missed route returns the visitor without injury, death or pain audio - except under the last floor of the
+		# main tower, where nothing is left to catch a fall: that costs what a missed floor costs (2026-11-23).
+		var off_the_bottom := str(trial_id).is_empty() and feet.y < float(building.spec.levels.back()) - 5.0
 		place_player(spawn_for(checkpoint))
 		_notice("Back on %s" % floor_name(checkpoint))
+		if off_the_bottom: _fall_costs(checkpoint)
 		return
 	if not body.is_on_floor():
 		airborne_speed = maxf(airborne_speed, -body.velocity.y)
 		if _landing_cost_armed: _airborne_peak = maxf(_airborne_peak,feet.y-fall_start_y)
 		stable_floor = -1
 		stable_time = 0.0
+		_catch_fall_past_a_floor(feet)
 		return
 	last_impact = airborne_speed if airborne_speed > 0 else last_impact
 	# Preserve real gravity/contact and the pad's visual response. Neither drop
@@ -504,6 +512,40 @@ func _physics_process(delta: float) -> void:
 		checkpoint = landed
 		checkpoint_saved.emit(checkpoint)
 		_notice("%s / checkpoint saved%s" % [floor_name(checkpoint), "\nDescent complete" if checkpoint == building.spec.levels.size()-1 else ""])
+
+## A FALL PAST A FLOOR (Palle, 2026-11-23: "If we go to the edge of the floor and start to fall and fall more than one
+## floor, bring us back to the closest and deal some damage to the player."). Dropping ONE floor - through a shaft onto
+## the next landing, off the south ledges - is the tower's own way down and stays free. A body that left floor f and is
+## FALL_MISS_DEPTH under the level of floor f + 1 has missed that floor: it is set down on that floor, the closest
+## one, at its arrival, and the charge pays MISSED_FLOOR_DAMAGE. Main tower only. A carried
+## or flying body never gets here (the caller returns before), and a drop room is a floor's own depth, not a miss.
+func _catch_fall_past_a_floor(feet: Vector3) -> bool:
+	if not str(trial_id).is_empty(): return false
+	var levels: Array = building.spec.levels
+	# the floor the fall began on: the first level at or under the last support
+	var from := -1
+	for i in levels.size():
+		if float(levels[i]) <= fall_start_y + 0.5:
+			from = i
+			break
+	if from < 0 or from + 1 >= levels.size() or feet.y > float(levels[from + 1]) - FALL_MISS_DEPTH: return false
+	for room in get_tree().get_nodes_in_group("void_grid_drop"):
+		if room.contains_drop_visitor(feet): return false
+	# the closest floor is the one just missed: the body is caught a few metres under it, long before the next.
+	# (Measured by height it would be a toss-up: three metres under one floor is three metres over the next.)
+	var closest := from + 1
+	# it is where the visitor now is, so it is the checkpoint (as a transfer door sets it): an arrival may stand on a
+	# work, where the landing rule below never sees the main floor
+	checkpoint = closest
+	place_player(spawn_for(closest))
+	checkpoint_saved.emit(closest)
+	_fall_costs(closest)
+	return true
+
+## What a missed floor costs, and the word for it. The charge's own signal flashes the hurt and may start a recovery.
+func _fall_costs(index: int) -> void:
+	charge.discharge(MISSED_FLOOR_DAMAGE, "fell past a floor")
+	_notice("FELL PAST A FLOOR\nBack on %s / charge %d%%" % [floor_name(index), ceili(charge.get_charge())])
 
 func _exterior_walk_support(feet: Vector3) -> bool:
 	# An edited/copy-rotated walkway can extend into the sky. Only real support

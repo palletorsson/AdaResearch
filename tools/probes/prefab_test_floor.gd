@@ -6,6 +6,10 @@ extends SceneTree
 ##   row  white-block                      wall slabs with no colliders: a body walks in under the pagoda, through the
 ##                                         block and out of its far side
 ##   row  menu-board                       six sticker notes and four badge notes on the in-game menu
+##   rows example-* / example-*-plinth     fourteen prefabs on plinths round the grounds: picked up, the item is in the
+##                                         hand, and the black can stays black, the text tape keeps its text
+##   rows police-line-* / edge-wall-*      blue barricades and short white walls at the edges round the block: each
+##                                         stops a body, and a body gets through the gaps between them
 ## The floor is found by its map name, so it may stand anywhere in the tower.
 ##
 ##   python tools/run_floor_probe.py Primitives_Prefab_Test prefab_test_floor.gd prefab_test.json <folder> --no-opening --opera-quiet [--xr]
@@ -244,6 +248,66 @@ func run() -> void:
 	result["triangles_outside_multimeshes"] = drawn
 	await _stand(_at(20.0, 8.6, 3.4), _at(4.0, 0.0, 1.0), 0.3)
 	await _picture("12_the_floor_from_a_corner.png")
+	# ------------------------------------------------------------------ the examples on their plinths
+	var items = load("res://commons/player/inventory_items.gd")
+	items.collected_path = folder.path_join("collected.json")       # never the visitor's own collection
+	var plinths := []
+	var empty := []
+	for row: Dictionary in game.building.content.data.floors[index].artifacts:
+		if str(row.artifact) != "association_plinth": continue
+		var plinth := _work(index, str(row.id))
+		plinths.append(plinth)
+		if plinth == null or not is_instance_valid(plinth.get("example")): empty.append(str(row.id))
+	_check("fourteen prefabs stand on plinths round the grounds, each plinth holding its example", plinths.size() == 14 and empty.is_empty(), {"plinths": plinths.size(), "without_an_example": empty})
+	# the picture first: once something is collected the hand shows its own preview where the eye aims
+	await _stand(_at(-17.2, -4.6, 1.7), _at(-17.2, -8.3, 1.0), 0.3)
+	await _picture("15_the_examples_north_of_area_a.png")
+	var hands: Array = get_nodes_in_group("inventory_hands")
+	var taken := {}
+	for id in ["example-spray-paint-plinth", "example-tape-plinth", "example-tyre-plinth"]:
+		var plinth := _work(index, id)
+		if plinth == null: continue
+		plinth.call("_on_picked_up")
+		for i in 6: await physics_frame
+		var item := str(plinth.get("item"))
+		taken[item] = {"collected": (items.collected() as Array).has(item), "settings": (hands[0].get("values") as Dictionary).get(item, {}) if not hands.is_empty() else {}}
+	result["taken_from_plinths"] = taken
+	_check("picking an example up collects its item", taken.size() == 3 and taken.values().all(func(t): return t.collected), {"taken": taken})
+	_check("the black can stays black and the text tape keeps its text", not hands.is_empty() and str((taken.get("spray_paint", {}).get("settings", {}) as Dictionary).get("pigment", "")) == "16191e"
+		and str((taken.get("tape", {}).get("settings", {}) as Dictionary).get("note", "")) == "PREFAB TEST", {"hands": hands.size()})
+	# ------------------------------------------------------------------ the edges round the block
+	var lines := 0
+	var short_walls := 0
+	for row: Dictionary in game.building.content.data.floors[index].artifacts:
+		if str(row.artifact) == "do_not_cross_barrier" and _work(index, str(row.id)) != null: lines += 1
+		if str(row.artifact) == "edge_wall" and _work(index, str(row.id)) != null: short_walls += 1
+	_check("seven blue police barricades and six short walls stand at the edges round the block", lines == 7 and short_walls == 6, {"barricades": lines, "walls": short_walls})
+	var guard := CharacterBody3D.new()
+	var guard_shape := CollisionShape3D.new()
+	var guard_capsule := CapsuleShape3D.new()
+	guard_capsule.radius = 0.3
+	guard_capsule.height = 1.8
+	guard_shape.shape = guard_capsule
+	guard.add_child(guard_shape)
+	guard.collision_layer = 0
+	guard.collision_mask = 1
+	guard.motion_mode = CharacterBody3D.MOTION_MODE_FLOATING
+	root.add_child(guard)
+	var tries := {}
+	for run: Array in [["the north barricade", 0.0, -7.4, 0.0, -9.8], ["the gap beside it", -2.25, -7.4, -2.25, -9.8], ["the north-west wall", -7.3, -7.4, -7.3, -9.8],
+			["the barricade behind the arrival", -0.4, 7.9, -0.4, 9.9], ["the barricade at shaft A", -5.6, 0.0, -7.6, 0.0], ["the open end of shaft A", -5.6, 2.4, -7.6, 2.4]]:
+		guard.global_position = _at(float(run[1]), float(run[2]), 0.93)
+		tries[run[0]] = await _walk(guard, _at(float(run[3]), float(run[4]), 0.93), 5.0)
+	guard.queue_free()
+	# the gap on the other side of the middle barricade is where the tower's own floor sign stands (found by a ray
+	# when a body would not pass there): the west gap is the open one
+	result["at_the_edges"] = tries
+	_check("a barricade or a wall stops a body", not tries["the north barricade"] and not tries["the north-west wall"] and not tries["the barricade behind the arrival"] and not tries["the barricade at shaft A"], tries)
+	_check("and a body still gets through the gaps: safer, not safe", tries["the gap beside it"] and tries["the open end of shaft A"], tries)
+	await _stand(_at(6.4, -7.3, 1.9), _at(-2.0, -8.6, 0.7), 0.3)
+	await _picture("16_the_police_line_at_the_north_edge.png")
+	await _stand(_at(-3.2, 5.9, 2.0), _at(-0.2, 8.8, 0.7), 0.3)
+	await _picture("17_behind_the_arrival.png")
 	# ------------------------------------------------------------------ the doors: Portals -> here -> Melencolia
 	var source = load("res://commons/void/room_source.gd")
 	var portals := int(source.spine_floor("Primitives_Portals"))

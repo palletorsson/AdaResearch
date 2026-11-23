@@ -26,6 +26,15 @@
       "map_ready": false,
       "configure_before_ready": true,
       "description": "A standing board with six sticker notes on the in-game menu (open it, its tabs, choose a thing, place it, the belt, this floor) and the four verb badges read from the badge coins, each marked LOCKED or YOURS. Words: commons/data/prefab_test/menu_board.json."
+    },
+    "edge_wall": {
+      "lookup_name": "edge_wall",
+      "name": "Edge wall / a short white parapet",
+      "scene": "res://commons/artifacts/prefab_test/edge_wall.tscn",
+      "category": "primitives",
+      "map_ready": false,
+      "configure_before_ready": true,
+      "description": "A short white wall slab at a slab's edge: solid, a little over a metre high, and never the whole edge. config: length, height, thick."
     }
   }
 }
