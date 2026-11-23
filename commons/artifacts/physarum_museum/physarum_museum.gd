@@ -7,6 +7,14 @@ var screen: MeshInstance3D
 var caption: Label3D
 var pending_config := {}
 
+# DNA passthrough (2026-11-23): the registry declares PhysarumColony's axis
+# against this wrapper, and a sweep sets it with Object.set() on the root.
+# Same values and default as PhysarumColony.gd; the setter only forwards.
+@export_enum("pair", "triad", "ring", "scattered") var anchorage: String = "triad":
+	set(value):
+		anchorage = value
+		apply_grid_config({"anchorage": value})
+
 func _ready() -> void:
 	viewport = SubViewport.new()
 	viewport.size = Vector2i(768,768)

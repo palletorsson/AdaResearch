@@ -6,6 +6,18 @@ var screen: MeshInstance3D
 var caption: Label3D
 var pending_config := {}
 
+# DNA passthrough (2026-11-23): the registry declares flow_field_table's axes
+# against this wrapper, and a sweep sets them with Object.set() on the root.
+# Same values and defaults as FlowFieldMain.gd; each setter only forwards.
+@export_enum("tour", "open", "block", "u_wall", "zigzag", "wind", "noise") var scenario: String = "tour":
+	set(value):
+		scenario = value
+		apply_grid_config({"scenario": value})
+@export_enum("arrows", "hidden") var field_display: String = "arrows":
+	set(value):
+		field_display = value
+		apply_grid_config({"field_display": value})
+
 func _ready() -> void:
 	viewport = SubViewport.new()
 	viewport.size = Vector2i(1024,1024)
