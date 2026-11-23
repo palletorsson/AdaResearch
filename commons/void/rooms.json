@@ -10026,6 +10026,22 @@
       "walls": [],
       "artifacts": [
         {
+          "id": "to-prefab-test",
+          "artifact": "void_floor_transfer",
+          "station": "SE",
+          "position": [
+            -7.5,
+            7.8
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "destination": "Primitives_Prefab_Test",
+            "caption": "PREFAB TEST"
+          }
+        },
+        {
           "id": "hall",
           "artifact": "void_primitive_portals",
           "station": "NW",
@@ -90858,6 +90874,154 @@
         "B"
       ],
       "solid_slab": true,
+      "supply_leads": false
+    },
+    {
+      "map": "Primitives_Prefab_Test",
+      "title": "Prefab Test",
+      "origin": false,
+      "walls": [],
+      "artifacts": [
+        {
+          "id": "menu-board",
+          "artifact": "menu_board",
+          "station": "SW",
+          "position": [
+            -4.7,
+            6.5
+          ],
+          "facing": 62,
+          "height": 0,
+          "scale": 1.3,
+          "config": {
+            "editor_label": "Menu board / how the in-game menu works, in sticker notes and badge notes (Palle 2026-11-22)"
+          }
+        },
+        {
+          "id": "white-block",
+          "artifact": "white_block",
+          "station": "NW",
+          "position": [
+            0,
+            -1.6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "side": 10,
+            "height": 5.4,
+            "count": 72,
+            "seed": 12,
+            "editor_label": "White block / wall slabs with no colliders, coloured primitives inside, a pagoda at the south face shows the way in (Palle 2026-11-22)"
+          }
+        },
+        {
+          "id": "test-area-west",
+          "artifact": "prefab_test_area",
+          "station": "NW",
+          "position": [
+            -17.2,
+            -0.6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "length": 6.6,
+            "depth": 13.6,
+            "count": 20,
+            "seed": 121,
+            "title": "TEST AREA A",
+            "editor_label": "Prefab test area A / a taped ground; the pile of 20 clears when you step in (Palle 2026-11-22)"
+          }
+        },
+        {
+          "id": "test-area-east",
+          "artifact": "prefab_test_area",
+          "station": "NE",
+          "position": [
+            17.2,
+            -0.6
+          ],
+          "facing": 0,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "length": 6.6,
+            "depth": 13.6,
+            "count": 20,
+            "seed": 122,
+            "title": "TEST AREA B",
+            "editor_label": "Prefab test area B / a taped ground; the pile of 20 clears when you step in (Palle 2026-11-22)"
+          }
+        },
+        {
+          "id": "prefab-belt-west",
+          "artifact": "prefab_belt",
+          "station": "SW",
+          "position": [
+            -17.2,
+            7.7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Prefab belt / the catalogue for test area A"
+          }
+        },
+        {
+          "id": "prefab-belt-east",
+          "artifact": "prefab_belt",
+          "station": "SE",
+          "position": [
+            17.2,
+            7.7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "editor_label": "Prefab belt / the catalogue for test area B"
+          }
+        },
+        {
+          "id": "on-to-melencolia",
+          "artifact": "void_floor_transfer",
+          "station": "SE",
+          "position": [
+            3.4,
+            7.7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "destination": "Primitives_Melencolia",
+            "caption": "ON TO MELENCOLIA"
+          }
+        },
+        {
+          "id": "back-to-portals",
+          "artifact": "void_floor_transfer",
+          "station": "SE",
+          "position": [
+            5.6,
+            7.7
+          ],
+          "facing": 180,
+          "height": 0,
+          "scale": 1,
+          "config": {
+            "destination": "Primitives_Portals",
+            "caption": "BACK TO PORTALS"
+          }
+        }
+      ],
+      "props": [],
+      "impact_cells": [],
+      "route": [],
       "supply_leads": false
     }
   ]

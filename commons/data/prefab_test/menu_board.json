@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "note": "The words on the Prefab Test floor's menu board (commons/artifacts/prefab_test/menu_board.gd). Every line here was read from the code on 2026-11-22: the board's tabs from commons/player/select_board.gd (TABS), the buttons from commons/void/game.gd (_right_button, _left_button, _unhandled_key_input) and commons/player/inventory_desktop.gd, the belt from commons/artifacts/prefab_belt/prefab_belt.gd. The four badge notes are NOT written here: the board reads them from commons/data/badges/coins.json (verbs), so they change with the coins. If a button changes in the code, change the line here.",
+  "title": "HOW THE MENU WORKS",
+  "subtitle": "Prefab Test: a floor to try the hand on",
+  "notes": [
+    {
+      "title": "OPEN THE BOARD",
+      "colour": "#ffe066",
+      "turn": -2.5,
+      "lines": ["Headset: right A, or left Y.", "Desktop: I. M pauses.", "The same button closes it."]
+    },
+    {
+      "title": "ITS TABS",
+      "colour": "#9bf6ff",
+      "turn": 1.5,
+      "lines": ["HAND what you hold. KNOBS its settings.", "PLACED what you have put down.", "PREFABS, BADGES, FLOORS, VOICE, PAUSE, KEYS."]
+    },
+    {
+      "title": "CHOOSE A THING",
+      "colour": "#ffadad",
+      "turn": -1.0,
+      "lines": ["Headset: click the left stick. Each click, the next thing.", "Desktop: Tab. Shift+Tab goes back.", "Headset, right B: the last thing again."]
+    },
+    {
+      "title": "PLACE IT",
+      "colour": "#caffbf",
+      "turn": 2.0,
+      "lines": ["Aim at the floor, or at a thing already placed.", "Headset: trigger. Desktop: F.", "Take it back: grip. Desktop: X."]
+    },
+    {
+      "title": "THE BELT",
+      "colour": "#ffd6a5",
+      "turn": -1.5,
+      "lines": ["Four trays of the prefab timeline.", "STEP keys move one tray. The lever rolls.", "Take a thing off its tray: it is yours.", "A closed box names the floor that opens it."]
+    },
+    {
+      "title": "THIS FLOOR",
+      "colour": "#bdb2ff",
+      "turn": 1.0,
+      "lines": ["Two taped areas to build in.", "Step over the tape and the pile clears.", "The white block stops nobody: walk in under the pagoda.", "Two doors by the arrival: on to Melencolia, back to Portals."]
+    }
+  ],
+  "badges_title": "FOUR BADGES, FOUR VERBS",
+  "badges_note": "Until its coin is yours you can place and take back. The coins stand on the floors after Melencolia.",
+  "locked": "LOCKED",
+  "yours": "YOURS"
+}

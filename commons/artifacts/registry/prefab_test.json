@@ -1,0 +1,31 @@
+{
+  "artifacts": {
+    "prefab_test_area": {
+      "lookup_name": "prefab_test_area",
+      "name": "Prefab test area / a taped piece of floor to build on",
+      "scene": "res://commons/artifacts/prefab_test/prefab_test_area.tscn",
+      "category": "primitives",
+      "map_ready": false,
+      "configure_before_ready": true,
+      "description": "A marked rectangle of empty floor for trying the prefab system. In its middle a pile of prefabs from the timeline, stuck into each other; the pile clears when the visitor steps over the tape. config: length, depth, count, seed, title."
+    },
+    "white_block": {
+      "lookup_name": "white_block",
+      "name": "White block / wall slabs that stop nobody",
+      "scene": "res://commons/artifacts/prefab_test/white_block.tscn",
+      "category": "primitives",
+      "map_ready": false,
+      "configure_before_ready": true,
+      "description": "White wall slabs stood close together as one block with no colliders; inside it, coloured primitives standing in each other; a small pagoda at its face shows where to walk in. config: side, height, count, seed, pagoda."
+    },
+    "menu_board": {
+      "lookup_name": "menu_board",
+      "name": "Menu board / how the in-game menu works",
+      "scene": "res://commons/artifacts/prefab_test/menu_board.tscn",
+      "category": "primitives",
+      "map_ready": false,
+      "configure_before_ready": true,
+      "description": "A standing board with six sticker notes on the in-game menu (open it, its tabs, choose a thing, place it, the belt, this floor) and the four verb badges read from the badge coins, each marked LOCKED or YOURS. Words: commons/data/prefab_test/menu_board.json."
+    }
+  }
+}
