@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "updated": "2026-11-22",
+  "updated": "2026-11-23",
   "title": "Ada Research — Void Tower System Atlas",
-  "thesis": "Technology is trapped in convention, yet in essence a potential general queer intellect. Ada Research starts as Nature-of-Code tutorials in VR and deliberately lets text, artifacts, machines, body, and space drift apart to form new queer relations inside an unfinished 210-floor skyscraper.",
+  "thesis": "Technology is trapped in convention, yet in essence a potential general queer intellect. Ada Research starts as Nature-of-Code tutorials in VR and deliberately lets text, artifacts, machines, body, and space drift apart to form new queer relations inside an unfinished 211-floor skyscraper.",
   "orders": [
     {
       "id": "concept",
@@ -82,7 +82,7 @@
       "group": "core",
       "color": "#2563eb",
       "question": "How does the unfinished skyscraper hold this floor, its shafts, and vertical leaks?",
-      "description": "210 stacked concrete and scaffold floors linked by Shaft A, Shaft B, structural columns, work lights, and open weather so floors visibly bleed into one another.",
+      "description": "211 stacked concrete and scaffold floors linked by Shaft A, Shaft B, structural columns, work lights, transfer doors (F11->F210->F12, F209->F13), and open weather so floors visibly bleed into one another.",
       "files": [
         "commons/void/rooms.json",
         "commons/void/layout.json",
@@ -193,7 +193,7 @@
       "group": "essential",
       "color": "#ea580c",
       "question": "Which cumulative Bauhaus studio tool, template building table, worker assemblage, or 26-sequence playground capability wakes up here?",
-      "description": "Cumulative vertical playground layer across all 26 sequences (F0-F209): unified Bauhaus Studio Workstations (1:16 tabletop -> 1:4 glass box -> 1:1 VR Visor), Template Building Stations (a12b12302 / e45839e06: hanging glass box equips face_triangle/face_square onto wrist clock over 0.5m plinths; F5 Tetrahedron 4 / Diamond 8 Wireframe / Icosahedron 20; F7 Cube 6 & association(cube) from terms.json), Worker & Dream-Body Assemblages, and progressive studio unlocks through kinetic pickups, arrays, palettes, patterns, jump pads, random-walk/spiky & smooth noise basins, 4x4x4 isosurface cutouts, and mind-map negotiation.",
+      "description": "Cumulative vertical playground layer across all 26 sequences (F0-F210): unified Bauhaus Studio Workstations (1:16 tabletop -> 1:4 glass box -> 1:1 VR Visor), Template Building Stations (a12b12302 / e45839e06: hanging glass box equips face_triangle/face_square onto wrist clock over 0.5m plinths; F5 Tetrahedron 4 / Diamond 8 Wireframe / Icosahedron 20; F7 Cube 6 & association(cube) from terms.json), Prefab Test Sandbox (F210), Worker & Dream-Body Assemblages, and progressive studio unlocks through kinetic pickups, arrays, palettes, patterns, jump pads, random-walk/spiky & smooth noise basins, 4x4x4 isosurface cutouts, and mind-map negotiation.",
       "files": [
         "commons/data/playground_layer.json",
         "commons/artifacts/scaffold_workstation/playground_layer.gd",
@@ -213,7 +213,19 @@
     "chapter_03_pairing_point_field": "Move one endpoint and watch what updates immediately versus what stays unchanged.",
     "chapter_03_do_not_cross_barrier": "A line in space is not just geometry — as a barrier it redirects how a body is allowed to walk.",
     "chapter_13_pick_up_cube": "Compare stillness, linear translate, rotate, and scale side by side to see how simple motion codes trigger emotional reactions.",
-    "letters": "Model B reads the roof letters and realizes the building's label does not match who she is."
+    "letters": "Model B reads the roof letters and realizes the building's label does not match who she is.",
+    "descent_f004_tape_robot": "A mathematical point has no width, yet the floor robot turns that abstraction into paper, ink and length.",
+    "descent_f032_colonnade": "Each column samples the room's own hue and saturation field, turning a colour rule into load-bearing architecture.",
+    "descent_f188_escher_cloister": "Local perspective rules stay consistent at every stair, while the global loop quietly breaks Euclidean space.",
+    "descent_f198_coupled_chamber": "Gray-Scott diffusion, Jolt physics bodies and a live tension graph couple across the four-beat QFEP discovery law.",
+    "descent_f202_wave_loom": "Belnap four-valued logic gluts drive a real 2D wave PDE and 24-voice Kuramoto chimera without collapsing into explosion.",
+    "descent_f208_strange_loop": "The tower parses all 211 floors of rooms.json, predicts its own nervous system, and gates 6-gene mutations into a MAP-Elites archive.",
+    "descent_f209_prefab_showroom": "At the top of the tower, reusable Bauhaus prefabs stand ready for someone else to rearrange and continue.",
+    "qfep_beat_F": "Beat F (Structure): establish enough coherent geometry and coupling to understand what the chamber is doing.",
+    "qfep_beat_E": "Beat E (Variation): widen parameters, contradictions or mutations when rigid structure restricts discovery.",
+    "qfep_beat_lambda": "Beat λ (Edge of Chaos): let unfamiliar cross-system relations run long enough to reveal new emergent behaviour.",
+    "qfep_beat_phi": "Beat Φ (Stabilize): crystallize what became useful into permanent architecture and archive the discovery.",
+    "chapter_13_what_motion_asks": "Compare a shift in position, a turn in direction and a change in size. The walkway stays still."
   },
   "floors": {
     "Point_Zero": {
@@ -743,7 +755,7 @@
       "evidenceReceipt": "doc/book/iterations/2026-11-21-quest-human-witnessed/f203-to-f209-descent-receipt.json",
       "plainBreadcrumb": "Pick a reusable part from the 8 open prefab shelves (88 items) or 5 full-size stock rails (53 parts), compose two testable arrangements at the Tier-3 Scaffold Workstation, and carry your collected part back into the tower through a transfer threshold.",
       "bodyHook": "Take a full-size part (rod) directly off the rail into your hand so it detaches into live gravity while equipping your bracelet, then press TransferKey on the threshold jamb to carry it to another floor.",
-      "note": "Quest 3 human-witnessed descent (2026-11-21, APK fadfd554, rev 329 Dual Breadcrumb HUD): Palle reached F209 Primitives_Prefab_Library live at [6.53, -1276.0, 0.36] (17.9 Hz, pose_age 0.01s). Verdict: 'very thing look good all the way down'.\n[2026-11-22 · Antigravity] Upgraded F209 construction-stock (scaffold_workstation_quads) and F1/F3/F5/F6/F7 workstations to unified Bauhaus Studio Workstation (bauhaus_kit.gd + studio_workstation.gd): Trans_Pre-aligned monochrome-to-colour kit, flat near-edge hand-principle template strip replacing PartsArc, 20m x 14m grid mirrored live at 1:4 in the 6.6m glass box (1:1 via VR Visor), and evolving humanoid Unit 02 (WorkerBeing) beside the console. Verified 15/15 (doc/book/iterations/2026-11-22-bauhaus-studio-workstation/report.json).\n[2026-11-22 · Antigravity] Added reusable Worker Form & Endless Museum Dream-Body Assemblage system (commons/artifacts/worker_assemblage/): staged atelier assemblage monument at [2.8, 0.6] (asawa_wire + stijl_robot + WorkerBeing in open Bauhaus measuring cage) plus integrated interactive workbench_arc (FORM / AXIS / MODE plinth synced with Color Palette Chooser) beside all 7 Studio Workbenches. Verified 14/14 PASS in doc/book/iterations/2026-11-22-worker-assemblage/report.json.\n[2026-11-22 · Antigravity] Shipped the 26-sequence General Intellect Playground Layer (commons/data/playground_layer.json + playground_layer.gd) integrated into studio_workstation.gd: rear SequenceLayerStrip unlocks Package/Coin/Bomb (F13+), 1D/2D/3D Arrays (F23+), Palettes (F28+), Panel Patterns (F37+), Jump Pads (F45+), Random Walk + Spiky Basin (F74+), Configurable Smooth Noise Basin (F89+), and 4x4x4 Isosurface Cutouts (F145+). Verified 12/12 PASS + 1:1 VR Visor view.\n[2026-11-22 · Antigravity] VR MultiMesh Studio Workstation upgrade (bauhaus_kit.gd + studio_workstation.gd + playground_layer.gd + sound_jump_pad.gd): baked multi-surface ArrayMeshes + MultiMeshInstance3D batching (726 instances in 19 draw calls), single compound StaticBody3D physics, zero-alloc 90 Hz hover memoization, +Y upward point stacking, 2-row terraced rear rack with SPRAY/SND PAD/BIG PIPE/NOISE CFG/CA STEP/MENGER/PLANT, and 11 new sequence workstations installed across F19/F24/F39/F55/F64/F81/F98/F108/F118/F122/F145 (18 total live across tower).",
+      "note": "Quest 3 human-witnessed descent (2026-11-21, APK fadfd554, rev 329 Dual Breadcrumb HUD): Palle reached F209 Primitives_Prefab_Library live at [6.53, -1276.0, 0.36] (17.9 Hz, pose_age 0.01s). Verdict: 'very thing look good all the way down'.\n[2026-11-22 · Antigravity] Upgraded F209 construction-stock (scaffold_workstation_quads) and F1/F3/F5/F6/F7 workstations to unified Bauhaus Studio Workstation (bauhaus_kit.gd + studio_workstation.gd): Trans_Pre-aligned monochrome-to-colour kit, flat near-edge hand-principle template strip replacing PartsArc, 20m x 14m grid mirrored live at 1:4 in the 6.6m glass box (1:1 via VR Visor), and evolving humanoid Unit 02 (WorkerBeing) beside the console. Verified 15/15 (doc/book/iterations/2026-11-22-bauhaus-studio-workstation/report.json).\n[2026-11-22 · Antigravity] Added reusable Worker Form & Endless Museum Dream-Body Assemblage system (commons/artifacts/worker_assemblage/): staged atelier assemblage monument at [2.8, 0.6] (asawa_wire + stijl_robot + WorkerBeing in open Bauhaus measuring cage) plus integrated interactive workbench_arc (FORM / AXIS / MODE plinth synced with Color Palette Chooser) beside all 7 Studio Workbenches. Verified 14/14 PASS in doc/book/iterations/2026-11-22-worker-assemblage/report.json.\n[2026-11-22 · Antigravity] Shipped the 26-sequence General Intellect Playground Layer (commons/data/playground_layer.json + playground_layer.gd) integrated into studio_workstation.gd: rear SequenceLayerStrip unlocks Package/Coin/Bomb (F13+), 1D/2D/3D Arrays (F23+), Palettes (F28+), Panel Patterns (F37+), Jump Pads (F45+), Random Walk + Spiky Basin (F74+), Configurable Smooth Noise Basin (F89+), and 4x4x4 Isosurface Cutouts (F145+). Verified 12/12 PASS + 1:1 VR Visor view.\n[2026-11-22 · Antigravity] VR MultiMesh Studio Workstation upgrade (bauhaus_kit.gd + studio_workstation.gd + playground_layer.gd + sound_jump_pad.gd): baked multi-surface ArrayMeshes + MultiMeshInstance3D batching (726 instances in 19 draw calls), single compound StaticBody3D physics, zero-alloc 90 Hz hover memoization, +Y upward point stacking, 2-row terraced rear rack with SPRAY/SND PAD/BIG PIPE/NOISE CFG/CA STEP/MENGER/PLANT, and 11 new sequence workstations installed across F19/F24/F39/F55/F64/F81/F98/F108/F118/F122/F145 (18 total live across tower).\n[2026-11-22 · Antigravity] Completed Arc VI-VIII on the Bauhaus Studio Workstations (mindmap_runtime.gd + playground_layer.gd + studio_workstation.gd): PROCGEN course synthesis (F129+), GPU-wave SOFTPAD softbodies (F136+), carved BOOL negative-space rooms (F158+, 2 MultiMesh DCs), MINDMAP topological overlay (MST + sparse cycle chords + crimson paradox links in 3 MultiMesh DCs, auto-active F161-F207), coupled self-referential PARADOX gates (A <-> !B, F184+), and per-instance-colored MultiMesh WITNESS negotiation beacons (CARE/PRECISION/EDGE/WITNESS, F192+); installed 7 upper-tower Studio Workstations across F130/F136/F160/F168/F191/F199/F207 (25 total live across F1-F209). Verified 9/9 + 12/12 PASS (31 glass DCs, 1 compound physics body).\n[2026-11-22 · Antigravity] Algorithm-as-Structure upgrade on Bauhaus Studio Workstations (bauhaus_kit.gd + model.gd + playground_layer.gd + studio_workstation.gd + mindmap_runtime.gd): BOOL interactively carves real pass-through holes (oculus / hatch / slot) directly into built quads with 4-strip open-center compound colliders; SOFTPAD weaves GPU-wave Softbody bounce decks directly inside quad frames; BIG PIPE auto-senses separated elevated quad islands (up to 4 bays) and spans flush bridges with grounded steel stanchions (2 MultiMesh DCs); MENGER builds a 3-level walkable carved Menger Sponge architecture with roof Oculus skylights, cardinal Hatches, 4 integrated Level-2 fractal corner piers (1,600 cubes in 1 MultiMesh DC), flush Big Pipe tunnel, and roof-rooted L-System trees; PROCGEN synthesizes all four into one unified course. Verified 35/35 PASS across arc_vii_viii_mindmap_probe (13/13), vr_multimesh_sequences_probe (10/10, 2,023 instances in 23 DCs), and playground_layer_probe (12/12).\n[2026-11-22 · Antigravity] Algorithm-as-Structure Round 2 (playground_layer.gd + studio_workstation.gd): true 4x4x4 implicit-field Isosurface MultiMesh Cutouts (6 scalar fields: crossing Schwarz-P, dome Metaball, spiral_ramp, gutter_ramp, basin, tunnel Gyroid) batched in 2 MultiMesh DCs + auto-carving intersecting quad decks; Morphogenetic Conway B3/S23 CA growing Level-2 Oculus crowns over Level-1 Embedded Softbody decks + Boolean slot walkways + auto-bridging Big Pipe colony connectors + roof L-System trees (14-18 glass DCs); smart deck surface auto-snap (snaps objects/plants onto roofs, passes through carved Boolean voids) fixing latent 1x typed Array[Vector3] coercion; fwidth-antialiased per-fragment topographic contour shader on smooth noise basin + noise-coupled multi-elevation Random Walk. Verified 38/38 PASS across arc_vii_viii_mindmap_probe (16/16), vr_multimesh_sequences_probe (10/10), and playground_layer_probe (12/12).\n[2026-11-22 · Antigravity] Grid-Exact Modular Alignment pass (playground_layer.gd::snap_object_addr + studio_workstation.gd): standardized BOOL rooms, ISO 4x4 cutouts (exact 0.5m voxels), MENGER cubes, BIG PIPE bays, and SOFTPAD frames to exact 1.0*unit (2m x 2m x 2m) major bays snapping to bay centers so walls/roofs meet Level-1 & Level-2 quad decks flush with zero gap; snapped PARADOX portals (2m x 2m) onto bay edges over corner joints and SND PAD / JUMP PAD / WITNESS plinths onto exact 1m x 1m minor grid cells (+0.25). Verified 38/38 PASS.\n[2026-11-22 · Antigravity] Created Radical Inside Procedural Body-Passage Grammar (commons/artifacts/radical_inside_grammar/radical_body_grammar.gd + radical_fetish_skin.gdshader + radical_body_passage.tscn, registered in catalog.json) fusing 8 procedural strategies (30x24 smooth parametric anatomical loft, sculpted Star-Void & Ovoid Boolean diaphragms, marched DreamIso SDF turquoise throat crown & cartilage arch, GPU breathing softbody alcoves & inlaid elastic floor spine, MultiMesh steel corset ribs & mirror-chrome crown teeth, 4x4x4 Gyroid voxel & Level-2 Menger bone pillars, neon wavefunction nerve filaments, and interactive 6-mode extreme fetish/anatomical shader switch) in 16 VR draw calls (~1,220-1,272 MultiMesh instances + ~11,600 SDF tris). Staged across the final 3 floors before Foundations Crisis via tools/place_radical_passages.py: F181 ML_Sequence_Memory (discovery_pink), F182 ML_Generative (bosett_amber), F183 ML_Synthesis (sirens_synthesis). Verified 7/7 PASS live in Godot 4.6 Vulkan.",
       "desiringMachine": {
         "machine": "8 glassless prefab_library_shelf banks (88 live items.json entries) + 5 full-size hanging_stock rails (53 removable physical parts & self-returning tools) + Tier-3 scaffold_workstation_quads + 2 void_floor_transfer portals (Trans_Pre F13, Primitives_Melencolia F12)",
         "activates": "Detaching reusable primitives into live physics while collecting them into inventory_hands, keeping tools anchored for the next visitor, and looping carried parts back into earlier tower sequences",
@@ -1112,14 +1124,413 @@
     "Color_Grid_Pallet": {
       "note": "[2026-11-22 · Antigravity] Added Color-tier Bauhaus Studio Workstation (scaffold-workstation on Shaft B NE, [10, -4.25]) with 6 curated Color-sequence palette swatches (MONO, BAUHAUS, QUEER, ALBERS, MONDRIAN, MEMPHIS) live-repainting both the 1:16 drafting grid and 1:4 glass-box playground + coloured Unit 02 (WorkerBeing). Verified 5/5 including strict pre-Color monochrome lock on F7 (doc/book/iterations/2026-11-22-bauhaus-studio-workstation/color_palette_report.json).",
       "evidenceTier": "desktop",
-      "evidenceReceipt": "doc/book/iterations/2026-11-22-general-intellect-playground-layer/report.json (12/12 PASS)"
+      "evidenceReceipt": "doc/book/iterations/2026-11-22-general-intellect-playground-layer/report.json (12/12 PASS)",
+      "desiringMachine": {
+        "machine": "Tier-3 Bauhaus Studio Workstation (F33, palette=bauhaus) + GridColorizer & Spectrum Forest",
+        "activates": "Unlocks the 6-Palette Chooser (palette_chooser) and live surface SPRAY painting (spray_paint) across the playground kit",
+        "couplesInto": "Every downstream coloured studio floor (F39-F209) and synced FORM/AXIS/MODE workbench arcs"
+      }
     },
     "Color_Context_Placed": {
-      "note": "[2026-11-22 · Antigravity] Installed full-colour worker_assemblage dyad (WorkerBeing + stijl_robot) at [-9.5, 5.2] celebrating Colour arrival on F28 via tools/place_worker_assemblages.py (14/14 PASS in doc/book/iterations/2026-11-22-worker-assemblage/report.json)."
+      "note": "[2026-11-22 · Antigravity] Installed full-colour worker_assemblage dyad (WorkerBeing + stijl_robot) at [-9.5, 5.2] celebrating Colour arrival on F28 via tools/place_worker_assemblages.py (14/14 PASS in doc/book/iterations/2026-11-22-worker-assemblage/report.json).",
+      "desiringMachine": {
+        "machine": "Worker & Dream-Body Assemblage (worker-assemblage-color-arrival) + Chroma Stacks & Colour Stations",
+        "activates": "Monochrome-to-colour threshold where WorkerBeing and Dream-Body formations take on live 6-palette colour assignments",
+        "couplesInto": "F33 Color_Grid_Pallet Studio Workstation (palette_chooser & spray_paint) and the F209 Atelier Worker Assemblage"
+      }
+    },
+    "Primitives_Prefab_Test": {
+      "stage": "void-edition",
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "doc/book/iterations/2026-11-22-prefab-test/prefab_test.json + commits 8805072c5 / 24b474548 / 4a62ef437 / 1f39d8580 / 3835e2bf8 (tools/probes/prefab_test_floor.gd 34/34, prefab_test_forgets.gd 5/5, fall_past_a_floor.gd 8/8)",
+      "plainBreadcrumb": "Step across the tape into Test Area A or B to clear its 20-prefab pile and try the Prefab Belts, verb badges, and plinth examples without saving to placed.json — then walk under the pagoda straight through the 53-slab collider-less White Block where hidden catalogue prefabs glitch in pink blur.",
+      "bodyHook": "Cross the floor tape to vanish the 20-object heap, read the HOW THE MENU WORKS sticker board, pick up a knob-configured tool from its plinth, and walk under the south pagoda into the collider-less white slabs; blue police-line sawhorses and 1.1 m edge walls guard the perimeter around the new fall-past-a-floor charge rule.",
+      "note": "Appended at floor index 210 (8805072c5) to avoid renumbering tower references, bridged in walk order between F11 Primitives_Portals and F12 Primitives_Melencolia via void_floor_transfer doors. Forgets placements on exit (3835e2bf8, commons/data/inventory/forget.json). Global game rule 24b474548: falling past a floor costs 15 charge and resets body to the missed floor (fall_past_a_floor.gd 8/8).",
+      "desiringMachine": {
+        "machine": "Two Prefab Test Areas (TEST AREA A / B) + Two Prefab Belts + 14 Association Plinths + Menu Board + 53-Slab White Block (forgets placements via forget.json)",
+        "activates": "Zero-consequence hands-on rehearsal of the 90-item catalogue, verb badges (PICK/TRANSLATE/ROTATE/SCALE), knobs-preserving plinth pickups (PREFAB TEST tape, black spray can), and an optical slab-glitch chamber hiding prefabs five ways",
+        "couplesInto": "Walk-order bridge inserted by transfer doors between F11 Primitives_Portals (PREFAB TEST) and F12 Primitives_Melencolia (ON TO MELENCOLIA), preparing Model B's hand before Transformation"
+      },
+      "queerOperator": {
+        "mode": "denaturalize",
+        "note": "Strips colliders from a 10 m solid white cube of 53 slabs and turns hidden prefabs' reds into hot pink under a 12-tap interior blur — exposing that a wall is only a convention of physics and a prefab's scale/colour only holds outside the cut."
+      }
+    },
+    "ISO_ImplicitModeling": {
+      "stage": "opera-bound",
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "doc/book/iterations/2026-11-22-contact/contact_study.json (within/ + field/ + church/) + commits d454772fa / b32fb6165 / 1c19fd81b / d2a6a839a (tools/probes/contact_study.gd desktop + --xr 29/29 PASS)",
+      "plainBreadcrumb": "Approach the 3 m CONTACT pairs to watch two implicit bodies merge four ways (through, cut, cubes, skin) and inside a diamond container, walk the 20-version phase-diagram floor, pass through the 9x CONTACT-within room, and enter the 17.5 m five-body CONTACT church cantilevered off the north side slab.",
+      "bodyHook": "Walk toward the south CONTACT stations to drive the two bodies together, read Euler-number phase boundaries painted across the 20-version floor, walk door-to-door through CONTACT-within (1.9 x 2.85 m doorway), and traverse the 33.6 m five-bay CONTACT church nave on the north side slab.",
+      "note": "CONTACT family landed across commits d454772fa, b32fb6165, 2b9f41dc2, 1c19fd81b, and d2a6a839a (134,328 total floor triangles; church 31,950 tris; threaded mesh arrival). Desktop + --xr probe passes 29/29 checks; not yet tried on Quest headset.",
+      "desiringMachine": {
+        "machine": "CONTACT Suite (5-station proximity row, 20-version phase-diagram field, 9x CONTACT-within hollow room, 33.6 m north-slab CONTACT church + 4-body baldachin canopy) + Implicit Surface Modeling",
+        "activates": "Smooth-union SDF contact (k-reach vs. gap) where floor position selects topological phase (two bodies -> one body -> openings -> melted shut) and scales a surface join up to habitable Bernini cathedral architecture",
+        "couplesInto": "Vertically punctures the tower's north facade — the 17.5 m CONTACT church stands on a 42x10 m north side slab and rises visibly past F155, F154, and F153"
+      },
+      "queerOperator": {
+        "mode": "bodily-remainder",
+        "note": "Turns proximity between two bodies into habitable architecture: you walk in through one body, pass through the narrowed smooth-union doorway where mixing-weight contours crowd, and stand under a four-body leaning baldachin open to the sky."
+      }
+    },
+    "Primitives_Columns": {
+      "stage": "opera-bound",
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "doc/book/iterations/2026-11-22-black-columns/after.json + commit 092e90ad5 (tools/probes/columns_outline.gd PASS: 31 black alien-family columns, 0.89m clearance)",
+      "plainBreadcrumb": "Walk through 31 matte-black columns turned from five alien outline profiles (Plug, Taper, Beads, Ripple, Twin) to see how one radius-list revolution code shifts from classical architecture into bodily silhouette.",
+      "bodyHook": "Thread the 0.89 m clearances between the matte-black Plug/Taper/Beads/Ripple/Twin silhouettes whose flared bases, waist-level necks, and overhead swellings scale directly against human torso height.",
+      "note": "Commit 092e90ad5 (2026-11-22): resolution_totem.gd gained outline_family=Alien and finish=black while preserving museum defaults; plaques and signs updated in commons/void/columns_study.gd. Desktop verified in doc/book/iterations/2026-11-22-black-columns/after.json.",
+      "desiringMachine": {
+        "machine": "Black Alien Colonnade (31 resolution_totem columns: Plug, Taper, Beads, Ripple, Twin) + Pipe Slide + Cylindrical Association Plinths (fire_extinguisher, oil_drum, tin_can)",
+        "activates": "Revolved profile-outline generation (9 sections: 4 straight collars + 5 curved swells) and cylindrical inventory associations (mod_fire_extinguisher, mod_oil_drum, mod_tin_can)",
+        "couplesInto": "Displaced the five classical outlines (Vessel, Reed, Bell, Spindle, Cairn) downward to F32 Color_Pillar as gradient_colonnade, while carrying cylindrical prefabs into the belt catalogue"
+      },
+      "queerOperator": {
+        "mode": "denaturalize",
+        "note": "Replaces classical architectural profiles with matte-black (#0c0c0e) alien butt-plug/dildo silhouettes on the exact same nine-section revolution math — exposing how thin the line is between 'neutral' geometric proportion and erotic/bodily form."
+      }
+    },
+    "Color_Pillar": {
+      "stage": "opera-bound",
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "doc/book/iterations/2026-11-22-colour-room-columns/gradient_colonnade.json + commit c47bbc493 (tools/probes/gradient_colonnade.gd PASS: 5 HSV-sampled columns + closed shafts)",
+      "plainBreadcrumb": "Step inside the closed HSV colour room where the five displaced classical columns (Vessel, Reed, Bell, Spindle, Cairn) sample their hue and saturation live from the floor coordinate and rise unlit from black to full value.",
+      "bodyHook": "Walk the x = -10 lane beside the five 5.45 m unlit gradient columns inside the sealed dark-floor / colour-ceiling chamber and compare their base-to-top luminance rise against the surrounding HSV pillar grid.",
+      "note": "Commit c47bbc493 (2026-11-22): closed_shafts seals F31/F32 slabs (shafts A & B closed — step via floor selection until alternate vertical link is added). Desktop verified in doc/book/iterations/2026-11-22-colour-room-columns/gradient_colonnade.json.",
+      "desiringMachine": {
+        "machine": "Closed HSV Pillar Colour Field (pillarcolorcollection) + Displaced Classical Gradient Colonnade (gradient_colonnade) + SpectrumVisualizer & Grab Rainbow Stick",
+        "activates": "Spatial HSV coordinate sampling (hue across X, saturation along Z, unlit value gradient 0->1 up Y) applied dynamically to imported classical profiles",
+        "couplesInto": "Absorbed the five classical column outlines displaced from F9 Primitives_Columns; solid_slab + enclosed_shafts A/B close shafts between F31-F32-F33 (traversal via floor selection)"
+      },
+      "queerOperator": {
+        "mode": "re-couple",
+        "note": "Rescues the classical column family evicted from F9 and plugs them into F32's unlit HSV coordinate field so colour ceases to be paint on an object and becomes a property of where a body stands."
+      }
+    },
+    "ML_Synthesis": {
+      "stage": "opera-bound",
+      "evidenceTier": "planned",
+      "plainBreadcrumb": "Walk the ML Synthesis corridor and enter the Radical Inside procedural body-passage grammar beside anomaly detection, joint-learn walking, and explainable AI stations before crossing into Foundations Crisis.",
+      "bodyHook": "Enter the radical_body_passage interior staged on F183 and contrast moving inside a procedural skin against observing the external joint_learn_walk and anomaly_detection plots.",
+      "note": "Staged with radical_inside_grammar (commons/artifacts/radical_inside_grammar/radical_body_passage.tscn + radical_body_grammar.gd + radical_fetish_skin.gdshader); kept evidenceTier=planned pending a committed iteration checks.json receipt on disk.",
+      "desiringMachine": {
+        "machine": "ML Spatial Corridor + Radical Inside Body-Passage Grammar (radical_body_passage) + Explainable AI & Joint-Learn Walk Stations",
+        "activates": "Procedural walkable body-passage spaces (8 strategies + 6 extreme shaders) juxtaposed with ML inference, anomaly boundaries, and explainability rigs",
+        "couplesInto": "Closes the Machine Learning arc (F176-F183) and opens the threshold into Foundations Crisis (F184) and the Arc VIII mind-map floors"
+      },
+      "queerOperator": {
+        "mode": "bodily-remainder",
+        "note": "Places an explicit procedural body-passage grammar directly beside explainable-AI and anomaly-detection instruments, insisting that an interiorized bodily surface resists reduction to classification boundaries."
+      }
+    },
+    "Tutorial_3D": {
+      "desiringMachine": {
+        "machine": "Tier-3 Bauhaus Studio Workstation (F24) + Bar Array & Sorting Algorithm Race",
+        "activates": "Unlocks 1D, 2D, and 3D array stamping (array_1d, array_2d, array_3d) on the unified 20m x 14m VR playground",
+        "couplesInto": "All downstream Bauhaus Studio Workstations (F28-F209), turning single primitives into repeatable structural grids"
+      }
+    },
+    "Tutorial_Pattern": {
+      "desiringMachine": {
+        "machine": "Tier-3 Bauhaus Studio Workstation (F39) + Pattern Maker Station (repeat lattice & mirror plates)",
+        "activates": "Unlocks procedural Panel Patterns (panel_pattern: checker, diamond, stripe, 17-symmetry) applied to playground surfaces",
+        "couplesInto": "Tiling & surface-skin workflows feeding into F105 Shader skins and F209 Prefab Library"
+      }
+    },
+    "Vectors_Act5_ForceAsPlace": {
+      "desiringMachine": {
+        "machine": "Tier-3 Bauhaus Studio Workstation (F55) + Force Field, Force Cubes & Vector Machine",
+        "activates": "Unlocks kinetic Jump Pads (jump_pad) and acoustic Sound Jump Pads (sound_jump_pad / SND PAD) on the playground grid",
+        "couplesInto": "Dynamic traversal playgrounds across WaveFunctions, Randomness, and F209 General Intellect Synthesis Atelier"
+      }
+    },
+    "WaveFunctions_Sine_Space": {
+      "desiringMachine": {
+        "machine": "Tier-3 Bauhaus Studio Workstation (F64) + TorusCylinder & Sine Playground Ball",
+        "activates": "Unlocks auto-routed Big Pipe systems (big_pipe / BIG PIPE) and sinusoidal bridges (sine_bridge) on the 20m x 14m studio",
+        "couplesInto": "Structural plumbing and oscillating traversal loops carried into F105-F209 workshops"
+      }
+    },
+    "Noise_Perlin_Simplex": {
+      "desiringMachine": {
+        "machine": "Tier-3 Bauhaus Studio Workstation (F98) + Perlin/Simplex Noise Terrain & Configurable Portal",
+        "activates": "Unlocks configurable smooth walkable Noise Basins (basin_noise / NOISE CFG) with contour-shaded terrain heightfields",
+        "couplesInto": "Combines with Randomness spiky basins (F74+) and feeds terrain substrates into Shaders, SoftBodies, and Isosurfaces"
+      }
+    },
+    "Shader_10_ReactionDiffusion": {
+      "desiringMachine": {
+        "machine": "Tier-3 Bauhaus Studio Workstation (F105) + Shader State Chamber & Reaction-Diffusion Gallery",
+        "activates": "Unlocks 7 reactive surface shader skins (black_lacquer, queer_rubber, pink_extravaganza, reaction_diff, oil_chrome, amber_sss, holo_xray)",
+        "couplesInto": "Reskins placed Bauhaus geometry and Morphogenetic blocks across Arc VI-VIII studios and F209"
+      }
+    },
+    "CA_GameOfLife": {
+      "desiringMachine": {
+        "machine": "Tier-3 Bauhaus Studio Workstation (F108) + CA Bridge, CA Columns & Mirrored Cellular Automata",
+        "activates": "Unlocks live Cellular Automata grid stepping (ca_step / CA), evolving placed playground blocks by neighbour rules",
+        "couplesInto": "Feeds emergent grid configurations into Fractals (F118 Menger), ProcGen (F130), and F209 Atelier"
+      }
+    },
+    "LSystems_Growth": {
+      "desiringMachine": {
+        "machine": "Tier-3 Bauhaus Studio Workstation (F122) + Tape Follower Robot & L-System Trees (Modulor Cypress)",
+        "activates": "Unlocks grid-fitted branching L-System Plant props (lsystem_plant / PLANT) grown directly onto the Bauhaus grid",
+        "couplesInto": "Populates procedural courses (F130), soft canopies (F136), and F209 General Intellect Synthesis Atelier"
+      }
+    },
+    "PG_Space_Colonization": {
+      "desiringMachine": {
+        "machine": "Tier-3 Bauhaus Studio Workstation (F130) + Space Colonization Algorithm & Colonization Floor",
+        "activates": "Unlocks one-click grammar-evolved Procedural Playground Courses (procgen_course / PROCGEN)",
+        "couplesInto": "Synthesizes arrays, pads, pipes, noise basins, CA, and plants into playable courses carried through F209"
+      }
+    },
+    "SoftBodies_Soft_Body_Deformation": {
+      "desiringMachine": {
+        "machine": "Tier-3 Bauhaus Studio Workstation (F136) + Soft Workshop Console, Jelly Cube, Softmill & Pendulum Slap",
+        "activates": "Unlocks embedded deformable Softbody Decks & Pads (softbody_pad) mounted directly onto the rigid Bauhaus frame",
+        "couplesInto": "Pairs elastic membranes with F145 Implicit Isosurfaces and F160 Boolean cavities in Arc VII"
+      }
+    },
+    "ISO_Introduction": {
+      "desiringMachine": {
+        "machine": "Tier-3 Bauhaus Studio Workstation (F145) + ISO Workshop Console & Voxel Noise Demo",
+        "activates": "Unlocks 4x4x4 Implicit Isosurface MultiMesh Cutout blocks (iso_cutout: tunnel, crossing, dome, spiral ramp, basin)",
+        "couplesInto": "F156 CONTACT implicit rooms, F160 Boolean_Works carved passages, and F209 Atelier"
+      }
+    },
+    "Boolean_Works": {
+      "desiringMachine": {
+        "machine": "Tier-3 Bauhaus Studio Workstation (F160) + CSG Compose Workbench, Subtraction Suite & SDF Cavern Room",
+        "activates": "Unlocks carved walkable Boolean spaces (boolean_space: difference tunnels, smooth-union stiles, intersection casts)",
+        "couplesInto": "Closes Arc VII volumetric sculpting and feeds carved spaces into Arc VIII spatial mind-map studios"
+      }
+    },
+    "GT_Foundations": {
+      "desiringMachine": {
+        "machine": "Tier-3 Bauhaus Studio Workstation (F168) + Konigsberg Seven Bridges & Two Travelers",
+        "activates": "Unlocks live Graph-Edge topology overlays (graph_overlay: shortest path, spanning trees, bottlenecks, cycle rank) on the playground mind map",
+        "couplesInto": "Arc VIII spatial reasoning across F191 Crisis_Synthesis, F199 QFEP_Synthesis, and F209 Atelier"
+      }
+    },
+    "Crisis_Synthesis": {
+      "desiringMachine": {
+        "machine": "Tier-3 Bauhaus Studio Workstation (F191) + Godel Atrium, Russell Paradox Workbench & Escher Staircase",
+        "activates": "Unlocks Paradox & Edge Gates (paradox_gate: undecidable gates and self-referential loops in mindmap_runtime.gd)",
+        "couplesInto": "F199 QFEP_Synthesis negotiation nodes and F200-F207 Post-Crisis situated witness rooms"
+      }
+    },
+    "QFEP_Synthesis": {
+      "desiringMachine": {
+        "machine": "Tier-3 Bauhaus Studio Workstation (F199) + QFEP Formula 3D, Entropy Meter & Queer Morphology Specimen",
+        "activates": "Unlocks situated Witness & Negotiation Nodes (witness_node) staging precision, surprise, and care trade-offs across the playground mind map",
+        "couplesInto": "F200-F207 Post-Crisis witness stations and F208-F209 Full General Intellect Synthesis Atelier"
+      }
     }
   },
-  "revision": 350,
+  "revision": 378,
   "history": [
+    {
+      "at": "2026-11-23T15:24:45.351Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "QFEP_Synthesis",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-23T15:24:45.299Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Crisis_Synthesis",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-23T15:24:45.253Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "GT_Foundations",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-23T15:24:45.011Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Boolean_Works",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-23T15:24:44.872Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "ISO_Introduction",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-23T15:24:44.802Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "SoftBodies_Soft_Body_Deformation",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-23T15:24:44.736Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "PG_Space_Colonization",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-23T15:24:44.688Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "LSystems_Growth",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-23T15:24:44.641Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "CA_GameOfLife",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-23T15:24:44.584Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Shader_10_ReactionDiffusion",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-23T15:24:44.481Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Noise_Perlin_Simplex",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-23T15:24:44.416Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "WaveFunctions_Sine_Space",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-23T15:24:44.265Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Vectors_Act5_ForceAsPlace",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-23T15:24:44.010Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Tutorial_Pattern",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-23T15:24:43.904Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Color_Grid_Pallet",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-23T15:24:43.815Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Color_Context_Placed",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-23T15:24:43.758Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Tutorial_3D",
+      "summary": "Updated desiringMachine"
+    },
+    {
+      "at": "2026-11-23T15:24:03.327Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "ML_Synthesis",
+      "summary": "Updated stage, evidenceTier, plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
+    },
+    {
+      "at": "2026-11-23T15:24:03.165Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Color_Pillar",
+      "summary": "Updated stage, evidenceTier, evidenceReceipt, plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator",
+      "receipt": "doc/book/iterations/2026-11-22-colour-room-columns/gradient_colonnade.json + commit c47bbc493 (tools/probes/gradient_colonnade.gd PASS: 5 HSV-sampled columns + closed shafts)"
+    },
+    {
+      "at": "2026-11-23T15:24:02.970Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Primitives_Columns",
+      "summary": "Updated stage, evidenceTier, evidenceReceipt, plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator",
+      "receipt": "doc/book/iterations/2026-11-22-black-columns/after.json + commit 092e90ad5 (tools/probes/columns_outline.gd PASS: 31 black alien-family columns, 0.89m clearance)"
+    },
+    {
+      "at": "2026-11-23T15:24:02.914Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "ISO_ImplicitModeling",
+      "summary": "Updated stage, evidenceTier, evidenceReceipt, plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator",
+      "receipt": "doc/book/iterations/2026-11-22-contact/contact_study.json (within/ + field/ + church/) + commits d454772fa / b32fb6165 / 1c19fd81b / d2a6a839a (tools/probes/contact_study.gd desktop + --xr 29/29 PASS)"
+    },
+    {
+      "at": "2026-11-23T15:24:02.373Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Primitives_Prefab_Test",
+      "summary": "Updated stage, evidenceTier, evidenceReceipt, plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator",
+      "receipt": "doc/book/iterations/2026-11-22-prefab-test/prefab_test.json + commits 8805072c5 / 24b474548 / 4a62ef437 / 1f39d8580 / 3835e2bf8 (tools/probes/prefab_test_floor.gd 34/34, prefab_test_forgets.gd 5/5, fall_past_a_floor.gd 8/8)"
+    },
+    {
+      "at": "2026-11-23T14:39:12Z",
+      "by": "Codex",
+      "action": "set_song_breadcrumb",
+      "target": "chapter_13_what_motion_asks",
+      "summary": "Compare a shift in position, a turn in direction and a change in size. The walkway stays still."
+    },
+    {
+      "at": "2026-11-22T15:55:38.000Z",
+      "by": "Antigravity",
+      "action": "append_note",
+      "target": "ML_Synthesis",
+      "summary": "Radical Inside Procedural Body-Passage Grammar (8 strategies + 6 extreme shaders, 16 VR DCs) staged on F181/F182/F183 before Foundations Crisis (7/7 PASS)"
+    },
+    {
+      "at": "2026-11-22T15:02:45.000Z",
+      "by": "Antigravity",
+      "action": "append_note",
+      "target": "Primitives_Prefab_Library",
+      "summary": "Grid-Exact Modular Alignment pass (all objects sized & snapped to exact 1m/2m Bauhaus grid; 38/38 PASS)"
+    },
+    {
+      "at": "2026-11-22T14:23:51.000Z",
+      "by": "Antigravity",
+      "action": "append_note",
+      "target": "Primitives_Prefab_Library",
+      "summary": "Algorithm-as-Structure Round 2 (4x4x4 Implicit Isosurface MultiMesh Cutouts, Morphogenetic CA, Smart Surface Auto-Snap, Contour Noise Shader; 38/38 PASS)"
+    },
+    {
+      "at": "2026-11-22T14:09:48.000Z",
+      "by": "Antigravity",
+      "action": "append_note",
+      "target": "Primitives_Prefab_Library",
+      "summary": "Algorithm-as-Structure upgrade (carved Boolean holes, embedded Softbody decks, auto Big Pipe bridges, 3-level walkable Menger architecture; 35/35 PASS)"
+    },
+    {
+      "at": "2026-11-22T13:17:36.927Z",
+      "by": "Antigravity",
+      "action": "append_note",
+      "target": "Primitives_Prefab_Library",
+      "summary": "Completed Arc VI-VIII on the Bauhaus Studio Workstations (mindmap_runtime.gd + playground_layer.gd + studio_workstation.gd): PROCGEN course "
+    },
     {
       "at": "2026-11-22T12:36:15.944Z",
       "by": "Antigravity",
@@ -2145,1091 +2556,6 @@
       "action": "set_encounter_breadcrumb",
       "target": "spine_e8b3bbc08eaec022aa",
       "summary": "Press REPLAY, then STEP. Find the green cell in the gold frame. Step again and watch it disappear while the frame holds "
-    },
-    {
-      "at": "2026-11-21T16:17:11.859Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_f6934fb7bc932e49f6",
-      "summary": "Take the point inside the metal square, carry it sideways and release it, then try pulling it out of the square's plane "
-    },
-    {
-      "at": "2026-11-21T16:17:11.674Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_3f7f650a316fcc8812",
-      "summary": "Watch the three cyan stepping stones across the rectangular pit and time the advance warning cue — the order stays fixed"
-    },
-    {
-      "at": "2026-11-21T16:17:11.456Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_e35a2815e1da44170c",
-      "summary": "Drop OCT to 1 on the noise mixer to see the broad light-and-dark boundary, step OCT upward with LAC and PER held fixed t"
-    },
-    {
-      "at": "2026-11-21T16:16:28.308Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_e84d0357e0699bf380",
-      "summary": "Walk across the scent-trail ground and compare it with the pheromone basin console (+1 STEP / +20 STEPS) — watch how eac"
-    },
-    {
-      "at": "2026-11-21T16:16:28.152Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_b20816c243b18fa551",
-      "summary": "Walk around the floor canvas and trace the brush cursor laying down thin lines, broad strokes, and splatters — compare w"
-    },
-    {
-      "at": "2026-11-21T16:16:27.997Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_2818b0dcbc7a8f09a2",
-      "summary": "Stand at the entrance plan facing the seeded room of columns and compare neighbouring column heights — raising each 2D s"
-    },
-    {
-      "at": "2026-11-21T16:16:27.834Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_2968f267edeb8ddb1e",
-      "summary": "Step inside the glass POPULATION / DIFFERENCE enclosure from the compact console and compare caps and stems drawn under "
-    },
-    {
-      "at": "2026-11-21T16:16:27.587Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_6244cd39cceb109ff1",
-      "summary": "Watch the yellow beads drop into bins on the exponential distribution sampler and compare how grouping the same stream o"
-    },
-    {
-      "at": "2026-11-21T16:16:27.434Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_7f575b428f201615c2",
-      "summary": "Follow the bright red bead inside the glass tank among the four dimmed beads, pick a spot you expect it to reach, and no"
-    },
-    {
-      "at": "2026-11-21T16:16:27.286Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_b43ec985815d488847",
-      "summary": "Watch the box, sphere, and cylinder weathering together on the right-wall rig — track how the same shared wear changes e"
-    },
-    {
-      "at": "2026-11-21T16:16:27.123Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_4a3b869f5df9408f95",
-      "summary": "Compare the edge profiles generated from the same random rule side by side — notice what family resemblance persists acr"
-    },
-    {
-      "at": "2026-11-21T16:16:26.980Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_f62ee62e3dd511444d",
-      "summary": "Walk among the diagonal slabs and look up at the wall patterns — follow a single path through independent forward and ba"
-    },
-    {
-      "at": "2026-11-21T16:16:26.820Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_f0e4200a259e795a4a",
-      "summary": "Before pressing the console on the 64-cube board, count the 16 amber cubes in the middle against the grey border cubes —"
-    },
-    {
-      "at": "2026-11-21T16:16:26.677Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_09f1e4cf632bafae6d",
-      "summary": "Press SORT on the Shannon Entropy Meter so the ten-colour row gathers into neat blocks, then check the entropy number — "
-    },
-    {
-      "at": "2026-11-21T16:16:26.519Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_c1bc4757b0bc46d0e4",
-      "summary": "Stand beside the group of pink chairs and compare how the same chairs yield different uncertainty readings when you chan"
-    },
-    {
-      "at": "2026-11-21T16:16:26.342Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_e35e2b04fe7e2d0182",
-      "summary": "Touch a dark bead on the five-rod abacus and watch it settle, then depart along the rod — notice which variable chance i"
-    },
-    {
-      "at": "2026-11-21T16:09:42.822Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_94790855aee49591be",
-      "summary": "At the bench, move one of the five sliders and watch the summed wave change shape. Press H1 ALONE to see the first voice"
-    },
-    {
-      "at": "2026-11-21T16:09:42.563Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_8ec586d90890cfb277",
-      "summary": "Move one frequency slider toward the other and watch the third row, their sum. As the two come close, it swells and fade"
-    },
-    {
-      "at": "2026-11-21T16:09:42.265Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_6647a3086c36f99d8f",
-      "summary": "Before stepping onto the spiral stair in the shaft, trace its treads with your eyes: each sits a little nearer to or far"
-    },
-    {
-      "at": "2026-11-21T16:09:42.017Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_8b9a2bbae673e81622",
-      "summary": "Strike a bar and listen until its tone has died away. Strike a longer bar, then the first one twice: each strike starts "
-    },
-    {
-      "at": "2026-11-21T16:09:41.774Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_8d59752502b2be935f",
-      "summary": "Stand still and listen: short sounds arrive by chance over a steady drone, and a shape lights when its sound plays. Wait"
-    },
-    {
-      "at": "2026-11-21T16:09:41.425Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_b4e3b54b7813019122",
-      "summary": "Pick one ridge on a spiral column and follow it upward with your eyes while the shaft turns. Then look down the colonnad"
-    },
-    {
-      "at": "2026-11-21T16:09:41.015Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_8728846037006a459a",
-      "summary": "Move the orange ball and press PLAY: one wave is changing another from inside. Press COMPARE to hear it against the base"
-    },
-    {
-      "at": "2026-11-21T16:09:40.781Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_1c41022ab4b87d1eb9",
-      "summary": "At the lattice, send one pulse with coupling on and watch it pass from neighbour to neighbour. Restart with coupling off"
-    },
-    {
-      "at": "2026-11-21T16:09:40.523Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_56e603b21a1a543c2d",
-      "summary": "Follow the point round the circle and watch its vertical rod. The graph beside it draws that height over time: the sine."
-    },
-    {
-      "at": "2026-11-21T16:09:40.245Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_8115d3427676daa6c6",
-      "summary": "Release the 32 spheres onto the sine tray and count how many leave by the outlet before the twelve seconds are up. Chang"
-    },
-    {
-      "at": "2026-11-21T16:09:40.000Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_96353ed141e9c4906b",
-      "summary": "Watch one pendulum leave marks behind it: the older a mark, the deeper it lies. Switch between FINE, COARSE and STROBE a"
-    },
-    {
-      "at": "2026-11-21T15:28:55.936Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_62eed8d8741a8b0f7b",
-      "summary": "Stack the loose pieces, let go, and compare a fallen quiet heap against a taller standing stack on the height and stabil"
-    },
-    {
-      "at": "2026-11-21T15:28:55.771Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_1dfcc61e8261d9e2c2",
-      "summary": "Watch the search cross the wrinkled blue-to-violet energy bench — notice an uphill step climb out of a shallow trough so"
-    },
-    {
-      "at": "2026-11-21T15:28:55.614Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_79160a9d3005321bff",
-      "summary": "Walk beneath the six-metre curtain of balanced aluminium discs, read the moment nameplates on each wire, and compare bal"
-    },
-    {
-      "at": "2026-11-21T15:28:55.455Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_aa92239066dd22fb3b",
-      "summary": "Watch the magenta cloth mesh settle in fixed 1/60 s Verlet steps from its two top corners, then compare how many solver "
-    },
-    {
-      "at": "2026-11-21T15:28:55.304Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_e522f8f69ec0237e5f",
-      "summary": "Grab any of the four cyan beads on the glowing cable and move it so the curve recomputes in your hand, then compare your"
-    },
-    {
-      "at": "2026-11-21T15:28:55.147Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_cafc5c87be365ca33f",
-      "summary": "Choose where the gold point starts above the blue energy surface, then press STEP repeatedly to watch downhill steps set"
-    },
-    {
-      "at": "2026-11-21T15:28:54.992Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_c2bf369f9eda0d98b6",
-      "summary": "Before crossing the gap, adjust PITCH, YAW, and ACCEL on the vector machine while watching the large and horizontal forc"
-    },
-    {
-      "at": "2026-11-21T15:28:54.838Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_40301431a581d3b4f7",
-      "summary": "Release two spheres together on the Momentum Cradle and watch how two leave the far side — compare what passes through t"
-    },
-    {
-      "at": "2026-11-21T15:28:54.689Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_6687bba3b3ff652a15",
-      "summary": "Watch how weight rests over the supporting feet at the support station, then compare the one-, four-, and six-legged wal"
-    },
-    {
-      "at": "2026-11-21T15:28:54.540Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_2780fa7e3f4bc7ed16",
-      "summary": "Switch the mutual-attraction field between PAIR and FIVE, then step into the FIVE field yourself — watch the PointBody s"
-    },
-    {
-      "at": "2026-11-21T15:28:54.381Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_24d2058a8367304688",
-      "summary": "Follow one white-tipped rod through a full turn, then step back across all twenty turning rods to see how small phase of"
-    },
-    {
-      "at": "2026-11-21T15:28:54.205Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_6cc90fe9b9d199b67e",
-      "summary": "Pull and release the hanging spring points — watch each mass rush straight past its resting balance point before turning"
-    },
-    {
-      "at": "2026-11-21T15:28:54.019Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_69faef794ec70d0080",
-      "summary": "Release the falling points through the three coloured liquid bands and watch how quadratic drag slows each drop differen"
-    },
-    {
-      "at": "2026-11-21T15:28:53.715Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_f3e9ff6216f53e69b5",
-      "summary": "Press RUN and follow the cyan and pink bodies starting from the same floor address — cyan slows at the centre while pink"
-    },
-    {
-      "at": "2026-11-21T15:28:53.544Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_cde9a97a8b02f0fcf1",
-      "summary": "Face the three equal-size black spheres above their lanes, press PUSH 1 s, and take your hand off the controls — the one"
-    },
-    {
-      "at": "2026-11-21T15:28:53.391Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_df14c2744dad1a7365",
-      "summary": "Stand at the centre console between both launch lanes, press FIRE, and turn to follow the amber marker across its rising"
-    },
-    {
-      "at": "2026-11-21T15:28:53.237Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_029473d1333fdb5102",
-      "summary": "Move either black point at the Direction station and watch the vector between them update — compare the same displacemen"
-    },
-    {
-      "at": "2026-11-21T15:24:07.282Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_24360f67fa7359b8f8",
-      "summary": "At the desk marked DRESS THE TEMPLE, choose a surface (the floor, a wall, the columns, the dome) and give it a pattern. "
-    },
-    {
-      "at": "2026-11-21T15:24:07.009Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_2c13e1489e1de9c206",
-      "summary": "At the tile editor, press the three buttons in turn: P1 translate, PM reflect, PG glide. The same mark is copied, then m"
-    },
-    {
-      "at": "2026-11-21T15:24:06.733Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_b9998f0a4fca51b435",
-      "summary": "At the tunnel, pick one line of tiles and follow it along the floor to the corner and up the wall. The line keeps its pl"
-    },
-    {
-      "at": "2026-11-21T15:24:06.514Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_b9aa37ded01db2085a",
-      "summary": "At the Pattern Maker, find the one 4 x 4 source mark and the two panels beside it. Both repeat the same mark; compare ho"
-    },
-    {
-      "at": "2026-11-21T15:20:22.020Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_ab35f6979d2ccb7bfd",
-      "summary": "Toggle one step off on the step sequencer and listen as the read column sweeps past — leaving a rest silences that beat "
-    },
-    {
-      "at": "2026-11-21T15:20:21.672Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_5175c9cafccc79dc9e",
-      "summary": "Compare rotating only a tile's painted motif against rotating the physical wall panel itself — turning the solid slab ch"
-    },
-    {
-      "at": "2026-11-21T15:20:21.403Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_794a21c6582dcafe49",
-      "summary": "Walk across both halves of the paired tile floor — fishbone beside square — and compare what changes underfoot when the "
-    },
-    {
-      "at": "2026-11-21T15:20:21.184Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_68623d8553620ecb9c",
-      "summary": "At the console beside the 4 x 4 x 4 flight lab, step X +, Y +, and Z + to move the transparent selector marker through t"
-    },
-    {
-      "at": "2026-11-21T15:20:21.036Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_1ba35f3f6f55c6044d",
-      "summary": "Watch the seven-by-seven grid of moving coins and track one row-and-column plate — the coin moves on while the grid addr"
-    },
-    {
-      "at": "2026-11-21T15:20:20.889Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_154ec5956b5e45cb00",
-      "summary": "Walk along the 32 numbered addresses in the row and take one occupant away — its slot and address label remain in sequen"
-    },
-    {
-      "at": "2026-11-21T15:20:20.742Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_0693670c5f38e37908",
-      "summary": "Adjust one control by a small step at the Just threshold mechanism and compare adjacent attempts to find the narrow edge"
-    },
-    {
-      "at": "2026-11-21T15:20:20.595Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_8a1a5e9ee31cbaebe6",
-      "summary": "Run the Almost threshold mechanism and watch the highest point the motion reaches — notice the exact remaining gap where"
-    },
-    {
-      "at": "2026-11-21T15:20:20.450Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_5ebeb00ab5ae9d79ab",
-      "summary": "Release the ball with the NOT track clear so it passes, then place the blocker and release again — blocking the input tu"
-    },
-    {
-      "at": "2026-11-21T15:20:20.303Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_84373d11bd204c5f76",
-      "summary": "Support only the left path, then only the right path, then neither, and release the ball at the OR ramp — either single "
-    },
-    {
-      "at": "2026-11-21T15:20:20.136Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_963d87dbf70533d161",
-      "summary": "Support both gaps on the AND ramp and release the ball so it crosses, then remove either single support and test again —"
-    },
-    {
-      "at": "2026-11-21T15:16:44.291Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_d367a51470fe856bd1",
-      "summary": "Look through two of the freestanding colour filters at once, then walk around them. The mixed colour changes with where "
-    },
-    {
-      "at": "2026-11-21T15:16:43.961Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_acf3461fcabb02c41b",
-      "summary": "Take a spray can from the rack and press the trigger at the canvas the machine is already painting. Distance, angle and "
-    },
-    {
-      "at": "2026-11-21T15:16:43.569Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_a28e4d510b95182509",
-      "summary": "Walk along X, then along Z, in the central bay, and watch the grid recolour as your address changes."
-    },
-    {
-      "at": "2026-11-21T15:16:43.349Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_5bf601bb591a0f686d",
-      "summary": "Take one of the twelve palette sets off the wall and carry it through the hall. Hold it up against other colours and und"
-    },
-    {
-      "at": "2026-11-21T15:16:43.133Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_dfa318fadefad2a732",
-      "summary": "Watch the film divide one arch into two, six, seven and forty-eight bands. Then turn back to the rainbow arch and count "
-    },
-    {
-      "at": "2026-11-21T15:16:42.913Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_83e5ba4835f83e5507",
-      "summary": "At the right-hand salon plinth, move the RGB control and watch the preview cube and the skin of your own hand change col"
-    },
-    {
-      "at": "2026-11-21T15:16:42.680Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_892e27c144453e40ff",
-      "summary": "Stand at the red, green, blue and white lamps and follow their light onto the board, the cube and the seven-sided receiv"
-    },
-    {
-      "at": "2026-11-21T15:16:42.408Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_7e4066caa95159600e",
-      "summary": "Walk the four stations in order: one colour for all, colour by shape, colour by height, colour by neighbour. The stack i"
-    },
-    {
-      "at": "2026-11-21T15:00:17.611Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_21_construction_robot",
-      "summary": "Watch the playground-maker robot assemble joints, rods, decks, and ramps into a continuous walkable route, then use the "
-    },
-    {
-      "at": "2026-11-21T15:00:17.252Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_21_floor21_fork",
-      "summary": "Walk the continuous Serpent course from start to finish, timing each crossing as sliding, turning, and scaling spans han"
-    },
-    {
-      "at": "2026-11-21T15:00:16.958Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_20_transformation_airlock",
-      "summary": "Watch translation, rotation, and scale cycle together inside the airlock, and step through only during the brief moment "
-    },
-    {
-      "at": "2026-11-21T15:00:16.633Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_19_carve_grid",
-      "summary": "Walk straight through the carve grid, then step back and look at the void — unlike the elastic slats, every cell your bo"
-    },
-    {
-      "at": "2026-11-21T15:00:16.461Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_19_approach_wall",
-      "summary": "Walk toward the upright slats, sidestep so the body-width gap tracks you along the wall, then step back and watch every "
-    },
-    {
-      "at": "2026-11-21T15:00:16.292Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_e9ae7e51d090c7c61e",
-      "summary": "Cross both matched-gap bridges at the scale-span comparison: one stretches a single deck by scaling, the other unfolds h"
-    },
-    {
-      "at": "2026-11-21T15:00:16.128Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_18_scale_me",
-      "summary": "Take the Drink Me bottle inside the scale chamber — the room shifts scale around you while your stride and gravity keep "
-    },
-    {
-      "at": "2026-11-21T15:00:15.971Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_16_carousel_cake",
-      "summary": "Step across the stacked counter-rotating layers of the opposed carousel and feel neighbouring rings pull your feet in op"
-    },
-    {
-      "at": "2026-11-21T15:00:15.805Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_b7b9077e73521bb499",
-      "summary": "Ride the carousel ring at 1 m from the pivot, then step out to 2.5 m — both rings share the same angular turn while the "
-    },
-    {
-      "at": "2026-11-21T15:00:15.635Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_a1ea445ae132aa0cd2",
-      "summary": "Board the X rotation wheel and follow a full turn downward toward the next floor as a flat deck tips into a descending s"
-    },
-    {
-      "at": "2026-11-21T15:00:15.473Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_de33e91d9d5fc4ff47",
-      "summary": "Stand before the Z upright end-platform and wait until its turning face levels out into a foothold — the solid stays unc"
-    },
-    {
-      "at": "2026-11-21T15:00:15.310Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_b7f2fdc5b36c8f1c23",
-      "summary": "Inspect the hinge association (hinge = association(config(rotation))) beside the rotation gimbal to see how turning stay"
-    },
-    {
-      "at": "2026-11-21T15:00:15.152Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_ebe6f65f724f97f1b2",
-      "summary": "Inspect the ten blue barriers packed side by side on Floor 15 — compare this packed translation row against their circul"
-    },
-    {
-      "at": "2026-11-21T15:00:14.997Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_0e0e54d03a14a06e19",
-      "summary": "Watch the suspended linear counterweight carriage travel along its straight track beside the Z translation cube (the mov"
-    },
-    {
-      "at": "2026-11-21T15:00:14.838Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_662e1c94767f030232",
-      "summary": "Watch the X translation cube beside the Y and Z cubes — each slides cleanly along a single axis while its faces never tu"
-    },
-    {
-      "at": "2026-11-21T15:00:14.679Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_8a75dc7ba8da871f9f",
-      "summary": "Time your step onto the moving Shaft B span and hold your footing as the deck shifts beneath you (this frame originally "
-    },
-    {
-      "at": "2026-11-21T15:00:14.524Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_5ec66bfd0405274e09",
-      "summary": "Cross from the rotating center span onto the Shaft A scaling span and note how changing which transform comes first shif"
-    },
-    {
-      "at": "2026-11-21T15:00:14.345Z",
-      "by": "Antigravity",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_1925adb97044ab9727",
-      "summary": "Stand by the adjustable landing at Shaft B, move the far bank, and test how far the translating span has to travel befor"
-    },
-    {
-      "at": "2026-11-21T14:50:30.332Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_9836e9bbf1e660c310",
-      "summary": "Walk up a wedge onto the court of concrete blocks and timber sheets. Nothing in it is new: the parts you know, put toget"
-    },
-    {
-      "at": "2026-11-21T14:50:30.103Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_d708ac8af1454151df",
-      "summary": "Lift the boards and blocks off the pallet one at a time, set them down another way, and let go to see whether it holds."
-    },
-    {
-      "at": "2026-11-21T14:50:29.862Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_12_durer_scene",
-      "summary": "Find the small skull on its block, where the engraving's seated figure would sit. The sphere, ladder, scales, hourglass "
-    },
-    {
-      "at": "2026-11-21T14:50:29.589Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_12_pyramidlong",
-      "summary": "Stand by a corner pyramid and look back at the tall pink one in the centre. Ask whether it leads the others or only rise"
-    },
-    {
-      "at": "2026-11-21T14:50:29.344Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_12_pyramid",
-      "summary": "Walk around the court of four pale blue pyramids and watch one pass in front of another. They stay still; your steps cha"
-    },
-    {
-      "at": "2026-11-21T14:50:29.085Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_11_achilles_tortoise",
-      "summary": "Press NEXT STEP and watch the space between the two figures. Each step halves the gap, and the marked end of the track s"
-    },
-    {
-      "at": "2026-11-21T14:50:28.841Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_11_combine_portals",
-      "summary": "From a distance, choose the first ring that looks round enough. Walk up to it and see whether its straight edges come ba"
-    },
-    {
-      "at": "2026-11-21T14:50:28.581Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_11_capsule",
-      "summary": "Look at the closed capsule by the door before you go on to the rings. It has no opening: nothing passes through it."
-    },
-    {
-      "at": "2026-11-21T14:50:28.296Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_ca7d08d7783aa1c12f",
-      "summary": "Push the O-shaped tyre, or grip it and let go. The letter swept round a circle rolls away as a wheel."
-    },
-    {
-      "at": "2026-11-21T14:50:28.037Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_90b5674844b8afd77a",
-      "summary": "Stand before the cyrtoid shell and read it as five rules in a row: a profile, the profile turned round its axis, pores o"
-    },
-    {
-      "at": "2026-11-21T14:50:27.648Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_170897327f7e0e4790",
-      "summary": "Take the timber chute from its plinth and read its tape, marble_chute = association(config(channel)). Tilt it: the two r"
-    },
-    {
-      "at": "2026-11-21T14:50:27.413Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_10_glyph_profile_gallery",
-      "summary": "Walk up to the tall O, the letter at body size, and look at its opening. The lower stroke is a sill you would have to st"
-    },
-    {
-      "at": "2026-11-21T14:50:27.045Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_17a6da16fabb4e75e9",
-      "summary": "Walk into the open pipe and slide down one storey to Profiles. A column you walked around has become one you pass throug"
-    },
-    {
-      "at": "2026-11-21T14:50:26.646Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_2f9c960fe8e3918f1e",
-      "summary": "Find the blue oil drum beside its floor tape, oil_drum = association(config(cylinder)). Lift it: the cylinder of this ha"
-    },
-    {
-      "at": "2026-11-21T14:50:26.348Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_09_resolution_colonnade_museum",
-      "summary": "Stand at the first five columns and follow one edge round each. The outline and height are the same; only the sides chan"
-    },
-    {
-      "at": "2026-11-21T14:44:52.816Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "PostCrisis_Synthesis",
-      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:44:52.633Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "AdvancedLaboratory_Lab_Equipment_Simulation",
-      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:44:52.458Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "Godel_Incompleteness",
-      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:44:52.175Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "SwarmIntelligence_Agent_Based_Modeling_ABM",
-      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:44:52.003Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "Assemblage_Same_Desire",
-      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:44:51.825Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "LSystems_Architecture",
-      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:44:51.314Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "CA_ExpandingSpace",
-      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:44:51.137Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "Random_Walk",
-      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:44:50.958Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "Random_Entropy",
-      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:44:50.780Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "WaveFunctions_AirMusic",
-      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:44:50.598Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "WaveFunctions_John_Cage",
-      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:44:50.405Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "WaveFunctions_Unit_Circle",
-      "summary": "Updated desiringMachine.machine, desiringMachine.activates, desiringMachine.couplesInto, note"
-    },
-    {
-      "at": "2026-11-21T14:44:50.206Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "Color_Paint",
-      "summary": "Updated desiringMachine.machine, desiringMachine.activates, desiringMachine.couplesInto, note"
-    },
-    {
-      "at": "2026-11-21T14:32:51.526Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "WaveFunctions_Unit_Circle",
-      "summary": "Updated desiringMachine.machine, desiringMachine.activates, desiringMachine.couplesInto, plainBreadcrumb, bodyHook, note, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:32:51.226Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "Change_Choreography",
-      "summary": "Updated desiringMachine.machine, desiringMachine.activates, desiringMachine.couplesInto, plainBreadcrumb, bodyHook, note, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:32:50.989Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "Cloth_Factory",
-      "summary": "Updated desiringMachine.machine, desiringMachine.activates, desiringMachine.couplesInto, plainBreadcrumb, bodyHook, note, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:32:50.774Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "Symmetry_Seventeen",
-      "summary": "Updated desiringMachine.machine, desiringMachine.activates, desiringMachine.couplesInto, plainBreadcrumb, bodyHook, note, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:32:50.626Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "Color_Walls",
-      "summary": "Updated desiringMachine.machine, desiringMachine.activates, desiringMachine.couplesInto, plainBreadcrumb, bodyHook, note, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:32:50.475Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "Color_Paint",
-      "summary": "Updated desiringMachine.machine, desiringMachine.activates, desiringMachine.couplesInto, plainBreadcrumb, bodyHook, note, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:32:50.319Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "Color_Rainbow",
-      "summary": "Updated desiringMachine.machine, desiringMachine.activates, desiringMachine.couplesInto, plainBreadcrumb, bodyHook, note, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:32:50.166Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "Tutorial_Tiling_Walls",
-      "summary": "Updated desiringMachine.machine, desiringMachine.activates, desiringMachine.couplesInto, plainBreadcrumb, bodyHook, note, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:31:53.216Z",
-      "by": "Codex",
-      "action": "update_floor",
-      "target": "WaveFunctions_Unit_Circle",
-      "summary": "Updated desiringMachine"
-    },
-    {
-      "at": "2026-11-21T14:31:52.448Z",
-      "by": "Codex",
-      "action": "update_floor",
-      "target": "Change_Choreography",
-      "summary": "Updated desiringMachine"
-    },
-    {
-      "at": "2026-11-21T14:31:50.086Z",
-      "by": "Codex",
-      "action": "update_floor",
-      "target": "Cloth_Factory",
-      "summary": "Updated desiringMachine"
-    },
-    {
-      "at": "2026-11-21T14:31:49.341Z",
-      "by": "Codex",
-      "action": "update_floor",
-      "target": "Symmetry_Seventeen",
-      "summary": "Updated desiringMachine"
-    },
-    {
-      "at": "2026-11-21T14:31:48.543Z",
-      "by": "Codex",
-      "action": "update_floor",
-      "target": "Color_Walls",
-      "summary": "Updated desiringMachine"
-    },
-    {
-      "at": "2026-11-21T14:31:47.637Z",
-      "by": "Codex",
-      "action": "update_floor",
-      "target": "Color_Paint",
-      "summary": "Updated desiringMachine"
-    },
-    {
-      "at": "2026-11-21T14:31:46.622Z",
-      "by": "Codex",
-      "action": "update_floor",
-      "target": "Color_Rainbow",
-      "summary": "Updated desiringMachine"
-    },
-    {
-      "at": "2026-11-21T14:31:45.908Z",
-      "by": "Codex",
-      "action": "update_floor",
-      "target": "Tutorial_Tiling_Walls",
-      "summary": "Updated desiringMachine"
-    },
-    {
-      "at": "2026-11-21T14:29:03.767Z",
-      "by": "fable-prefab-belt",
-      "action": "update_floor",
-      "target": "Point_Animatedcube",
-      "summary": "Updated plainBreadcrumb, bodyHook"
-    },
-    {
-      "at": "2026-11-21T14:28:46.906Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_08_form_in_hand",
-      "summary": "Take the black point. While you hold it the form loses rings and segments and corners appear. Press the trigger to send "
-    },
-    {
-      "at": "2026-11-21T14:28:46.583Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_08_budget_of_smoothness",
-      "summary": "Choose one of the four turning spheres for a far background and one to inspect close up. Then press SHOW / HIDE COUNTS a"
-    },
-    {
-      "at": "2026-11-21T14:28:46.298Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_08_sphere_resolution_atlas",
-      "summary": "Walk along the twelve small spheres. Across a row the rings increase; down a column the segments do. Follow one change w"
-    },
-    {
-      "at": "2026-11-21T14:28:45.855Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_08_geometry_courtyard",
-      "summary": "Lift one of the five solids from its block and count how many faces meet at a corner. Compare it with the next one."
-    },
-    {
-      "at": "2026-11-21T14:28:45.577Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_07_prefab_box_library",
-      "summary": "Take two copies of one box from the shelf to the worktable. Move one: the other stays. Put them side by side, apart, or "
-    },
-    {
-      "at": "2026-11-21T14:28:45.342Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_07_polyhedron_nets_cube",
-      "summary": "Follow the pink square as the net folds into a cube. The cube shrinks, drops to the floor and stays, and another net ope"
-    },
-    {
-      "at": "2026-11-21T14:28:44.958Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_07_cube_lines",
-      "summary": "Look at the outline cube: no faces, only edges, and you still read a box."
-    },
-    {
-      "at": "2026-11-21T14:28:44.618Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_07_paired_cube_diagonals",
-      "summary": "Hold the pink corner on cube A and pull it out of its face. Cube B's corner follows, and the two front faces fold along "
-    },
-    {
-      "at": "2026-11-21T14:28:44.353Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_06_pyramid_edit",
-      "summary": "Take the apex of the pyramid and move it. Every face that meets it tilts at once."
-    },
-    {
-      "at": "2026-11-21T14:28:44.060Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_06_concrete_barrier",
-      "summary": "Walk up to the striped barriers round the basin. The wedge profile that carried you up now turns you away."
-    },
-    {
-      "at": "2026-11-21T14:28:43.824Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_06_wedge_palace",
-      "summary": "Follow the arrows up one of the low wedges to the platform. Walking forward lifts you a metre."
-    },
-    {
-      "at": "2026-11-21T14:28:43.582Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "chapter_06_align_tetrahedron",
-      "summary": "Take the pink point and bring it to the small ring. The faces settle into a tetrahedron and the whole solid falls: now y"
-    },
-    {
-      "at": "2026-11-21T14:28:43.086Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "faces_make_shelter",
-      "summary": "Look through the frame at the joined faces on the assembly table. Try adding another face at a free edge."
-    },
-    {
-      "at": "2026-11-21T14:28:42.759Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "shared_diagonal",
-      "summary": "Find the diagonal where the two coloured triangles meet."
-    },
-    {
-      "at": "2026-11-21T14:28:42.489Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "draw_a_face",
-      "summary": "Frame the drawing point, then take it in hand and draw out a face."
-    },
-    {
-      "at": "2026-11-21T14:28:42.123Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "three_edges",
-      "summary": "Look through the frame at the three edges and the empty space between them."
-    },
-    {
-      "at": "2026-11-21T14:28:41.866Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "spine_17293a78fb2c777454",
-      "summary": "Touch the glass with one fingertip, then with more of the hand, and watch the mark widen."
-    },
-    {
-      "at": "2026-11-21T14:28:41.618Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "draw_dot",
-      "summary": "Hold any of the three beads, draw a bend, pause and release. Walk around the line that stays."
-    },
-    {
-      "at": "2026-11-21T14:28:41.348Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "encounter-635aefdfd29759aa92df081413759ced",
-      "summary": "Spray the canvas with the left can, then tap that can again to step the spacing through 20, 80 and 200 mm. The right can"
-    },
-    {
-      "at": "2026-11-21T14:28:40.996Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "glass_paint_wall",
-      "summary": "Draw on the glass, lift the pen, and make a second mark across the gap."
-    },
-    {
-      "at": "2026-11-21T14:28:40.676Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "bubble_brush",
-      "summary": "Pause with a drawing bead and its count rests. Then hold the black Bubble Brush still, let a sphere grow, move past its "
-    },
-    {
-      "at": "2026-11-21T14:28:40.412Z",
-      "by": "fable-prefab-belt",
-      "action": "set_encounter_breadcrumb",
-      "target": "encounter-79529f7938fe52d39696ae5314f39277",
-      "summary": "Lift the black point from its plinth, draw a bend in the air and put it back. The line stays where the point moved."
-    },
-    {
-      "at": "2026-11-21T14:20:08.287Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "Primitives_Ignorance",
-      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:20:08.091Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "Point_Animatedcube",
-      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
-    },
-    {
-      "at": "2026-11-21T14:20:07.778Z",
-      "by": "Antigravity",
-      "action": "update_floor",
-      "target": "Primitives_Polythedra",
-      "summary": "Updated plainBreadcrumb, bodyHook, note, desiringMachine, queerOperator"
     }
   ],
   "encounterBreadcrumbs": {
