@@ -482,6 +482,33 @@ const KEEP_EVERY := 2.0
 var _keep_since := 0.0
 var _kept := ""                    # the last snapshot written
 
+## FORGETFUL FLOORS (Palle, 2026-11-23, on the Prefab Test floor: "when we add an object the objects stay ... for now the
+## world should not remember these"). A thing standing on a floor whose map is listed in FORGET_PATH is not kept: it
+## stands for the visit, and a row kept there before is not stood again.
+const FORGET_PATH := "res://commons/data/inventory/forget.json"
+static var _forget_maps: Array = []
+static var _forget_read := false
+
+func _forgotten(at: Vector3) -> bool:
+	if not _forget_read:
+		_forget_read = true
+		var data: Variant = JSON.parse_string(FileAccess.get_file_as_string(FORGET_PATH)) if FileAccess.file_exists(FORGET_PATH) else null
+		if data is Dictionary and data.get("maps") is Array: _forget_maps = data.maps
+	if _forget_maps.is_empty(): return false
+	var g := _void()
+	if g == null or g.get("building") == null: return false
+	var index := -1
+	var stream: Variant = g.get("floor_stream")
+	if stream != null and is_instance_valid(stream): index = int(stream.floor_at_position(at))
+	else:
+		var levels: Array = g.building.spec.levels
+		for i in levels.size():
+			if at.y >= float(levels[i]) - 0.5:
+				index = i
+				break
+	var floors: Array = g.building.content.data.floors
+	return index >= 0 and index < floors.size() and _forget_maps.has(str(floors[index].map))
+
 ## What would be written now: one row per placed thing (not a lifted one, not one held, not one lost below the tower).
 func kept_rows() -> Array:
 	var rows: Array = []
@@ -489,6 +516,7 @@ func kept_rows() -> Array:
 		if not is_instance_valid(n) or not n.is_inside_tree() or n == lifted or not n.has_meta("inv_item"):continue
 		if n.has_method("is_picked_up") and n.is_picked_up():continue
 		var t: Transform3D = n.global_transform
+		if _forgotten(t.origin):continue   # a forgetful floor: stands for the visit, not kept
 		if t.origin.y < -2000.0:continue
 		var b: Basis = t.basis.orthonormalized()
 		var flat: Array = []
@@ -524,6 +552,7 @@ func restore_kept() -> int:
 		var bv: Array = row.get("basis", []);var at: Array = row.get("at", [0, 0, 0])
 		if bv.size() != 9 or at.size() != 3:continue
 		var t := Transform3D(Basis(Vector3(bv[0], bv[1], bv[2]), Vector3(bv[3], bv[4], bv[5]), Vector3(bv[6], bv[7], bv[8])), Vector3(at[0], at[1], at[2]))
+		if _forgotten(t.origin):continue   # kept before its floor became forgetful: not stood again
 		var cfg: Dictionary = row.get("config", {}) if row.get("config") is Dictionary else {}
 		var n: Node3D = spawn_at(t, str(row.item), cfg)
 		if n == null:continue

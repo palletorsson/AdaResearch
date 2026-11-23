@@ -20,6 +20,8 @@ In each wing a rectangle of tape, **TEST AREA A** and **TEST AREA B**, 6.6 by 13
 
 South of each area stands a **prefab belt**: four trays of the prefab timeline between two housings. The STEP keys move it one tray, the lever rolls it. Take a thing off its tray and it is in the hand.
 
+This floor does not remember. What you place here stands while you play, and the next game starts without it. Everywhere else in the tower, what you build is kept.
+
 ## 4. The white block
 
 In the middle of the floor stands a white block, ten metres on a side and 5.4 m tall. It is made of fifty-three wall slabs stood face to face, each 18 cm thick. There is no room inside it, and there is no collider anywhere in it.
