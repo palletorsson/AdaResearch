@@ -16,7 +16,7 @@
       "category": "primitives",
       "map_ready": false,
       "configure_before_ready": true,
-      "description": "White wall slabs stood close together as one block with no colliders; hidden in it, the catalogue's prefabs - giant, sheared, grazing a slab's face, turning, repeated hundreds of times - so every step through the slabs cuts them somewhere else; a small pagoda at its face shows where to walk in. config: side, height, seed, pagoda, hidden (layered | zones | primitives | giant | coplanar | grazing | lattice | turning | sheared | scatter), count (primitives only)."
+      "description": "White wall slabs stood close together as one block with no colliders; hidden in it, the catalogue's prefabs - giant, sheared, grazing a slab's face, turning, repeated hundreds of times - so every step through the slabs cuts them somewhere else; their reds are pink; inside, the view is blurred; a small pagoda at its face shows where to walk in. config: side, height, seed, pagoda, blur (0..1), hidden (layered | zones | primitives | giant | coplanar | grazing | lattice | turning | sheared | scatter), count (primitives only)."
     },
     "menu_board": {
       "lookup_name": "menu_board",

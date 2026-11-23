@@ -63,6 +63,17 @@ extends Node3D
 ## between two slabs and are missed; a few turning things are mostly elsewhere. Zones spreads five ways over five
 ## bands, a few prefabs each, and is thin for it. A coplanar face fights the slab only from the side it lies on, and
 ## the eye is nearly always inside a slab, looking at that slab's inner faces: it shows less than expected.
+## PINK (Palle, 23 Nov 2026: "in the prefabs inside the cube make the reds pink"). Every red in a hidden prefab - a
+## hue within 15 degrees of red and plainly saturated: the beach ball, the bowling pin, the warning triangle, the tin
+## can's band - is a hot pink, on a COPY of its material: the same prefab stands red on the belts and the plinths.
+## Orange (the cone) and wood stay as they are. The pagoda keeps its vermilion: it marks the way in, outside.
+## THE BLUR (the same message: "and add a blur inside the cube"). While the eye is in the block, what it sees is
+## blurred, from nothing at the face to `blur` at BLUR_IN metres in: a quad over the whole view under the camera, its
+## shader (white_block_blur.gdshader) reading the screen - the way rainbow_playground's world wash covers the view on
+## desktop and in a headset. Drawn first of the see-through things, so a label and the hud stay sharp.
+## Measured the same day (layered, one run; the table above is with the blur off, so the ways compare): the jump per
+## step stays (0.077 blurred, 0.079 not: soft fields of colour still swap from step to step), the two eyes disagree a
+## little less (0.086 against 0.112), 5 more draw calls. Inside, the picture's edges are 16 times softer.
 ## What is hidden is held still in itself (the health cross bobs) and checked twice a second while somebody is near:
 ## a TorusMesh's box is not final when its tyre is seated (2.7 m reach seated, 5.6 m seconds later).
 
@@ -93,6 +104,7 @@ const JOINT := 0.014                      # between two segments of one slab
 @export var seed_value := 12
 @export var pagoda := true
 @export_enum("layered", "zones", "primitives", "giant", "coplanar", "grazing", "lattice", "turning", "sheared", "scatter") var hidden: String = "layered"
+@export_range(0.0, 1.0) var blur := 1.0
 
 var walls: MultiMeshInstance3D
 var shapes: Array[MultiMeshInstance3D] = []
@@ -111,10 +123,17 @@ var _lattice: Node3D                 # the lattice's MultiMeshes hang under it: 
 var _clock := 0.0
 var _tidy := 0                       # frames until what is hidden is checked again
 const TIDY_EVERY := 30
+var pinked := 0                      # materials and instance colours turned from red to pink
+var blur_quad: MeshInstance3D        # the blur over the view, under the camera, while the eye is in the block
+var blur_amount := 0.0
+var _blur_mat: ShaderMaterial
+const BLUR_SHADER := preload("res://commons/artifacts/prefab_test/white_block_blur.gdshader")
+const BLUR_IN := 0.8                 # metres into the block where the blur is whole
+const PINK_HUE := 0.917              # hot pink
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	for key in ["side", "height", "slab", "panel", "joint", "count", "pagoda", "hidden"]:
+	for key in ["side", "height", "slab", "panel", "joint", "count", "pagoda", "hidden", "blur"]:
 		if config.has(key): set(key, config[key])
 	if config.has("seed"): seed_value = int(config.seed)
 	if is_node_ready():
@@ -122,13 +141,14 @@ func apply_grid_config(config: Dictionary) -> void:
 			remove_child(child)
 			child.queue_free()
 		shapes.clear(); things.clear(); grids.clear(); plan.clear()
+		pinked = 0
 		_queue.clear(); _seat.clear(); _turning.clear(); _rocking.clear()
 		_lattice = null
 		_build()
 
 
 func _ready() -> void:
-	for key in ["side", "height", "slab", "panel", "joint", "count", "pagoda", "hidden"]:
+	for key in ["side", "height", "slab", "panel", "joint", "count", "pagoda", "hidden", "blur"]:
 		if has_meta("config_" + key): set(key, get_meta("config_" + key))
 	if has_meta("config_seed"): seed_value = int(get_meta("config_seed"))
 	_build()
@@ -299,6 +319,7 @@ func _process(delta: float) -> void:
 		HandLib._make_inert(thing)
 		var row: Dictionary = wait[1]
 		thing.set_meta("hidden_way", str(row.way))
+		pinked += _pink(thing, true)
 		match str(row.way):
 			"coplanar": _lay_in_a_face(thing, row)
 			"grazing":
@@ -314,6 +335,7 @@ func _process(delta: float) -> void:
 		things.append(thing)
 	if _queue.is_empty() and _seat.is_empty(): built = true
 	var eye := get_viewport().get_camera_3d()
+	_blur(eye)
 	if eye == null or to_local(eye.global_position).length() > side * 1.6: return
 	# what is hidden stays inside. Checked again and again, not only when seated: a prefab's mesh may still change
 	# after it has been made (a TorusMesh's box is not final when its tyre is seated - measured 2.7 m reach seated,
@@ -340,6 +362,128 @@ func _process(delta: float) -> void:
 	if is_instance_valid(_lattice):
 		_lattice.position.z = sin(_clock * 0.45) * (slab + joint) * 0.5
 		_lattice.rotation.y = sin(_clock * 0.31) * 0.02
+
+
+## Red, as this block counts it: a hue within 15 degrees of red, plainly saturated, not black.
+static func _is_red(c: Color) -> bool:
+	return c.s >= 0.4 and c.v >= 0.2 and (c.h <= 0.04 or c.h >= 0.95)
+
+
+## The pink for a red: hot pink, its saturation and depth taken a little from the red it replaces.
+static func _pinked(c: Color) -> Color:
+	return Color.from_hsv(PINK_HUE, clampf(c.s * 0.62, 0.32, 0.62), lerpf(0.84, 1.0, c.v), c.a)
+
+
+## A copy of a material with its reds pink, or null when nothing in it is red. `change` false: only says whether.
+func _pink_material(m: Material, change: bool) -> Material:
+	if m is BaseMaterial3D:
+		var b := m as BaseMaterial3D
+		if not _is_red(b.albedo_color): return null
+		if not change: return b
+		var copy := b.duplicate() as BaseMaterial3D
+		copy.albedo_color = _pinked(b.albedo_color)
+		if copy.emission_enabled and _is_red(copy.emission): copy.emission = _pinked(copy.emission)
+		return copy
+	if m is ShaderMaterial and (m as ShaderMaterial).shader != null:
+		var sm := m as ShaderMaterial
+		var copy: ShaderMaterial = null
+		for u: Dictionary in sm.shader.get_shader_uniform_list():
+			if int(u.type) != TYPE_COLOR: continue
+			var v: Variant = sm.get_shader_parameter(StringName(str(u.name)))
+			if v == null: v = RenderingServer.shader_get_parameter_default(sm.shader.get_rid(), StringName(str(u.name)))
+			if v is Vector3: v = Color((v as Vector3).x, (v as Vector3).y, (v as Vector3).z)
+			if not (v is Color and _is_red(v)): continue
+			if not change: return sm
+			if copy == null: copy = sm.duplicate() as ShaderMaterial
+			copy.set_shader_parameter(StringName(str(u.name)), _pinked(v))
+		return copy
+	return null
+
+
+## The reds of one prefab (or the lattice) made pink: how many materials and instance colours were red. `change`
+## false counts them and changes nothing (reds_left).
+func _pink(node: Node, change: bool) -> int:
+	var n := 0
+	var parts: Array = node.find_children("*", "GeometryInstance3D", true, false)
+	if node is GeometryInstance3D: parts.append(node)
+	for part in parts:
+		if part is Label3D or not (part is MeshInstance3D or part is MultiMeshInstance3D): continue
+		var g := part as GeometryInstance3D
+		if g.material_override != null:
+			var p := _pink_material(g.material_override, change)
+			if p != null:
+				n += 1
+				if change: g.material_override = p
+			continue
+		if g is MeshInstance3D and (g as MeshInstance3D).mesh != null:
+			var mi := g as MeshInstance3D
+			for i in mi.mesh.get_surface_count():
+				var m := mi.get_surface_override_material(i)
+				if m == null: m = mi.mesh.surface_get_material(i)
+				if m == null: continue
+				var p := _pink_material(m, change)
+				if p != null:
+					n += 1
+					if change: mi.set_surface_override_material(i, p)
+		elif g is MultiMeshInstance3D and (g as MultiMeshInstance3D).multimesh != null:
+			var many := (g as MultiMeshInstance3D).multimesh
+			if many.mesh != null and many.mesh.get_surface_count() == 1 and many.mesh.surface_get_material(0) != null:
+				var p := _pink_material(many.mesh.surface_get_material(0), change)
+				if p != null:
+					n += 1
+					if change: g.material_override = p
+			if many.use_colors:
+				for i in many.instance_count:
+					var c := many.get_instance_color(i)
+					if _is_red(c):
+						n += 1
+						if change: many.set_instance_color(i, _pinked(c))
+	return n
+
+
+## How many reds are left in what is hidden (a probe asks; 0 once everything is made).
+func reds_left() -> int:
+	var n := 0
+	for thing: Node3D in things:
+		if is_instance_valid(thing): n += _pink(thing, false)
+	for grid: MultiMeshInstance3D in grids:
+		if is_instance_valid(grid): n += _pink(grid, false)
+	return n
+
+
+## The blur, by how deep the eye is in the block: nothing outside or at a face, `blur` at BLUR_IN metres in.
+func _blur(eye: Camera3D) -> void:
+	var deep := -1.0
+	if eye != null:
+		var p := to_local(eye.global_position)
+		deep = minf(minf(side * 0.5 - absf(p.x), side * 0.5 - absf(p.z)), minf(p.y, height - p.y))
+	blur_amount = blur * smoothstep(0.0, BLUR_IN, deep) if deep > 0.0 else 0.0
+	if blur_amount < 0.002:
+		if is_instance_valid(blur_quad): blur_quad.visible = false
+		return
+	if not is_instance_valid(blur_quad):
+		_blur_mat = ShaderMaterial.new()
+		_blur_mat.shader = BLUR_SHADER
+		_blur_mat.render_priority = -120          # first of the see-through things: labels and the hud draw over it
+		blur_quad = MeshInstance3D.new()
+		blur_quad.name = "WhiteBlockBlur"
+		var quad := QuadMesh.new()
+		quad.size = Vector2(2.0, 2.0)
+		quad.subdivide_width = 4
+		quad.subdivide_depth = 4
+		blur_quad.mesh = quad
+		blur_quad.extra_cull_margin = 16384.0
+		blur_quad.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		blur_quad.material_override = _blur_mat
+	if blur_quad.get_parent() != eye:
+		if blur_quad.get_parent() != null: blur_quad.get_parent().remove_child(blur_quad)
+		eye.add_child(blur_quad)
+	blur_quad.visible = true
+	_blur_mat.set_shader_parameter("amount", blur_amount)
+
+
+func _exit_tree() -> void:
+	if is_instance_valid(blur_quad): blur_quad.queue_free()
 
 
 ## A prefab's meshes as one box in the block's own metres.
@@ -481,6 +625,7 @@ func _repeat(thing: Node3D, row: Dictionary) -> void:
 		node.name = "Grid"
 		node.multimesh = many
 		node.material_override = mesh.material_override
+		if node.material_override == null and mesh.mesh.get_surface_count() == 1: node.material_override = mesh.get_surface_override_material(0)
 		if not is_instance_valid(_lattice):
 			_lattice = Node3D.new()
 			_lattice.name = "Lattice"

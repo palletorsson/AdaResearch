@@ -53,6 +53,22 @@ func _picture(file: String) -> void:
 	root.get_texture().get_image().save_png(folder.path_join(file))
 
 
+## How sharp the picture is: the mean SQUARED step in brightness from a pixel to its right-hand neighbour, on a grid.
+## (Squared: the plain sum of steps is the same for a blurred edge, which only spreads one step over more pixels.)
+func _sharpness() -> float:
+	for i in 4: await process_frame
+	await RenderingServer.frame_post_draw
+	var picture := root.get_texture().get_image()
+	var total := 0.0
+	var n := 0
+	for y in range(40, picture.get_height() - 120, 4):
+		for x in range(0, picture.get_width() - 2, 4):
+			var step := picture.get_pixel(x + 1, y).get_luminance() - picture.get_pixel(x, y).get_luminance()
+			total += step * step
+			n += 1
+	return total / maxi(n, 1)
+
+
 func _work(index: int, id: String) -> Node3D:
 	var mount := game.building.content.exhibits.get("%d/%s" % [index, id]) as Node3D
 	return mount.get_node_or_null("Artifact") as Node3D if is_instance_valid(mount) else null
@@ -89,6 +105,8 @@ func run() -> void:
 	if game.body.get("scripted_input") != null:
 		game.body.scripted_input = true; game.body.set_process_unhandled_input(false)
 	game.scene_loaded(); game.scene_visible()
+	# a key pressed anywhere can land in the probe's off-screen window and open the menu board over the view
+	game.set_process_unhandled_key_input(false); game.set_process_unhandled_input(false)
 	var index := int(game.checkpoint)
 	result = {"floor": index, "checks": [], "passed": false}
 	for i in 900: await physics_frame
@@ -166,6 +184,7 @@ func run() -> void:
 		for row: Dictionary in block.get("plan"): hid[str(row.id)] = true
 		result["hidden"] = {"way": way, "prefabs": (block.get("things") as Array).size(), "lattice_meshes": (block.get("grids") as Array).size(), "kinds": hid.keys()}
 		_check("the block hides the catalogue's prefabs in its slabs, all of them made", bool(block.get("built")) and (block.get("things") as Array).size() >= 12 and hid.size() >= 8, result.hidden)
+		_check("the reds in the hidden prefabs are pink, none left", int(block.get("pinked")) > 0 and int(block.call("reds_left")) == 0, {"pinked": block.get("pinked"), "reds_left": block.call("reds_left")})
 	_check("the block's middle is inside it and the arrival is not", bool(block.call("holds", block.global_position + Vector3.UP)) and not bool(block.call("holds", arrival)))
 	var walker := CharacterBody3D.new()
 	var capsule := CapsuleShape3D.new()
@@ -240,8 +259,23 @@ func run() -> void:
 	await _picture("6_one_step_inside.png")
 	await _stand(Vector3(here.x - 3.2, floor_y + 1.65, here.z) - block.global_basis.z * 3.0, Vector3(here.x + 2.5, floor_y + 2.2, here.z) + block.global_basis.z * 2.0, 0.3)
 	await _picture("7_inside_the_block.png")
+	# the blur: on in here, and it softens the picture - edges against the same view with the blur off
+	var quad: Variant = block.get("blur_quad")
+	var blurred := {"amount": snappedf(float(block.get("blur_amount")), 0.01), "shown": quad != null and is_instance_valid(quad) and (quad as Node3D).is_visible_in_tree()}
+	var soft := await _sharpness()
+	var keep: float = block.get("blur")
+	block.set("blur", 0.0)
+	await _picture("7b_inside_without_the_blur.png")
+	var sharp := await _sharpness()
+	block.set("blur", keep)
+	blurred["edges_blurred"] = snappedf(soft * 1000.0, 0.001)
+	blurred["edges_sharp"] = snappedf(sharp * 1000.0, 0.001)
+	result["blur"] = blurred
+	_check("inside the block the view is blurred: its edges at most 60 % of the same view unblurred", bool(blurred.shown) and float(blurred.amount) > 0.9 and soft < sharp * 0.6, blurred)
 	await _stand(Vector3(here.x + 9.4, floor_y + 3.2, here.z) + block.global_basis.z * 9.0, Vector3(here.x, floor_y + 2.2, here.z), 0.3)
 	await _picture("8_the_block_from_outside.png")
+	quad = block.get("blur_quad")
+	_check("outside the block the view is not blurred", float(block.get("blur_amount")) < 0.002 and (quad == null or not is_instance_valid(quad) or not (quad as Node3D).is_visible_in_tree()), {"amount": block.get("blur_amount")})
 	# ------------------------------------------------------------------ the menu board
 	var notes: Array = board.get("notes")
 	var badges: Array = board.get("badges")

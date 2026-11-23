@@ -30,6 +30,10 @@ Inside, the eye is in a slab, then in a joint, then in the next slab. Each face 
 
 Hidden in the slabs are things from the catalogue, the same prefabs the belts carry, hidden five ways at once. A few stand four to six times their size, so a tyre is walked through for a dozen slabs. Crates and pallets are sheared and stretched. Boards and signs lie almost in a slab's face, a few degrees out of it, and rock by less than a degree, so the line where one leaves the slab runs metres while the eye moves centimetres. A tyre, a board and a pallet turn slowly. One small thing, a dice or a tin, is repeated in rows through the whole block, every other one mirrored and drawn inside out, and the rows drift by half a slab.
 
+In here red is pink. The beach ball, the bowling pin, the warning triangle and the tin cans' bands are hot pink, while the same things stay red on the belts and the plinths outside.
+
+Inside, the view is blurred. The blur begins at the face and is whole less than a metre in, and it lifts as you step out. The board's words and the hud stay sharp.
+
 So every step cuts every hidden thing somewhere else, and each eye of a headset is shown a different cut. Measured while walking the carpet line 4 cm at a time, the view changes five times as much per step as it did with the seventy-two primitives that stood here first, and the two eyes disagree five times as much. Small things at their own size were the least strange, because they fall between two slabs and are missed.
 
 Seeing a wall and being stopped by it are two things. Only one of them was built here.
@@ -52,4 +56,4 @@ A fall is not free any more. One floor down, the tower's own way, costs nothing.
 
 ---
 
-*Checked by `tools/probes/prefab_test_floor.gd`: 31 checks, among them that stepping over the tape clears that area's pile and not the other, that a body 0.6 m wide and 1.8 m tall walks in under the pagoda and out of the far wall, that 95 % of that walk is inside a slab, that nothing hidden in the block is solid or reaches out of it, that a barricade stops a body and a gap lets it through, and the round trip Portals, Prefab Test, Melencolia through the three doors. The fall rule has its own probe, `tools/probes/fall_past_a_floor.gd`. The ways of hiding things in the block were measured against each other by `tools/probes/white_block_glitch.gd`.*
+*Checked by `tools/probes/prefab_test_floor.gd`: 34 checks, among them that stepping over the tape clears that area's pile and not the other, that a body 0.6 m wide and 1.8 m tall walks in under the pagoda and out of the far wall, that 95 % of that walk is inside a slab, that nothing hidden in the block is solid or reaches out of it, that no red is left in it, that the view inside is blurred and outside is not, that a barricade stops a body and a gap lets it through, and the round trip Portals, Prefab Test, Melencolia through the three doors. The fall rule has its own probe, `tools/probes/fall_past_a_floor.gd`. The ways of hiding things in the block were measured against each other by `tools/probes/white_block_glitch.gd`.*

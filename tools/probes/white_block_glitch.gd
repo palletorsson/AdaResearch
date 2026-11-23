@@ -16,7 +16,8 @@ extends SceneTree
 ##
 ##   python tools/run_floor_probe.py Primitives_Prefab_Test white_block_glitch.gd glitch.json <folder> --no-opening --opera-quiet
 
-const WAYS := ["primitives", "scatter", "giant", "coplanar", "grazing", "lattice", "turning", "sheared", "zones", "layered"]
+# each way with the blur off, so the ways compare; then the default as it stands, blurred
+const WAYS := ["primitives", "scatter", "giant", "coplanar", "grazing", "lattice", "turning", "sheared", "zones", "layered", "layered_blur"]
 const STEP := 0.04
 
 var game: Node
@@ -73,6 +74,8 @@ func run() -> void:
 	if game.body.get("scripted_input") != null:
 		game.body.scripted_input = true; game.body.set_process_unhandled_input(false)
 	game.scene_loaded(); game.scene_visible()
+	# a key pressed anywhere can land in the probe's off-screen window and open the menu board over the view
+	game.set_process_unhandled_key_input(false); game.set_process_unhandled_input(false)
 	var index := int(game.checkpoint)
 	result = {"floor": index, "checks": [], "passed": false, "ways": {}}
 	for i in 900: await physics_frame
@@ -97,7 +100,7 @@ func run() -> void:
 	for way: String in WAYS:
 		if only != "" and not only.split(",").has(way): continue
 		_note("way %s" % way)
-		block.call("apply_grid_config", {"hidden": way})
+		block.call("apply_grid_config", {"hidden": "layered", "blur": 1.0} if way == "layered_blur" else {"hidden": way, "blur": 0.0})
 		for i in 900:
 			await process_frame
 			if bool(block.get("built")): break
