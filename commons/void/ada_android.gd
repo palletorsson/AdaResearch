@@ -55,13 +55,27 @@ func assemble(head_layers: int, tracked_hands: bool, add_knit := true) -> void:
 		set_look(look)
 
 
+## A descendant's transform in an ancestor's space, composed from the local transforms between them. In the
+## tree it equals ancestor.global_transform.affine_inverse() * node.global_transform; unlike that it is also
+## true BEFORE the body is in the tree. The roof crate assembles its three copies first and adds them after:
+## the global transforms printed "!is_inside_tree()" 456 times, returned identity (hands and coat shading of
+## the copies sampled in the wrong space) and failed floor 0's model export.
+func _relative_to(node: Node, ancestor: Node) -> Transform3D:
+	var out := Transform3D.IDENTITY
+	var step := node
+	while step != null and step != ancestor:
+		if step is Node3D: out = (step as Node3D).transform * out
+		step = step.get_parent()
+	return out
+
+
 func _prepare_armor_coats(parent: Node3D) -> void:
 	for child in parent.get_children():
 		if not child is Node3D or child == _arms[0].end or child == _arms[1].end:
 			continue
 		if child is MeshInstance3D and child.material_override in [_armor, _helmet_finish]:
 			var helmet: bool = child.material_override == _helmet_finish
-			var local_to_body: Transform3D = global_transform.affine_inverse() * child.global_transform
+			var local_to_body: Transform3D = _relative_to(child, self)
 			var mesh := ArrayMesh.new()
 			for index in child.mesh.get_surface_count():
 				var arrays: Array = child.mesh.surface_get_arrays(index)
@@ -266,7 +280,7 @@ func _desktop_hand_model(side: float) -> Node3D:
 	frame.add_child(model)
 	var skeleton := model.get_node("Armature/Skeleton3D") as Skeleton3D
 	var wrist := skeleton.find_bone("Wrist_L" if side < 0.0 else "Wrist_R")
-	var local_wrist := frame.global_transform.affine_inverse() * skeleton.global_transform * skeleton.get_bone_global_pose(wrist)
+	var local_wrist := _relative_to(skeleton, frame) * skeleton.get_bone_global_pose(wrist)
 	model.transform = local_wrist.affine_inverse() * model.transform
 	return frame
 
