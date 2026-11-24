@@ -377,12 +377,10 @@
                 "$ref": "#/definitions/pair"
               },
               "facing": {
-                "enum": [
-                  0,
-                  90,
-                  180,
-                  270
-                ]
+                "type": "number",
+                "minimum": -360,
+                "maximum": 360,
+                "description": "Authored yaw in degrees. Set dressing turns a prop by any angle (set_dressing.gd), and work lights are aimed; quarter turns are not required."
               },
               "scale": {
                 "type": "number",

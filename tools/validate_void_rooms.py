@@ -184,7 +184,7 @@ def validate(data, frame_path=None):
             prop_ids.add(prop['id'])
             size = catalog['props'][prop['kind']]['size']; scale = prop['scale']
             w,h,d = [v*scale for v in size]
-            if prop['facing'] in [90,270]: w,d = d,w
+            if prop['facing'] % 360 in [90,270]: w,d = d,w   # -90 is a quarter turn too; any other angle keeps the unturned box
             x,z = prop['position']; bounds = rect(x,z,w,d)
             placement(bounds, 'prop '+prop['id'])
             # a prop the catalogue marks reaches_ceiling (props, closure backdrops, dust sheets) is meant to meet the slab above:
