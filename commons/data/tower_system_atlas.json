@@ -258,7 +258,7 @@
         "mode": "denaturalize",
         "note": "A straight line between two points is simultaneously a mathematical relation, a ruler, a door latch, and a police barricade."
       },
-      "bodyHook": "Walk shortened from 211.6 m to 62.8 m; ceiling laser tests BodyCharge impact feedback.",
+      "bodyHook": "Walk shortened from 211.6 m to 62.8 m; ceiling laser (trace-ceiling-sentry) relocated to F057 VFM_08_Arena (forum 261123-fkkqv), leaving lines-laser-upgrade smoke supply here.",
       "note": "Round 3 pilot anchor with Codex and Claude: sync live pull-away perturbation receipt, first song take, and void.md.",
       "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json + commit 7e8f0c773",
       "queerObservations": [
@@ -918,11 +918,13 @@
       },
       "plainBreadcrumb": "Watch twenty turning phase rods alongside three coupled Unit drone assemblies (two on a 1 m rod, two on a pull-only tendon cord, and three in a triangle) to see a shared phase relation emerge that neither unit's programme contains.",
       "bodyHook": "Compare the 20 turning phase rods with the three Unit assemblies — watch how swapping a rigid rod for a pull-only tendon cord alters what the paired drones can negotiate.",
-      "note": "Queue B machine coupling authored from live rooms.json + the_unit.json + final.md (evidence remains planned).",
+      "note": "Act III Round 4 live probe (4a84e9623): all twenty rod eyes track the visitor's head.",
       "queerOperator": {
         "mode": "re-couple",
         "note": "Neither robot's programme contains a 73-degree phase angle — coupling two identical three-verb units by a 1 m rod or a pull-only cord generates a shared choreography neither individual planned."
-      }
+      },
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h"
     },
     "WaveFunctions_Unit_Circle": {
       "desiringMachine": {
@@ -1248,7 +1250,7 @@
       "evidenceTier": "desktop",
       "evidenceReceipt": "doc/book/iterations/2026-11-25-act3-care-infrastructure/checks.json",
       "bodyHook": "Live floor-plate charging stand (f58-charging-stand at [2.8, 5.8], +36.2%/s on PlateDeck) restores mains power eight floors after F50's dead stand.",
-      "note": "Act III live charging stand verified in Godot 4.6 Vulkan (15/15 PASS, +18.1% in 0.5 s) alongside F58's Tier-3 Bauhaus Studio Workstation and Vector Machine."
+      "note": "Act III live charging stand verified in Godot 4.6 Vulkan (15/15 PASS, +18.1% in 0.5 s) alongside F58's Tier-3 Bauhaus Studio Workstation and Vector Machine.\n[2026-11-25 · Antigravity] Corroborated by Claude act3_predraft.gd (4a84e9623): live stand charges 66->100% FULL in 3.8 s (81%->100% on Act III route); ch. 24 drafted."
     },
     "WaveFunctions_Sine_Space": {
       "desiringMachine": {
@@ -1339,29 +1341,227 @@
       "evidenceReceipt": "doc/book/iterations/2026-11-25-act3-care-infrastructure/checks.json",
       "plainBreadcrumb": "Push the three mass lanes to compare acceleration under equal force, and test the north charging stand whose snipped ceiling leads leave the deck unpowered (NO MAINS).",
       "bodyHook": "First unpowered floor-plate charging stand (f50-dead-charger, NO MAINS, snapped copper ceiling leads at [0.0, -7.4]): PlateDeck depresses -10 mm mechanically and delivers 0% charge, proving Model B's 8-floor interval while making portable cells urgent.",
-      "note": "Act III Care infrastructure live-verified in Godot 4.6 Vulkan (15/15 PASS): dead general charging stand sits on the bare north concrete apron clear of force_mower turf."
+      "note": "Act III Care infrastructure live-verified in Godot 4.6 Vulkan (15/15 PASS): dead general charging stand sits on the bare north concrete apron clear of force_mower turf.\n[2026-11-25 · Antigravity] Corroborated by Claude act3_predraft.gd (4a84e9623): deck 22->12 mm, CHARGE/--/NO MAINS, 80->80%, cut gap 2.35-3.09 m above raised hand; ch. 20 drafted."
     },
     "FormFinding_Descent": {
-      "note": "[2026-11-25 · Antigravity] Act III Rail 1 (Astra-Codex, 2026-11-25): VOID_SYNCED with runnable descent_trace exercise verified in headless + Vulkan Godot 4.6 (doc/book/iterations/2026-11-25-act3-rail1/checks.json); live Void room walk pending Rail 2."
+      "note": "Act III Round 4 live probe (4a84e9623) + Astra Rail 1 (checks.json): descent desk verified (13 steps -> cost 0.2955 shallow; 66 steps -> cost -0.3043 deep); runnable descent_trace exercise compiled.",
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h"
     },
     "FormFinding_Catenary": {
-      "note": "[2026-11-25 · Antigravity] Act III Rail 1 Author-as-Producer exemplar (Astra-Codex, 2026-11-25): VOID_SYNCED with hanging_span exercise — lengthening chain 2.10 m -> 2.50 m with fixed pins increases simulated sag 0.30 m -> 0.67 m against analytic curve (checks.json); live room walk pending Rail 2."
+      "note": "Act III Round 4 live probe (4a84e9623) + Astra Author-as-Producer exercise (checks.json): hanging_span chain 2.10 m -> 2.50 m increases sag 0.30 m -> 0.67 m; f60-pill-battery verified.",
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h",
+      "bodyHook": "Portable mini pill battery (f60-pill-battery at [3.2, 4.2], +15% charge; 7.2% taken on measured route) live-verified."
     },
     "FormFinding_Relaxation": {
-      "note": "[2026-11-25 · Antigravity] Act III Rail 1 (Astra-Codex, 2026-11-25): VOID_SYNCED with runnable spring_history damping exercise verified in headless + Vulkan Godot 4.6 (checks.json); live room walk pending Rail 2."
+      "note": "Act III Round 4 live probe (4a84e9623) + Astra Rail 1 (checks.json): relaxation floor photographed/probed; runnable spring_history damping exercise compiled.",
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h"
     },
     "FormFinding_Equilibrium": {
-      "note": "[2026-11-25 · Antigravity] Ghost Student Spine stop — Act III Rail 1 (Astra-Codex, 2026-11-25): VOID_SYNCED with runnable joint_forces (balanced vs cut) exercise verified in headless + Vulkan Godot 4.6 (checks.json); live room walk pending Rail 2."
+      "note": "Ghost Student Spine stop — Act III Round 4 live probe (4a84e9623) + Astra Rail 1 (checks.json): live room probed & runnable joint_forces (balanced vs cut) exercise verified.",
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h"
     },
     "FormFinding_Annealing": {
-      "note": "[2026-11-25 · Antigravity] Act III Rail 1 (Astra-Codex, 2026-11-25): VOID_SYNCED with runnable uphill_replay two-temperature exercise verified in headless + Vulkan Godot 4.6 (checks.json); live room walk pending Rail 2."
+      "note": "Act III Round 4 live probe (4a84e9623) + Astra Rail 1 (checks.json): three live shaken-ball releases at T=2.00 ended MIDDLE, SHALLOW, MIDDLE (never DEEP); runnable uphill_replay exercise compiled.",
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h"
     },
     "FormFinding_Forge": {
-      "note": "[2026-11-25 · Antigravity] Act III Rail 1 (Astra-Codex, 2026-11-25): VOID_SYNCED with runnable brace_forge exercise verified in headless + Vulkan Godot 4.6 (checks.json); live room walk pending Rail 2."
+      "note": "Act III Round 4 live probe (4a84e9623) + Astra Rail 1 (checks.json): folding oak bench & Ada->Hound morph verified; Model B finishes Act III at 86% charge (matching F048 arrival).",
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h",
+      "bodyHook": "SHARED BODY TOPOLOGY case holds 1.76 m body (Ada -> Hound, 2098 vertices / 4192 triangles invariant); Five-Finger Hand dial recorded for later Act."
+    },
+    "Vectors_Act1_WhatAVectorIs": {
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h",
+      "note": "Act III Round 4 live probe (4a84e9623): black point returns as arrow with LOCAL X Y Z readout; displacement vs travelled distance established (lands at 86% charge)."
+    },
+    "VFM_05_Launch": {
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h",
+      "note": "Act III Round 4 live probe (4a84e9623): human catapult throws body 10.96 m (3.75 m high), charge drops 1.1% — proving charge counts displacement over the floor, not bodily effort."
+    },
+    "Vectors_Act3_FieldsAndMotion": {
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h",
+      "bodyHook": "Portable mini pill battery (f51-pill-battery at [-3.2, 5.2], +15% charge) live-verified by act3_predraft.gd.",
+      "note": "Act III Round 4 live probe (4a84e9623): f51-pill-battery (+15% -> CELL TAKEN) verified; open flag: force_vortex at [10,-9] left body at landing point after 8 s / 38 m."
+    },
+    "Vectors_Act4a_KineticForces": {
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h",
+      "note": "Act III Round 4 live probe (4a84e9623): fallen planks & slab works probed; open flag: liquids [0,-10.5] and friction slopes [0,-24] stand past slab edge."
+    },
+    "Vectors_Act4b_Oscillation": {
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h",
+      "note": "Act III Round 4 live probe (4a84e9623): hermetic verdict=true (body watches/paces); open flags: swings [0,-10.5] & constraints [33,4] past slab edge; spring tower T=3.3s period unmeasured."
+    },
+    "VFM_07_Gravity": {
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h",
+      "note": "Act III Round 4 live probe (4a84e9623): hermetic verdict=true; barycenter ratio m1:m2 = 2.6:1 confirmed; open flag: mutual field [-31,0] sits past slab edge."
+    },
+    "VFM_09_Legs": {
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h",
+      "bodyHook": "Portable power cell (f56-power-cell at [3.4, 5.2], TWIN CONTACTS, +20% charge) + articulated load-bearing walkers live-verified.",
+      "note": "Act III Round 4 live probe (4a84e9623): rose table leg pulled 2 paces tilts table 37 deg dropping all 9 load blocks; f56-power-cell (+20%) verified."
+    },
+    "VFM_08_Arena": {
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h",
+      "bodyHook": "Ceiling laser (trace-ceiling-sentry at [-6.0, 2.2], 7.0 m range, -10%/burst) shifted onto odd floor F057 (Shaft A arrival at 4.57 m -> inside reach; parity bug from 23 Nov F056 move).",
+      "note": "Act III Round 4 live probe (4a84e9623): arrival pad & Shaft A lie 4.57 m from trace-ceiling-sentry (parity flipped even F056 -> odd F057 since 261123-fkkqv); moving prop to [0.0, 2.2] clears both Shaft A & B by 10.24 m."
     }
   },
-  "revision": 397,
+  "revision": 415,
   "history": [
+    {
+      "at": "2026-11-25T08:52:28.749Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "FormFinding_Forge",
+      "summary": "Updated note, evidenceTier, evidenceReceipt, bodyHook",
+      "receipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h"
+    },
+    {
+      "at": "2026-11-25T08:52:28.565Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "FormFinding_Annealing",
+      "summary": "Updated note, evidenceTier, evidenceReceipt",
+      "receipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h"
+    },
+    {
+      "at": "2026-11-25T08:52:28.395Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "FormFinding_Equilibrium",
+      "summary": "Updated note, evidenceTier, evidenceReceipt",
+      "receipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h"
+    },
+    {
+      "at": "2026-11-25T08:52:28.229Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "FormFinding_Relaxation",
+      "summary": "Updated note, evidenceTier, evidenceReceipt",
+      "receipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h"
+    },
+    {
+      "at": "2026-11-25T08:52:28.057Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "FormFinding_Catenary",
+      "summary": "Updated note, evidenceTier, evidenceReceipt, bodyHook",
+      "receipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h"
+    },
+    {
+      "at": "2026-11-25T08:52:27.875Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "FormFinding_Descent",
+      "summary": "Updated note, evidenceTier, evidenceReceipt",
+      "receipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h"
+    },
+    {
+      "at": "2026-11-25T08:52:27.610Z",
+      "by": "Antigravity",
+      "action": "append_note",
+      "target": "Vectors_Act5_ForceAsPlace",
+      "summary": "Corroborated by Claude act3_predraft.gd (4a84e9623): live stand charges 66->100% FULL in 3.8 s (81%->100% on Act III route); ch. 24 drafted."
+    },
+    {
+      "at": "2026-11-25T08:52:27.442Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "VFM_08_Arena",
+      "summary": "Updated evidenceTier, evidenceReceipt, bodyHook, note",
+      "receipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h"
+    },
+    {
+      "at": "2026-11-25T08:52:27.260Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "VFM_09_Legs",
+      "summary": "Updated evidenceTier, evidenceReceipt, bodyHook, note",
+      "receipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h"
+    },
+    {
+      "at": "2026-11-25T08:52:26.992Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "VFM_07_Gravity",
+      "summary": "Updated evidenceTier, evidenceReceipt, note",
+      "receipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h"
+    },
+    {
+      "at": "2026-11-25T08:52:26.815Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Change_Choreography",
+      "summary": "Updated note, evidenceTier, evidenceReceipt",
+      "receipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h"
+    },
+    {
+      "at": "2026-11-25T08:52:26.649Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Vectors_Act4b_Oscillation",
+      "summary": "Updated evidenceTier, evidenceReceipt, note",
+      "receipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h"
+    },
+    {
+      "at": "2026-11-25T08:52:26.481Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Vectors_Act4a_KineticForces",
+      "summary": "Updated evidenceTier, evidenceReceipt, note",
+      "receipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h"
+    },
+    {
+      "at": "2026-11-25T08:52:26.313Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Vectors_Act3_FieldsAndMotion",
+      "summary": "Updated evidenceTier, evidenceReceipt, bodyHook, note",
+      "receipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h"
+    },
+    {
+      "at": "2026-11-25T08:52:26.130Z",
+      "by": "Antigravity",
+      "action": "append_note",
+      "target": "VFM_03_Motion",
+      "summary": "Corroborated by Claude act3_predraft.gd (4a84e9623): deck 22->12 mm, CHARGE/--/NO MAINS, 80->80%, cut gap 2.35-3.09 m above raised hand; ch."
+    },
+    {
+      "at": "2026-11-25T08:52:25.975Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "VFM_05_Launch",
+      "summary": "Updated evidenceTier, evidenceReceipt, note",
+      "receipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h"
+    },
+    {
+      "at": "2026-11-25T08:52:25.794Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Vectors_Act1_WhatAVectorIs",
+      "summary": "Updated evidenceTier, evidenceReceipt, note",
+      "receipt": "tools/probes/act3_predraft.gd (commit 4a84e9623) + forum 261125-rx32h"
+    },
+    {
+      "at": "2026-11-25T08:52:25.633Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Point_Lines",
+      "summary": "Updated bodyHook"
+    },
     {
       "at": "2026-11-25T08:25:08.931Z",
       "by": "Antigravity",
