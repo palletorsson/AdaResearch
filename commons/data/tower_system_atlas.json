@@ -434,8 +434,8 @@
         "note": "Non-commutative order (T*R*S != S*R*T) breaks the myth that formal operations are interchangeable — sequence determines where bodies end up."
       },
       "bodyHook": "South Drink Me chamber alters perceived bodily scale directly.",
-      "note": "Re-spaced all 8 North Matrix Gallery stations clear of pillars/shafts, fixed backwards film_scale_children monitor, added 4 work lights.",
-      "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json + tools/audit_trans_all.py 35/35 PASS",
+      "note": "Astra-Codex desktop Vulkan receipt (2026-11-25): live Drink-Me chamber expands 3x (3.0,3.0,3.0 -> 11.4x10.2x9.6 m), fixed witness keeps transform; OPERA_JOURNEY.md & OPERA_MANUSCRIPT.txt re-rendered from journey.json to threefold.",
+      "evidenceReceipt": "doc/book/iterations/2026-11-25-act3-rail1/checks.json",
       "queerObservations": [
         {
           "id": "qobs_a30dc28a",
@@ -478,8 +478,8 @@
         "note": "Passage Ledger tells one single crossing five different ways, refusing one authoritative log of passage."
       },
       "bodyHook": "Timing bodily transit through sliding/scaling gates plus West pusher throw range.",
-      "note": "Fixed backwards film_door_routes monitor, added monolith, gallery lights, and West pusher practice bomb.",
-      "evidenceReceipt": "doc/book/iterations/2026-11-21-what-the-world-keeps/checks.json + tools/audit_trans_all.py 35/35 PASS",
+      "note": "Astra-Codex desktop Vulkan receipt (2026-11-25): relocated work-light tripod cleared all five ledger bays (ghost, sweep, terminus, formula, none) across 3,150 rays from 21 eye positions (0 tripod hits).",
+      "evidenceReceipt": "doc/book/iterations/2026-11-25-act3-rail1/checks.json",
       "queerObservations": [
         {
           "id": "qobs_02457c88",
@@ -1104,7 +1104,9 @@
       "note": "Live desktop walk verified in Godot 4.6 (6/6 PASS, doc/book/iterations/2026-11-21-sky-stairs-walk/checks.json): ShaftFlight 51 ceramic treads + WalkableSpiral + Guardrails, sinusoidal radius span 0.339 m (WAVE_AMPLITUDE=0.17), 21/21 continuous raycast hits across 6.00 m drop (max delta 0.31 m), Model B settled cleanly at top/mid/bottom (|dy|<=0.08 m)."
     },
     "Color_Nails": {
-      "note": "[2026-11-21 · Antigravity] Drift audit (2026-11-21): spine_83e5ba4835f83e5507 ('Change the Surround') sits at [0.75, 1.45, 1.25] facing the right salon plinth (Skin RGB) beside the left plinth (Nails RGB) — skin colour is the Albers simultaneous-contrast surround for the nails. Breadcrumb honestly names changing hand/skin colour."
+      "note": "Astra-Codex desktop Vulkan receipt (2026-11-25): both Shaft A & B ball pools retain 56 live balls while opening clear 2.5x1.2 m southern descent lanes; desktop player walked off both lips and landed cleanly on F034.",
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "doc/book/iterations/2026-11-25-act3-rail1/checks.json"
     },
     "SpeculativeComputation_Collective_Knowledge": {
       "evidenceTier": "human-witnessed",
@@ -1338,10 +1340,94 @@
       "plainBreadcrumb": "Push the three mass lanes to compare acceleration under equal force, and test the north charging stand whose snipped ceiling leads leave the deck unpowered (NO MAINS).",
       "bodyHook": "First unpowered floor-plate charging stand (f50-dead-charger, NO MAINS, snapped copper ceiling leads at [0.0, -7.4]): PlateDeck depresses -10 mm mechanically and delivers 0% charge, proving Model B's 8-floor interval while making portable cells urgent.",
       "note": "Act III Care infrastructure live-verified in Godot 4.6 Vulkan (15/15 PASS): dead general charging stand sits on the bare north concrete apron clear of force_mower turf."
+    },
+    "FormFinding_Descent": {
+      "note": "[2026-11-25 · Antigravity] Act III Rail 1 (Astra-Codex, 2026-11-25): VOID_SYNCED with runnable descent_trace exercise verified in headless + Vulkan Godot 4.6 (doc/book/iterations/2026-11-25-act3-rail1/checks.json); live Void room walk pending Rail 2."
+    },
+    "FormFinding_Catenary": {
+      "note": "[2026-11-25 · Antigravity] Act III Rail 1 Author-as-Producer exemplar (Astra-Codex, 2026-11-25): VOID_SYNCED with hanging_span exercise — lengthening chain 2.10 m -> 2.50 m with fixed pins increases simulated sag 0.30 m -> 0.67 m against analytic curve (checks.json); live room walk pending Rail 2."
+    },
+    "FormFinding_Relaxation": {
+      "note": "[2026-11-25 · Antigravity] Act III Rail 1 (Astra-Codex, 2026-11-25): VOID_SYNCED with runnable spring_history damping exercise verified in headless + Vulkan Godot 4.6 (checks.json); live room walk pending Rail 2."
+    },
+    "FormFinding_Equilibrium": {
+      "note": "[2026-11-25 · Antigravity] Ghost Student Spine stop — Act III Rail 1 (Astra-Codex, 2026-11-25): VOID_SYNCED with runnable joint_forces (balanced vs cut) exercise verified in headless + Vulkan Godot 4.6 (checks.json); live room walk pending Rail 2."
+    },
+    "FormFinding_Annealing": {
+      "note": "[2026-11-25 · Antigravity] Act III Rail 1 (Astra-Codex, 2026-11-25): VOID_SYNCED with runnable uphill_replay two-temperature exercise verified in headless + Vulkan Godot 4.6 (checks.json); live room walk pending Rail 2."
+    },
+    "FormFinding_Forge": {
+      "note": "[2026-11-25 · Antigravity] Act III Rail 1 (Astra-Codex, 2026-11-25): VOID_SYNCED with runnable brace_forge exercise verified in headless + Vulkan Godot 4.6 (checks.json); live room walk pending Rail 2."
     }
   },
-  "revision": 388,
+  "revision": 397,
   "history": [
+    {
+      "at": "2026-11-25T08:25:08.931Z",
+      "by": "Antigravity",
+      "action": "append_note",
+      "target": "FormFinding_Forge",
+      "summary": "Act III Rail 1 (Astra-Codex, 2026-11-25): VOID_SYNCED with runnable brace_forge exercise verified in headless + Vulkan Godot 4.6 (checks.jso"
+    },
+    {
+      "at": "2026-11-25T08:25:08.737Z",
+      "by": "Antigravity",
+      "action": "append_note",
+      "target": "FormFinding_Annealing",
+      "summary": "Act III Rail 1 (Astra-Codex, 2026-11-25): VOID_SYNCED with runnable uphill_replay two-temperature exercise verified in headless + Vulkan God"
+    },
+    {
+      "at": "2026-11-25T08:25:08.551Z",
+      "by": "Antigravity",
+      "action": "append_note",
+      "target": "FormFinding_Equilibrium",
+      "summary": "Ghost Student Spine stop — Act III Rail 1 (Astra-Codex, 2026-11-25): VOID_SYNCED with runnable joint_forces (balanced vs cut) exercise verif"
+    },
+    {
+      "at": "2026-11-25T08:25:08.251Z",
+      "by": "Antigravity",
+      "action": "append_note",
+      "target": "FormFinding_Relaxation",
+      "summary": "Act III Rail 1 (Astra-Codex, 2026-11-25): VOID_SYNCED with runnable spring_history damping exercise verified in headless + Vulkan Godot 4.6 "
+    },
+    {
+      "at": "2026-11-25T08:25:08.060Z",
+      "by": "Antigravity",
+      "action": "append_note",
+      "target": "FormFinding_Catenary",
+      "summary": "Act III Rail 1 Author-as-Producer exemplar (Astra-Codex, 2026-11-25): VOID_SYNCED with hanging_span exercise — lengthening chain 2.10 m -> 2"
+    },
+    {
+      "at": "2026-11-25T08:25:07.692Z",
+      "by": "Antigravity",
+      "action": "append_note",
+      "target": "FormFinding_Descent",
+      "summary": "Act III Rail 1 (Astra-Codex, 2026-11-25): VOID_SYNCED with runnable descent_trace exercise verified in headless + Vulkan Godot 4.6 (doc/book"
+    },
+    {
+      "at": "2026-11-25T08:25:07.473Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Color_Nails",
+      "summary": "Updated note, evidenceTier, evidenceReceipt",
+      "receipt": "doc/book/iterations/2026-11-25-act3-rail1/checks.json"
+    },
+    {
+      "at": "2026-11-25T08:25:07.195Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Trans_Pit",
+      "summary": "Updated note, evidenceReceipt",
+      "receipt": "doc/book/iterations/2026-11-25-act3-rail1/checks.json"
+    },
+    {
+      "at": "2026-11-25T08:25:06.996Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Trans_Scale",
+      "summary": "Updated note, evidenceReceipt",
+      "receipt": "doc/book/iterations/2026-11-25-act3-rail1/checks.json"
+    },
     {
       "at": "2026-11-25T08:14:29.617Z",
       "by": "Antigravity",
