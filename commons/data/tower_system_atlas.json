@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "updated": "2026-11-23",
+  "updated": "2026-11-25",
   "title": "Ada Research — Void Tower System Atlas",
-  "thesis": "Technology is trapped in convention, yet in essence a potential general queer intellect. Ada Research starts as Nature-of-Code tutorials in VR and deliberately lets text, artifacts, machines, body, and space drift apart to form new queer relations inside an unfinished 211-floor skyscraper.",
+  "thesis": "Technology is trapped in convention, yet in essence a potential general queer intellect. Ada Research starts as Nature-of-Code tutorials in VR and deliberately lets text, artifacts, machines, body, and space drift apart to form new queer relations inside an unfinished 214-floor skyscraper.",
   "orders": [
     {
       "id": "concept",
@@ -82,7 +82,7 @@
       "group": "core",
       "color": "#2563eb",
       "question": "How does the unfinished skyscraper hold this floor, its shafts, and vertical leaks?",
-      "description": "211 stacked concrete and scaffold floors linked by Shaft A, Shaft B, structural columns, work lights, transfer doors (F11->F210->F12, F209->F13), and open weather so floors visibly bleed into one another.",
+      "description": "214 stacked concrete and scaffold floors linked by Shaft A, Shaft B, structural columns, work lights, transfer doors (F11->F213->F12, F212->F13), and open weather so floors visibly bleed into one another.",
       "files": [
         "commons/void/rooms.json",
         "commons/void/layout.json",
@@ -193,7 +193,7 @@
       "group": "essential",
       "color": "#ea580c",
       "question": "Which cumulative Bauhaus studio tool, template building table, worker assemblage, or 26-sequence playground capability wakes up here?",
-      "description": "Cumulative vertical playground layer across all 26 sequences (F0-F210): unified Bauhaus Studio Workstations (1:16 tabletop -> 1:4 glass box -> 1:1 VR Visor), Template Building Stations (a12b12302 / e45839e06: hanging glass box equips face_triangle/face_square onto wrist clock over 0.5m plinths; F5 Tetrahedron 4 / Diamond 8 Wireframe / Icosahedron 20; F7 Cube 6 & association(cube) from terms.json), Prefab Test Sandbox (F210), Worker & Dream-Body Assemblages, and progressive studio unlocks through kinetic pickups, arrays, palettes, patterns, jump pads, random-walk/spiky & smooth noise basins, 4x4x4 isosurface cutouts, and mind-map negotiation.",
+      "description": "Cumulative vertical playground layer across all 26 sequences (F0-F213): unified Bauhaus Studio Workstations (1:16 tabletop -> 1:4 glass box -> 1:1 VR Visor), Template Building Stations (a12b12302 / e45839e06: hanging glass box equips face_triangle/face_square onto wrist clock over 0.5m plinths; F5 Tetrahedron 4 / Diamond 8 Wireframe / Icosahedron 20; F7 Cube 6 & association(cube) from terms.json), Prefab Test Sandbox (F213), Worker & Dream-Body Assemblages, and progressive studio unlocks through kinetic pickups, arrays, palettes, patterns, jump pads, random-walk/spiky & smooth noise basins, 4x4x4 isosurface cutouts, and mind-map negotiation.",
       "files": [
         "commons/data/playground_layer.json",
         "commons/artifacts/scaffold_workstation/playground_layer.gd",
@@ -219,7 +219,7 @@
     "descent_f188_escher_cloister": "Local perspective rules stay consistent at every stair, while the global loop quietly breaks Euclidean space.",
     "descent_f198_coupled_chamber": "Gray-Scott diffusion, Jolt physics bodies and a live tension graph couple across the four-beat QFEP discovery law.",
     "descent_f202_wave_loom": "Belnap four-valued logic gluts drive a real 2D wave PDE and 24-voice Kuramoto chimera without collapsing into explosion.",
-    "descent_f208_strange_loop": "The tower parses all 211 floors of rooms.json, predicts its own nervous system, and gates 6-gene mutations into a MAP-Elites archive.",
+    "descent_f208_strange_loop": "The tower parses all 214 floors of rooms.json, predicts its own nervous system, and gates 6-gene mutations into a MAP-Elites archive.",
     "descent_f209_prefab_showroom": "At the top of the tower, reusable Bauhaus prefabs stand ready for someone else to rearrange and continue.",
     "qfep_beat_F": "Beat F (Structure): establish enough coherent geometry and coupling to understand what the chamber is doing.",
     "qfep_beat_E": "Beat E (Variation): widen parameters, contradictions or mutations when rigid structure restricts discovery.",
@@ -1242,7 +1242,11 @@
         "machine": "Tier-3 Bauhaus Studio Workstation (F55) + Force Field, Force Cubes & Vector Machine",
         "activates": "Unlocks kinetic Jump Pads (jump_pad) and acoustic Sound Jump Pads (sound_jump_pad / SND PAD) on the playground grid",
         "couplesInto": "Dynamic traversal playgrounds across WaveFunctions, Randomness, and F209 General Intellect Synthesis Atelier"
-      }
+      },
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "doc/book/iterations/2026-11-25-act3-care-infrastructure/checks.json",
+      "bodyHook": "Live floor-plate charging stand (f58-charging-stand at [2.8, 5.8], +36.2%/s on PlateDeck) restores mains power eight floors after F50's dead stand.",
+      "note": "Act III live charging stand verified in Godot 4.6 Vulkan (15/15 PASS, +18.1% in 0.5 s) alongside F58's Tier-3 Bauhaus Studio Workstation and Vector Machine."
     },
     "WaveFunctions_Sine_Space": {
       "desiringMachine": {
@@ -1327,10 +1331,89 @@
         "activates": "Unlocks situated Witness & Negotiation Nodes (witness_node) staging precision, surprise, and care trade-offs across the playground mind map",
         "couplesInto": "F200-F207 Post-Crisis witness stations and F208-F209 Full General Intellect Synthesis Atelier"
       }
+    },
+    "VFM_03_Motion": {
+      "evidenceTier": "desktop",
+      "evidenceReceipt": "doc/book/iterations/2026-11-25-act3-care-infrastructure/checks.json",
+      "plainBreadcrumb": "Push the three mass lanes to compare acceleration under equal force, and test the north charging stand whose snipped ceiling leads leave the deck unpowered (NO MAINS).",
+      "bodyHook": "First unpowered floor-plate charging stand (f50-dead-charger, NO MAINS, snapped copper ceiling leads at [0.0, -7.4]): PlateDeck depresses -10 mm mechanically and delivers 0% charge, proving Model B's 8-floor interval while making portable cells urgent.",
+      "note": "Act III Care infrastructure live-verified in Godot 4.6 Vulkan (15/15 PASS): dead general charging stand sits on the bare north concrete apron clear of force_mower turf."
     }
   },
-  "revision": 378,
+  "revision": 388,
   "history": [
+    {
+      "at": "2026-11-25T08:14:29.617Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "f20_spin_half_return",
+      "summary": "Pick up the white cup with its pink band from the CUP / CARRY IT LEVEL cabinet and turn it level through 360 degrees (th"
+    },
+    {
+      "at": "2026-11-25T08:14:29.425Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "f20_platonic_shutter",
+      "summary": "Compare the five Platonic solids standing beside the smooth sphere: discrete faces click into alignment at fixed symmetr"
+    },
+    {
+      "at": "2026-11-25T08:14:29.262Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "f20_ghost_cages",
+      "summary": "Watch the eight prisms turning inside their fixed gold ghost-cages — from 3 sides up to 64 — and notice how higher symme"
+    },
+    {
+      "at": "2026-11-25T08:14:29.107Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "f19_grammar_table",
+      "summary": "Compare all six 18-degree rows across the four bands side by side to see how one repeated step rule unfolds into a whole"
+    },
+    {
+      "at": "2026-11-25T08:14:28.940Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "f19_carousel_profiles",
+      "summary": "Inspect the five striped monochrome revolved shells flanking the cut: each rim sweeps one constant profile around a sing"
+    },
+    {
+      "at": "2026-11-25T08:14:28.796Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "f19_rotation_axes",
+      "summary": "Walk the four greyscale bands (X, Y, Z, and combined X-Y-Z) from 0 to 90 degrees and read the white corner mark on the f"
+    },
+    {
+      "at": "2026-11-25T08:14:28.643Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "f18_grammar_corridor",
+      "summary": "Follow how sixteen identical four-bar frames stepped by 11.25 degrees along Z form a single twisting passage around the "
+    },
+    {
+      "at": "2026-11-25T08:14:28.473Z",
+      "by": "Antigravity",
+      "action": "set_encounter_breadcrumb",
+      "target": "f18_boolean_tunnel",
+      "summary": "Walk out onto the 26-metre stationary pale plank through sixteen rotating black tunnel frames; glance down at the fixed "
+    },
+    {
+      "at": "2026-11-25T08:14:28.308Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "Vectors_Act5_ForceAsPlace",
+      "summary": "Updated evidenceTier, evidenceReceipt, bodyHook, note",
+      "receipt": "doc/book/iterations/2026-11-25-act3-care-infrastructure/checks.json"
+    },
+    {
+      "at": "2026-11-25T08:14:28.139Z",
+      "by": "Antigravity",
+      "action": "update_floor",
+      "target": "VFM_03_Motion",
+      "summary": "Updated evidenceTier, evidenceReceipt, plainBreadcrumb, bodyHook, note",
+      "receipt": "doc/book/iterations/2026-11-25-act3-care-infrastructure/checks.json"
+    },
     {
       "at": "2026-11-23T15:24:45.351Z",
       "by": "Antigravity",
@@ -2824,6 +2907,14 @@
     "spine_2eded4767a3109c51d": "Watch the generative paths trace arcs resembling your recorded hand gestures without copying any single example — follow the entire phrase to see what variation the generator invented.",
     "spine_fa88850f999d5f048e": "Inspect a raised, enlarged flagged point in the anomaly display beside an unflagged neighbour and read which active numerical threshold flagged it; nearby, declare A, B, or neither before testing a fresh gesture.",
     "spine_bf651581bc9429bc44": "Use the Euclid postulates plaque beside the parallel-lines and triangle-sum stations to test the fifth postulate — notice what you already assumed whenever three points closed a flat 180-degree triangle.",
-    "spine_61634d850d841e29d5": "At the triangle curvature workbench, start on PLANE with three held corners, then switch to SPHERE — watch straight geodesics curve and the angle sum climb past 180 degrees as the surface rule changes."
+    "spine_61634d850d841e29d5": "At the triangle curvature workbench, start on PLANE with three held corners, then switch to SPHERE — watch straight geodesics curve and the angle sum climb past 180 degrees as the surface rule changes.",
+    "f18_boolean_tunnel": "Walk out onto the 26-metre stationary pale plank through sixteen rotating black tunnel frames; glance down at the fixed walkway whenever your balance tilts toward the turning room.",
+    "f18_grammar_corridor": "Follow how sixteen identical four-bar frames stepped by 11.25 degrees along Z form a single twisting passage around the still bridge.",
+    "f19_rotation_axes": "Walk the four greyscale bands (X, Y, Z, and combined X-Y-Z) from 0 to 90 degrees and read the white corner mark on the final row to see how rotation order decides which face lands on top.",
+    "f19_carousel_profiles": "Inspect the five striped monochrome revolved shells flanking the cut: each rim sweeps one constant profile around a single turning axis.",
+    "f19_grammar_table": "Compare all six 18-degree rows across the four bands side by side to see how one repeated step rule unfolds into a whole orientation table.",
+    "f20_ghost_cages": "Watch the eight prisms turning inside their fixed gold ghost-cages — from 3 sides up to 64 — and notice how higher symmetry makes the outline snap back into place sooner until the 64-sided prism looks almost still.",
+    "f20_platonic_shutter": "Compare the five Platonic solids standing beside the smooth sphere: discrete faces click into alignment at fixed symmetry angles while the sphere matches at every turn.",
+    "f20_spin_half_return": "Pick up the white cup with its pink band from the CUP / CARRY IT LEVEL cabinet and turn it level through 360 degrees (the band twists), then keep turning to 720 degrees so the band unwinds flat without spilling."
   }
 }
